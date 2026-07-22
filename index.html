@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>lemonelly · Fresh, fast websites · Cape Town · $1,000 + $60/mo</title>
+  <meta name="description" content="lemonelly builds fresh, fast, unignorable websites for local businesses — trades, creatives, healthcare. $1,000 setup + $60/mo, live in one week. Cape Town.">
+  <link rel="canonical" href="https://lemonelly.com/">
+  <meta name="theme-color" content="#FFFDF8">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg transform='rotate(-20 32 38)'%3E%3Cellipse cx='32' cy='38' rx='23' ry='16' fill='%23F5D000' stroke='%2316150F' stroke-width='4'/%3E%3C/g%3E%3Cpath d='M34 16q10-9 20-2q-9 9-20 2z' fill='%2316150F'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="lemonelly">
+  <meta property="og:title" content="lemonelly · Fresh. Fast. Unignorable.">
+  <meta property="og:description" content="Websites for local businesses that land higher-end clients. $1,000 setup + $60/mo, live in one week. Proudly built in Cape Town.">
+  <meta property="og:url" content="https://lemonelly.com/">
+  <meta property="og:image" content="https://lemonelly.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "lemonelly",
+    "url": "https://lemonelly.com/",
+    "email": "hello@lemonelly.com",
+    "description": "Web design studio building fresh, fast websites for local businesses. $1,000 setup + $60/month.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cape Town",
+      "addressCountry": "ZA"
+    },
+    "areaServed": "Cape Town"
+  }
+  </script>
+
+  <style>
+    /* ---------- Tokens ---------- */
+    :root {
+      --paper: #FFFDF8;
+      --card: #FFFFFF;
+      --ink: #16150F;
+      --ink-2: #55524A;
+      --lemon: #F5D000;
+      --lemon-deep: #EDC900;
+      --lemon-wash: #FBF3C2;
+      --line: #E9E5D8;
+
+      --sp-1: .25rem; --sp-2: .5rem; --sp-3: 1rem; --sp-4: 1.5rem;
+      --sp-5: 2.5rem; --sp-6: 4rem; --sp-7: 6rem;
+
+      --wrap: 68rem;
+      --gutter: clamp(1rem, 4vw, 2rem);
+      --r: 6px;
+
+      --fs-0: .875rem;
+      --fs-1: 1rem;
+      --fs-2: 1.25rem;
+      --fs-3: clamp(1.375rem, 1.2rem + .9vw, 1.75rem);
+      --fs-4: clamp(1.75rem, 1.4rem + 1.8vw, 2.5rem);
+      --fs-5: clamp(2.5rem, 1.9rem + 3vw, 4.25rem);
+      --lh-tight: 1.1;
+      --lh-body: 1.6;
+    }
+
+    /* ---------- Reset ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    body, h1, h2, h3, p, figure, ol, ul { margin: 0; }
+    ol[class], ul[class] { padding: 0; list-style: none; }
+    img { max-width: 100%; display: block; }
+    h1, h2, h3 { text-wrap: balance; line-height: var(--lh-tight); }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: var(--fs-1);
+      line-height: var(--lh-body);
+      color: var(--ink);
+      background: var(--paper);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--lemon); color: var(--ink); }
+    :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+    .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
+
+    a { color: inherit; }
+    p a, footer a {
+      text-decoration-thickness: 2px;
+      text-underline-offset: 2px;
+    }
+    p a:hover, footer a:hover { text-decoration-color: var(--lemon); text-decoration-thickness: 3px; }
+
+    .skip-link {
+      position: absolute; left: var(--sp-3); top: -100%;
+      background: var(--ink); color: var(--paper);
+      padding: var(--sp-2) var(--sp-3); border-radius: var(--r); z-index: 20;
+    }
+    .skip-link:focus { top: var(--sp-3); }
+
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px;
+      margin: -1px; padding: 0; overflow: hidden;
+      clip-path: inset(50%); white-space: nowrap; border: 0;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: var(--sp-2) var(--sp-4);
+      border: 2px solid var(--ink); border-radius: var(--r);
+      font-weight: 700; font-size: var(--fs-1); line-height: 1.2;
+      text-decoration: none; color: var(--ink); background: transparent;
+      transition: background-color .15s ease;
+    }
+    .btn-solid { background: var(--lemon); }
+    .btn-solid:hover { background: var(--lemon-deep); }
+    .btn-ghost:hover { background: var(--lemon-wash); }
+
+    /* ---------- Header / nav ---------- */
+    .site-head {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--paper); border-bottom: 1px solid var(--line);
+    }
+    .nav-row {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 4rem; gap: var(--sp-4);
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      font-weight: 800; font-size: var(--fs-2); letter-spacing: -.02em;
+      text-decoration: none;
+    }
+    .brand svg { width: 24px; height: 24px; }
+
+    .menu-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; margin-right: calc(-1 * var(--sp-2));
+      background: none; border: 0; border-radius: var(--r);
+      color: var(--ink); cursor: pointer;
+    }
+    .menu-btn:hover { background: var(--lemon-wash); }
+
+    #site-nav { display: none; }
+    #site-nav ul { display: flex; flex-direction: column; gap: var(--sp-2); list-style: none; padding: 0; }
+    #site-nav a:not(.btn) {
+      display: block; padding: var(--sp-2) 0;
+      font-weight: 600; text-decoration: none;
+    }
+    #site-nav a:not(.btn):hover { text-decoration: underline; text-decoration-color: var(--lemon); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+
+    .site-head[data-open] #site-nav {
+      display: block;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--paper); border-bottom: 1px solid var(--line);
+      padding: var(--sp-3) var(--gutter) var(--sp-4);
+    }
+
+    @media (min-width: 60rem) {
+      .menu-btn { display: none; }
+      #site-nav { display: block; }
+      #site-nav ul { flex-direction: row; align-items: center; gap: var(--sp-4); }
+      #site-nav a:not(.btn) { padding: var(--sp-1) 0; }
+      #site-nav .btn { min-height: 44px; }
+    }
+
+    /* ---------- Sections ---------- */
+    section { padding-block: var(--sp-6); }
+    @media (min-width: 40rem) { section { padding-block: var(--sp-7); } }
+    section + section { border-top: 1px solid var(--line); }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: var(--sp-2);
+      font-size: var(--fs-0); font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);
+      margin-bottom: var(--sp-3);
+    }
+    .eyebrow::before { content: ""; width: 1.5rem; height: .5rem; background: var(--lemon); }
+
+    h2 { font-size: var(--fs-4); font-weight: 800; letter-spacing: -.01em; margin-bottom: var(--sp-5); }
+    .hl {
+      background: var(--lemon); box-decoration-break: clone; -webkit-box-decoration-break: clone;
+      padding: .02em .12em;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero { padding-block: var(--sp-6); }
+    @media (min-width: 40rem) { .hero { padding-block: var(--sp-7); } }
+    .badge {
+      display: inline-block; background: var(--lemon-wash);
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: var(--sp-1) var(--sp-3);
+      font-size: var(--fs-0); font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      margin-bottom: var(--sp-4);
+    }
+    h1 {
+      font-size: var(--fs-5); font-weight: 800; letter-spacing: -.02em;
+      max-width: 16ch; margin-bottom: var(--sp-4);
+    }
+    .lede { font-size: var(--fs-2); color: var(--ink-2); max-width: 46ch; margin-bottom: var(--sp-5); }
+
+    /* ---------- Cards ---------- */
+    .grid-3 { display: grid; gap: var(--sp-3); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
+      padding: var(--sp-4);
+    }
+    .card::before { content: ""; display: block; width: 2rem; height: 4px; background: var(--lemon); margin-bottom: var(--sp-3); }
+    .card h3 { font-size: var(--fs-2); font-weight: 800; letter-spacing: .01em; margin-bottom: var(--sp-2); }
+    .card p { color: var(--ink-2); }
+
+    /* ---------- Process ---------- */
+    .steps { display: grid; gap: var(--sp-5) var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .step-num {
+      display: inline-block; font-size: var(--fs-4); font-weight: 800; line-height: 1;
+      box-shadow: inset 0 -.28em 0 var(--lemon);
+      margin-bottom: var(--sp-2);
+    }
+    .steps h3 { font-size: var(--fs-1); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; margin-bottom: var(--sp-2); }
+    .steps p { color: var(--ink-2); }
+
+    /* ---------- Work ---------- */
+    .grid-2 { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .project { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: var(--sp-4); }
+    .plate {
+      background: var(--lemon-wash); border-radius: var(--r);
+      aspect-ratio: 16 / 9; display: grid; place-items: center;
+      margin-bottom: var(--sp-4);
+    }
+    .plate span {
+      font-weight: 800; font-size: var(--fs-3); letter-spacing: .06em;
+      text-align: center; line-height: 1.15; white-space: pre-line;
+    }
+    .project .cat {
+      font-size: var(--fs-0); font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--ink-2); margin-bottom: var(--sp-1);
+    }
+    .project h3 { font-size: var(--fs-2); font-weight: 800; margin-bottom: var(--sp-2); }
+    .project p { color: var(--ink-2); margin-bottom: var(--sp-3); }
+    .project .visit { font-weight: 700; text-underline-offset: 3px; text-decoration-thickness: 2px; }
+    .project .visit:hover { text-decoration-color: var(--lemon); text-decoration-thickness: 3px; }
+
+    /* ---------- Team ---------- */
+    .people { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 52rem; }
+    .person { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: var(--sp-4); }
+    .headshot {
+      position: relative; aspect-ratio: 1; border-radius: var(--r);
+      overflow: hidden; background: var(--lemon-wash); margin-bottom: var(--sp-4);
+    }
+    .monogram {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      font-size: var(--fs-5); font-weight: 800; letter-spacing: .02em; color: var(--ink);
+    }
+    .headshot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .person h3 { font-size: var(--fs-2); font-weight: 800; letter-spacing: .02em; }
+    .person .cred { font-size: var(--fs-0); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); margin: var(--sp-1) 0 var(--sp-2); }
+    .person .bio { color: var(--ink-2); }
+
+    /* ---------- CTA ---------- */
+    .cta { text-align: center; }
+    .cta .eyebrow { justify-content: center; }
+    .cta h2 { margin-bottom: var(--sp-3); }
+    .cta p { color: var(--ink-2); max-width: 46ch; margin: 0 auto var(--sp-5); font-size: var(--fs-2); }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); justify-content: center; }
+
+    /* ---------- Footer ---------- */
+    footer { border-top: 1px solid var(--line); padding-block: var(--sp-5); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); align-items: center; justify-content: space-between; }
+    footer .mark { font-weight: 800; letter-spacing: .06em; }
+    footer p { color: var(--ink-2); font-size: var(--fs-0); }
+
+    /* ---------- Motion ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-head">
+    <div class="wrap nav-row">
+      <a class="brand" href="#top" aria-label="lemonelly — home">
+        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <g transform="rotate(-20 32 38)">
+            <ellipse cx="32" cy="38" rx="23" ry="16" fill="#F5D000" stroke="#16150F" stroke-width="4"/>
+          </g>
+          <path d="M34 16q10-9 20-2q-9 9-20 2z" fill="#16150F"/>
+        </svg>
+        lemonelly
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="visually-hidden">Menu</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <nav id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a class="btn btn-solid" href="#start">Get Started</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-label="Introduction">
+      <div class="wrap">
+        <p class="badge">$1,000 Setup + $60/Mo</p>
+        <h1>Fresh. Fast. <span class="hl">Unignorable.</span></h1>
+        <p class="lede">We build the zestiest sites on the web. Elevate your brand, dominate your local market, and land higher-end clients who spend more.</p>
+        <a class="btn btn-solid" href="#start">Squeeze the Day</a>
+      </div>
+    </section>
+
+    <section id="why" aria-labelledby="why-h">
+      <div class="wrap">
+        <p class="eyebrow">Why Us</p>
+        <h2 id="why-h">Worth the Squeeze</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Bold Design</h3>
+            <p>We create striking visual identities that make you look like the undeniable, premium choice in your industry.</p>
+          </div>
+          <div class="card">
+            <h3>Blazing Fast</h3>
+            <p>Engineered from the ground up to load instantly and perform flawlessly across every single device.</p>
+          </div>
+          <div class="card">
+            <h3>Better Clients</h3>
+            <p>A polished, professional presence builds immediate trust, allowing you to confidently command higher prices.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" aria-labelledby="process-h">
+      <div class="wrap">
+        <p class="eyebrow">Process</p>
+        <h2 id="process-h">The 1-Week Launch</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-num" aria-hidden="true">01</span>
+            <h3>Understand <span aria-hidden="true">·</span> Days 1–2</h3>
+            <p>We dive deep into your business needs, goals, and target audience to strategize the perfect build.</p>
+          </li>
+          <li>
+            <span class="step-num" aria-hidden="true">02</span>
+            <h3>Implement <span aria-hidden="true">·</span> Days 3–5</h3>
+            <p>Our team designs and codes the core website, combining artistic flair with strict technical precision.</p>
+          </li>
+          <li>
+            <span class="step-num" aria-hidden="true">03</span>
+            <h3>Launch <span aria-hidden="true">·</span> Days 6–7</h3>
+            <p>We review the site with you, make immediate updates based on your feedback, and push it live.</p>
+          </li>
+          <li>
+            <span class="step-num" aria-hidden="true">∞</span>
+            <h3>Ongoing <span aria-hidden="true">·</span> $60/Mo</h3>
+            <p>Premium hosting, security, and one round of updates every single month to keep your site fresh.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="for" aria-labelledby="for-h">
+      <div class="wrap">
+        <p class="eyebrow">Clients</p>
+        <h2 id="for-h">Who We Build For</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Home &amp; Trade</h3>
+            <p>Roofers, Pool Cleaning, HVAC. We turn dirty jobs into premium, trusted brands.</p>
+          </div>
+          <div class="card">
+            <h3>Creatives</h3>
+            <p>Interior Designers, Architects. Your digital storefront will finally match your portfolio.</p>
+          </div>
+          <div class="card">
+            <h3>Healthcare</h3>
+            <p>Doctors, Dentists, Clinics. Building deep patient trust before they even step in the door.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" aria-labelledby="work-h">
+      <div class="wrap">
+        <p class="eyebrow">Work</p>
+        <h2 id="work-h">Freshly Squeezed</h2>
+        <div class="grid-2">
+          <article class="project">
+            <div class="plate" aria-hidden="true"><span>LOST WAX
+FOUNDRY</span></div>
+            <p class="cat">Fine Art &amp; Craft</p>
+            <h3>Lost Wax Foundry</h3>
+            <p>A gallery-grade site for a specialist bronze casting studio in Somerset West — heritage craftsmanship presented with the polish it deserves.</p>
+            <a class="visit" href="https://lostwaxfoundry.com" target="_blank" rel="noopener">Visit lostwaxfoundry.com →</a>
+          </article>
+          <article class="project">
+            <div class="plate" aria-hidden="true"><span>NEURA
+BUILD</span></div>
+            <p class="cat">Tech &amp; Research</p>
+            <h3>Neurabuild</h3>
+            <p>A clean, credible presence for a consultancy that turns university research into market-ready products — robust, secure, and fast.</p>
+            <a class="visit" href="https://neurabuild.com" target="_blank" rel="noopener">Visit neurabuild.com →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" aria-labelledby="team-h">
+      <div class="wrap">
+        <p class="eyebrow">Team</p>
+        <h2 id="team-h">The Zest Makers</h2>
+        <div class="people">
+          <div class="person">
+            <figure class="headshot">
+              <span class="monogram" aria-hidden="true">VK</span>
+              <img src="assets/veronica.jpg" alt="Veronica Kotze, Creative Director at lemonelly"
+                   width="640" height="640" loading="lazy" onerror="this.remove()">
+            </figure>
+            <h3>Veronica Kotze</h3>
+            <p class="cred">Bachelor of Arts</p>
+            <p class="bio">The creative eye. Veronica ensures your brand looks stunning, communicates the right vibe, and captures attention.</p>
+          </div>
+          <div class="person">
+            <figure class="headshot">
+              <span class="monogram" aria-hidden="true">BB</span>
+              <img src="assets/ben.jpg" alt="Ben Blaine, Technical Lead at lemonelly"
+                   width="640" height="640" loading="lazy" onerror="this.remove()">
+            </figure>
+            <h3>Ben Blaine</h3>
+            <p class="cred">BSc Mechanical Engineering</p>
+            <p class="bio">The technical engine. Ben builds the underlying structure, ensuring the site is lightning-fast and rock-solid.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="start" class="cta" aria-labelledby="start-h">
+      <div class="wrap">
+        <p class="eyebrow">Get Started</p>
+        <h2 id="start-h">Let's Make <span class="hl">Lemonade</span></h2>
+        <p>Ready for a site that finally matches how good your business really is? Tell us what you do — we'll show you what fresh looks like.</p>
+        <div class="cta-actions">
+          <a class="btn btn-solid" href="mailto:hello@lemonelly.com">Email Us</a>
+          <!-- TODO(ben): replace 27000000000 with your real WhatsApp number in international format, e.g. 2782xxxxxxx -->
+          <a class="btn btn-ghost" href="https://wa.me/27000000000" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="mark">LEMONELLY.COM</p>
+      <p>Proudly built in Cape Town · <a href="mailto:hello@lemonelly.com">hello@lemonelly.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var head = document.querySelector('.site-head');
+      var btn = document.querySelector('.menu-btn');
+      var nav = document.getElementById('site-nav');
+      function setOpen(open) {
+        head.toggleAttribute('data-open', open);
+        btn.setAttribute('aria-expanded', String(open));
+      }
+      btn.addEventListener('click', function () {
+        setOpen(!head.hasAttribute('data-open'));
+      });
+      nav.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setOpen(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    })();
+  </script>
+</body>
+</html>
