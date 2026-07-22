@@ -14,19 +14,14 @@ Then open http://localhost:8000/
 
 ## Team photos
 
-The team section works without photos (styled initials show instead). To add the real
-headshots, drop these two files into `assets/` — no code changes needed:
-
-| File | Who | Spec |
-|---|---|---|
-| `assets/veronica.jpg` | Veronica Kotze | square crop, ≥800×800px, under ~150KB |
-| `assets/ben.jpg` | Ben Blaine | square crop, ≥800×800px, under ~150KB |
+The real headshots live at `assets/veronica.jpg` and `assets/ben.jpg`. To swap either one,
+just replace the file (roughly square crop, ≥800px, under ~150KB) — no code changes needed.
+If a photo file is missing, the page falls back to styled initials automatically.
 
 ## Before launch
 
 - [ ] Replace the placeholder WhatsApp number in `index.html` (search for `wa.me`) with the
       real number in international format (e.g. `https://wa.me/2782xxxxxxx`).
-- [ ] Add the two team photos (see above).
 
 ## Deploy
 
