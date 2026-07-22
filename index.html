@@ -6,8 +6,8 @@
   <title>lemonelly · Fresh, fast websites · Cape Town · $1,000 + $60/mo</title>
   <meta name="description" content="lemonelly builds fresh, fast, unignorable websites for local businesses — trades, creatives, healthcare. $1,000 setup + $60/mo, live in one week. Cape Town.">
   <link rel="canonical" href="https://lemonelly.com/">
-  <meta name="theme-color" content="#FFFDF8">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg transform='rotate(-20 32 38)'%3E%3Cellipse cx='32' cy='38' rx='23' ry='16' fill='%23F5D000' stroke='%2316150F' stroke-width='4'/%3E%3C/g%3E%3Cpath d='M34 16q10-9 20-2q-9 9-20 2z' fill='%2316150F'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#44C593">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg transform='rotate(-20 32 38)'%3E%3Cellipse cx='32' cy='38' rx='23' ry='16' fill='%23FFD335' stroke='%2316150F' stroke-width='4'/%3E%3C/g%3E%3Cpath d='M34 16q10-9 20-2q-9 9-20 2z' fill='%232E9B70'/%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
   <meta property="og:type" content="website">
@@ -40,21 +40,27 @@
   <style>
     /* ---------- Tokens ---------- */
     :root {
-      --paper: #FFFDF8;
-      --card: #FFFFFF;
+      --mint: #44C593;
+      --mint-deep: #2E9B70;
+      --mint-line: rgba(15, 61, 46, .18);
+      --green-ink: #0F3D2E;
+      --cream: #FFF9E3;
+      --card: #FFFDF4;
       --ink: #16150F;
       --ink-2: #55524A;
-      --lemon: #F5D000;
-      --lemon-deep: #EDC900;
-      --lemon-wash: #FBF3C2;
-      --line: #E9E5D8;
+      --lemon: #FFD335;
+      --lemon-deep: #F0C400;
+      --lemon-wash: #FFF3C4;
+
+      --shadow: 0 10px 22px rgba(15, 61, 46, .18);
 
       --sp-1: .25rem; --sp-2: .5rem; --sp-3: 1rem; --sp-4: 1.5rem;
       --sp-5: 2.5rem; --sp-6: 4rem; --sp-7: 6rem;
 
       --wrap: 68rem;
       --gutter: clamp(1rem, 4vw, 2rem);
-      --r: 6px;
+      --r: 10px;
+      --r-lg: 18px;
 
       --fs-0: .875rem;
       --fs-1: 1rem;
@@ -79,7 +85,7 @@
       font-size: var(--fs-1);
       line-height: var(--lh-body);
       color: var(--ink);
-      background: var(--paper);
+      background: var(--mint);
       -webkit-font-smoothing: antialiased;
     }
 
@@ -97,7 +103,7 @@
 
     .skip-link {
       position: absolute; left: var(--sp-3); top: -100%;
-      background: var(--ink); color: var(--paper);
+      background: var(--ink); color: var(--cream);
       padding: var(--sp-2) var(--sp-3); border-radius: var(--r); z-index: 20;
     }
     .skip-link:focus { top: var(--sp-3); }
@@ -119,12 +125,12 @@
     }
     .btn-solid { background: var(--lemon); }
     .btn-solid:hover { background: var(--lemon-deep); }
-    .btn-ghost:hover { background: var(--lemon-wash); }
+    .btn-ghost:hover { background: var(--cream); }
 
     /* ---------- Header / nav ---------- */
     .site-head {
       position: sticky; top: 0; z-index: 10;
-      background: var(--paper); border-bottom: 1px solid var(--line);
+      background: var(--mint); border-bottom: 1px solid var(--mint-line);
     }
     .nav-row {
       display: flex; align-items: center; justify-content: space-between;
@@ -143,7 +149,7 @@
       background: none; border: 0; border-radius: var(--r);
       color: var(--ink); cursor: pointer;
     }
-    .menu-btn:hover { background: var(--lemon-wash); }
+    .menu-btn:hover { background: var(--cream); }
 
     #site-nav { display: none; }
     #site-nav ul { display: flex; flex-direction: column; gap: var(--sp-2); list-style: none; padding: 0; }
@@ -156,7 +162,7 @@
     .site-head[data-open] #site-nav {
       display: block;
       position: absolute; top: 100%; left: 0; right: 0;
-      background: var(--paper); border-bottom: 1px solid var(--line);
+      background: var(--mint); border-bottom: 1px solid var(--mint-line);
       padding: var(--sp-3) var(--gutter) var(--sp-4);
     }
 
@@ -171,28 +177,41 @@
     /* ---------- Sections ---------- */
     section { padding-block: var(--sp-6); }
     @media (min-width: 40rem) { section { padding-block: var(--sp-7); } }
-    section + section { border-top: 1px solid var(--line); }
+    section + section { border-top: 1px solid var(--mint-line); }
 
     .eyebrow {
       display: flex; align-items: center; gap: var(--sp-2);
       font-size: var(--fs-0); font-weight: 700;
-      letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);
+      letter-spacing: .12em; text-transform: uppercase; color: var(--green-ink);
       margin-bottom: var(--sp-3);
     }
-    .eyebrow::before { content: ""; width: 1.5rem; height: .5rem; background: var(--lemon); }
+    .eyebrow::before { content: ""; width: 1.5rem; height: .5rem; background: var(--lemon); border-radius: 999px; }
 
     h2 { font-size: var(--fs-4); font-weight: 800; letter-spacing: -.01em; margin-bottom: var(--sp-5); }
     .hl {
       background: var(--lemon); box-decoration-break: clone; -webkit-box-decoration-break: clone;
-      padding: .02em .12em;
+      padding: .02em .12em; border-radius: 4px;
     }
 
     /* ---------- Hero ---------- */
-    .hero { padding-block: var(--sp-6); }
+    .hero {
+      padding-block: var(--sp-6);
+      background-image: url(assets/pattern.png);
+      background-size: 300px;
+    }
     @media (min-width: 40rem) { .hero { padding-block: var(--sp-7); } }
+    .hero-panel {
+      background: var(--cream); border-radius: var(--r-lg); box-shadow: var(--shadow);
+      padding: var(--sp-5) var(--sp-4);
+      display: grid; gap: var(--sp-4); align-items: center;
+    }
+    @media (min-width: 60rem) {
+      .hero-panel { grid-template-columns: 1.15fr .85fr; padding: var(--sp-6) var(--sp-5); }
+    }
+    .hero-art { width: min(100%, 26rem); height: auto; margin-inline: auto; }
     .badge {
       display: inline-block; background: var(--lemon-wash);
-      border: 1px solid var(--line); border-radius: 999px;
+      border: 1px solid var(--mint-line); border-radius: 999px;
       padding: var(--sp-1) var(--sp-3);
       font-size: var(--fs-0); font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
       margin-bottom: var(--sp-4);
@@ -204,12 +223,12 @@
     .lede { font-size: var(--fs-2); color: var(--ink-2); max-width: 46ch; margin-bottom: var(--sp-5); }
 
     /* ---------- Cards ---------- */
-    .grid-3 { display: grid; gap: var(--sp-3); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .grid-3 { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
     .card {
-      background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
+      background: var(--card); border-radius: var(--r); box-shadow: var(--shadow);
       padding: var(--sp-4);
     }
-    .card::before { content: ""; display: block; width: 2rem; height: 4px; background: var(--lemon); margin-bottom: var(--sp-3); }
+    .card::before { content: ""; display: block; width: 2rem; height: 5px; background: var(--lemon); border-radius: 999px; margin-bottom: var(--sp-3); }
     .card h3 { font-size: var(--fs-2); font-weight: 800; letter-spacing: .01em; margin-bottom: var(--sp-2); }
     .card p { color: var(--ink-2); }
 
@@ -221,11 +240,11 @@
       margin-bottom: var(--sp-2);
     }
     .steps h3 { font-size: var(--fs-1); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; margin-bottom: var(--sp-2); }
-    .steps p { color: var(--ink-2); }
+    .steps p { color: var(--green-ink); }
 
     /* ---------- Work ---------- */
     .grid-2 { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .project { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: var(--sp-4); }
+    .project { background: var(--card); border-radius: var(--r); box-shadow: var(--shadow); padding: var(--sp-4); }
     .plate {
       background: var(--lemon-wash); border-radius: var(--r);
       aspect-ratio: 16 / 9; display: grid; place-items: center;
@@ -246,7 +265,7 @@
 
     /* ---------- Team ---------- */
     .people { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 52rem; }
-    .person { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: var(--sp-4); }
+    .person { background: var(--card); border-radius: var(--r); box-shadow: var(--shadow); padding: var(--sp-4); }
     .headshot {
       position: relative; aspect-ratio: 1; border-radius: var(--r);
       overflow: hidden; background: var(--lemon-wash); margin-bottom: var(--sp-4);
@@ -261,17 +280,24 @@
     .person .bio { color: var(--ink-2); }
 
     /* ---------- CTA ---------- */
-    .cta { text-align: center; }
+    .cta {
+      background-image: url(assets/pattern.png);
+      background-size: 300px;
+    }
+    .cta-panel {
+      background: var(--cream); border-radius: var(--r-lg); box-shadow: var(--shadow);
+      padding: var(--sp-6) var(--sp-4); text-align: center;
+    }
     .cta .eyebrow { justify-content: center; }
     .cta h2 { margin-bottom: var(--sp-3); }
     .cta p { color: var(--ink-2); max-width: 46ch; margin: 0 auto var(--sp-5); font-size: var(--fs-2); }
     .cta-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); justify-content: center; }
 
     /* ---------- Footer ---------- */
-    footer { border-top: 1px solid var(--line); padding-block: var(--sp-5); }
+    footer { border-top: 1px solid var(--mint-line); padding-block: var(--sp-5); }
     footer .wrap { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); align-items: center; justify-content: space-between; }
     footer .mark { font-weight: 800; letter-spacing: .06em; }
-    footer p { color: var(--ink-2); font-size: var(--fs-0); }
+    footer p { color: var(--green-ink); font-size: var(--fs-0); }
 
     /* ---------- Motion ---------- */
     @media (prefers-reduced-motion: reduce) {
@@ -288,7 +314,7 @@
       <a class="brand" href="#top" aria-label="lemonelly — home">
         <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
           <g transform="rotate(-20 32 38)">
-            <ellipse cx="32" cy="38" rx="23" ry="16" fill="#F5D000" stroke="#16150F" stroke-width="4"/>
+            <ellipse cx="32" cy="38" rx="23" ry="16" fill="#FFD335" stroke="#16150F" stroke-width="4"/>
           </g>
           <path d="M34 16q10-9 20-2q-9 9-20 2z" fill="#16150F"/>
         </svg>
@@ -315,10 +341,15 @@
   <main id="main">
     <section class="hero" id="top" aria-label="Introduction">
       <div class="wrap">
-        <p class="badge">$1,000 Setup + $60/Mo</p>
-        <h1>Fresh. Fast. <span class="hl">Unignorable.</span></h1>
-        <p class="lede">We build the zestiest sites on the web. Elevate your brand, dominate your local market, and land higher-end clients who spend more.</p>
-        <a class="btn btn-solid" href="#start">Squeeze the Day</a>
+        <div class="hero-panel">
+          <div>
+            <p class="badge">$1,000 Setup + $60/Mo</p>
+            <h1>Fresh. Fast. <span class="hl">Unignorable.</span></h1>
+            <p class="lede">We build the zestiest sites on the web. Elevate your brand, dominate your local market, and land higher-end clients who spend more.</p>
+            <a class="btn btn-solid" href="#start">Squeeze the Day</a>
+          </div>
+          <img class="hero-art" src="assets/hero-lemon.png" alt="" width="640" height="480" onerror="this.remove()">
+        </div>
       </div>
     </section>
 
@@ -449,13 +480,15 @@ BUILD</span></div>
 
     <section id="start" class="cta" aria-labelledby="start-h">
       <div class="wrap">
-        <p class="eyebrow">Get Started</p>
-        <h2 id="start-h">Let's Make <span class="hl">Lemonade</span></h2>
-        <p>Ready for a site that finally matches how good your business really is? Tell us what you do — we'll show you what fresh looks like.</p>
-        <div class="cta-actions">
-          <a class="btn btn-solid" href="mailto:hello@lemonelly.com">Email Us</a>
-          <a class="btn btn-ghost" href="https://wa.me/27727206606" target="_blank" rel="noopener">WhatsApp Veronica</a>
-          <a class="btn btn-ghost" href="https://wa.me/27792896707" target="_blank" rel="noopener">WhatsApp Ben</a>
+        <div class="cta-panel">
+          <p class="eyebrow">Get Started</p>
+          <h2 id="start-h">Let's Make <span class="hl">Lemonade</span></h2>
+          <p>Ready for a site that finally matches how good your business really is? Tell us what you do — we'll show you what fresh looks like.</p>
+          <div class="cta-actions">
+            <a class="btn btn-solid" href="mailto:hello@lemonelly.com">Email Us</a>
+            <a class="btn btn-ghost" href="https://wa.me/27727206606" target="_blank" rel="noopener">WhatsApp Veronica</a>
+            <a class="btn btn-ghost" href="https://wa.me/27792896707" target="_blank" rel="noopener">WhatsApp Ben</a>
+          </div>
         </div>
       </div>
     </section>
