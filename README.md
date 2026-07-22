@@ -18,11 +18,6 @@ The real headshots live at `assets/veronica.jpg` and `assets/ben.jpg`. To swap e
 just replace the file (roughly square crop, ≥800px, under ~150KB) — no code changes needed.
 If a photo file is missing, the page falls back to styled initials automatically.
 
-## Before launch
-
-- [ ] Replace the placeholder WhatsApp number in `index.html` (search for `wa.me`) with the
-      real number in international format (e.g. `https://wa.me/2782xxxxxxx`).
-
 ## Deploy
 
 Any static host works (Cloudflare Pages, Netlify, GitHub Pages, plain nginx). Upload the
