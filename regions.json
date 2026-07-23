@@ -11,7 +11,8 @@
     "meta_desc": "lemonelly designs your new website free — trades, creatives, healthcare. You pay $120/mo only once you're happy and it goes live. Cape Town.",
     "og_title": "lemonelly · Free website design for local businesses",
     "og_desc": "We design your new website free. You pay $120/mo only when you love it and it goes live. Proudly built in Cape Town.",
-    "badge": "Web design studio for local businesses"
+    "badge": "Web design studio",
+    "badge_ext": " for local businesses"
   },
   "za": {
     "path": "za",
@@ -25,7 +26,8 @@
     "meta_desc": "lemonelly designs your new website free — trades, creatives, healthcare. You pay R2,200/mo only once you're happy and it goes live. Cape Town.",
     "og_title": "lemonelly · Free website design for South African small businesses",
     "og_desc": "We design your new website free. You pay R2,200/mo only when you love it and it goes live. Proudly built in Cape Town.",
-    "badge": "Web Design Studio · Cape Town"
+    "badge": "Web Design Studio",
+    "badge_ext": " · Cape Town"
   },
   "us": {
     "path": "us",
@@ -39,7 +41,8 @@
     "meta_desc": "lemonelly designs your new website free — trades, creatives, healthcare. You pay $120/mo only once you're happy and it goes live.",
     "og_title": "lemonelly · Free website design for US small businesses",
     "og_desc": "We design your new website free. You pay $120/mo only when you love it and it goes live.",
-    "badge": "Web design studio for US small businesses"
+    "badge": "Web design studio",
+    "badge_ext": " for US small businesses"
   },
   "uk": {
     "path": "uk",
@@ -53,7 +56,8 @@
     "meta_desc": "lemonelly designs your new website free — trades, creatives, healthcare. You pay £95/mo only once you're happy and it goes live.",
     "og_title": "lemonelly · Free website design for UK small businesses",
     "og_desc": "We design your new website free. You pay £95/mo only when you love it and it goes live.",
-    "badge": "Web design studio for UK small businesses"
+    "badge": "Web design studio",
+    "badge_ext": " for UK small businesses"
   },
   "eu": {
     "path": "eu",
@@ -67,6 +71,7 @@
     "meta_desc": "lemonelly designs your new website free — trades, creatives, healthcare. You pay €110/mo only once you're happy and it goes live.",
     "og_title": "lemonelly · Free website design for European small businesses",
     "og_desc": "We design your new website free. You pay €110/mo only when you love it and it goes live.",
-    "badge": "Web design studio for European small businesses"
+    "badge": "Web design studio",
+    "badge_ext": " for European small businesses"
   }
 }

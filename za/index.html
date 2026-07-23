@@ -180,6 +180,11 @@
       content: ""; width: .55rem; height: .55rem; border-radius: 50%;
       background: var(--green); flex: none;
     }
+    .badge-pill { white-space: nowrap; }
+    .badge-ext { white-space: pre; }
+    @media (max-width: 40rem) {
+      .badge-ext { display: none; }
+    }
 
     .region-nav {
       display: inline-flex; flex: none; border: 1px solid var(--line); border-radius: 999px; overflow: hidden;
@@ -412,7 +417,7 @@
     <section class="hero" id="top" aria-label="Introduction">
       <div class="wrap">
         <div>
-          <p class="badge-pill">Web Design Studio · Cape Town</p>
+          <p class="badge-pill">Web Design Studio<span class="badge-ext"> · Cape Town</span></p>
           <h1>We design your website free. You only pay if you love it.</h1>
           <p class="lede">Professional websites that win trust for South African small businesses. Live in 7 days. R2,200/month once you're happy, and nothing before that.</p>
           <div class="hero-actions">
