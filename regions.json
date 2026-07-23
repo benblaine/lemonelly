@@ -11,7 +11,8 @@
     "title": "lemonelly · Websites that win trust for local businesses · $1,000 + $60/mo",
     "meta_desc": "lemonelly designs and builds fast, professional websites for small and independent businesses — trades, creatives, healthcare. $1,000 setup + $60/mo, live in one week. Cape Town.",
     "og_title": "lemonelly · Websites that win trust for local businesses",
-    "og_desc": "Fast, professional websites for small and independent businesses. $1,000 setup + $60/mo, live in one week. Proudly built in Cape Town."
+    "og_desc": "Fast, professional websites for small and independent businesses. $1,000 setup + $60/mo, live in one week. Proudly built in Cape Town.",
+    "badge": "Web design studio for local businesses"
   },
   "za": {
     "path": "za",
@@ -25,7 +26,8 @@
     "title": "lemonelly · Websites for South African small businesses · R18,000 + R1,100/mo",
     "meta_desc": "lemonelly designs and builds fast, professional websites for South African small businesses — trades, creatives, healthcare. R18,000 setup + R1,100/mo, live in one week. Cape Town.",
     "og_title": "lemonelly · Websites for South African small businesses",
-    "og_desc": "Fast, professional websites for South African small businesses. R18,000 setup + R1,100/mo, live in one week. Proudly built in Cape Town."
+    "og_desc": "Fast, professional websites for South African small businesses. R18,000 setup + R1,100/mo, live in one week. Proudly built in Cape Town.",
+    "badge": "Web Design Studio · Cape Town"
   },
   "us": {
     "path": "us",
@@ -39,7 +41,8 @@
     "title": "lemonelly · Websites for American small businesses · $1,000 + $60/mo",
     "meta_desc": "lemonelly designs and builds fast, professional websites for American small businesses — trades, creatives, healthcare. $1,000 setup + $60/mo, live in one week.",
     "og_title": "lemonelly · Websites for American small businesses",
-    "og_desc": "Fast, professional websites for American small businesses. $1,000 setup + $60/mo, live in one week."
+    "og_desc": "Fast, professional websites for American small businesses. $1,000 setup + $60/mo, live in one week.",
+    "badge": "Web design studio for US small businesses"
   },
   "uk": {
     "path": "uk",
@@ -53,7 +56,8 @@
     "title": "lemonelly · Websites for British small businesses · £800 + £50/mo",
     "meta_desc": "lemonelly designs and builds fast, professional websites for British small businesses — trades, creatives, healthcare. £800 setup + £50/mo, live in one week.",
     "og_title": "lemonelly · Websites for British small businesses",
-    "og_desc": "Fast, professional websites for British small businesses. £800 setup + £50/mo, live in one week."
+    "og_desc": "Fast, professional websites for British small businesses. £800 setup + £50/mo, live in one week.",
+    "badge": "Web design studio for UK small businesses"
   },
   "eu": {
     "path": "eu",
@@ -67,6 +71,7 @@
     "title": "lemonelly · Websites for European small businesses · €950 + €55/mo",
     "meta_desc": "lemonelly designs and builds fast, professional websites for European small businesses — trades, creatives, healthcare. €950 setup + €55/mo, live in one week.",
     "og_title": "lemonelly · Websites for European small businesses",
-    "og_desc": "Fast, professional websites for European small businesses. €950 setup + €55/mo, live in one week."
+    "og_desc": "Fast, professional websites for European small businesses. €950 setup + €55/mo, live in one week.",
+    "badge": "Web design studio for European small businesses"
   }
 }

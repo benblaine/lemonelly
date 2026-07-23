@@ -41,6 +41,7 @@ for key, r in regions.items():
         "LEDE_AUDIENCE": r["lede_audience"],
         "TRADES": r["trades"],
         "AREA_SERVED": r["area_served"],
+        "BADGE": r["badge"],
         "REGION_NAV": region_nav(r["code"]),
     }
     for k, v in values.items():
