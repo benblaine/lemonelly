@@ -36,6 +36,39 @@
     "areaServed": "Cape Town"
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does a website cost with lemonelly?",
+        "acceptedAnswer": { "@type": "Answer", "text": "$1,000 once-off to design and build your site, then $60/month for hosting, security, and updates. That's the whole price — no hourly rates, no surprise invoices." }
+      },
+      {
+        "@type": "Question",
+        "name": "How fast will my site be live?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Seven days from kickoff. Days 1–2 we learn your business, days 3–5 we design and build, days 6–7 we review it with you and go live." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the $60/month actually cover?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Premium hosting, security, and one round of content updates every month — new photos, price changes, fresh copy. Your site stays current without you touching it." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do you need from me to get started?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Just tell us about your business — what you do, who your customers are, and what makes you good at it. We take it from there and review everything with you before launch." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change things after the site is live?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. One round of updates is included every single month, so your site keeps up as your business grows — just send us what's changed." }
+      }
+    ]
+  }
+  </script>
 
   <style>
     /* ---------- Tokens ---------- */
@@ -282,6 +315,28 @@
     .person .cred { font-size: var(--fs-0); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green); margin: var(--sp-1) 0 var(--sp-2); }
     .person .bio { color: var(--ink-2); }
 
+    /* ---------- FAQ ---------- */
+    .faq-list { max-width: 46rem; margin-inline: auto; border-bottom: 1px solid var(--line); }
+    .faq-list details { border-top: 1px solid var(--line); }
+    .faq-list summary {
+      display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+      padding: var(--sp-4) 0; cursor: pointer; list-style: none;
+      font-size: var(--fs-2); font-weight: 600;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary:hover { color: var(--green); }
+    .faq-list summary .plus {
+      flex: none; width: 1.5rem; height: 1.5rem; position: relative;
+      transition: transform .2s ease;
+    }
+    .faq-list summary .plus::before, .faq-list summary .plus::after {
+      content: ""; position: absolute; inset: 0; margin: auto; background: currentColor;
+    }
+    .faq-list summary .plus::before { width: 100%; height: 2px; }
+    .faq-list summary .plus::after { width: 2px; height: 100%; }
+    .faq-list details[open] summary .plus { transform: rotate(45deg); }
+    .faq-list details p { color: var(--ink-2); padding: 0 2.5rem var(--sp-4) 0; }
+
     /* ---------- CTA ---------- */
     .cta { background: var(--bg-2); border-top: 1px solid var(--line); text-align: center; }
     .cta h2 { font-size: var(--fs-4); font-weight: 800; letter-spacing: -.02em; margin-top: var(--sp-4); }
@@ -522,6 +577,37 @@ BUILD</span>
             <p class="cred">Technical Lead · BSc Mechanical Engineering</p>
             <p class="bio">The technical engine. Ben builds the underlying structure, ensuring the site is lightning-fast and rock-solid.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-h">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="badge-pill">FAQ</p>
+          <h2 id="faq-h">Common questions</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>What does a website cost with lemonelly? <span class="plus" aria-hidden="true"></span></summary>
+            <p>$1,000 once-off to design and build your site, then $60/month for hosting, security, and updates. That's the whole price — no hourly rates, no surprise invoices.</p>
+          </details>
+          <details>
+            <summary>How fast will my site be live? <span class="plus" aria-hidden="true"></span></summary>
+            <p>Seven days from kickoff. Days 1–2 we learn your business, days 3–5 we design and build, days 6–7 we review it with you and go live.</p>
+          </details>
+          <details>
+            <summary>What does the $60/month actually cover? <span class="plus" aria-hidden="true"></span></summary>
+            <p>Premium hosting, security, and one round of content updates every month — new photos, price changes, fresh copy. Your site stays current without you touching it.</p>
+          </details>
+          <details>
+            <summary>What do you need from me to get started? <span class="plus" aria-hidden="true"></span></summary>
+            <p>Just tell us about your business — what you do, who your customers are, and what makes you good at it. We take it from there and review everything with you before launch.</p>
+          </details>
+          <details>
+            <summary>Can I change things after the site is live? <span class="plus" aria-hidden="true"></span></summary>
+            <p>Yes. One round of updates is included every single month, so your site keeps up as your business grows — just send us what's changed.</p>
+          </details>
         </div>
       </div>
     </section>
