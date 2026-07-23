@@ -12,13 +12,30 @@ One static page, no build step, no dependencies, zero external requests.
 - Lemon yellow `#FFD335` appears only in the logo mark
 - System font stack, pill buttons, 24px-radius cards, hairline borders `#E8E6E1`
 
+## Regional pages
+
+The site ships five pages generated from one template: `/` (global, USD) plus `/za`, `/us`,
+`/uk`, `/eu` — each with regional pricing, audience wording, and metadata. A geography
+toggle in the navbar links between them, and `hreflang` tags tie them together for search.
+
+**To change copy or layout**: edit `template/index.template.html`.
+**To change a region's prices or wording**: edit `regions.json`.
+Then regenerate all pages and commit the results:
+
+```sh
+python3 scripts/build.py
+```
+
+Never edit `index.html` or `za|us|uk|eu/index.html` directly — they're generated and will
+be overwritten by the next build.
+
 ## Preview locally
 
 ```sh
 python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000/
+Then open http://localhost:8000/ (regional pages at /za/, /us/, /uk/, /eu/)
 
 ## Images
 
