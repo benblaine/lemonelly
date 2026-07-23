@@ -262,11 +262,8 @@
     }
     .price-strip strong { color: var(--ink); font-weight: 700; }
 
-    .hero-photos { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); margin-top: var(--sp-5); }
-    @media (min-width: 60rem) {
-      .hero-photos { margin-top: 0; }
-      .hero-photos .headshot:last-child { transform: translateY(var(--sp-4)); }
-    }
+    .hero-art { width: 100%; height: auto; margin-top: var(--sp-5); border-radius: var(--r-lg); border: 1px solid var(--line); }
+    @media (min-width: 60rem) { .hero-art { margin-top: 0; } }
 
     /* ---------- Stats ---------- */
     .stats { border-block: 1px solid var(--line); background: var(--bg-2); padding-block: var(--sp-5); }
@@ -322,7 +319,6 @@
       position: relative; aspect-ratio: 1; border-radius: var(--r);
       overflow: hidden; background: var(--bg-2); margin-bottom: var(--sp-4);
     }
-    .hero-photos .headshot { margin-bottom: 0; border-radius: var(--r-lg); aspect-ratio: 4 / 5; box-shadow: var(--shadow); }
     .monogram {
       position: absolute; inset: 0; display: grid; place-items: center;
       font-size: var(--fs-5); font-weight: 800; letter-spacing: .02em; color: var(--ink-2);
@@ -419,18 +415,9 @@
           </div>
           <p class="price-strip"><strong>$1,000</strong> flat setup <span aria-hidden="true">·</span> <strong>$60/mo</strong> hosting &amp; updates <span aria-hidden="true">·</span> live in <strong>7 days</strong></p>
         </div>
-        <div class="hero-photos">
-          <figure class="headshot">
-            <span class="monogram" aria-hidden="true">VK</span>
-            <img src="/assets/veronica.jpg" alt="Veronica Kotze, Creative Director at lemonelly"
-                 width="640" height="800" onerror="this.remove()">
-          </figure>
-          <figure class="headshot">
-            <span class="monogram" aria-hidden="true">BB</span>
-            <img src="/assets/ben.jpg" alt="Ben Blaine, Technical Lead at lemonelly"
-                 width="640" height="800" onerror="this.remove()">
-          </figure>
-        </div>
+        <img class="hero-art" src="/assets/hero-mockup.png"
+             alt="The Lost Wax Foundry website, built by lemonelly, shown on a laptop and phone"
+             width="1400" height="900" onerror="this.remove()">
       </div>
     </section>
 
