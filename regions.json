@@ -12,7 +12,8 @@
     "og_title": "lemonelly · Free website design for local businesses",
     "og_desc": "We design your new website free. You pay $120/mo only when you love it and it goes live. Proudly built in Cape Town.",
     "badge": "Web design studio",
-    "badge_ext": " for local businesses"
+    "badge_ext": " for local businesses",
+    "region_param": ""
   },
   "za": {
     "path": "za",
@@ -27,7 +28,8 @@
     "og_title": "lemonelly · Free website design for South African small businesses",
     "og_desc": "We design your new website free. You pay R2,200/mo only when you love it and it goes live. Proudly built in Cape Town.",
     "badge": "Web Design Studio",
-    "badge_ext": " · Cape Town"
+    "badge_ext": " · Cape Town",
+    "region_param": "?r=za"
   },
   "us": {
     "path": "us",
@@ -42,7 +44,8 @@
     "og_title": "lemonelly · Free website design for US small businesses",
     "og_desc": "We design your new website free. You pay $120/mo only when you love it and it goes live.",
     "badge": "Web design studio",
-    "badge_ext": " for US small businesses"
+    "badge_ext": " for US small businesses",
+    "region_param": "?r=us"
   },
   "uk": {
     "path": "uk",
@@ -57,7 +60,8 @@
     "og_title": "lemonelly · Free website design for UK small businesses",
     "og_desc": "We design your new website free. You pay £95/mo only when you love it and it goes live.",
     "badge": "Web design studio",
-    "badge_ext": " for UK small businesses"
+    "badge_ext": " for UK small businesses",
+    "region_param": "?r=uk"
   },
   "eu": {
     "path": "eu",
@@ -72,6 +76,7 @@
     "og_title": "lemonelly · Free website design for European small businesses",
     "og_desc": "We design your new website free. You pay €110/mo only when you love it and it goes live.",
     "badge": "Web design studio",
-    "badge_ext": " for European small businesses"
+    "badge_ext": " for European small businesses",
+    "region_param": "?r=eu"
   }
 }

@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start your free draft · lemonelly</title>
+  <meta name="description" content="Pick your vibe, tell us about your business, and we'll design your website free. You only pay once you love it.">
+  <link rel="canonical" href="https://lemonelly.com/start">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg transform='rotate(-20 32 38)'%3E%3Cellipse cx='32' cy='38' rx='23' ry='16' fill='%23FFD335' stroke='%23111110' stroke-width='4'/%3E%3C/g%3E%3Cpath d='M34 16q10-9 20-2q-9 9-20 2z' fill='%23166548'/%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --bg: #FFFFFF; --bg-2: #F7F7F5; --ink: #111110; --ink-2: #55524A;
+      --line: #E8E6E1; --green: #166548; --green-deep: #0F4F37;
+      --cta: #6AC197; --cta-deep: #48AF7D; --lemon: #FFD335;
+      --shadow: 0 2px 10px rgba(17,17,16,.05);
+      --r: 16px; --r-lg: 24px;
+      --wrap: 46rem;
+    }
+    * , *::before, *::after { box-sizing: border-box; }
+    body, h1, h2, h3, p, figure, ol, ul, fieldset { margin: 0; }
+    ul[class], ol[class] { padding: 0; list-style: none; }
+    fieldset { border: 0; padding: 0; }
+    img { max-width: 100%; display: block; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink); background: var(--bg); line-height: 1.6; font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: var(--lemon); color: var(--ink); }
+    :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2rem); }
+
+    /* header */
+    .site-head { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; min-height: 4rem; max-width: 72rem; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2rem); }
+    .brand { display: inline-flex; align-items: center; gap: .5rem; font-weight: 800; font-size: 1.1875rem; letter-spacing: -.02em; text-decoration: none; color: var(--ink); }
+    .brand svg { width: 26px; height: 26px; }
+    .back-home { font-size: .875rem; font-weight: 600; color: var(--ink-2); text-decoration: none; }
+    .back-home:hover { color: var(--ink); }
+
+    h1 { font-size: clamp(1.875rem, 5vw, 2.75rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+    .sub { color: var(--ink-2); margin-top: .75rem; max-width: 48ch; }
+    section.screen { padding-block: 2.5rem 5rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: .5em; justify-content: center;
+      min-height: 48px; padding: .5rem 1.5rem; border: 1.5px solid transparent; border-radius: 999px;
+      font: inherit; font-weight: 600; cursor: pointer; text-decoration: none; color: var(--ink); background: transparent;
+      transition: background-color .15s ease, border-color .15s ease;
+    }
+    .btn-solid { background: var(--cta); }
+    .btn-solid:hover { background: var(--cta-deep); }
+    .btn-solid[disabled] { background: var(--line); color: var(--ink-2); cursor: not-allowed; }
+    .btn-ghost { border-color: var(--line); }
+    .btn-ghost:hover { border-color: var(--ink); }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-green:hover { background: var(--green-deep); }
+
+    /* filter pills */
+    .filters { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.75rem 0; }
+    .filters button {
+      border: 1px solid var(--line); background: var(--bg); border-radius: 999px;
+      padding: .4rem 1rem; font: inherit; font-size: .875rem; font-weight: 600; color: var(--ink-2); cursor: pointer;
+    }
+    .filters button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .filters button:hover { color: var(--ink); }
+
+    /* style gallery */
+    .gallery { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); max-width: 72rem; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2rem); }
+    .style-card { border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); overflow: hidden; background: var(--bg); }
+    .style-card .body { padding: 1.25rem; }
+    .style-card h3 { font-size: 1.1875rem; font-weight: 700; display: inline; }
+    .style-card .tag { display: inline-block; margin-left: .4rem; font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--green); }
+    .style-card p { color: var(--ink-2); font-size: .9375rem; margin: .5rem 0 1rem; }
+    .style-note { max-width: 72rem; margin: 0 auto 1rem; padding-inline: clamp(1rem, 4vw, 2rem); color: var(--ink-2); font-size: .875rem; }
+
+    /* CSS-drawn style thumbs (style directions, not screenshots) */
+    .thumb { aspect-ratio: 4/3; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; padding: 12%; display: flex; flex-direction: column; gap: 6%; }
+    .thumb i { display: block; border-radius: 3px; }
+    .t-modern { background: #fff; }
+    .t-modern .bar1 { height: 12%; width: 70%; background: var(--ink); }
+    .t-modern .bar2 { height: 5%; width: 50%; background: var(--line); }
+    .t-modern .bar3 { height: 5%; width: 44%; background: var(--line); }
+    .t-modern .dot { height: 12%; width: 34%; background: var(--cta); border-radius: 999px; margin-top: auto; }
+    .t-bold { background: var(--ink); }
+    .t-bold .bar1 { height: 22%; width: 85%; background: #fff; }
+    .t-bold .bar2 { height: 22%; width: 60%; background: #fff; }
+    .t-bold .dot { height: 10%; width: 30%; background: var(--lemon); margin-top: auto; }
+    .t-classic { background: #FDFBF4; align-items: center; text-align: center; }
+    .t-classic .bar1 { height: 3%; width: 40%; background: #B4A57A; }
+    .t-classic .bar2 { height: 10%; width: 66%; background: var(--ink); font-family: Georgia, serif; }
+    .t-classic .bar3 { height: 3%; width: 40%; background: #B4A57A; }
+    .t-classic .bar4 { height: 4%; width: 55%; background: var(--line); margin-top: auto; }
+    .t-creative { background: #fff; }
+    .t-creative .bar1 { height: 16%; width: 55%; background: var(--lemon); transform: rotate(-3deg); }
+    .t-creative .bar2 { height: 16%; width: 70%; background: var(--cta); transform: rotate(2deg); }
+    .t-creative .dot { height: 26%; width: 35%; background: var(--green); border-radius: 50%; margin-top: auto; margin-left: 55%; }
+    .t-minimal { background: #fff; gap: 9%; }
+    .t-minimal .bar1 { height: 4%; width: 42%; background: var(--ink); }
+    .t-minimal .bar2 { height: 2px; width: 100%; background: var(--line); }
+    .t-minimal .bar3 { height: 3%; width: 30%; background: var(--line); }
+    .t-industrial { background: #3A3D40; }
+    .t-industrial .bar1 { height: 16%; width: 75%; background: #E8E6E1; border-radius: 0; }
+    .t-industrial .bar2 { height: 8%; width: 45%; background: #F2B705; border-radius: 0; }
+    .t-industrial .bar3 { height: 8%; width: 45%; background: #6B7075; border-radius: 0; margin-top: auto; }
+
+    /* progress */
+    .progress { display: flex; gap: .25rem; margin: 1.5rem 0 1rem; }
+    .progress li { flex: 1; display: flex; flex-direction: column; align-items: center; gap: .4rem; position: relative; }
+    .progress li::before { content: ""; position: absolute; top: 1rem; left: -50%; width: 100%; height: 2px; background: var(--line); z-index: -1; }
+    .progress li:first-child::before { display: none; }
+    .progress .dot {
+      width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center;
+      border: 2px solid var(--line); background: var(--bg); font-size: .8125rem; font-weight: 700; color: var(--ink-2);
+    }
+    .progress li[data-state="done"] .dot { background: var(--green); border-color: var(--green); color: #fff; }
+    .progress li[data-state="active"] .dot { background: var(--cta); border-color: var(--cta); color: var(--ink); }
+    .progress .lbl { font-size: .6875rem; font-weight: 600; letter-spacing: .02em; color: var(--ink-2); text-align: center; }
+    .progress li[data-state="active"] .lbl { color: var(--ink); font-weight: 700; }
+    @media (max-width: 40rem) { .progress .lbl { display: none; } .progress li[data-state="active"] .lbl { display: block; } }
+
+    /* selected template card */
+    .picked {
+      display: flex; align-items: center; gap: 1rem; border: 1px solid var(--line); border-radius: var(--r);
+      padding: .75rem 1rem; margin-bottom: 2rem; box-shadow: var(--shadow);
+    }
+    .picked .mini { width: 64px; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; flex: none; }
+    .picked .mini .thumb { padding: 8%; gap: 5%; border: 0; }
+    .picked strong { font-size: .9375rem; }
+    .picked .tag { font-size: .75rem; color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+    .picked button { margin-left: auto; }
+
+    /* form bits */
+    .panel h2 { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 800; letter-spacing: -.02em; }
+    .panel .sect { margin-top: 2.25rem; }
+    .panel .sect > h3 { font-size: 1.1875rem; font-weight: 700; }
+    .panel .hint { color: var(--ink-2); font-size: .9375rem; margin: .35rem 0 1rem; }
+    .opt { color: var(--ink-2); font-weight: 500; font-size: .875rem; }
+
+    .radio-cards { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .radio-card {
+      border: 1.5px solid var(--line); border-radius: var(--r); padding: 1rem 1.25rem; cursor: pointer;
+      display: flex; gap: .75rem; align-items: center; font-weight: 600;
+    }
+    .radio-card:has(input:checked) { border-color: var(--green); background: #F4FAF7; }
+    .radio-card input { accent-color: var(--green); width: 1.1rem; height: 1.1rem; }
+
+    .domain-row { display: flex; gap: .5rem; margin-top: 1rem; }
+    .domain-row input { flex: 1; }
+    input[type="text"], input[type="email"], input[type="tel"], textarea {
+      font: inherit; width: 100%; border: 1.5px solid var(--line); border-radius: 12px;
+      padding: .7rem .9rem; color: var(--ink); background: var(--bg);
+    }
+    input:focus, textarea:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+    textarea { min-height: 7.5rem; resize: vertical; }
+    label.f { display: block; font-weight: 600; font-size: .9375rem; margin-bottom: .35rem; }
+    .fgrid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 1rem; }
+    .field-err { border-color: #C0392B !important; }
+    .err-msg { color: #C0392B; font-size: .875rem; margin-top: .75rem; display: none; }
+
+    .ext-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+    .ext-chips label {
+      border: 1px solid var(--line); border-radius: 999px; padding: .3rem .8rem; font-size: .875rem; font-weight: 600;
+      cursor: pointer; color: var(--ink-2); display: inline-flex; gap: .4rem; align-items: center;
+    }
+    .ext-chips label:has(input:checked) { background: var(--green); border-color: var(--green); color: #fff; }
+    .ext-chips input { position: absolute; opacity: 0; }
+    .domain-note { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: .75rem 1rem; font-size: .875rem; color: var(--ink-2); margin-top: 1rem; }
+
+    .checks { display: grid; gap: .6rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .check {
+      border: 1.5px solid var(--line); border-radius: 12px; padding: .7rem 1rem; cursor: pointer;
+      display: flex; gap: .6rem; align-items: center; font-weight: 600; font-size: .9375rem;
+    }
+    .check:has(input:checked) { border-color: var(--green); background: #F4FAF7; }
+    .check input { accent-color: var(--green); width: 1.05rem; height: 1.05rem; flex: none; }
+
+    .addrow { display: flex; gap: .5rem; margin-top: 1rem; }
+    .addrow input { flex: 1; }
+    .chiplist { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+    .chiplist span { background: var(--bg-2); border: 1px solid var(--line); border-radius: 999px; padding: .3rem .5rem .3rem .9rem; font-size: .875rem; font-weight: 600; display: inline-flex; align-items: center; gap: .35rem; }
+    .chiplist button { border: 0; background: none; cursor: pointer; font-size: 1rem; line-height: 1; color: var(--ink-2); padding: 0 .25rem; }
+    .chiplist button:hover { color: var(--ink); }
+
+    .swatches { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: .5rem; }
+    .swatches .sw { width: 2.4rem; height: 2.4rem; border-radius: 10px; border: 1px solid var(--line); position: relative; }
+    .swatches .sw button { position: absolute; inset: auto -6px -6px auto; width: 1.2rem; height: 1.2rem; border-radius: 50%; border: 1px solid var(--line); background: #fff; font-size: .7rem; line-height: 1; cursor: pointer; }
+    .colorrow { display: flex; gap: .5rem; align-items: center; margin-top: .75rem; }
+    .colorrow input[type="color"] { width: 3rem; height: 2.6rem; border: 1px solid var(--line); border-radius: 10px; padding: 2px; background: var(--bg); cursor: pointer; }
+
+    details.power { border: 1px solid var(--line); border-radius: var(--r); margin-top: .75rem; overflow: hidden; }
+    details.power summary { list-style: none; cursor: pointer; padding: 1rem 1.25rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+    details.power summary::-webkit-details-marker { display: none; }
+    details.power summary .plus { transition: transform .2s ease; font-weight: 400; color: var(--ink-2); }
+    details.power[open] summary .plus { transform: rotate(45deg); }
+    details.power .inner { padding: 0 1.25rem 1.25rem; color: var(--ink-2); font-size: .9375rem; }
+    details.power .inner label { display: inline-flex; gap: .5rem; align-items: center; margin-top: .75rem; font-weight: 600; color: var(--ink); cursor: pointer; }
+    details.power .inner input { accent-color: var(--green); }
+
+    .callout { border: 1.5px solid var(--green); background: #F4FAF7; border-radius: var(--r); padding: 1.25rem; margin-top: 1.5rem; }
+    .callout label { display: flex; gap: .75rem; align-items: flex-start; font-weight: 600; cursor: pointer; }
+    .callout input { accent-color: var(--green); width: 1.1rem; height: 1.1rem; margin-top: .25rem; flex: none; }
+    .dd-qs { margin-top: 1.25rem; display: none; }
+    .dd-qs.show { display: block; }
+    .dd-qs .fgrid { grid-template-columns: 1fr; }
+
+    .price-line { background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--r); padding: 1rem 1.25rem; margin-top: 1.5rem; font-weight: 600; }
+    .subcta { text-align: center; color: var(--ink-2); font-size: .9375rem; margin-top: 1rem; }
+
+    /* bottom nav */
+    .flow-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; gap: 1rem; }
+    .flow-nav .back { background: none; border: 0; font: inherit; font-weight: 600; color: var(--ink-2); cursor: pointer; padding: .5rem; }
+    .flow-nav .back:hover { color: var(--ink); }
+    #next-btn { min-width: 11rem; }
+    #next-btn.submit-mode { flex: 1; max-width: 24rem; }
+
+    /* done screen */
+    .summary { background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--r); padding: 1.25rem; white-space: pre-wrap; font-size: .875rem; color: var(--ink-2); margin: 1.5rem 0; max-height: 40vh; overflow: auto; }
+    .send-row { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+    /* FAB */
+    .fab {
+      position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 20;
+      width: 3.5rem; height: 3.5rem; border-radius: 50%; background: var(--green);
+      display: grid; place-items: center; box-shadow: 0 6px 20px rgba(17,17,16,.25); text-decoration: none;
+    }
+    .fab:hover { background: var(--green-deep); }
+    .fab svg { width: 1.6rem; height: 1.6rem; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* footer */
+    footer { border-top: 1px solid var(--line); padding-block: 2.5rem; margin-top: 3rem; }
+    footer .cols { max-width: 72rem; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2rem); display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    footer h4 { font-size: .8125rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 .75rem; }
+    footer p { color: var(--ink-2); font-size: .9375rem; }
+    footer ul li { margin-bottom: .4rem; }
+    footer a { color: var(--ink-2); text-decoration: none; font-size: .9375rem; }
+    footer a:hover { color: var(--ink); }
+    footer .vp { font-weight: 700; color: var(--ink); font-size: 1.0625rem; }
+    footer .btn { margin-top: 1rem; }
+
+    [hidden] { display: none !important; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="site-head">
+    <div class="nav-row">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <g transform="rotate(-20 32 38)"><ellipse cx="32" cy="38" rx="23" ry="16" fill="#FFD335" stroke="#111110" stroke-width="4"/></g>
+          <path d="M34 16q10-9 20-2q-9 9-20 2z" fill="#166548"/>
+        </svg>
+        lemonelly
+      </a>
+      <a class="back-home" href="/">← back to lemonelly.com</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ Style gallery ============ -->
+    <section class="screen" id="view-gallery">
+      <div class="wrap">
+        <h1>Pick your vibe</h1>
+        <p class="sub">Explore fresh, dynamic looks built to make your trade business stand out. Don't worry—we can tweak every detail later!</p>
+        <div class="filters" role="group" aria-label="Filter styles">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="Modern" aria-pressed="false">Modern</button>
+          <button type="button" data-filter="Bold" aria-pressed="false">Bold</button>
+          <button type="button" data-filter="Classic" aria-pressed="false">Classic</button>
+          <button type="button" data-filter="Creative" aria-pressed="false">Creative</button>
+          <button type="button" data-filter="Minimal" aria-pressed="false">Minimal</button>
+          <button type="button" data-filter="Industrial" aria-pressed="false">Industrial</button>
+        </div>
+      </div>
+      <p class="style-note">These are style directions, not fixed templates — your site is designed from scratch in the direction you pick.</p>
+      <div class="gallery">
+        <div class="style-card" data-tag="Modern">
+          <div class="thumb t-modern" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i><i class="dot"></i></div>
+          <div class="body">
+            <h3>Clean Pro</h3><span class="tag">[Modern]</span>
+            <p>Crisp, confident, and easy to trust. Big type, clear buttons, zero clutter.</p>
+            <button type="button" class="btn btn-solid select-style" data-name="Clean Pro" data-style="Modern">Select Style</button>
+          </div>
+        </div>
+        <div class="style-card" data-tag="Bold">
+          <div class="thumb t-bold" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="dot"></i></div>
+          <div class="body">
+            <h3>Big Impact</h3><span class="tag">[Bold]</span>
+            <p>Dark, punchy, and impossible to scroll past. For businesses that want to be seen.</p>
+            <button type="button" class="btn btn-solid select-style" data-name="Big Impact" data-style="Bold">Select Style</button>
+          </div>
+        </div>
+        <div class="style-card" data-tag="Classic">
+          <div class="thumb t-classic" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i><i class="bar4"></i></div>
+          <div class="body">
+            <h3>Trade Mark</h3><span class="tag">[Classic]</span>
+            <p>Established and dependable. The look of a business that's been at it for years.</p>
+            <button type="button" class="btn btn-solid select-style" data-name="Trade Mark" data-style="Classic">Select Style</button>
+          </div>
+        </div>
+        <div class="style-card" data-tag="Creative">
+          <div class="thumb t-creative" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="dot"></i></div>
+          <div class="body">
+            <h3>Fresh Twist</h3><span class="tag">[Creative]</span>
+            <p>Colour, energy, and personality. Perfect when your work is your portfolio.</p>
+            <button type="button" class="btn btn-solid select-style" data-name="Fresh Twist" data-style="Creative">Select Style</button>
+          </div>
+        </div>
+        <div class="style-card" data-tag="Minimal">
+          <div class="thumb t-minimal" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i><i class="bar2"></i></div>
+          <div class="body">
+            <h3>Bare Essentials</h3><span class="tag">[Minimal]</span>
+            <p>Quiet luxury. Lots of air, few words, everything exactly where it should be.</p>
+            <button type="button" class="btn btn-solid select-style" data-name="Bare Essentials" data-style="Minimal">Select Style</button>
+          </div>
+        </div>
+        <div class="style-card" data-tag="Industrial">
+          <div class="thumb t-industrial" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i></div>
+          <div class="body">
+            <h3>Steel Works</h3><span class="tag">[Industrial]</span>
+            <p>Tough, practical, built like your work. Strong lines and no nonsense.</p>
+            <button type="button" class="btn btn-solid select-style" data-name="Steel Works" data-style="Industrial">Select Style</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5-step flow ============ -->
+    <section class="screen" id="view-flow" hidden>
+      <div class="wrap">
+        <ol class="progress" aria-label="Progress">
+          <li data-step="1"><span class="dot">1</span><span class="lbl">Web address</span></li>
+          <li data-step="2"><span class="dot">2</span><span class="lbl">Secret sauce</span></li>
+          <li data-step="3"><span class="dot">3</span><span class="lbl">Deep dive</span></li>
+          <li data-step="4"><span class="dot">4</span><span class="lbl">Contact</span></li>
+          <li data-step="5"><span class="dot">5</span><span class="lbl">Reserve</span></li>
+        </ol>
+
+        <div class="picked">
+          <span class="mini" id="picked-mini" aria-hidden="true"></span>
+          <span><strong id="picked-name">—</strong><br><span class="tag" id="picked-tag">—</span></span>
+          <button type="button" class="btn btn-ghost" id="change-style">Change</button>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="panel" data-panel="1">
+          <h2>Your web address</h2>
+          <div class="sect">
+            <h3>Your domain</h3>
+            <p class="hint">Where will people find you online?</p>
+            <div class="radio-cards">
+              <label class="radio-card"><input type="radio" name="domain-mode" value="new" checked> Find a fresh new domain</label>
+              <label class="radio-card"><input type="radio" name="domain-mode" value="have"> I've already got a domain</label>
+            </div>
+            <div id="domain-new">
+              <div class="domain-row">
+                <input type="text" id="domain-name" placeholder="e.g. smithroofing" aria-label="Domain name idea">
+                <button type="button" class="btn btn-green" id="domain-search">Search</button>
+              </div>
+              <div class="ext-chips" id="ext-chips" hidden>
+                <label><input type="checkbox" value=".com" checked>.com</label>
+                <label><input type="checkbox" value=".co.uk">.co.uk</label>
+                <label><input type="checkbox" value=".co.za">.co.za</label>
+                <label><input type="checkbox" value=".org">.org</label>
+                <label><input type="checkbox" value=".net">.net</label>
+              </div>
+              <p class="domain-note" id="domain-note" hidden>Nice one — we'll check live availability for <strong id="domain-echo"></strong> and confirm your options within 24 hours. Tick the endings you'd be happy with.</p>
+            </div>
+            <div id="domain-have" hidden>
+              <div class="domain-row"><input type="text" id="domain-existing" placeholder="e.g. smithroofing.co.uk" aria-label="Your existing domain"></div>
+            </div>
+          </div>
+          <div class="sect">
+            <h3>Your pages</h3>
+            <p class="hint">We've built a high-converting default stack for you. Toggle what you need, or add custom pages!</p>
+            <div class="checks" id="page-checks">
+              <label class="check"><input type="checkbox" value="Home" checked> Home</label>
+              <label class="check"><input type="checkbox" value="Services" checked> Services</label>
+              <label class="check"><input type="checkbox" value="About Us" checked> About Us</label>
+              <label class="check"><input type="checkbox" value="Contact Us" checked> Contact Us</label>
+              <label class="check"><input type="checkbox" value="Gallery"> Gallery</label>
+              <label class="check"><input type="checkbox" value="Products"> Products</label>
+            </div>
+            <div class="addrow">
+              <input type="text" id="custom-page" placeholder="Add another page (optional)" aria-label="Custom page name">
+              <button type="button" class="btn btn-ghost" id="add-page">Add</button>
+            </div>
+            <div class="chiplist" id="custom-pages"></div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="panel" data-panel="2" hidden>
+          <h2>Your secret sauce</h2>
+          <div class="sect">
+            <h3>Tell us your story</h3>
+            <p class="hint">Give us the highlights! What do you do, who do you serve, and where are you based? (Keep it simple—just speak like you're talking to a mate).</p>
+            <textarea id="story" placeholder="e.g. We're a family roofing outfit in Leeds. 20 years on the tools, mostly re-roofs and repairs. Customers stay with us because we show up when we say we will."></textarea>
+          </div>
+          <div class="sect">
+            <h3>Brand colors <span class="opt">(optional)</span></h3>
+            <p class="hint">Have existing brand colors? Pick a couple here. If not, no stress—we'll match your logo or pick something sharp!</p>
+            <div class="swatches" id="swatches"></div>
+            <div class="colorrow">
+              <input type="color" id="color-pick" value="#166548" aria-label="Pick a colour">
+              <button type="button" class="btn btn-ghost" id="add-color">+ Add color</button>
+            </div>
+          </div>
+          <div class="sect">
+            <h3>Your assets <span class="opt">(optional)</span></h3>
+            <p class="hint">Tick what you've got — logo, job site photos, or team shots! We'll collect the actual files on WhatsApp or email right after you submit (no uploads needed here).</p>
+            <div class="checks" id="asset-checks">
+              <label class="check"><input type="checkbox" value="Logo"> Logo</label>
+              <label class="check"><input type="checkbox" value="Job site photos"> Job site photos</label>
+              <label class="check"><input type="checkbox" value="Team shots"> Team shots</label>
+              <label class="check"><input type="checkbox" value="None yet — help me"> None yet — help me</label>
+            </div>
+          </div>
+          <div class="sect">
+            <h3>Anything extra? <span class="opt">(optional)</span></h3>
+            <textarea id="extras" placeholder="Taglines, social handles, or special design notes."></textarea>
+          </div>
+          <div class="sect">
+            <h3>Optional power-ups</h3>
+            <details class="power">
+              <summary>Content Writing <span class="plus">+</span></summary>
+              <div class="inner">Let us polish your words and nail your tone.
+                <label><input type="checkbox" id="pu-content"> Yes, write my content for me</label></div>
+            </details>
+            <details class="power">
+              <summary>Image Library <span class="plus">+</span></summary>
+              <div class="inner">Need pro stock photos? We've got thousands ready to go.
+                <label><input type="checkbox" id="pu-images"> Yes, add pro stock photos</label></div>
+            </details>
+            <details class="power">
+              <summary>Video Library <span class="plus">+</span></summary>
+              <div class="inner">Got video clips or a YouTube link? Drop them in here.
+                <input type="text" id="pu-video" placeholder="Paste a YouTube link or describe your clips" style="margin-top:.75rem"></div>
+            </details>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="panel" data-panel="3" hidden>
+          <h2>Let's craft your story</h2>
+          <p class="sub">A standout website isn't just about pretty graphics—it's about connecting with your ideal customers! The more juicy details you share with us, the better we can highlight your strengths and win you more jobs.</p>
+          <div class="callout">
+            <label><input type="checkbox" id="deepdive"> I want the sharpest copy possible! Tick this box to answer a few quick bonus questions to help us nail your messaging.</label>
+          </div>
+          <div class="dd-qs" id="dd-qs">
+            <div class="fgrid">
+              <div><label class="f" for="dd-ideal">Who's your ideal customer?</label><textarea id="dd-ideal" placeholder="e.g. Homeowners in North Leeds who want it done properly, once."></textarea></div>
+              <div><label class="f" for="dd-diff">What makes you different from the next crew?</label><textarea id="dd-diff" placeholder="e.g. We photograph every stage and send it to you. No surprises."></textarea></div>
+              <div><label class="f" for="dd-jobs">Which jobs do you want MORE of?</label><textarea id="dd-jobs" placeholder="e.g. Full re-roofs, not gutter patch-ups."></textarea></div>
+              <div><label class="f" for="dd-tone">How should your site sound?</label><textarea id="dd-tone" placeholder="e.g. Straight-talking and friendly. No corporate waffle."></textarea></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="panel" data-panel="4" hidden>
+          <h2>Where should we send your preview?</h2>
+          <p class="sub">Drop your details below so we can keep you updated as your site comes to life.</p>
+          <div class="fgrid">
+            <div><label class="f" for="c-first">First Name</label><input type="text" id="c-first" autocomplete="given-name" required></div>
+            <div><label class="f" for="c-last">Last Name</label><input type="text" id="c-last" autocomplete="family-name" required></div>
+            <div><label class="f" for="c-email">Email Address</label><input type="email" id="c-email" placeholder="client@example.com" autocomplete="email" required></div>
+            <div><label class="f" for="c-phone">Phone Number</label><input type="tel" id="c-phone" autocomplete="tel" required></div>
+            <div><label class="f" for="c-biz">Business Name</label><input type="text" id="c-biz" autocomplete="organization" required></div>
+          </div>
+          <p class="err-msg" id="contact-err">Please fill in your name, a valid email, phone, and business name — we need them to send your preview.</p>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="panel" data-panel="5" hidden>
+          <h2>Ready to squeeze the main event?</h2>
+          <p class="sub">Zero risk, zero upfront fees today. You'll only launch your <strong id="price-monthly">$120</strong>/month subscription once you've reviewed and totally loved your finished site.</p>
+          <div class="callout">
+            <label><input type="checkbox" id="terms"> I agree to the Terms &amp; Conditions: lemonelly will design my full website for review. My subscription only starts once I approve the site, and I can cancel anytime.</label>
+          </div>
+          <p class="price-line">Free design &amp; drafts · <strong><span id="price-monthly-2">$120</span>/mo</strong> only once you approve · Cancel anytime</p>
+        </div>
+
+        <div class="flow-nav">
+          <button type="button" class="back" id="back-btn">← Back</button>
+          <button type="button" class="btn btn-solid" id="next-btn">Next →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Done ============ -->
+    <section class="screen" id="view-done" hidden>
+      <div class="wrap">
+        <h1>One tap to send it 🍋</h1>
+        <p class="sub">Here's your project brief. Send it to us on WhatsApp or email — whichever you prefer — and our team will get to work and reach out within 24 hours!</p>
+        <div class="summary" id="summary"></div>
+        <div class="send-row">
+          <a class="btn btn-green" id="send-wa" href="#" target="_blank" rel="noopener">Send via WhatsApp</a>
+          <a class="btn btn-solid" id="send-email" href="#">Send via email</a>
+          <button type="button" class="btn btn-ghost" id="copy-brief">Copy to clipboard</button>
+        </div>
+        <p class="subcta">Attach your logo and photos in the same message — that's everything we need.</p>
+      </div>
+    </section>
+  </main>
+
+  <a class="fab" href="https://wa.me/27792896707" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.6 7.2L4 21l1.8-5.4A8 8 0 1121 12z"/></svg>
+  </a>
+
+  <footer>
+    <div class="cols">
+      <div>
+        <p class="vp">Bright, squeeze-easy websites for small businesses.</p>
+        <p style="margin-top:.75rem">lemonelly gets tradespeople online fast: we design your site free, refine it with you, and you only pay once you love it.</p>
+        <a class="btn btn-solid" href="#top" onclick="location.hash='';location.reload();return false;">GET STARTED</a>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/#why">Why Us</a></li>
+          <li><a href="/#process">Our Process</a></li>
+          <li><a href="/#work">Recent Work</a></li>
+          <li><a href="/#team">The Team</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/#start">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:hello@lemonelly.com">hello@lemonelly.com</a></li>
+          <li><a href="https://wa.me/27727206606" target="_blank" rel="noopener">WhatsApp Veronica</a></li>
+          <li><a href="https://wa.me/27792896707" target="_blank" rel="noopener">WhatsApp Ben</a></li>
+        </ul>
+        <p style="margin-top:1rem;font-size:.8125rem">Proudly built in Cape Town.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var $ = function (s, r) { return (r || document).querySelector(s); };
+      var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+      var PRICES = { za: 'R2,200', us: '$120', uk: '£95', eu: '€110' };
+      var region = new URLSearchParams(location.search).get('r');
+      var monthly = PRICES[region] || '$120';
+      $('#price-monthly').textContent = monthly;
+      $('#price-monthly-2').textContent = monthly;
+
+      var THUMBS = {
+        'Clean Pro': 't-modern', 'Big Impact': 't-bold', 'Trade Mark': 't-classic',
+        'Fresh Twist': 't-creative', 'Bare Essentials': 't-minimal', 'Steel Works': 't-industrial'
+      };
+
+      var state = {
+        style: null, step: 1,
+        domainMode: 'new', domainName: '', domainExisting: '', exts: ['.com'],
+        pages: ['Home', 'Services', 'About Us', 'Contact Us'], customPages: [],
+        story: '', colors: [], assets: [], extras: '',
+        puContent: false, puImages: false, puVideo: '',
+        deepdive: false, dd: { ideal: '', diff: '', jobs: '', tone: '' },
+        contact: { first: '', last: '', email: '', phone: '', biz: '' },
+        terms: false
+      };
+
+      function save() { try { localStorage.setItem('lemonelly-onboarding', JSON.stringify(state)); } catch (e) {} }
+      function load() {
+        try {
+          var raw = localStorage.getItem('lemonelly-onboarding');
+          if (raw) { var s = JSON.parse(raw); for (var k in state) if (k in s) state[k] = s[k]; }
+        } catch (e) {}
+      }
+
+      /* ---- views ---- */
+      function show(view) {
+        ['gallery', 'flow', 'done'].forEach(function (v) { $('#view-' + v).hidden = (v !== view); });
+        window.scrollTo(0, 0);
+      }
+
+      /* ---- gallery ---- */
+      $$('.filters button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          $$('.filters button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+          b.setAttribute('aria-pressed', 'true');
+          var f = b.getAttribute('data-filter');
+          $$('.style-card').forEach(function (c) {
+            c.hidden = (f !== 'all' && c.getAttribute('data-tag') !== f);
+          });
+        });
+      });
+      $$('.select-style').forEach(function (b) {
+        b.addEventListener('click', function () {
+          state.style = { name: b.getAttribute('data-name'), tag: b.getAttribute('data-style') };
+          save(); renderPicked(); renderStep(); show('flow');
+        });
+      });
+      $('#change-style').addEventListener('click', function () { show('gallery'); });
+
+      function renderPicked() {
+        if (!state.style) return;
+        $('#picked-name').textContent = state.style.name;
+        $('#picked-tag').textContent = '[' + state.style.tag + ']';
+        var tpl = $('.thumb.' + THUMBS[state.style.name]);
+        $('#picked-mini').innerHTML = tpl ? '<span class="thumb ' + THUMBS[state.style.name] + '" style="display:flex">' + tpl.innerHTML + '</span>' : '';
+      }
+
+      /* ---- steps ---- */
+      function renderStep() {
+        $$('.panel').forEach(function (p) { p.hidden = (+p.getAttribute('data-panel') !== state.step); });
+        $$('.progress li').forEach(function (li) {
+          var n = +li.getAttribute('data-step');
+          var dot = $('.dot', li);
+          if (n < state.step) { li.setAttribute('data-state', 'done'); dot.textContent = '✓'; }
+          else if (n === state.step) { li.setAttribute('data-state', 'active'); dot.textContent = n; }
+          else { li.removeAttribute('data-state'); dot.textContent = n; }
+        });
+        var next = $('#next-btn');
+        if (state.step === 5) {
+          next.textContent = 'Submit my project';
+          next.classList.add('submit-mode');
+          next.disabled = !state.terms;
+        } else {
+          next.textContent = 'Next →';
+          next.classList.remove('submit-mode');
+          next.disabled = false;
+        }
+        $('#back-btn').style.visibility = 'visible';
+        save();
+      }
+
+      $('#back-btn').addEventListener('click', function () {
+        if (state.step > 1) { state.step--; renderStep(); window.scrollTo(0, 0); }
+        else { show('gallery'); }
+      });
+
+      $('#next-btn').addEventListener('click', function () {
+        if (state.step === 4 && !validContact()) return;
+        if (state.step < 5) { state.step++; renderStep(); window.scrollTo(0, 0); }
+        else if (state.terms) { finish(); }
+      });
+
+      /* ---- step 1 wiring ---- */
+      $$('input[name="domain-mode"]').forEach(function (r) {
+        r.addEventListener('change', function () {
+          state.domainMode = r.value;
+          $('#domain-new').hidden = (r.value !== 'new');
+          $('#domain-have').hidden = (r.value !== 'have');
+          save();
+        });
+      });
+      $('#domain-search').addEventListener('click', function () {
+        var v = $('#domain-name').value.trim();
+        if (!v) { $('#domain-name').focus(); return; }
+        state.domainName = v;
+        $('#domain-echo').textContent = v;
+        $('#ext-chips').hidden = false;
+        $('#domain-note').hidden = false;
+        save();
+      });
+      $('#domain-name').addEventListener('input', function (e) { state.domainName = e.target.value.trim(); save(); });
+      $('#domain-existing').addEventListener('input', function (e) { state.domainExisting = e.target.value.trim(); save(); });
+      $$('#ext-chips input').forEach(function (c) {
+        c.addEventListener('change', function () {
+          state.exts = $$('#ext-chips input').filter(function (x) { return x.checked; }).map(function (x) { return x.value; });
+          save();
+        });
+      });
+      $$('#page-checks input').forEach(function (c) {
+        c.addEventListener('change', function () {
+          state.pages = $$('#page-checks input').filter(function (x) { return x.checked; }).map(function (x) { return x.value; });
+          save();
+        });
+      });
+      $('#add-page').addEventListener('click', function () {
+        var v = $('#custom-page').value.trim();
+        if (!v) return;
+        state.customPages.push(v); $('#custom-page').value = ''; renderCustomPages(); save();
+      });
+      function renderCustomPages() {
+        $('#custom-pages').innerHTML = state.customPages.map(function (p, i) {
+          return '<span>' + esc(p) + '<button type="button" data-i="' + i + '" aria-label="Remove ' + esc(p) + '">×</button></span>';
+        }).join('');
+        $$('#custom-pages button').forEach(function (b) {
+          b.addEventListener('click', function () { state.customPages.splice(+b.getAttribute('data-i'), 1); renderCustomPages(); save(); });
+        });
+      }
+
+      /* ---- step 2 wiring ---- */
+      $('#story').addEventListener('input', function (e) { state.story = e.target.value; save(); });
+      $('#extras').addEventListener('input', function (e) { state.extras = e.target.value; save(); });
+      $('#add-color').addEventListener('click', function () {
+        var c = $('#color-pick').value;
+        if (state.colors.indexOf(c) === -1) { state.colors.push(c); renderSwatches(); save(); }
+      });
+      function renderSwatches() {
+        $('#swatches').innerHTML = state.colors.map(function (c, i) {
+          return '<span class="sw" style="background:' + esc(c) + '" title="' + esc(c) + '"><button type="button" data-i="' + i + '" aria-label="Remove colour ' + esc(c) + '">×</button></span>';
+        }).join('');
+        $$('#swatches button').forEach(function (b) {
+          b.addEventListener('click', function () { state.colors.splice(+b.getAttribute('data-i'), 1); renderSwatches(); save(); });
+        });
+      }
+      $$('#asset-checks input').forEach(function (c) {
+        c.addEventListener('change', function () {
+          state.assets = $$('#asset-checks input').filter(function (x) { return x.checked; }).map(function (x) { return x.value; });
+          save();
+        });
+      });
+      $('#pu-content').addEventListener('change', function (e) { state.puContent = e.target.checked; save(); });
+      $('#pu-images').addEventListener('change', function (e) { state.puImages = e.target.checked; save(); });
+      $('#pu-video').addEventListener('input', function (e) { state.puVideo = e.target.value.trim(); save(); });
+
+      /* ---- step 3 wiring ---- */
+      $('#deepdive').addEventListener('change', function (e) {
+        state.deepdive = e.target.checked;
+        $('#dd-qs').classList.toggle('show', state.deepdive);
+        save();
+      });
+      ['ideal', 'diff', 'jobs', 'tone'].forEach(function (k) {
+        $('#dd-' + k).addEventListener('input', function (e) { state.dd[k] = e.target.value; save(); });
+      });
+
+      /* ---- step 4 wiring ---- */
+      var cmap = { first: '#c-first', last: '#c-last', email: '#c-email', phone: '#c-phone', biz: '#c-biz' };
+      Object.keys(cmap).forEach(function (k) {
+        $(cmap[k]).addEventListener('input', function (e) { state.contact[k] = e.target.value.trim(); save(); });
+      });
+      function validContact() {
+        var ok = true;
+        Object.keys(cmap).forEach(function (k) {
+          var el = $(cmap[k]);
+          var bad = !state.contact[k] || (k === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(state.contact.email));
+          el.classList.toggle('field-err', bad);
+          if (bad) ok = false;
+        });
+        $('#contact-err').style.display = ok ? 'none' : 'block';
+        return ok;
+      }
+
+      /* ---- step 5 wiring ---- */
+      $('#terms').addEventListener('change', function (e) { state.terms = e.target.checked; renderStep(); });
+
+      /* ---- finish ---- */
+      function brief() {
+        var s = state;
+        var L = [];
+        L.push('NEW PROJECT — lemonelly onboarding');
+        L.push('');
+        L.push('Style: ' + (s.style ? s.style.name + ' [' + s.style.tag + ']' : '—'));
+        if (s.domainMode === 'new') {
+          L.push('Domain: needs a new one — "' + (s.domainName || 'no idea yet') + '" (endings: ' + (s.exts.join(', ') || 'any') + ')');
+        } else {
+          L.push('Domain: already has ' + (s.domainExisting || '(not given)'));
+        }
+        L.push('Pages: ' + s.pages.concat(s.customPages).join(', '));
+        L.push('');
+        L.push('STORY: ' + (s.story || '(not given)'));
+        if (s.colors.length) L.push('Brand colours: ' + s.colors.join(', '));
+        if (s.assets.length) L.push('Assets to send: ' + s.assets.join(', '));
+        if (s.extras) L.push('Extras: ' + s.extras);
+        var pu = [];
+        if (s.puContent) pu.push('Content writing');
+        if (s.puImages) pu.push('Image library');
+        if (s.puVideo) pu.push('Video: ' + s.puVideo);
+        if (pu.length) L.push('Power-ups: ' + pu.join(' · '));
+        if (s.deepdive) {
+          L.push('');
+          L.push('DEEP DIVE:');
+          if (s.dd.ideal) L.push('· Ideal customer: ' + s.dd.ideal);
+          if (s.dd.diff) L.push('· Different because: ' + s.dd.diff);
+          if (s.dd.jobs) L.push('· Wants more of: ' + s.dd.jobs);
+          if (s.dd.tone) L.push('· Tone: ' + s.dd.tone);
+        }
+        L.push('');
+        L.push('CONTACT: ' + s.contact.first + ' ' + s.contact.last + ' · ' + s.contact.biz);
+        L.push(s.contact.email + ' · ' + s.contact.phone);
+        L.push('');
+        L.push('Terms agreed (free design, ' + monthly + '/mo after approval, cancel anytime): YES');
+        return L.join('\n');
+      }
+
+      function finish() {
+        var text = brief();
+        $('#summary').textContent = text;
+        $('#send-wa').href = 'https://wa.me/27792896707?text=' + encodeURIComponent(text);
+        $('#send-email').href = 'mailto:hello@lemonelly.com?subject=' +
+          encodeURIComponent('New project: ' + (state.contact.biz || 'lemonelly onboarding')) +
+          '&body=' + encodeURIComponent(text);
+        show('done');
+      }
+      $('#copy-brief').addEventListener('click', function () {
+        var t = $('#summary').textContent;
+        if (navigator.clipboard) { navigator.clipboard.writeText(t); }
+        $('#copy-brief').textContent = 'Copied!';
+        setTimeout(function () { $('#copy-brief').textContent = 'Copy to clipboard'; }, 1500);
+      });
+
+      function esc(x) { return String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+      /* ---- restore ---- */
+      load();
+      if (state.style) {
+        renderPicked();
+        renderCustomPages(); renderSwatches();
+        $('#story').value = state.story; $('#extras').value = state.extras;
+        $('#domain-name').value = state.domainName; $('#domain-existing').value = state.domainExisting;
+        if (state.domainMode === 'have') {
+          $('input[name="domain-mode"][value="have"]').checked = true;
+          $('#domain-new').hidden = true; $('#domain-have').hidden = false;
+        }
+        $$('#page-checks input').forEach(function (c) { c.checked = state.pages.indexOf(c.value) !== -1; });
+        $$('#asset-checks input').forEach(function (c) { c.checked = state.assets.indexOf(c.value) !== -1; });
+        $$('#ext-chips input').forEach(function (c) { c.checked = state.exts.indexOf(c.value) !== -1; });
+        $('#pu-content').checked = state.puContent; $('#pu-images').checked = state.puImages;
+        $('#pu-video').value = state.puVideo;
+        $('#deepdive').checked = state.deepdive; $('#dd-qs').classList.toggle('show', state.deepdive);
+        ['ideal', 'diff', 'jobs', 'tone'].forEach(function (k) { $('#dd-' + k).value = state.dd[k]; });
+        Object.keys(cmap).forEach(function (k) { $(cmap[k]).value = state.contact[k]; });
+        $('#terms').checked = state.terms;
+        renderStep(); show('flow');
+      }
+    })();
+  </script>
+</body>
+</html>
