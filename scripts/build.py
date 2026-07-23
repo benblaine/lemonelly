@@ -42,6 +42,7 @@ for key, r in regions.items():
         "AREA_SERVED": r["area_served"],
         "BADGE": r["badge"],
         "BADGE_EXT": r["badge_ext"],
+        "REGION_PARAM": r["region_param"],
         "REGION_NAV": region_nav(r["code"]),
     }
     for k, v in values.items():
@@ -58,6 +59,7 @@ for key, r in regions.items():
 
 sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+urls.append("https://lemonelly.com/start")
 sitemap += [f"  <url><loc>{u}</loc></url>" for u in urls]
 sitemap.append("</urlset>")
 (ROOT / "sitemap.xml").write_text("\n".join(sitemap) + "\n")
