@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>lemonelly · Fresh, fast websites · Cape Town · $1,000 + $60/mo</title>
+  <title>lemonelly · Fresh, fast, unignorable websites · Cape Town · $1,000 + $60/mo</title>
   <meta name="description" content="lemonelly builds fresh, fast, unignorable websites for local businesses — trades, creatives, healthcare. $1,000 setup + $60/mo, live in one week. Cape Town.">
   <link rel="canonical" href="https://lemonelly.com/">
-  <meta name="theme-color" content="#44C593">
+  <meta name="theme-color" content="#FFFDF6">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg transform='rotate(-20 32 38)'%3E%3Cellipse cx='32' cy='38' rx='23' ry='16' fill='%23FFD335' stroke='%2316150F' stroke-width='4'/%3E%3C/g%3E%3Cpath d='M34 16q10-9 20-2q-9 9-20 2z' fill='%232E9B70'/%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="lemonelly">
-  <meta property="og:title" content="lemonelly · Fresh. Fast. Unignorable.">
+  <meta property="og:title" content="lemonelly · Fresh. Fast. Unignorable websites.">
   <meta property="og:description" content="Websites for local businesses that land higher-end clients. $1,000 setup + $60/mo, live in one week. Proudly built in Cape Town.">
   <meta property="og:url" content="https://lemonelly.com/">
   <meta property="og:image" content="https://lemonelly.com/assets/og.png">
@@ -40,26 +40,28 @@
   <style>
     /* ---------- Tokens ---------- */
     :root {
-      --mint: #44C593;
-      --mint-deep: #2E9B70;
-      --mint-line: rgba(15, 61, 46, .18);
-      --green-ink: #0F3D2E;
-      --cream: #FFF9E3;
-      --card: #FFFDF4;
+      --paper: #FFFDF6;
+      --card: #FFFFFF;
+      --line: #EAE6D9;
       --ink: #16150F;
       --ink-2: #55524A;
+
+      --mint: #44C593;
+      --mint-deep: #2E9B70;
+      --cream: #FFF9E3;
       --lemon: #FFD335;
       --lemon-deep: #F0C400;
       --lemon-wash: #FFF3C4;
 
-      --shadow: 0 10px 22px rgba(15, 61, 46, .18);
+      --shadow: 0 2px 8px rgba(20, 20, 10, .06);
+      --shadow-lift: 0 10px 22px rgba(15, 61, 46, .18);
 
       --sp-1: .25rem; --sp-2: .5rem; --sp-3: 1rem; --sp-4: 1.5rem;
-      --sp-5: 2.5rem; --sp-6: 4rem; --sp-7: 6rem;
+      --sp-5: 2.5rem; --sp-6: 4rem; --sp-7: 7rem;
 
       --wrap: 68rem;
       --gutter: clamp(1rem, 4vw, 2rem);
-      --r: 10px;
+      --r: 8px;
       --r-lg: 18px;
 
       --fs-0: .875rem;
@@ -85,7 +87,7 @@
       font-size: var(--fs-1);
       line-height: var(--lh-body);
       color: var(--ink);
-      background: var(--mint);
+      background: var(--paper);
       -webkit-font-smoothing: antialiased;
     }
 
@@ -103,7 +105,7 @@
 
     .skip-link {
       position: absolute; left: var(--sp-3); top: -100%;
-      background: var(--ink); color: var(--cream);
+      background: var(--ink); color: var(--paper);
       padding: var(--sp-2) var(--sp-3); border-radius: var(--r); z-index: 20;
     }
     .skip-link:focus { top: var(--sp-3); }
@@ -125,12 +127,12 @@
     }
     .btn-solid { background: var(--lemon); }
     .btn-solid:hover { background: var(--lemon-deep); }
-    .btn-ghost:hover { background: var(--cream); }
+    .btn-ghost:hover { background: var(--lemon-wash); }
 
     /* ---------- Header / nav ---------- */
     .site-head {
       position: sticky; top: 0; z-index: 10;
-      background: var(--mint); border-bottom: 1px solid var(--mint-line);
+      background: var(--paper); border-bottom: 1px solid var(--line);
     }
     .nav-row {
       display: flex; align-items: center; justify-content: space-between;
@@ -149,7 +151,7 @@
       background: none; border: 0; border-radius: var(--r);
       color: var(--ink); cursor: pointer;
     }
-    .menu-btn:hover { background: var(--cream); }
+    .menu-btn:hover { background: var(--lemon-wash); }
 
     #site-nav { display: none; }
     #site-nav ul { display: flex; flex-direction: column; gap: var(--sp-2); list-style: none; padding: 0; }
@@ -162,7 +164,7 @@
     .site-head[data-open] #site-nav {
       display: block;
       position: absolute; top: 100%; left: 0; right: 0;
-      background: var(--mint); border-bottom: 1px solid var(--mint-line);
+      background: var(--paper); border-bottom: 1px solid var(--line);
       padding: var(--sp-3) var(--gutter) var(--sp-4);
     }
 
@@ -177,31 +179,32 @@
     /* ---------- Sections ---------- */
     section { padding-block: var(--sp-6); }
     @media (min-width: 40rem) { section { padding-block: var(--sp-7); } }
-    section + section { border-top: 1px solid var(--mint-line); }
+    section + section { border-top: 1px solid var(--line); }
+    section.hero, section.cta { border-top: 0; }
 
     .eyebrow {
       display: flex; align-items: center; gap: var(--sp-2);
       font-size: var(--fs-0); font-weight: 700;
-      letter-spacing: .12em; text-transform: uppercase; color: var(--green-ink);
+      letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);
       margin-bottom: var(--sp-3);
     }
     .eyebrow::before { content: ""; width: 1.5rem; height: .5rem; background: var(--lemon); border-radius: 999px; }
 
-    h2 { font-size: var(--fs-4); font-weight: 800; letter-spacing: -.01em; margin-bottom: var(--sp-5); }
+    h2 { font-size: var(--fs-4); font-weight: 800; letter-spacing: -.015em; margin-bottom: var(--sp-5); }
     .hl {
       background: var(--lemon); box-decoration-break: clone; -webkit-box-decoration-break: clone;
       padding: .02em .12em; border-radius: 4px;
     }
 
-    /* ---------- Hero ---------- */
+    /* ---------- Hero (mint bookend) ---------- */
     .hero {
       padding-block: var(--sp-6);
-      background-image: url(assets/pattern.png);
+      background: var(--mint) url(assets/pattern.png);
       background-size: 300px;
     }
     @media (min-width: 40rem) { .hero { padding-block: var(--sp-7); } }
     .hero-panel {
-      background: var(--cream); border-radius: var(--r-lg); box-shadow: var(--shadow);
+      background: var(--cream); border-radius: var(--r-lg); box-shadow: var(--shadow-lift);
       padding: var(--sp-5) var(--sp-4);
       display: grid; gap: var(--sp-4); align-items: center;
     }
@@ -211,7 +214,7 @@
     .hero-art { width: min(100%, 26rem); height: auto; margin-inline: auto; }
     .badge {
       display: inline-block; background: var(--lemon-wash);
-      border: 1px solid var(--mint-line); border-radius: 999px;
+      border: 1px solid var(--line); border-radius: 999px;
       padding: var(--sp-1) var(--sp-3);
       font-size: var(--fs-0); font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
       margin-bottom: var(--sp-4);
@@ -220,15 +223,15 @@
       font-size: var(--fs-5); font-weight: 800; letter-spacing: -.02em;
       max-width: 16ch; margin-bottom: var(--sp-4);
     }
-    .lede { font-size: var(--fs-2); color: var(--ink-2); max-width: 46ch; margin-bottom: var(--sp-5); }
+    .lede { font-size: var(--fs-2); line-height: 1.7; color: var(--ink-2); max-width: 46ch; margin-bottom: var(--sp-5); }
 
     /* ---------- Cards ---------- */
     .grid-3 { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
     .card {
-      background: var(--card); border-radius: var(--r); box-shadow: var(--shadow);
-      padding: var(--sp-4);
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
+      box-shadow: var(--shadow); padding: var(--sp-4);
     }
-    .card::before { content: ""; display: block; width: 2rem; height: 5px; background: var(--lemon); border-radius: 999px; margin-bottom: var(--sp-3); }
+    .card::before { content: ""; display: block; width: 2rem; height: 4px; background: var(--lemon); border-radius: 999px; margin-bottom: var(--sp-3); }
     .card h3 { font-size: var(--fs-2); font-weight: 800; letter-spacing: .01em; margin-bottom: var(--sp-2); }
     .card p { color: var(--ink-2); }
 
@@ -240,11 +243,11 @@
       margin-bottom: var(--sp-2);
     }
     .steps h3 { font-size: var(--fs-1); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; margin-bottom: var(--sp-2); }
-    .steps p { color: var(--green-ink); }
+    .steps p { color: var(--ink-2); }
 
     /* ---------- Work ---------- */
     .grid-2 { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .project { background: var(--card); border-radius: var(--r); box-shadow: var(--shadow); padding: var(--sp-4); }
+    .project { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); padding: var(--sp-4); }
     .plate {
       background: var(--lemon-wash); border-radius: var(--r);
       aspect-ratio: 16 / 9; display: grid; place-items: center;
@@ -265,7 +268,7 @@
 
     /* ---------- Team ---------- */
     .people { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 52rem; }
-    .person { background: var(--card); border-radius: var(--r); box-shadow: var(--shadow); padding: var(--sp-4); }
+    .person { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); padding: var(--sp-4); }
     .headshot {
       position: relative; aspect-ratio: 1; border-radius: var(--r);
       overflow: hidden; background: var(--lemon-wash); margin-bottom: var(--sp-4);
@@ -279,25 +282,25 @@
     .person .cred { font-size: var(--fs-0); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); margin: var(--sp-1) 0 var(--sp-2); }
     .person .bio { color: var(--ink-2); }
 
-    /* ---------- CTA ---------- */
+    /* ---------- CTA (mint bookend) ---------- */
     .cta {
-      background-image: url(assets/pattern.png);
+      background: var(--mint) url(assets/pattern.png);
       background-size: 300px;
     }
     .cta-panel {
-      background: var(--cream); border-radius: var(--r-lg); box-shadow: var(--shadow);
+      background: var(--cream); border-radius: var(--r-lg); box-shadow: var(--shadow-lift);
       padding: var(--sp-6) var(--sp-4); text-align: center;
     }
     .cta .eyebrow { justify-content: center; }
     .cta h2 { margin-bottom: var(--sp-3); }
-    .cta p { color: var(--ink-2); max-width: 46ch; margin: 0 auto var(--sp-5); font-size: var(--fs-2); }
+    .cta p { color: var(--ink-2); max-width: 46ch; margin: 0 auto var(--sp-5); font-size: var(--fs-2); line-height: 1.7; }
     .cta-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); justify-content: center; }
 
     /* ---------- Footer ---------- */
-    footer { border-top: 1px solid var(--mint-line); padding-block: var(--sp-5); }
+    footer { border-top: 1px solid var(--line); padding-block: var(--sp-5); }
     footer .wrap { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); align-items: center; justify-content: space-between; }
     footer .mark { font-weight: 800; letter-spacing: .06em; }
-    footer p { color: var(--green-ink); font-size: var(--fs-0); }
+    footer p { color: var(--ink-2); font-size: var(--fs-0); }
 
     /* ---------- Motion ---------- */
     @media (prefers-reduced-motion: reduce) {
@@ -344,7 +347,7 @@
         <div class="hero-panel">
           <div>
             <p class="badge">$1,000 Setup + $60/Mo</p>
-            <h1>Fresh. Fast. <span class="hl">Unignorable.</span></h1>
+            <h1>Fresh. Fast. Unignorable <span class="hl">websites</span>.</h1>
             <p class="lede">We build the zestiest sites on the web. Elevate your brand, dominate your local market, and land higher-end clients who spend more.</p>
             <a class="btn btn-solid" href="#start">Squeeze the Day</a>
           </div>
