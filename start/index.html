@@ -78,7 +78,8 @@
     .style-note { max-width: 72rem; margin: 0 auto 1rem; padding-inline: clamp(1rem, 4vw, 2rem); color: var(--ink-2); font-size: .875rem; }
 
     /* CSS-drawn style thumbs (style directions, not screenshots) */
-    .thumb { aspect-ratio: 4/3; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; padding: 12%; display: flex; flex-direction: column; gap: 6%; }
+    .thumb { aspect-ratio: 16/9; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; padding: 12%; display: flex; flex-direction: column; gap: 6%; }
+    .thumb > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .thumb i { display: block; border-radius: 3px; }
     .t-modern { background: #fff; }
     .t-modern .bar1 { height: 12%; width: 70%; background: var(--ink); }
@@ -279,7 +280,7 @@
       <p class="style-note">These are style directions, not fixed templates — your site is designed from scratch in the direction you pick.</p>
       <div class="gallery">
         <div class="style-card" data-tag="Modern">
-          <div class="thumb t-modern" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i><i class="dot"></i></div>
+          <div class="thumb t-modern" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i><i class="dot"></i><img src="/assets/style-modern.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
           <div class="body">
             <h3>Clean Pro</h3><span class="tag">[Modern]</span>
             <p>Crisp, confident, and easy to trust. Big type, clear buttons, zero clutter.</p>
@@ -287,7 +288,7 @@
           </div>
         </div>
         <div class="style-card" data-tag="Bold">
-          <div class="thumb t-bold" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="dot"></i></div>
+          <div class="thumb t-bold" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="dot"></i><img src="/assets/style-bold.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
           <div class="body">
             <h3>Big Impact</h3><span class="tag">[Bold]</span>
             <p>Dark, punchy, and impossible to scroll past. For businesses that want to be seen.</p>
@@ -295,7 +296,7 @@
           </div>
         </div>
         <div class="style-card" data-tag="Classic">
-          <div class="thumb t-classic" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i><i class="bar4"></i></div>
+          <div class="thumb t-classic" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i><i class="bar4"></i><img src="/assets/style-classic.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
           <div class="body">
             <h3>Trade Mark</h3><span class="tag">[Classic]</span>
             <p>Established and dependable. The look of a business that's been at it for years.</p>
@@ -303,7 +304,7 @@
           </div>
         </div>
         <div class="style-card" data-tag="Creative">
-          <div class="thumb t-creative" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="dot"></i></div>
+          <div class="thumb t-creative" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="dot"></i><img src="/assets/style-creative.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
           <div class="body">
             <h3>Fresh Twist</h3><span class="tag">[Creative]</span>
             <p>Colour, energy, and personality. Perfect when your work is your portfolio.</p>
@@ -311,7 +312,7 @@
           </div>
         </div>
         <div class="style-card" data-tag="Minimal">
-          <div class="thumb t-minimal" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i><i class="bar2"></i></div>
+          <div class="thumb t-minimal" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i><i class="bar2"></i><img src="/assets/style-minimal.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
           <div class="body">
             <h3>Bare Essentials</h3><span class="tag">[Minimal]</span>
             <p>Quiet luxury. Lots of air, few words, everything exactly where it should be.</p>
@@ -319,7 +320,7 @@
           </div>
         </div>
         <div class="style-card" data-tag="Industrial">
-          <div class="thumb t-industrial" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i></div>
+          <div class="thumb t-industrial" aria-hidden="true"><i class="bar1"></i><i class="bar2"></i><i class="bar3"></i><img src="/assets/style-industrial.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
           <div class="body">
             <h3>Steel Works</h3><span class="tag">[Industrial]</span>
             <p>Tough, practical, built like your work. Strong lines and no nonsense.</p>
