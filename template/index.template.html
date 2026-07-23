@@ -32,7 +32,7 @@
     "name": "lemonelly",
     "url": "https://lemonelly.com/",
     "email": "hello@lemonelly.com",
-    "description": "Web design studio building fast, professional websites for {{LEDE_AUDIENCE}}. {{SETUP}} setup + {{MONTHLY}}/month.",
+    "description": "Web design studio building fast, professional websites for {{LEDE_AUDIENCE}}. Free website design; {{MONTHLY}}/month once your site is live.",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Cape Town",
@@ -49,12 +49,17 @@
       {
         "@type": "Question",
         "name": "What does a website cost with lemonelly?",
-        "acceptedAnswer": { "@type": "Answer", "text": "{{SETUP}} once-off to design and build your site, then {{MONTHLY}}/month for hosting, security, and updates. That's the whole price — no hourly rates, no surprise invoices." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Nothing upfront. The design, the draft, and every revision are free. You only start paying {{MONTHLY}}/month once you're happy and your new site goes live." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I don't like the draft?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Then you pay nothing and keep your current website. There's no obligation — the draft is free either way." }
       },
       {
         "@type": "Question",
         "name": "How fast will my site be live?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Seven days from kickoff. Days 1–2 we learn your business, days 3–5 we design and build, days 6–7 we review it with you and go live." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Seven days from kickoff. Days 1–2 we design your free draft, days 3–5 we refine it with your feedback, days 6–7 we go live." }
       },
       {
         "@type": "Question",
@@ -64,7 +69,7 @@
       {
         "@type": "Question",
         "name": "What do you need from me to get started?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Just tell us about your business — what you do, who your customers are, and what makes you good at it. We take it from there and review everything with you before launch." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Just tell us about your business and point us at your current website if you have one. We take it from there and review everything with you before launch." }
       },
       {
         "@type": "Question",
@@ -408,12 +413,12 @@
         <div>
           <p class="badge-pill">{{BADGE}}</p>
           <h1>Websites that win trust for local businesses.</h1>
-          <p class="lede">We design and build fast, professional websites for {{LEDE_AUDIENCE}} — so you stand out in your market and land higher-end clients who spend more.</p>
+          <p class="lede">We design your new website free — fast, professional, built for {{LEDE_AUDIENCE}}. You only start paying once you love it.</p>
           <div class="hero-actions">
-            <a class="btn btn-solid" href="#start">Get Started <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="btn btn-solid" href="#start">Get Your Free Draft <span class="arrow" aria-hidden="true">→</span></a>
             <a class="btn btn-ghost" href="#work">See Our Work</a>
           </div>
-          <p class="price-strip"><strong>{{SETUP}}</strong> flat setup <span aria-hidden="true">·</span> <strong>{{MONTHLY}}/mo</strong> hosting &amp; updates <span aria-hidden="true">·</span> live in <strong>7 days</strong></p>
+          <p class="price-strip"><strong>Free</strong> website design <span aria-hidden="true">·</span> <strong>{{MONTHLY}}/mo</strong> once you're happy <span aria-hidden="true">·</span> live in <strong>7 days</strong></p>
         </div>
         <img class="hero-art" src="/assets/hero-mockup.png"
              alt="The Lost Wax Foundry website, built by lemonelly, shown on a laptop and phone"
@@ -424,8 +429,8 @@
     <div class="stats" role="group" aria-label="What you get">
       <div class="wrap">
         <p class="stat"><strong>7 days</strong> <span>from kickoff to launch</span></p>
-        <p class="stat"><strong>{{SETUP}}</strong> <span>flat setup fee, no surprises</span></p>
-        <p class="stat"><strong>{{MONTHLY}}/mo</strong> <span>hosting, security &amp; monthly updates</span></p>
+        <p class="stat"><strong>Free</strong> <span>design, drafts &amp; revisions</span></p>
+        <p class="stat"><strong>{{MONTHLY}}/mo</strong> <span>only once your site goes live</span></p>
       </div>
     </div>
 
@@ -470,18 +475,18 @@
         <ol class="steps">
           <li>
             <span class="step-num" aria-hidden="true">01</span>
-            <h3>Understand <span aria-hidden="true">·</span> Days 1–2</h3>
-            <p>We dive deep into your business needs, goals, and target audience to strategize the perfect build.</p>
+            <h3>Draft <span aria-hidden="true">·</span> Days 1–2</h3>
+            <p>We design a free draft of your new website, based on your current site and what makes your business good.</p>
           </li>
           <li>
             <span class="step-num" aria-hidden="true">02</span>
-            <h3>Implement <span aria-hidden="true">·</span> Days 3–5</h3>
-            <p>Our team designs and codes the core website, combining artistic flair with strict technical precision.</p>
+            <h3>Refine <span aria-hidden="true">·</span> Days 3–5</h3>
+            <p>You give feedback, we improve the draft until it feels right. Still completely free.</p>
           </li>
           <li>
             <span class="step-num" aria-hidden="true">03</span>
             <h3>Launch <span aria-hidden="true">·</span> Days 6–7</h3>
-            <p>We review the site with you, make immediate updates based on your feedback, and push it live.</p>
+            <p>Love it? We push it live. Only now does the {{MONTHLY}}/month begin.</p>
           </li>
           <li>
             <span class="step-num" aria-hidden="true">04</span>
@@ -595,11 +600,15 @@ BUILD</span>
         <div class="faq-list">
           <details>
             <summary>What does a website cost with lemonelly? <span class="plus" aria-hidden="true"></span></summary>
-            <p>{{SETUP}} once-off to design and build your site, then {{MONTHLY}}/month for hosting, security, and updates. That's the whole price — no hourly rates, no surprise invoices.</p>
+            <p>Nothing upfront. The design, the draft, and every revision are free. You only start paying {{MONTHLY}}/month once you're happy and your new site goes live.</p>
+          </details>
+          <details>
+            <summary>What if I don't like the draft? <span class="plus" aria-hidden="true"></span></summary>
+            <p>Then you pay nothing and keep your current website. There's no obligation — the draft is free either way.</p>
           </details>
           <details>
             <summary>How fast will my site be live? <span class="plus" aria-hidden="true"></span></summary>
-            <p>Seven days from kickoff. Days 1–2 we learn your business, days 3–5 we design and build, days 6–7 we review it with you and go live.</p>
+            <p>Seven days from kickoff. Days 1–2 we design your free draft, days 3–5 we refine it with your feedback, days 6–7 we go live.</p>
           </details>
           <details>
             <summary>What does the {{MONTHLY}}/month actually cover? <span class="plus" aria-hidden="true"></span></summary>
@@ -607,7 +616,7 @@ BUILD</span>
           </details>
           <details>
             <summary>What do you need from me to get started? <span class="plus" aria-hidden="true"></span></summary>
-            <p>Just tell us about your business — what you do, who your customers are, and what makes you good at it. We take it from there and review everything with you before launch.</p>
+            <p>Just tell us about your business and point us at your current website if you have one. We take it from there and review everything with you before launch.</p>
           </details>
           <details>
             <summary>Can I change things after the site is live? <span class="plus" aria-hidden="true"></span></summary>
@@ -620,8 +629,8 @@ BUILD</span>
     <section id="start" class="cta" aria-labelledby="start-h">
       <div class="wrap">
         <p class="badge-pill">Get Started</p>
-        <h2 id="start-h">Ready when you are</h2>
-        <p>Ready for a site that finally matches how good your business really is? Tell us what you do — we'll show you what's possible.</p>
+        <h2 id="start-h">Start with a free draft</h2>
+        <p>Ready for a site that finally matches how good your business really is? Tell us what you do — we'll design your new site free.</p>
         <div class="cta-actions">
           <a class="btn btn-solid" href="mailto:hello@lemonelly.com">Email Us <span class="arrow" aria-hidden="true">→</span></a>
           <a class="btn btn-ghost" href="https://wa.me/27727206606" target="_blank" rel="noopener">WhatsApp Veronica</a>

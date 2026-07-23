@@ -36,7 +36,6 @@ for key, r in regions.items():
         "OG_TITLE": r["og_title"],
         "OG_DESC": r["og_desc"],
         "CANONICAL": r["canonical"],
-        "SETUP": r["setup"],
         "MONTHLY": r["monthly"],
         "LEDE_AUDIENCE": r["lede_audience"],
         "TRADES": r["trades"],
