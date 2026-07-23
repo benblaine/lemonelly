@@ -245,6 +245,19 @@
     }
     .price-strip strong { color: var(--ink); font-weight: 700; }
 
+    .currency {
+      display: inline-flex; border: 1px solid var(--line); border-radius: 999px;
+      overflow: hidden; margin-left: .25rem; vertical-align: middle;
+    }
+    .currency button {
+      border: 0; background: none; cursor: pointer; color: var(--ink-2);
+      font: inherit; font-size: .75rem; font-weight: 700; letter-spacing: .04em;
+      padding: .35rem .65rem; min-height: 32px;
+    }
+    .currency button:hover { color: var(--ink); }
+    .currency button[aria-pressed="true"] { background: var(--green); color: #fff; }
+    .currency button:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+
     .hero-photos { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); margin-top: var(--sp-5); }
     @media (min-width: 60rem) {
       .hero-photos { margin-top: 0; }
@@ -399,7 +412,11 @@
             <a class="btn btn-solid" href="#start">Get Started <span class="arrow" aria-hidden="true">→</span></a>
             <a class="btn btn-ghost" href="#work">See Our Work</a>
           </div>
-          <p class="price-strip"><strong>$1,000</strong> flat setup <span aria-hidden="true">·</span> <strong>$60/mo</strong> hosting &amp; updates <span aria-hidden="true">·</span> live in <strong>7 days</strong></p>
+          <p class="price-strip"><strong><span data-price="setup">$1,000</span></strong> flat setup <span aria-hidden="true">·</span> <strong><span data-price="monthly">$60</span>/mo</strong> hosting &amp; updates <span aria-hidden="true">·</span> live in <strong>7 days</strong>
+            <span class="currency" role="group" aria-label="Show prices in">
+              <button type="button" data-currency="ZAR" aria-pressed="false">ZAR</button><button type="button" data-currency="USD" aria-pressed="true">USD</button><button type="button" data-currency="GBP" aria-pressed="false">GBP</button><button type="button" data-currency="EUR" aria-pressed="false">EUR</button>
+            </span>
+          </p>
         </div>
         <div class="hero-photos">
           <figure class="headshot">
@@ -419,8 +436,8 @@
     <div class="stats" role="group" aria-label="What you get">
       <div class="wrap">
         <p class="stat"><strong>7 days</strong> <span>from kickoff to launch</span></p>
-        <p class="stat"><strong>$1,000</strong> <span>flat setup fee, no surprises</span></p>
-        <p class="stat"><strong>$60/mo</strong> <span>hosting, security &amp; monthly updates</span></p>
+        <p class="stat"><strong><span data-price="setup">$1,000</span></strong> <span>flat setup fee, no surprises</span></p>
+        <p class="stat"><strong><span data-price="monthly">$60</span>/mo</strong> <span>hosting, security &amp; monthly updates</span></p>
       </div>
     </div>
 
@@ -480,7 +497,7 @@
           </li>
           <li>
             <span class="step-num" aria-hidden="true">04</span>
-            <h3>Ongoing <span aria-hidden="true">·</span> $60/Mo</h3>
+            <h3>Ongoing <span aria-hidden="true">·</span> <span data-price="monthly">$60</span>/Mo</h3>
             <p>Premium hosting, security, and one round of updates every single month to keep your site current.</p>
           </li>
         </ol>
@@ -590,14 +607,14 @@ BUILD</span>
         <div class="faq-list">
           <details>
             <summary>What does a website cost with lemonelly? <span class="plus" aria-hidden="true"></span></summary>
-            <p>$1,000 once-off to design and build your site, then $60/month for hosting, security, and updates. That's the whole price — no hourly rates, no surprise invoices.</p>
+            <p><span data-price="setup">$1,000</span> once-off to design and build your site, then <span data-price="monthly">$60</span>/month for hosting, security, and updates. That's the whole price — no hourly rates, no surprise invoices.</p>
           </details>
           <details>
             <summary>How fast will my site be live? <span class="plus" aria-hidden="true"></span></summary>
             <p>Seven days from kickoff. Days 1–2 we learn your business, days 3–5 we design and build, days 6–7 we review it with you and go live.</p>
           </details>
           <details>
-            <summary>What does the $60/month actually cover? <span class="plus" aria-hidden="true"></span></summary>
+            <summary>What does the <span data-price="monthly">$60</span>/month actually cover? <span class="plus" aria-hidden="true"></span></summary>
             <p>Premium hosting, security, and one round of content updates every month — new photos, price changes, fresh copy. Your site stays current without you touching it.</p>
           </details>
           <details>
@@ -651,6 +668,33 @@ BUILD</span>
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') setOpen(false);
       });
+    })();
+
+    (function () {
+      var PRICES = {
+        ZAR: { setup: 'R18,000', monthly: 'R1,100' },
+        USD: { setup: '$1,000', monthly: '$60' },
+        GBP: { setup: '£800', monthly: '£50' },
+        EUR: { setup: '€950', monthly: '€55' }
+      };
+      var buttons = document.querySelectorAll('.currency button');
+      function setCurrency(code) {
+        if (!PRICES[code]) return;
+        document.querySelectorAll('[data-price]').forEach(function (el) {
+          el.textContent = PRICES[code][el.getAttribute('data-price')];
+        });
+        buttons.forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.getAttribute('data-currency') === code));
+        });
+        try { localStorage.setItem('lemonelly-currency', code); } catch (e) {}
+      }
+      buttons.forEach(function (b) {
+        b.addEventListener('click', function () { setCurrency(b.getAttribute('data-currency')); });
+      });
+      try {
+        var saved = localStorage.getItem('lemonelly-currency');
+        if (saved && saved !== 'USD') setCurrency(saved);
+      } catch (e) {}
     })();
   </script>
 </body>
