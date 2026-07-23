@@ -1,0 +1,72 @@
+{
+  "global": {
+    "path": "",
+    "code": null,
+    "setup": "$1,000",
+    "monthly": "$60",
+    "lede_audience": "small and independent businesses",
+    "trades": "Roofers, Pool Cleaning, HVAC",
+    "area_served": "Cape Town",
+    "canonical": "https://lemonelly.com/",
+    "title": "lemonelly · Websites that win trust for local businesses · $1,000 + $60/mo",
+    "meta_desc": "lemonelly designs and builds fast, professional websites for small and independent businesses — trades, creatives, healthcare. $1,000 setup + $60/mo, live in one week. Cape Town.",
+    "og_title": "lemonelly · Websites that win trust for local businesses",
+    "og_desc": "Fast, professional websites for small and independent businesses. $1,000 setup + $60/mo, live in one week. Proudly built in Cape Town."
+  },
+  "za": {
+    "path": "za",
+    "code": "ZA",
+    "setup": "R18,000",
+    "monthly": "R1,100",
+    "lede_audience": "South African small businesses",
+    "trades": "Roofers, Pool Cleaning, Plumbers",
+    "area_served": "South Africa",
+    "canonical": "https://lemonelly.com/za",
+    "title": "lemonelly · Websites for South African small businesses · R18,000 + R1,100/mo",
+    "meta_desc": "lemonelly designs and builds fast, professional websites for South African small businesses — trades, creatives, healthcare. R18,000 setup + R1,100/mo, live in one week. Cape Town.",
+    "og_title": "lemonelly · Websites for South African small businesses",
+    "og_desc": "Fast, professional websites for South African small businesses. R18,000 setup + R1,100/mo, live in one week. Proudly built in Cape Town."
+  },
+  "us": {
+    "path": "us",
+    "code": "US",
+    "setup": "$1,000",
+    "monthly": "$60",
+    "lede_audience": "American small businesses",
+    "trades": "Roofers, Pool Cleaning, HVAC",
+    "area_served": "United States",
+    "canonical": "https://lemonelly.com/us",
+    "title": "lemonelly · Websites for American small businesses · $1,000 + $60/mo",
+    "meta_desc": "lemonelly designs and builds fast, professional websites for American small businesses — trades, creatives, healthcare. $1,000 setup + $60/mo, live in one week.",
+    "og_title": "lemonelly · Websites for American small businesses",
+    "og_desc": "Fast, professional websites for American small businesses. $1,000 setup + $60/mo, live in one week."
+  },
+  "uk": {
+    "path": "uk",
+    "code": "UK",
+    "setup": "£800",
+    "monthly": "£50",
+    "lede_audience": "British small businesses",
+    "trades": "Roofers, Plumbers, Heating Engineers",
+    "area_served": "United Kingdom",
+    "canonical": "https://lemonelly.com/uk",
+    "title": "lemonelly · Websites for British small businesses · £800 + £50/mo",
+    "meta_desc": "lemonelly designs and builds fast, professional websites for British small businesses — trades, creatives, healthcare. £800 setup + £50/mo, live in one week.",
+    "og_title": "lemonelly · Websites for British small businesses",
+    "og_desc": "Fast, professional websites for British small businesses. £800 setup + £50/mo, live in one week."
+  },
+  "eu": {
+    "path": "eu",
+    "code": "EU",
+    "setup": "€950",
+    "monthly": "€55",
+    "lede_audience": "European small businesses",
+    "trades": "Roofers, Plumbers, Electricians",
+    "area_served": "Europe",
+    "canonical": "https://lemonelly.com/eu",
+    "title": "lemonelly · Websites for European small businesses · €950 + €55/mo",
+    "meta_desc": "lemonelly designs and builds fast, professional websites for European small businesses — trades, creatives, healthcare. €950 setup + €55/mo, live in one week.",
+    "og_title": "lemonelly · Websites for European small businesses",
+    "og_desc": "Fast, professional websites for European small businesses. €950 setup + €55/mo, live in one week."
+  }
+}
