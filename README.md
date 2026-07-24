@@ -50,6 +50,16 @@ All swappable by replacing the file — no code changes needed:
 
 If a photo file is missing, the page falls back to styled initials / a text plate automatically.
 
+## Client drafts
+
+Sales-pitch website redesigns for local businesses, served at
+`lemonelly.com/draft/<slug>` (noindex, excluded in robots.txt, never in the
+sitemap). Built by copying `template/draft.template.html` and adapting it per
+company — see `.claude/skills/draft/SKILL.md` for the full workflow (`/draft <url>`).
+Prospect fact sheets live in `reference/clients/`; shared stock imagery and the
+self-hosted font in `assets/draft/`. `reference/`, `template/` and friends are
+excluded from deploy via `.vercelignore`.
+
 ## Deploy
 
 Vercel deploys `main` to lemonelly.com automatically. `404.html` is picked up by most static hosts.

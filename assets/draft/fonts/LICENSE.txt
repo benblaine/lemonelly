@@ -1,0 +1,16 @@
+Archivo (variable, latin subset) — archivo-latin-var.woff2
+Copyright 2019 The Archivo Project Authors (https://github.com/Omnibus-Type/Archivo)
+
+Licensed under the SIL Open Font License, Version 1.1.
+Full license text: https://openfontlicense.org/open-font-license-official-text/
+
+The OFL permits bundling, embedding, and redistribution of the font with
+web pages, provided the font itself is not sold on its own.
+
+---
+
+Fraunces (variable, latin subset) — fraunces-latin-var.woff2
+Copyright 2019 The Fraunces Project Authors (https://github.com/undercasetype/Fraunces)
+
+Licensed under the SIL Open Font License, Version 1.1.
+Full license text: https://openfontlicense.org/open-font-license-official-text/
