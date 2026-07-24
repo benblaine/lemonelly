@@ -4,394 +4,413 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Capital Roofing Co. | Roofers in London &middot; Draft by lemonelly</title>
-<meta name="description" content="Award-winning roofing contractor serving London, Kent and the South East since 1968. Commercial and domestic roofing, flat roofing, slating &amp; tiling and specialist leadwork.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>lemonelly · Capital Roofing Co. (draft)</title>
+<meta name="description" content="Award-winning family-run roofing contractor in Blackheath, London — commercial and domestic roofing, flat and seamless roofing, slating &amp; tiling and specialist leadwork across London, Kent and the South East since 1968.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Capital Roofing Co. — a free website draft by lemonelly">
+<meta property="og:description" content="A modern website concept for Capital Roofing Co., built from their real details.">
+<meta property="og:image" content="https://lemonelly.com/assets/draft/stock/hero-slate-arched-dormers.jpeg">
+<meta property="og:url" content="https://lemonelly.com/draft/capitalroofing">
 <style>
+  @font-face{
+    font-family:'Archivo';
+    src:url('/assets/draft/fonts/archivo-latin-var.woff2') format('woff2');
+    font-weight:100 900;font-style:normal;font-display:swap;
+  }
+  @font-face{
+    font-family:'Fraunces';
+    src:url('/assets/draft/fonts/fraunces-latin-var.woff2') format('woff2');
+    font-weight:400 900;font-style:normal;font-display:swap;
+  }
   :root{
-    --ink:#14161a;
+    --ink:#171a1f;
+    --ink-soft:#3f444d;
     --paper:#ffffff;
-    --accent:#caa030;
-    --accent-deep:#a8801f;
-    --accent-text:#8a6a1a;
-    --panel:#10131c;
-    --grey:#6e727a;
-    --line:#e7e7e6;
+    --wash:#f6f5f2;
+    --panel:#161a22;
+    --panel-soft:#1f2530;
+    --accent:#35608f;
+    --accent-deep:#2a4e75;
+    --accent-text:#2d5580;
+    --grey:#6b7079;
+    --line:#e7e5e0;
+    --line-soft:#eeece7;
+    --radius:16px;
+    --radius-lg:24px;
     --radius-pill:999px;
-    --radius:14px;
-    --radius-lg:22px;
-    --maxw:1200px;
+    --maxw:1180px;
+    --serif:'Fraunces',Georgia,'Times New Roman',serif;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     font-family:'Archivo',system-ui,-apple-system,sans-serif;
-    color:var(--ink);
-    background:var(--paper);
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+    color:var(--ink);background:var(--paper);
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.5;
   }
   img{display:block;max-width:100%;}
   a{color:inherit;text-decoration:none;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
-  section{padding-block:88px;}
+  section{padding-block:84px;}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-0.01em;line-height:1.05;}
 
-  /* ---------- NAV ---------- */
-  header{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px;}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.02em;font-size:16px;line-height:1;}
-  .logo svg{width:30px;height:23px;flex:none;}
-  .logo small{display:block;font-weight:500;font-size:9px;letter-spacing:.34em;color:var(--grey);margin-top:3px;}
-  nav.links{display:flex;gap:28px;font-size:14px;font-weight:600;}
-  nav.links a:hover{color:var(--accent-text);}
-  .nav-right{display:flex;align-items:center;gap:22px;font-size:13.5px;font-weight:600;}
-  .nav-right a{display:inline-flex;align-items:center;gap:8px;}
-  .nav-right svg{width:16px;height:16px;flex:none;color:var(--accent-text);}
-  .nav-right a:hover{color:var(--accent-text);}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-text);margin-bottom:16px;}
+
   .btn{
-    display:inline-flex;align-items:center;gap:.5em;justify-content:center;
-    background:var(--accent);color:var(--ink);
-    padding:13px 28px;border-radius:var(--radius-pill);
-    font-size:14px;font-weight:700;transition:background .2s;border:none;cursor:pointer;
+    display:inline-flex;align-items:center;gap:.55em;justify-content:center;
+    background:var(--accent);color:#fff;padding:14px 26px;border-radius:var(--radius-pill);
+    font-size:14px;font-weight:700;transition:background .2s,transform .2s;border:none;cursor:pointer;
   }
   .btn:hover{background:var(--accent-deep);}
-  .btn.dark{background:var(--ink);color:#fff;}
-  .btn.dark:hover{background:var(--accent);color:var(--ink);}
+  .btn svg{width:16px;height:16px;}
+  .btn.dark{background:var(--ink);}
+  .btn.dark:hover{background:#000;}
   .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
-  .btn.ghost:hover{border-color:var(--accent-text);color:var(--accent-text);}
-  .btn.white{background:#fff;color:var(--ink);}
-  .btn.white:hover{background:var(--ink);color:#fff;}
+  .btn.ghost:hover{border-color:var(--ink);}
+  .btn.light{background:#fff;color:var(--ink);}
+  .btn.light:hover{background:var(--wash);}
 
-  .eyebrow{
-    font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--accent-text);margin-bottom:14px;
+  header{background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .lm-topbar{position:sticky;top:0;z-index:30;}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:24px;}
+  .logo{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:700;font-size:19px;line-height:1;}
+  .logo svg{width:30px;height:24px;flex:none;}
+  .logo small{display:block;font-family:'Archivo';font-weight:600;font-size:9px;letter-spacing:.24em;color:var(--grey);margin-top:4px;}
+  nav.links{display:flex;gap:30px;font-size:14px;font-weight:600;}
+  nav.links a{color:var(--ink-soft);}
+  nav.links a:hover{color:var(--accent-text);}
+  .nav-right{display:flex;align-items:center;gap:20px;font-size:14px;font-weight:700;}
+  .nav-right .tel{display:inline-flex;align-items:center;gap:8px;}
+  .nav-right .tel svg{width:16px;height:16px;color:var(--accent-text);}
+  .nav-right .tel small{display:block;font-size:11px;font-weight:600;color:var(--grey);letter-spacing:.02em;}
+  @media (max-width:920px){nav.links,.nav-right .tel{display:none;}}
+
+  .hero{position:relative;color:#fff;padding:0;isolation:isolate;}
+  .hero-media{position:absolute;inset:0;z-index:-1;overflow:hidden;}
+  .hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 32%;}
+  .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,16,20,.92),rgba(14,16,20,.72) 42%,rgba(14,16,20,.32) 72%,rgba(14,16,20,.14));}
+  .hero .wrap{min-height:clamp(540px,74vh,720px);display:flex;flex-direction:column;justify-content:center;padding-top:72px;padding-bottom:96px;}
+  .hero-head{max-width:660px;}
+  .hero .eyebrow{color:#f2a469;}
+  .hero h1{font-size:clamp(40px,6vw,72px);color:#fff;}
+  .hero h1 .em{color:var(--accent);font-style:italic;}
+  .hero .sub{font-size:clamp(16px,1.5vw,18px);color:rgba(255,255,255,.84);max-width:48ch;margin-top:20px;}
+  .hero ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:24px;}
+  .hero li{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:#fff;}
+  .hero li svg{width:19px;height:19px;flex:none;color:var(--accent);}
+  .hero-actions{display:flex;align-items:center;gap:16px;margin-top:32px;flex-wrap:wrap;}
+  .hero-actions .btn.ghost{color:#fff;border-color:rgba(255,255,255,.45);}
+  .hero-actions .btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);}
+  @media (max-width:920px){
+    /* phone: real photo at the top, text on a dark panel below it */
+    .hero{background:var(--panel);}
+    .hero-media{position:static;z-index:auto;height:auto;}
+    .hero-media img{height:clamp(220px,54vw,360px);object-position:center 38%;}
+    .hero-media::after{display:none;}
+    .hero .wrap{min-height:0;padding-top:36px;padding-bottom:52px;}
   }
-  .contact-card .eyebrow{color:var(--accent);}
 
-  /* ---------- HERO ---------- */
-  .hero{padding-top:72px;padding-bottom:0;}
-  .hero-head h1{
-    font-weight:800;font-size:clamp(38px,6vw,64px);
-    line-height:1.02;letter-spacing:-0.02em;text-transform:uppercase;max-width:16ch;
-  }
-  .hero-head .sub{font-size:clamp(15px,1.6vw,18px);color:var(--grey);max-width:46ch;margin-top:18px;line-height:1.6;}
-  .hero-actions{display:flex;align-items:center;gap:18px;margin-top:30px;flex-wrap:wrap;}
-  .hero-actions .note{font-size:13px;color:var(--grey);font-weight:600;}
-  .hero-row{display:grid;grid-template-columns:.9fr .9fr 1.3fr;gap:14px;margin-top:52px;height:clamp(200px,26vw,320px);}
-  .hero-row img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius);}
+  .features{background:var(--panel);color:#fff;}
+  .features .wrap{padding-block:8px;}
+  .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;transform:translateY(-42px);}
+  .feat{background:var(--panel-soft);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:26px 24px;}
+  .feat .ic{width:42px;height:42px;border-radius:11px;background:rgba(224,116,46,.16);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .feat .ic svg{width:22px;height:22px;color:var(--accent);}
+  .feat h3{font-family:'Archivo';font-weight:700;font-size:15.5px;letter-spacing:0;margin-bottom:7px;}
+  .feat p{font-size:13px;color:#a9adb6;line-height:1.55;}
+  @media (max-width:920px){.feat-grid{grid-template-columns:1fr 1fr;transform:translateY(-30px);}}
+  @media (max-width:560px){.feat-grid{grid-template-columns:1fr;}}
 
-  /* ---------- MARQUEE ---------- */
-  .marquee{background:var(--ink);color:#fff;overflow:hidden;white-space:nowrap;padding:16px 0;}
-  .marquee-track{display:inline-block;animation:scroll 28s linear infinite;}
-  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  @media (prefers-reduced-motion:reduce){.marquee-track{animation:none;}}
-  .marquee span{
-    display:inline-flex;align-items:center;gap:12px;margin:0 34px;
-    font-weight:700;letter-spacing:.14em;font-size:14px;text-transform:uppercase;
-  }
-  .marquee svg{width:20px;height:14px;flex:none;color:var(--accent);}
-
-  /* ---------- SOLUTIONS / STATS ---------- */
-  .solutions{background:var(--panel);color:#fff;}
-  .solutions .head{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:end;margin-bottom:44px;}
-  .solutions h2{font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-0.01em;line-height:1.15;}
-  .solutions .head p{color:#a7abb3;font-size:15px;line-height:1.6;}
-  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr) 1.5fr;gap:16px;}
-  .stat-tile{
-    background:#22262e;border-radius:var(--radius);padding:28px 22px;
-    display:flex;flex-direction:column;justify-content:center;
-  }
-  .stat-tile.hi{background:var(--accent);}
-  .stat-tile .n{font-size:clamp(30px,3.4vw,44px);font-weight:800;letter-spacing:-0.02em;}
-  .stat-tile .l{font-size:13px;color:#c7cad0;margin-top:6px;font-weight:600;}
-  .stat-tile.hi .l{color:rgba(20,22,26,.75);}
-  .stat-tile.hi .n{color:var(--ink);}
-  .stat-note{
-    background:#fff;color:var(--ink);border-radius:var(--radius);
-    padding:26px 26px;display:flex;flex-direction:column;justify-content:center;gap:14px;
-  }
-  .stat-note p{font-size:14px;color:var(--grey);line-height:1.6;}
-  .stat-note .btn{align-self:flex-start;}
-
-  /* ---------- ABOUT ---------- */
-  .about .grid{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center;}
-  .about-photos{position:relative;height:400px;}
-  .about-photos img{position:absolute;object-fit:cover;border-radius:var(--radius);}
-  .about-photos .p1{width:66%;height:84%;top:0;left:0;}
-  .about-photos .p2{width:46%;height:54%;bottom:0;right:2%;box-shadow:0 20px 48px rgba(0,0,0,.18);border:5px solid #fff;}
-  .about-card{background:var(--accent);color:var(--ink);border-radius:var(--radius-lg);padding:44px 40px;}
-  .about-card h2{font-size:clamp(24px,2.6vw,32px);font-weight:700;letter-spacing:-0.01em;margin-bottom:20px;}
-  .about-card ul{list-style:none;display:grid;gap:14px;margin-bottom:28px;}
-  .about-card li{position:relative;padding-left:26px;font-size:15px;line-height:1.5;font-weight:600;}
-  .about-card li::before{content:"";position:absolute;left:0;top:.4em;width:9px;height:9px;border-radius:50%;background:var(--ink);}
-
-  /* ---------- SERVICES ---------- */
-  .services .head{text-align:center;max-width:46rem;margin:0 auto 48px;}
-  .services h2{font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-0.01em;}
+  .services .head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px;flex-wrap:wrap;}
+  .services h2{font-size:clamp(28px,3.4vw,42px);}
+  .services .head a{font-size:14px;font-weight:700;color:var(--accent-text);display:inline-flex;align-items:center;gap:7px;}
   .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .svc-card{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;}
-  .svc-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s;}
-  .svc-card:hover img{transform:scale(1.06);}
-  .svc-card::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(to top,rgba(20,22,26,.88) 0%,rgba(20,22,26,.15) 55%,transparent 75%);
-  }
-  .svc-card .txt{position:absolute;left:20px;right:20px;bottom:20px;z-index:2;color:#fff;}
-  .svc-card .idx{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.1em;}
-  .svc-card h3{font-size:19px;font-weight:700;margin:6px 0 12px;letter-spacing:-0.01em;}
-  .svc-card .more{
-    display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;
-    background:rgba(255,255,255,.16);backdrop-filter:blur(2px);padding:8px 14px;border-radius:var(--radius-pill);
-  }
-  .svc-card .more:hover{background:var(--accent);color:var(--ink);}
+  .svc-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;transition:box-shadow .25s,transform .25s;}
+  .svc-card:hover{box-shadow:0 18px 40px rgba(0,0,0,.08);transform:translateY(-3px);}
+  .svc-card .ph{aspect-ratio:16/10;overflow:hidden;}
+  .svc-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .svc-card:hover .ph img{transform:scale(1.05);}
+  .svc-card .body{padding:20px 20px 22px;}
+  .svc-card h3{font-family:'Archivo';font-weight:700;font-size:16.5px;letter-spacing:0;}
+  .svc-card p{font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.55;}
+  .svc-card .more{margin-top:14px;font-size:12.5px;font-weight:700;color:var(--accent-text);display:inline-flex;align-items:center;gap:6px;}
+  @media (max-width:920px){.svc-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.svc-grid{grid-template-columns:1fr;}}
 
-  /* ---------- FEATURED WORK ---------- */
-  .featured .head{text-align:center;margin-bottom:48px;}
-  .featured h2{font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-0.01em;}
-  .fgrid{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:auto auto;gap:20px;}
+  .stats{background:var(--wash);}
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+  .stat .n{font-family:var(--serif);font-weight:700;font-size:clamp(30px,3.4vw,44px);color:var(--ink);}
+  .stat .l{font-size:13px;font-weight:600;color:var(--ink-soft);margin-top:6px;}
+  @media (max-width:640px){.stat-row{grid-template-columns:1fr 1fr;gap:32px 24px;}}
+
+  .about .grid{display:grid;grid-template-columns:1fr 1.02fr;gap:56px;align-items:center;}
+  .about-photos{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .about-photos img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius);}
+  .about-photos img:first-child{grid-row:span 2;height:100%;}
+  .about h2{font-size:clamp(26px,3vw,38px);margin-bottom:20px;}
+  .about ul{list-style:none;display:grid;gap:15px;margin:22px 0 30px;}
+  .about li{position:relative;padding-left:30px;font-size:15px;color:var(--ink-soft);line-height:1.5;}
+  .about li svg{position:absolute;left:0;top:2px;width:20px;height:20px;color:var(--accent);}
+  @media (max-width:920px){.about .grid{grid-template-columns:1fr;gap:36px;}}
+
+  .work .head{text-align:center;max-width:44rem;margin:0 auto 44px;}
+  .work h2{font-size:clamp(28px,3.4vw,42px);}
+  .work .head p{color:var(--ink-soft);margin-top:14px;}
+  .fgrid{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-auto-rows:200px;gap:16px;}
   .fgrid figure{margin:0;position:relative;overflow:hidden;border-radius:var(--radius);}
   .fgrid img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
-  .fgrid figure:hover img{transform:scale(1.04);}
-  .fgrid .tall{grid-row:1 / span 2;}
-  .fgrid .tall img{height:560px;}
-  .fgrid .wide img{height:270px;}
-  .fgrid figcaption{
-    position:absolute;left:16px;bottom:14px;background:var(--accent);
-    color:var(--ink);font-size:12px;font-weight:700;letter-spacing:.1em;
-    text-transform:uppercase;padding:8px 14px;border-radius:var(--radius-pill);
-  }
+  .fgrid figure:hover img{transform:scale(1.05);}
+  .fgrid .big{grid-row:span 2;}
+  .fgrid figcaption{position:absolute;left:14px;bottom:12px;background:rgba(255,255,255,.94);color:var(--ink);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 13px;border-radius:var(--radius-pill);}
+  @media (max-width:760px){.fgrid{grid-template-columns:1fr 1fr;grid-auto-rows:150px;}.fgrid .big{grid-row:span 2;grid-column:span 2;}}
 
-  /* ---------- CONTACT ---------- */
-  .contact-card{
-    background:var(--panel);color:#fff;border-radius:var(--radius-lg);
-    padding:64px 48px 56px;margin:0 24px;max-width:var(--maxw);margin-inline:auto;
-  }
-  .contact-card .top{text-align:center;max-width:640px;margin:0 auto 40px;}
-  .contact-card h2{font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-0.01em;}
-  .contact-card .sub{color:#a7abb3;font-size:15px;margin-top:12px;}
-  .contact-card .actions{display:flex;gap:14px;justify-content:center;margin-top:26px;flex-wrap:wrap;}
-  form.quote{max-width:760px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-  form.quote input,form.quote select,form.quote textarea{
-    font-family:inherit;font-size:14px;padding:14px 18px;
-    border:1.5px solid #33373f;border-radius:12px;background:#22262e;color:#fff;width:100%;
-  }
-  form.quote ::placeholder{color:#82868f;}
+  .tc-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .testi-card{background:var(--panel);color:#fff;border-radius:var(--radius-lg);padding:44px 40px;display:flex;flex-direction:column;justify-content:center;}
+  .testi-card .quote{font-family:var(--serif);font-weight:500;font-size:clamp(19px,2vw,23px);line-height:1.4;}
+  .testi-card .stars{color:var(--accent);letter-spacing:3px;margin-bottom:18px;font-size:15px;}
+  .testi-card cite{display:block;margin-top:20px;font-family:'Archivo';font-style:normal;font-size:13.5px;font-weight:700;color:#c3c7cf;}
+  .cta-card{background:var(--accent);color:#fff;border-radius:var(--radius-lg);padding:44px 40px;display:flex;flex-direction:column;justify-content:center;}
+  .cta-card h2{font-size:clamp(24px,2.6vw,32px);color:#fff;}
+  .cta-card p{margin:14px 0 24px;font-size:15px;color:rgba(255,255,255,.9);max-width:34ch;}
+  .cta-card .row{display:flex;gap:12px;flex-wrap:wrap;}
+  @media (max-width:820px){.tc-grid{grid-template-columns:1fr;}}
+
+  .contact{background:var(--wash);}
+  .contact .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start;}
+  .contact h2{font-size:clamp(28px,3.4vw,42px);}
+  .contact .sub{color:var(--ink-soft);margin-top:14px;max-width:38ch;}
+  .contact .direct{margin-top:28px;display:grid;gap:14px;}
+  .contact .direct a{display:flex;align-items:center;gap:13px;font-weight:700;font-size:15px;}
+  .contact .direct .ic{width:42px;height:42px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex:none;}
+  .contact .direct .ic svg{width:19px;height:19px;color:var(--accent-text);}
+  .contact .direct small{display:block;font-size:12px;font-weight:600;color:var(--grey);}
+  form.quote{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  form.quote label{grid-column:1/-1;font-family:var(--serif);font-weight:600;font-size:20px;margin-bottom:4px;}
+  form.quote input,form.quote select,form.quote textarea{font-family:inherit;font-size:14px;padding:13px 15px;border:1.5px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);width:100%;}
+  form.quote ::placeholder{color:#9a9ea6;}
   form.quote input:focus,form.quote select:focus,form.quote textarea:focus{outline:2px solid var(--accent);border-color:transparent;}
-  form.quote textarea{grid-column:1 / -1;min-height:110px;resize:vertical;}
-  form.quote .full{grid-column:1 / -1;}
-  form.quote button{grid-column:1 / -1;justify-self:center;padding:14px 44px;font-size:15px;}
+  form.quote textarea{grid-column:1/-1;min-height:96px;resize:vertical;}
+  form.quote .full{grid-column:1/-1;}
+  form.quote button{grid-column:1/-1;padding:15px;font-size:15px;}
+  @media (max-width:820px){.contact .grid{grid-template-columns:1fr;gap:32px;}form.quote{grid-template-columns:1fr;}}
 
-  /* ---------- FOOTER ---------- */
-  .footer{
-    display:flex;align-items:flex-start;justify-content:space-between;
-    gap:32px;padding:44px 24px 12px;flex-wrap:wrap;max-width:var(--maxw);margin:0 auto;
-  }
-  .footer nav{display:flex;gap:26px;font-size:13.5px;font-weight:600;flex-wrap:wrap;}
-  .footer nav a:hover{color:var(--accent-text);}
-  .footer .areas{font-size:12px;color:var(--grey);max-width:420px;line-height:1.7;}
-  .legal{text-align:center;font-size:12px;color:#b5b5b5;padding:24px 24px 32px;}
+  footer.site{background:var(--panel);color:#fff;padding:56px 0 0;}
+  .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .foot-top .logo{color:#fff;}
+  .foot-top .logo small{color:#9aa0a9;}
+  footer.site nav{display:flex;gap:26px;font-size:14px;font-weight:600;flex-wrap:wrap;}
+  footer.site nav a{color:#c3c7cf;}
+  footer.site nav a:hover{color:#fff;}
+  .areas{font-size:12.5px;color:#9aa0a9;line-height:1.7;padding:26px 0;}
+  .foot-legal{font-size:12px;color:#8b909a;padding-bottom:30px;line-height:1.6;}
+  .foot-legal a{color:#c3c7cf;text-decoration:underline;}
 
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width:900px){
-    nav.links{display:none;}
-    .hero-row{grid-template-columns:1fr 1fr;height:auto;}
-    .hero-row img{aspect-ratio:1/1;height:auto;}
-    .hero-row img:last-child{grid-column:1/-1;aspect-ratio:16/9;}
-    .solutions .head{grid-template-columns:1fr;}
-    .stat-grid{grid-template-columns:1fr 1fr;}
-    .stat-note{grid-column:1/-1;}
-    .about .grid{grid-template-columns:1fr;}
-    .about-photos{height:320px;}
-    .svc-grid{grid-template-columns:1fr 1fr;}
-    .fgrid{grid-template-columns:1fr;}
-    .fgrid .tall{grid-row:auto;}
-    .fgrid .tall img{height:320px;}
-    form.quote{grid-template-columns:1fr;}
-    .contact-card{padding:48px 24px 40px;}
-  }
-  @media (max-width:560px){
-    .svc-grid{grid-template-columns:1fr;}
-  }
+  .lm-badge{position:fixed;left:16px;bottom:16px;z-index:50;display:inline-flex;align-items:center;gap:8px;background:#fff;color:#111110;border:1px solid #e2e2e2;border-radius:999px;padding:9px 16px;font-size:12.5px;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.14);}
+  .lm-badge svg{width:20px;height:20px;}
+  .lm-badge:hover{border-color:#166548;color:#166548;}
 </style>
 </head>
 <body>
 
+<div class="lm-topbar">
+<div class="lm-draft-banner"><strong>Draft website &mdash; for review only</strong><span>A free website concept by <a href="https://lemonelly.com">lemonelly</a></span></div>
+<style>
+.lm-draft-banner{background:#FFD335;color:#111110;text-align:center;padding:8px 16px;line-height:1.35;display:flex;gap:6px 14px;justify-content:center;align-items:center;flex-wrap:wrap;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;}
+.lm-draft-banner span{font-weight:600;letter-spacing:.06em;text-transform:none;opacity:.85;}
+.lm-draft-banner a{color:#111110;text-decoration:underline;}
+</style>
 <header>
   <div class="wrap nav">
     <a class="logo" href="#top" aria-label="Capital Roofing Co. home">
       <svg viewBox="0 0 34 26" fill="none" aria-hidden="true">
-        <path d="M2 24 L17 4 L32 24" stroke="#caa030" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M9 24 L17 13 L25 24" stroke="#14161a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 24 L17 4 L32 24" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 24 L17 13 L25 24" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span>CAPITAL ROOFING<small>LONDON</small></span>
+      <span>Capital Roofing<small>LONDON</small></span>
     </a>
     <nav class="links">
-      <a href="#about">About</a>
       <a href="#services">Services</a>
+      <a href="#about">About</a>
       <a href="#work">Our Work</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-right">
-      <a class="tel" href="tel:02088585123"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>020 8858 5123</a>
-      <a class="btn" href="#contact">Get a Quote</a>
+      <a class="tel" href="tel:02088585123">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>020 8858 5123<small>Blackheath, London</small></span>
+      </a>
+      <a class="btn" href="#contact">Get a Free Quote</a>
     </div>
   </div>
 </header>
+</div>
 
-<!-- HERO -->
 <section class="hero" id="top">
+  <div class="hero-media">
+    <img fetchpriority="high" width="1000" height="1000" src="/assets/draft/stock/hero-slate-arched-dormers.jpeg" alt="Slate roof with arched dormer windows and a stone chimney">
+  </div>
   <div class="wrap">
     <div class="hero-head">
       <p class="eyebrow">Roofing Services in London</p>
-      <h1>Award-Winning Roofers in London</h1>
-      <p class="sub">Commercial and domestic roofing, flat roofing, slating &amp; tiling and specialist leadwork &mdash; a family-run business trusted across London, Kent and the South East since 1968.</p>
-      <div class="hero-actions">
-        <a class="btn" href="#contact">Book a Free Site Visit</a>
-        <span class="note">Free, no-obligation quotes &middot; Repeat clients since 1968</span>
-      </div>
-    </div>
-    <div class="hero-row">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1587061633437-187ac80e8e7a?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Red tiled roof">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1518736346281-76873166a64a?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Grey slate roof">
-      <img src="https://images.unsplash.com/photo-1633759593085-1eaeb724fc88?q=60&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Roofer working on a pitched roof with a hammer" fetchpriority="high">
-    </div>
-  </div>
-</section>
-
-<!-- MARQUEE -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>COMMERCIAL ROOFING</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>DOMESTIC ROOFING</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>FLAT &amp; SEAMLESS ROOFING</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>SLATING &amp; TILING</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>SPECIALIST LEADWORK</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>COMMERCIAL ROOFING</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>DOMESTIC ROOFING</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>FLAT &amp; SEAMLESS ROOFING</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>SLATING &amp; TILING</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>SPECIALIST LEADWORK</span>
-  </div>
-</div>
-
-<!-- SOLUTIONS / STATS -->
-<section class="solutions">
-  <div class="wrap">
-    <div class="head">
-      <h2>Award-Winning Roofing, Trusted Since 1968</h2>
-      <p>From our on-site training centre in Greenwich to the roof over your head, we bring nearly six decades of family expertise to every project &mdash; assessed properly, quoted honestly, finished to the highest standard.</p>
-    </div>
-    <div class="stat-grid">
-      <div class="stat-tile"><div class="n">1968</div><div class="l">Founded &mdash; still family run</div></div>
-      <div class="stat-tile hi"><div class="n">4</div><div class="l">Family generations at the helm</div></div>
-      <div class="stat-tile"><div class="n">1000s</div><div class="l">Repeat &amp; referred clients</div></div>
-      <div class="stat-note">
-        <p>Free, no-obligation site visit with a clear, detailed quote &mdash; covering London, Kent and the South East.</p>
-        <a class="btn dark" href="#contact">Get a Free Quote</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="wrap grid">
-    <div class="about-photos">
-      <img class="p1" loading="lazy" src="https://images.unsplash.com/photo-1635424824849-1b09bdcc55b1?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Roofer fixing panels with a power drill">
-      <img class="p2" loading="lazy" src="https://images.unsplash.com/photo-1635424709961-f3a150459ad4?q=60&amp;w=600&amp;auto=format&amp;fit=crop" alt="Two roofers working on a pitched roof">
-    </div>
-    <div class="about-card">
-      <p class="eyebrow" style="color:rgba(20,22,26,.72)">About Capital Roofing Co.</p>
-      <h2>A Family Business Built On Repeat Trust</h2>
+      <h1>Roofing London<br>since <span class="em">1968</span>.</h1>
+      <p class="sub">Commercial and domestic roofing, flat and seamless roofing, slating &amp; tiling and specialist leadwork — a family firm serving London, Kent and the South East for three generations.</p>
       <ul>
-        <li>Family-run since 1968, now led by the third and fourth generations</li>
-        <li>On-site training centre in Greenwich for apprentice roofers</li>
-        <li>Most of our work comes from repeat and referred clients</li>
-        <li>Commercial and domestic roofing across London, Kent and the South East</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Family-run since 1968</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Commercial &amp; domestic roofing</li>
       </ul>
-      <a class="btn white" href="#contact">Get a Free Quote</a>
+      <div class="hero-actions">
+        <a class="btn" href="#contact">Book a Free Site Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn ghost" href="tel:02088585123">Call 020 8858 5123</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<section class="features">
+  <div class="wrap">
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Award-Winning Work</h3>
+        <p>Creating award-winning roofing solutions, recognised across the industry.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1M9 13h1m4 0h1"/></svg></div>
+        <h3>Family-Run Since 1968</h3>
+        <p>Founded by Eric Peck and still led by his sons, grandsons and granddaughters.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3>Our Own Training Centre</h3>
+        <p>The Capital Roofing Training Center in Greenwich keeps our standards high.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Repeat Business</h3>
+        <p>Most of our current work comes from clients who come back — and refer us on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="services" id="services">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">What We Do</p>
-      <h2>Comprehensive Roofing Services</h2>
+      <div>
+        <p class="eyebrow">What We Do</p>
+        <h2>Our Roofing Services</h2>
+      </div>
+      <a href="#contact">View all services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="svc-grid">
       <a class="svc-card" href="#contact">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1590365876016-da05ac533e83?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Roof with triangular window">
-        <div class="txt"><span class="idx">01</span><h3>Commercial Roofing</h3><span class="more">Request a quote</span></div>
+        <div class="ph"><img loading="lazy" width="1000" height="750" src="/assets/draft/stock/svc-slate-closeup.jpeg" alt="Close-up of a natural slate roof"></div>
+        <div class="body"><h3>Slating &amp; Tiling</h3><p>New roofs and re-roofs in natural slate and tile, built to last.</p><span class="more">Request a quote →</span></div>
       </a>
       <a class="svc-card" href="#contact">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1566071634551-224a639a1c7d?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Bungalow roof">
-        <div class="txt"><span class="idx">02</span><h3>Domestic Roofing</h3><span class="more">Request a quote</span></div>
+        <div class="ph"><img loading="lazy" width="1000" height="750" src="/assets/draft/stock/svc-grp-flat-skylights.jpeg" alt="Flat roof with roof lights"></div>
+        <div class="body"><h3>Flat &amp; Seamless Roofing</h3><p>Modern flat and seamless roofing systems for homes and businesses.</p><span class="more">Request a quote →</span></div>
       </a>
       <a class="svc-card" href="#contact">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1503594384566-461fe158e797?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Timber house with dark roof">
-        <div class="txt"><span class="idx">03</span><h3>Flat &amp; Seamless Roofing</h3><span class="more">Request a quote</span></div>
+        <div class="ph"><img loading="lazy" width="1000" height="750" src="/assets/draft/stock/svc-leadwork-bay.jpeg" alt="Lead roof over a bay window"></div>
+        <div class="body"><h3>Specialist Leadwork</h3><p>Traditional leadwork, flashings and detailing by specialists.</p><span class="more">Request a quote →</span></div>
       </a>
       <a class="svc-card" href="#contact">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1602064828974-fcac67d33f4e?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Striped roof pattern">
-        <div class="txt"><span class="idx">04</span><h3>Slating &amp; Tiling</h3><span class="more">Request a quote</span></div>
-      </a>
-      <a class="svc-card" href="#contact">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1632759145351-1d592919f522?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Roofer seated on a metal roof">
-        <div class="txt"><span class="idx">05</span><h3>Specialist Leadwork</h3><span class="more">Request a quote</span></div>
-      </a>
-      <a class="svc-card" href="#contact">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1519115226133-94046df0e272?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="House roof with window">
-        <div class="txt"><span class="idx">06</span><h3>Roof Repairs &amp; Maintenance</h3><span class="more">Request a quote</span></div>
+        <div class="ph"><img loading="lazy" width="1000" height="750" src="/assets/draft/stock/work-brick-slate-chimneys.jpeg" alt="Brick buildings with slate roofs and chimneys"></div>
+        <div class="body"><h3>Commercial &amp; Domestic</h3><p>From family homes to commercial contracts across the South East.</p><span class="more">Request a quote →</span></div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- FEATURED WORK -->
-<section class="featured" id="work">
+<section class="stats">
+  <div class="wrap">
+    <div class="stat-row">
+      <div class="stat"><div class="n">1968</div><div class="l">Founded by Eric Peck</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">Generations of the family</div></div>
+      <div class="stat"><div class="n">58</div><div class="l">Years of roofing</div></div>
+      <div class="stat"><div class="n">SE</div><div class="l">London, Kent &amp; the South East</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap grid">
+    <div class="about-photos">
+      <img loading="lazy" width="1000" height="1250" src="/assets/draft/stock/work-stone-tudor-ivy.jpeg" alt="Stone period home with a slate roof">
+      <img loading="lazy" width="1000" height="600" src="/assets/draft/stock/svc-terracotta-tile-dormers.jpeg" alt="Terracotta tiled roof with dormer windows">
+      <img loading="lazy" width="1000" height="600" src="/assets/draft/stock/svc-grp-flat-grey.jpeg" alt="Modern grey flat roof">
+    </div>
+    <div>
+      <p class="eyebrow">About Capital Roofing Co.</p>
+      <h2>A family firm, three generations deep</h2>
+      <p style="color:var(--ink-soft);font-size:15.5px;">Founded in 1968 by Eric Peck, Capital Roofing is regarded as an outstanding example of true professionalism in the quality of its work — and it's still family-managed today.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Based at Capital House, Westcombe Hill, Blackheath</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Serving London, Kent and the South East of England</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>On-site training facility in Greenwich for the next generation</li>
+      </ul>
+      <a class="btn" href="#contact">Get a Free Quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Examples Of Our Work</p>
-      <h2>Award-Winning Work, Commercial To Heritage</h2>
+      <p class="eyebrow">The Kind Of Work We Handle</p>
+      <h2>Commercial &amp; heritage roofing, done properly</h2>
+      <p>Slate and tile, flat and seamless systems, and specialist leadwork — on buildings like these across London and the South East.</p>
     </div>
     <div class="fgrid">
-      <figure class="tall">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1602193230480-7840a38eb0c3?q=60&amp;w=900&amp;auto=format&amp;fit=crop" alt="Contemporary building roofline">
-        <figcaption>Commercial</figcaption>
-      </figure>
-      <figure class="wide">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1726589004565-bedfba94d3a2?q=60&amp;w=900&amp;auto=format&amp;fit=crop" alt="Roofer at work on a residential roof">
-        <figcaption>Residential</figcaption>
-      </figure>
-      <figure class="wide">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1557671009-600c3a1973ca?q=60&amp;w=900&amp;auto=format&amp;fit=crop" alt="Ornate heritage tiled roof">
-        <figcaption>Heritage</figcaption>
-      </figure>
+      <figure class="big"><img loading="lazy" width="1000" height="1250" src="/assets/draft/stock/work-stone-slate-dormers.jpeg" alt="Stone home with a slate roof and dormer windows"><figcaption>Slate roofs</figcaption></figure>
+      <figure><img loading="lazy" width="1000" height="667" src="/assets/draft/stock/svc-grp-lantern.webp" alt="Flat roof with a lantern roof light"><figcaption>Flat roofs</figcaption></figure>
+      <figure><img loading="lazy" width="1000" height="667" src="/assets/draft/stock/work-white-brick-shingle.jpg" alt="White brick home with a shingle roof"><figcaption>Re-roofs</figcaption></figure>
+      <figure><img loading="lazy" width="1000" height="667" src="/assets/draft/stock/hero-slate-dormer-chimney.jpeg" alt="Slate roof with a dormer and stone chimney"><figcaption>Heritage</figcaption></figure>
+      <figure><img loading="lazy" width="1000" height="667" src="/assets/draft/stock/svc-terracotta-dormer.jpeg" alt="Terracotta tiled roof with a dormer window"><figcaption>Tiled roofs</figcaption></figure>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" style="padding-top:0;">
-  <div class="contact-card">
-    <div class="top">
+<section id="cta">
+  <div class="wrap tc-grid">
+    <div class="testi-card">
+      <p class="quote">&ldquo;Creating award-winning roofing solutions&rdquo; — and most of our business is repeat business.</p>
+      <cite>Capital Roofing Co. — family-run since 1968</cite>
+    </div>
+    <div class="cta-card">
+      <h2>Planning a roofing project?</h2>
+      <p>Talk to a family firm with nearly six decades on London's roofs.</p>
+      <div class="row">
+        <a class="btn light" href="#contact">Book a Free Site Visit</a>
+        <a class="btn" style="background:rgba(255,255,255,.16)" href="tel:02088585123">Call Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap grid">
+    <div>
       <p class="eyebrow">Get In Touch</p>
-      <h2>Need a roof you can trust?</h2>
-      <p class="sub">Get in touch for a free, no-obligation site visit and a clear, detailed quote.</p>
-      <div class="actions">
-        <a class="btn" href="tel:02088585123">Call 020 8858 5123</a>
-        <a class="btn ghost" style="color:#fff;border-color:#33373f" href="mailto:info@capital-roofing.co.uk">Email Us</a>
+      <h2>Planning a roofing project?</h2>
+      <p class="sub">Get in touch and we'll take a proper look — honest advice from a firm that's been doing this since 1968.</p>
+      <div class="direct">
+        <a href="tel:02088585123">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span>020 8858 5123<small>Capital House, Blackheath SE3</small></span>
+        </a>
+        <a href="mailto:info@capital-roofing.co.uk">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg></span>
+          <span>info@capital-roofing.co.uk<small>Email us any time</small></span>
+        </a>
       </div>
     </div>
     <form class="quote" onsubmit="sendQuote(event)">
+      <label>Request a free quote</label>
       <input name="name" placeholder="Full name" required>
       <input name="tel" type="tel" placeholder="Phone" required>
-      <input name="email" type="email" placeholder="Email">
+      <input name="email" type="email" placeholder="Email" class="full">
       <select name="service" required>
         <option value="" disabled selected>Required service</option>
         <option>Commercial Roofing</option>
@@ -401,30 +420,37 @@
         <option>Specialist Leadwork</option>
         <option>Other</option>
       </select>
-      <input class="full" name="postcode" placeholder="Postcode">
+      <input name="postcode" placeholder="Postcode">
       <textarea name="message" placeholder="Tell us about the job"></textarea>
       <button class="btn" type="submit">Send enquiry</button>
     </form>
   </div>
 </section>
 
-<footer class="footer">
-  <a class="logo" href="#top">
-    <svg viewBox="0 0 34 26" fill="none" aria-hidden="true">
-      <path d="M2 24 L17 4 L32 24" stroke="#caa030" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M9 24 L17 13 L25 24" stroke="#14161a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span>CAPITAL ROOFING<small>LONDON</small></span>
-  </a>
-  <nav>
-    <a href="#about">About Us</a>
-    <a href="#services">Services</a>
-    <a href="#work">Our Work</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <p class="areas"><strong>Areas we cover:</strong> London, Blackheath, Greenwich, Bexley, Bromley, Dartford, Sevenoaks, Tunbridge Wells, Maidstone, Rochester &amp; the South East.</p>
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="logo" href="#top">
+        <svg viewBox="0 0 34 26" fill="none" aria-hidden="true">
+          <path d="M2 24 L17 4 L32 24" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 24 L17 13 L25 24" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Capital Roofing<small>LONDON</small></span>
+      </a>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#work">Our Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <p class="areas"><strong style="color:#c3c7cf">Areas we cover:</strong> London, Blackheath, Greenwich and across Kent &amp; the South East of England.</p>
+    <p class="foot-legal">
+      Capital Roofing Co. Ltd &copy;2026 ·
+      Design concept prepared by <a href="https://lemonelly.com">lemonelly</a> for Capital Roofing Co. — this is not Capital Roofing Co.'s live website. Photography is placeholder imagery shown for layout only.
+    </p>
+  </div>
 </footer>
-<p class="legal">Capital Roofing Co. Ltd | All Rights Reserved &copy;2026</p>
 
 <script>
 function sendQuote(e){
@@ -441,17 +467,5 @@ function sendQuote(e){
   <svg viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-20 32 38)"><ellipse cx="32" cy="38" rx="23" ry="16" fill="#FFD335" stroke="#111110" stroke-width="4"/></g><path d="M34 16q10-9 20-2q-9 9-20 2z" fill="#166548"/></svg>
   Free draft by lemonelly
 </a>
-<style>
-.lm-badge{
-  position:fixed;left:16px;bottom:16px;z-index:50;
-  display:inline-flex;align-items:center;gap:8px;
-  background:#fff;color:#111110;border:1px solid #e2e2e2;
-  border-radius:999px;padding:9px 16px;
-  font-size:12.5px;font-weight:600;letter-spacing:.02em;
-  box-shadow:0 6px 24px rgba(0,0,0,.14);
-}
-.lm-badge svg{width:20px;height:20px;}
-.lm-badge:hover{border-color:#166548;color:#166548;}
-</style>
 </body>
 </html>
