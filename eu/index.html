@@ -266,6 +266,11 @@
 
     .sec-head { text-align: center; max-width: 46rem; margin-inline: auto; margin-bottom: var(--sp-6); }
     .sec-head h2 { font-size: var(--fs-4); font-weight: 800; letter-spacing: -.02em; margin-top: var(--sp-4); }
+    .sec-head h2::after {
+      content: ""; display: block; width: 3rem; height: .3rem; border-radius: 999px;
+      background: var(--lemon); margin: var(--sp-3) auto 0;
+    }
+    .tint { background: var(--bg-2); border-block: 1px solid var(--line); }
     .sec-head p { color: var(--ink-2); margin-top: var(--sp-3); }
 
     /* ---------- Hero ---------- */
@@ -310,8 +315,9 @@
     .card h3 { font-size: var(--fs-3); font-weight: 700; letter-spacing: -.01em; margin-bottom: var(--sp-2); }
     .card p { color: var(--ink-2); }
 
-    /* ---------- Prep (Before We Break Ground) ---------- */
-    .prep-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    /* ---------- Prep (Before We Build) ---------- */
+    .prep-grid { grid-template-columns: 1fr; }
+    @media (min-width: 40rem) { .prep-grid { grid-template-columns: repeat(2, 1fr); } }
     .prep-grid .card p + p, .prep-grid .card ul + p { margin-top: var(--sp-3); }
     .prep-grid .card ul { list-style: none; padding: 0; margin-top: var(--sp-3); display: grid; gap: var(--sp-2); }
     .prep-grid .card li { position: relative; padding-left: 1.4rem; color: var(--ink-2); }
@@ -391,10 +397,12 @@
     .faq-list details p { color: var(--ink-2); padding: 0 2.5rem var(--sp-4) 0; }
 
     /* ---------- CTA ---------- */
-    .cta { background: var(--bg-2); border-top: 1px solid var(--line); text-align: center; }
+    .cta { background: var(--green-deep); border-top: 1px solid var(--green-deep); text-align: center; color: #fff; }
     .cta h2 { font-size: var(--fs-4); font-weight: 800; letter-spacing: -.02em; margin-top: var(--sp-4); }
-    .cta p { color: var(--ink-2); max-width: 46ch; margin: var(--sp-3) auto var(--sp-5); font-size: var(--fs-2); }
+    .cta p { color: rgba(255, 255, 255, .85); max-width: 46ch; margin: var(--sp-3) auto var(--sp-5); font-size: var(--fs-2); }
     .cta-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); justify-content: center; }
+    .cta .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, .45); }
+    .cta .btn-ghost:hover { border-color: #fff; background: rgba(255, 255, 255, .08); }
 
     /* ---------- Footer ---------- */
     footer { border-top: 1px solid var(--line); padding-block: var(--sp-5); }
@@ -432,10 +440,10 @@
       </button>
       <nav id="site-nav" aria-label="Main">
         <ul>
+          <li><a href="#team">Team</a></li>
           <li><a href="#why">Why Us</a></li>
           <li><a href="#process">Process</a></li>
           <li><a href="#work">Work</a></li>
-          <li><a href="#team">Team</a></li>
           <li class="nav-region"><span class="region-nav" role="group" aria-label="Choose your region"><a href="/za">ZA</a><a href="/us">US</a><a href="/uk">UK</a><a href="/eu" aria-current="true">EU</a></span></li>
           <li><a class="btn btn-solid" href="/start?r=eu">Get Started <span class="arrow" aria-hidden="true">→</span></a></li>
         </ul>
@@ -470,7 +478,47 @@
       </div>
     </div>
 
-    <section id="why" aria-labelledby="why-h">
+    <section id="team" aria-labelledby="team-h">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="badge-pill">The Team</p>
+          <h2 id="team-h">The people you'll work with</h2>
+          <p>A combined 30+ years of experience working at the intersection of tech, art and design.</p>
+        </div>
+        <div class="people">
+          <div class="person">
+            <figure class="headshot">
+              <span class="monogram" aria-hidden="true">VK</span>
+              <img src="/assets/veronica.jpg" alt="Veronica Kotze, Creative Director at lemonelly"
+                   width="640" height="640" loading="lazy" onerror="this.remove()">
+            </figure>
+            <h3>Veronica Kotze</h3>
+            <p class="cred">Creative Director · BA Honours in Fine Arts</p>
+            <p class="bio">The creative eye. Veronica worked for world-renowned artist Lionel Smit before bringing that craft to brands. She makes sure your site looks stunning, communicates the right vibe, and captures attention.</p>
+            <div class="contact">
+              <a class="btn btn-ghost" href="https://wa.me/27727206606" target="_blank" rel="noopener">WhatsApp Veronica</a>
+              <a class="btn btn-ghost" href="mailto:veronica@lemonelly.com">Email</a>
+            </div>
+          </div>
+          <div class="person">
+            <figure class="headshot">
+              <span class="monogram" aria-hidden="true">BB</span>
+              <img src="/assets/ben.jpg" alt="Ben Blaine, Technical Lead at lemonelly"
+                   width="640" height="640" loading="lazy" onerror="this.remove()">
+            </figure>
+            <h3>Ben Blaine</h3>
+            <p class="cred">Technical Lead · BSc Mechanical Engineering</p>
+            <p class="bio">The technical engine. Ben worked at venture builder FireID and helped build tech startups SnapScan and OfferZen — plus dozens of products since. He builds the structure that keeps your site lightning-fast and rock-solid.</p>
+            <div class="contact">
+              <a class="btn btn-ghost" href="https://wa.me/27792896707" target="_blank" rel="noopener">WhatsApp Ben</a>
+              <a class="btn btn-ghost" href="mailto:ben@lemonelly.com">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tint" id="why" aria-labelledby="why-h">
       <div class="wrap">
         <div class="sec-head">
           <p class="badge-pill">Why Us</p>
@@ -533,12 +581,12 @@
       </div>
     </section>
 
-    <section id="prep" aria-labelledby="prep-h">
+    <section class="tint" id="prep" aria-labelledby="prep-h">
       <div class="wrap">
         <div class="sec-head">
-          <p class="badge-pill">Before We Break Ground</p>
+          <p class="badge-pill">Before We Build</p>
           <h2 id="prep-h">Let's nail your story.</h2>
-          <p>Cookie-cutter templates don't win contracts. Real understanding does. The deeper we dive into what makes your business tick, who you serve, and what sets you apart, the sharper your copy gets — and the harder your new site works to drive high-quality leads.</p>
+          <p>Cookie-cutter templates don't win customers. Real understanding does. The deeper we dive into what makes your business tick, who you serve, and what sets you apart, the sharper your copy gets — and the harder your new site works to drive high-quality leads.</p>
         </div>
         <div class="grid-3 prep-grid">
           <div class="card">
@@ -558,11 +606,11 @@
               <li>Your best project photos ready to upload</li>
               <li>Quick, rough notes for each page</li>
             </ul>
-            <p>Not a writer? Don't stress. Bullet points are all we need. Hand over the raw facts, and our specialized construction copywriters will do the heavy lifting to spin them into gold.</p>
+            <p>Not a writer? Don't stress. Bullet points are all we need. Hand over the raw facts, and we'll do the heavy lifting to spin them into gold.</p>
           </div>
           <div class="card">
             <h3>Your site's blueprint</h3>
-            <p>Most heavy-hitting trade sites rock 6 to 8 core pages. The standard arsenal includes:</p>
+            <p>Most heavy-hitting small-business sites rock 6 to 8 core pages. The standard arsenal includes:</p>
             <ul>
               <li>A high-converting Home page</li>
               <li>An authentic About Us page</li>
@@ -570,13 +618,13 @@
               <li>SEO-optimized Service pages (so you actually rank on Google)</li>
               <li>A Contact page engineered to generate inquiries</li>
             </ul>
-            <p>Need more? Accreditations, Pricing, Case Studies, or Meet the Crew? You got it. Bespoke means built exclusively for you.</p>
+            <p>Need more? Accreditations, Pricing, Case Studies, or Meet the Team? You got it. Bespoke means built exclusively for you.</p>
           </div>
           <div class="card">
             <h3>The anti-template advantage</h3>
             <p>Anyone can prompt an AI to spit out a generic layout. We dig deeper. We ask the tough, agency-level questions that uncover exactly why clients choose you over the competition.</p>
             <ul>
-              <li>We brief you the exact same way we brief national contractors</li>
+              <li>We brief you the same way top agencies brief national brands</li>
               <li>We transform your raw answers into proper, lead-generating copy</li>
               <li>Your site is 100% custom-built — never recycled, never templated</li>
             </ul>
@@ -623,7 +671,7 @@
       </div>
     </section>
 
-    <section id="work" aria-labelledby="work-h">
+    <section class="tint" id="work" aria-labelledby="work-h">
       <div class="wrap">
         <div class="sec-head">
           <p class="badge-pill">Recent Projects</p>
@@ -650,46 +698,6 @@ BUILD</span>
             <h3>Neurabuild <span class="arrow" aria-hidden="true">↗</span></h3>
             <p class="cat">Tech &amp; Research</p>
           </a>
-        </div>
-      </div>
-    </section>
-
-    <section id="team" aria-labelledby="team-h">
-      <div class="wrap">
-        <div class="sec-head">
-          <p class="badge-pill">The Team</p>
-          <h2 id="team-h">The people you'll work with</h2>
-          <p>A combined 30+ years of experience working at the intersection of tech, art and design.</p>
-        </div>
-        <div class="people">
-          <div class="person">
-            <figure class="headshot">
-              <span class="monogram" aria-hidden="true">VK</span>
-              <img src="/assets/veronica.jpg" alt="Veronica Kotze, Creative Director at lemonelly"
-                   width="640" height="640" loading="lazy" onerror="this.remove()">
-            </figure>
-            <h3>Veronica Kotze</h3>
-            <p class="cred">Creative Director · BA Honours in Fine Arts</p>
-            <p class="bio">The creative eye. Veronica worked for world-renowned artist Lionel Smit before bringing that craft to brands. She makes sure your site looks stunning, communicates the right vibe, and captures attention.</p>
-            <div class="contact">
-              <a class="btn btn-ghost" href="https://wa.me/27727206606" target="_blank" rel="noopener">WhatsApp Veronica</a>
-              <a class="btn btn-ghost" href="mailto:veronica@lemonelly.com">Email</a>
-            </div>
-          </div>
-          <div class="person">
-            <figure class="headshot">
-              <span class="monogram" aria-hidden="true">BB</span>
-              <img src="/assets/ben.jpg" alt="Ben Blaine, Technical Lead at lemonelly"
-                   width="640" height="640" loading="lazy" onerror="this.remove()">
-            </figure>
-            <h3>Ben Blaine</h3>
-            <p class="cred">Technical Lead · BSc Mechanical Engineering</p>
-            <p class="bio">The technical engine. Ben worked at venture builder FireID and helped build tech startups SnapScan and OfferZen — plus dozens of products since. He builds the structure that keeps your site lightning-fast and rock-solid.</p>
-            <div class="contact">
-              <a class="btn btn-ghost" href="https://wa.me/27792896707" target="_blank" rel="noopener">WhatsApp Ben</a>
-              <a class="btn btn-ghost" href="mailto:ben@lemonelly.com">Email</a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
