@@ -82,8 +82,10 @@ back a table: company → live URL → pitch snippet.
 7. **Preview:** `python3 -m http.server 8000` → check `/draft/<slug>/` (and
    that `/` is unaffected) at desktop and ~375px widths.
 
-8. **Ship:** branch → commit page + fact sheet + per-company assets → push →
-   draft PR → Ben eyeballs the Vercel preview → merge → live.
+8. **Ship:** run `python3 scripts/build_admin.py` to refresh the private
+   drafts tracker (`reference/DRAFTS.md`); then branch → commit page + fact
+   sheet + per-company assets + the tracker → push → draft PR → Ben eyeballs
+   the Vercel preview → merge → live.
 
 9. **Hand back:** live URL(s) + a 3-sentence pitch-email draft per company
    (free concept, built from their real details, no strings). When Ben
