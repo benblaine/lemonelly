@@ -310,6 +310,19 @@
     .card h3 { font-size: var(--fs-3); font-weight: 700; letter-spacing: -.01em; margin-bottom: var(--sp-2); }
     .card p { color: var(--ink-2); }
 
+    /* ---------- Prep (Before We Break Ground) ---------- */
+    .prep-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .prep-grid .card p + p, .prep-grid .card ul + p { margin-top: var(--sp-3); }
+    .prep-grid .card ul { list-style: none; padding: 0; margin-top: var(--sp-3); display: grid; gap: var(--sp-2); }
+    .prep-grid .card li { position: relative; padding-left: 1.4rem; color: var(--ink-2); }
+    .prep-grid .card li::before {
+      content: ""; position: absolute; left: 0; top: .5em;
+      width: .55rem; height: .55rem; border-radius: 50%; background: var(--green);
+    }
+    .prep-cta { text-align: center; margin-top: var(--sp-6); }
+    .prep-cta h3 { font-size: var(--fs-3); font-weight: 700; letter-spacing: -.01em; }
+    .prep-cta p { color: var(--ink-2); max-width: 46ch; margin: var(--sp-2) auto var(--sp-4); }
+
     /* ---------- Process ---------- */
     .steps { display: grid; gap: var(--sp-5) var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
     .steps li { border-top: 2px solid var(--line); padding-top: var(--sp-4); }
@@ -517,6 +530,64 @@
             <p>{{MONTHLY}}/month covers everything: fast hosting, SSL security, software and security updates, one round of content edits every month, SEO, and direct WhatsApp support. No upfront cost. No hidden fees. Cancel anytime.</p>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <section id="prep" aria-labelledby="prep-h">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="badge-pill">Before We Break Ground</p>
+          <h2 id="prep-h">Let's nail your story.</h2>
+          <p>Cookie-cutter templates don't win contracts. Real understanding does. The deeper we dive into what makes your business tick, who you serve, and what sets you apart, the sharper your copy gets — and the harder your new site works to drive high-quality leads.</p>
+        </div>
+        <div class="grid-3 prep-grid">
+          <div class="card">
+            <h3>Step 1: Start your Free Draft</h3>
+            <p>No clunky accounts or passwords to juggle just yet. We like to get straight to the point. Your first move is simple: tell us what you want.</p>
+            <ul>
+              <li>Share your vision and goals</li>
+              <li>Give us the raw details of your business</li>
+              <li>Watch us spin it into a custom Free Draft</li>
+            </ul>
+            <p>No upfront commitments. Just your ideas, fast-tracked.</p>
+          </div>
+          <div class="card">
+            <h3>Prep for impact</h3>
+            <p>We move fast, but a little prep goes a long way. To hit the ground running, try to gather:</p>
+            <ul>
+              <li>Your best project photos ready to upload</li>
+              <li>Quick, rough notes for each page</li>
+            </ul>
+            <p>Not a writer? Don't stress. Bullet points are all we need. Hand over the raw facts, and our specialized construction copywriters will do the heavy lifting to spin them into gold.</p>
+          </div>
+          <div class="card">
+            <h3>Your site's blueprint</h3>
+            <p>Most heavy-hitting trade sites rock 6 to 8 core pages. The standard arsenal includes:</p>
+            <ul>
+              <li>A high-converting Home page</li>
+              <li>An authentic About Us page</li>
+              <li>A stunning Project Gallery to show off your work</li>
+              <li>SEO-optimized Service pages (so you actually rank on Google)</li>
+              <li>A Contact page engineered to generate inquiries</li>
+            </ul>
+            <p>Need more? Accreditations, Pricing, Case Studies, or Meet the Crew? You got it. Bespoke means built exclusively for you.</p>
+          </div>
+          <div class="card">
+            <h3>The anti-template advantage</h3>
+            <p>Anyone can prompt an AI to spit out a generic layout. We dig deeper. We ask the tough, agency-level questions that uncover exactly why clients choose you over the competition.</p>
+            <ul>
+              <li>We brief you the exact same way we brief national contractors</li>
+              <li>We transform your raw answers into proper, lead-generating copy</li>
+              <li>Your site is 100% custom-built — never recycled, never templated</li>
+            </ul>
+            <p>That's why a lemonelly site crushes a drag-and-drop Wix build. The real power is in the strategy we build before we write a single line of code.</p>
+          </div>
+        </div>
+        <div class="prep-cta">
+          <h3>Ready to get started?</h3>
+          <p>Kick off the Free Draft process, get your raw notes together, and let's get to work. Your killer new website is closer than you think.</p>
+          <a class="btn btn-solid" href="/start{{REGION_PARAM}}">Start My Free Draft <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
       </div>
     </section>
 
