@@ -88,4 +88,4 @@ pricing.
   policy).
 
 Assigned: Veronica
-Status: drafted 2026-07-24
+Status: no draft built — parked/dead domain, no real business content found (2026-07-24)

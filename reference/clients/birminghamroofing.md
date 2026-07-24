@@ -76,4 +76,4 @@ should decide whether it's worth keeping, replacing, or deleting once a
 correct/live company URL is identified.
 
 Assigned: Veronica
-Status: drafted 2026-07-24
+Status: no draft built — parked/dead domain, no real business content found (2026-07-24)
