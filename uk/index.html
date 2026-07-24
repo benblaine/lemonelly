@@ -339,7 +339,7 @@
 
     /* ---------- Team ---------- */
     .people { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); max-width: 56rem; margin-inline: auto; }
-    .person { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: var(--sp-4); }
+    .person { display: flex; flex-direction: column; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: var(--sp-4); }
     .headshot {
       position: relative; aspect-ratio: 1; border-radius: var(--r);
       overflow: hidden; background: var(--bg-2); margin-bottom: var(--sp-4);
@@ -352,7 +352,7 @@
     .person h3 { font-size: var(--fs-3); font-weight: 700; }
     .person .cred { font-size: var(--fs-0); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green); margin: var(--sp-1) 0 var(--sp-2); }
     .person .bio { color: var(--ink-2); }
-    .person .contact { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-3); }
+    .person .contact { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: auto; padding-top: var(--sp-3); }
     .person .contact .btn { min-height: 42px; padding-inline: 1.1rem; font-size: var(--fs-0); }
 
     /* ---------- FAQ ---------- */
@@ -602,7 +602,7 @@ BUILD</span>
             <p class="bio">The creative eye. Veronica worked for world-renowned artist Lionel Smit before bringing that craft to brands. She makes sure your site looks stunning, communicates the right vibe, and captures attention.</p>
             <div class="contact">
               <a class="btn btn-ghost" href="https://wa.me/27727206606" target="_blank" rel="noopener">WhatsApp Veronica</a>
-              <a class="btn btn-ghost" href="mailto:hello@lemonelly.com?subject=For%20Veronica">Email</a>
+              <a class="btn btn-ghost" href="mailto:veronica@lemonelly.com">Email</a>
             </div>
           </div>
           <div class="person">
@@ -616,7 +616,7 @@ BUILD</span>
             <p class="bio">The technical engine. Ben worked at venture builder FireID and helped build tech startups SnapScan and OfferZen — plus dozens of products since. He builds the structure that keeps your site lightning-fast and rock-solid.</p>
             <div class="contact">
               <a class="btn btn-ghost" href="https://wa.me/27792896707" target="_blank" rel="noopener">WhatsApp Ben</a>
-              <a class="btn btn-ghost" href="mailto:hello@lemonelly.com?subject=For%20Ben">Email</a>
+              <a class="btn btn-ghost" href="mailto:ben@lemonelly.com">Email</a>
             </div>
           </div>
         </div>
