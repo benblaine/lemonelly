@@ -61,8 +61,10 @@ back a table: company → live URL → pitch snippet.
      VERIFIABLE figure (years trading / areas covered). Localize phone format,
      spelling, terms (Velux vs skylights).
    - Badge links to the matching regional page (UK company → /uk, etc.).
-   - Title: `<Company> | <trade> in <Town> · Draft by lemonelly`. Fill og
-     tags (og:image = the hero image, absolute URL). Keep both disclaimers.
+   - Title (browser tab): `lemonelly · <Company> (draft)` — always lead with
+     lemonelly. Fill og tags (og:image = the hero image, absolute URL). Keep
+     both disclaimers AND the `.lm-draft-banner` at the top of `<body>`
+     ("Draft website — for review only").
    - HARD RULE: never invent reviews, ratings, review counts, project totals,
      prices ("starting at £X"), certifications (GAF/BBB-style badges), or "our
      work" claims. Stock-filled galleries stay framed as "the kind of work we
