@@ -45,4 +45,5 @@ Source: https://mattboydroofing.co.uk (nav + reroofing page)
 - No brand colour stated. Do NOT invent one.
 - Commercial work not offered — site states domestic customers only.
 
+Assigned: Veronica
 Status: drafted 2026-07-24

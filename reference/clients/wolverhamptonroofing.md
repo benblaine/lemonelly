@@ -48,4 +48,5 @@ Slug: `wolverhamptonroofing` · Fetched 2026-07-24
 - NO 24/7 availability, no commercial/industrial work (they say domestic), no prices, no project totals.
 - Family-run and "20 years" ARE real and may be stated.
 
+Assigned: Veronica
 Status: drafted 2026-07-24

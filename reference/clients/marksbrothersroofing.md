@@ -53,4 +53,5 @@ Source: homepage + services page.
 - No ratings, star scores, review counts, project totals, or prices.
 - Family/brothers/second-and-third-generation CAN be asserted (their own site says so).
 
+Assigned: Veronica
 Status: drafted 2026-07-24

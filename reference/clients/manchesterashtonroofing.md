@@ -63,4 +63,5 @@ Verbatim testimonials with attribution (source: https://www.manchesterandashton-
 - No guarantee/warranty length stated — do NOT invent one.
 - No formal published service-area list — areas above are inferred from testimonials only; keep the list modest.
 
+Assigned: Veronica
 Status: drafted 2026-07-24
