@@ -84,24 +84,29 @@
   .nav-right .tel small{display:block;font-size:11px;font-weight:600;color:var(--grey);letter-spacing:.02em;}
   @media (max-width:920px){nav.links,.nav-right .tel{display:none;}}
 
-  .hero{padding-top:64px;padding-bottom:64px;}
-  .hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
-  .hero h1{font-size:clamp(38px,5.4vw,64px);}
-  .hero h1 .em{color:var(--accent-text);font-style:italic;}
-  .hero .sub{font-size:clamp(16px,1.5vw,18px);color:var(--ink-soft);max-width:46ch;margin-top:22px;}
-  .hero ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;}
-  .hero li{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;}
+  .hero{position:relative;color:#fff;padding:0;isolation:isolate;}
+  .hero-media{position:absolute;inset:0;z-index:-1;overflow:hidden;}
+  .hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 32%;}
+  .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,16,20,.92),rgba(14,16,20,.72) 42%,rgba(14,16,20,.32) 72%,rgba(14,16,20,.14));}
+  .hero .wrap{min-height:clamp(540px,74vh,720px);display:flex;flex-direction:column;justify-content:center;padding-top:72px;padding-bottom:96px;}
+  .hero-head{max-width:660px;}
+  .hero .eyebrow{color:#f2a469;}
+  .hero h1{font-size:clamp(40px,6vw,72px);color:#fff;}
+  .hero h1 .em{color:var(--accent);font-style:italic;}
+  .hero .sub{font-size:clamp(16px,1.5vw,18px);color:rgba(255,255,255,.84);max-width:48ch;margin-top:20px;}
+  .hero ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:24px;}
+  .hero li{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:#fff;}
   .hero li svg{width:19px;height:19px;flex:none;color:var(--accent);}
   .hero-actions{display:flex;align-items:center;gap:16px;margin-top:32px;flex-wrap:wrap;}
-  .hero-photo{position:relative;}
-  .hero-photo>img{width:100%;height:clamp(360px,44vw,520px);object-fit:cover;border-radius:var(--radius-lg);clip-path:polygon(8% 0,100% 0,100% 100%,0 100%);}
-  .hero-badge{position:absolute;left:-22px;bottom:26px;background:#fff;border-radius:var(--radius);box-shadow:0 18px 40px rgba(0,0,0,.16);padding:18px 22px;display:flex;gap:14px;align-items:center;}
-  .hero-badge .n{font-family:var(--serif);font-weight:700;font-size:32px;color:var(--accent-text);line-height:1;}
-  .hero-badge .l{font-size:12.5px;font-weight:600;color:var(--ink-soft);line-height:1.35;max-width:13ch;}
+  .hero-actions .btn.ghost{color:#fff;border-color:rgba(255,255,255,.45);}
+  .hero-actions .btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);}
   @media (max-width:920px){
-    .hero .grid{grid-template-columns:1fr;gap:36px;}
-    .hero-photo>img{clip-path:none;height:clamp(280px,60vw,420px);}
-    .hero-badge{left:16px;}
+    /* phone: real photo at the top, text on a dark panel below it */
+    .hero{background:var(--panel);}
+    .hero-media{position:static;z-index:auto;height:auto;}
+    .hero-media img{height:clamp(220px,54vw,360px);object-position:center 38%;}
+    .hero-media::after{display:none;}
+    .hero .wrap{min-height:0;padding-top:36px;padding-bottom:52px;}
   }
 
   .features{background:var(--panel);color:#fff;}
@@ -233,7 +238,10 @@
 </header>
 
 <section class="hero" id="top">
-  <div class="wrap grid">
+  <div class="hero-media">
+    <img fetchpriority="high" width="1600" height="1067" src="/assets/draft/stock/hero-slate-dormer-chimney.jpeg" alt="Newly finished slate roof with a dormer window and stone chimney">
+  </div>
+  <div class="wrap">
     <div class="hero-head">
       <p class="eyebrow">Roofing Services in Harrogate &amp; York</p>
       <h1>Trusted roofers,<br><span class="em">time-served</span> in Yorkshire.</h1>
@@ -245,13 +253,6 @@
       <div class="hero-actions">
         <a class="btn" href="#contact">Book a Free Site Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="btn ghost" href="tel:01904900204">Call 01904 900 204</a>
-      </div>
-    </div>
-    <div class="hero-photo">
-      <img fetchpriority="high" width="1600" height="1067" src="/assets/draft/stock/hero-slate-dormer-chimney.jpeg" alt="Newly finished slate roof with a dormer window and stone chimney">
-      <div class="hero-badge">
-        <div class="n">20+</div>
-        <div class="l">years of roofing experience</div>
       </div>
     </div>
   </div>
