@@ -95,7 +95,8 @@
   .btn.light:hover{background:var(--wash);}
 
   /* ---------- NAV ---------- */
-  header{background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30;}
+  header{background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .lm-topbar{position:sticky;top:0;z-index:30;}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:24px;}
   .logo{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:700;font-size:19px;line-height:1;}
   .logo svg{width:30px;height:24px;flex:none;}
@@ -246,6 +247,7 @@
 </head>
 <body>
 
+<div class="lm-topbar">
 <div class="lm-draft-banner"><strong>Draft website &mdash; for review only</strong><span>A free website concept by <a href="https://lemonelly.com">lemonelly</a></span></div>
 <style>
 .lm-draft-banner{background:#FFD335;color:#111110;text-align:center;padding:8px 16px;line-height:1.35;display:flex;gap:6px 14px;justify-content:center;align-items:center;flex-wrap:wrap;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;}
@@ -278,6 +280,7 @@
     </div>
   </div>
 </header>
+</div>
 
 <!-- HERO — SLOT: h1 (trade + town, one italic emphasis word), sub, tick-list of REAL
      value props (only things the prospect actually offers), hero photo, corner badge
