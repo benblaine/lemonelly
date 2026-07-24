@@ -46,4 +46,5 @@ Slug: `roofersharrogate` · Draft: https://lemonelly.com/draft/roofersharrogate
 - https://www.eborroofingcontractors.co.uk/testimonials (2026-07-24)
 - /about returns 404
 
+Assigned: Veronica
 Status: drafted 2026-07-24

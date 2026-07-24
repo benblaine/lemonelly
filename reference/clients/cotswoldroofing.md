@@ -46,4 +46,5 @@
 - http://archive.org/wayback/available?url=cotswoldroofing.co.uk — no snapshot.
 - WebSearch "Cotswold Roofing ... services" — no match for this exact business/domain.
 
+Assigned: Veronica
 Status: drafted 2026-07-24

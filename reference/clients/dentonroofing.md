@@ -63,4 +63,5 @@
 - https://dentonroofing.co.uk/consultation — fetched 2026-07-24
 - https://dentonroofing.co.uk/stone — fetched 2026-07-24
 
+Assigned: Veronica
 Status: drafted 2026-07-24
