@@ -37,31 +37,44 @@ back a table: company → live URL → pitch snippet.
 5. **Adapt** (the craft step — this is where the draft earns the pitch):
    - Retheme `--accent / --accent-deep / --accent-text` to their brand color.
      Contrast-check: accent-text on white ≥4.5:1, ink on accent ≥4.5:1 — shift
-     to the nearest passing shade if needed.
+     to the nearest passing shade if needed. (Default is a warm construction
+     orange; most roofers suit orange/red/deep-blue.)
    - Redraw the SVG wordmark with their name; replace ALL Kestrel content from
      the fact sheet.
-   - Prune/reshape sections to fit reality: no testimonials → drop that
-     section; 4 services → 2×2 grid. Don't pad with filler.
-   - Images: prefer the prospect's own photos (copy to `assets/draft/<slug>/`,
-     compressed to spec) when quality allows; otherwise pick from
-     `assets/draft/stock/` by READING the images and matching service
-     semantics. Spec: hero ≤1600px/≤250KB, cards ≤1000px/≤160KB, page total
-     ≤1.5MB; `loading="lazy"` below the fold, `fetchpriority="high"` on the
-     hero, width/height attributes on all imgs.
-   - Hero copy from their actual positioning: trade + town ("Roofers in
-     Harrogate"). Localize phone format, spelling, terms (Velux vs skylights).
+   - Prune/reshape sections to fit reality:
+     - **Services grid** defaults to 3 columns. 4 services → keep `repeat(3,1fr)`
+       or switch to `repeat(4,1fr)` for one clean row; 6 → two rows of 3.
+     - **Testimonial + CTA pair**: if the prospect has a real, attributable
+       review, use it verbatim in the testimonial card. If NOT, replace the
+       whole testimonial card with a second value/CTA panel — never invent one.
+     - **Stats strip**: needs ≥3 verifiable figures (years, areas, crew size,
+       "Free" quotes). If you can't fill it honestly, delete the section.
+     - **Feature band** (4 columns): honest value props, not fabricated stats.
+   - Images: prefer the prospect's own photos (copy to `assets/draft/<slug>/`)
+     when quality allows; otherwise pick from `assets/draft/stock/` by READING
+     the images and matching service semantics (filenames are descriptive:
+     `hero-slate-*`, `svc-grp-*`, `svc-leadwork-*`, `work-stone-*`, etc.). Spec:
+     hero ≤1600px wide, cards ≤1000px, page image total ≤1.5MB; `loading="lazy"`
+     below the fold, `fetchpriority="high"` on the hero, width/height on all imgs.
+   - Hero: serif H1 from their real positioning (trade + town), one italic
+     `.em` emphasis word; tick-list = only real value props; badge number = a
+     VERIFIABLE figure (years trading / areas covered). Localize phone format,
+     spelling, terms (Velux vs skylights).
    - Badge links to the matching regional page (UK company → /uk, etc.).
    - Title: `<Company> | <trade> in <Town> · Draft by lemonelly`. Fill og
      tags (og:image = the hero image, absolute URL). Keep both disclaimers.
-   - HARD RULE: never invent reviews, stats, certifications, or "our work"
-     claims. Stats band uses verifiable facts only; stock-filled galleries stay
-     framed as "the kind of work we handle".
+   - HARD RULE: never invent reviews, ratings, review counts, project totals,
+     prices ("starting at £X"), certifications (GAF/BBB-style badges), or "our
+     work" claims. Stock-filled galleries stay framed as "the kind of work we
+     handle".
 
 6. **QA checklist** (all must pass):
    - `grep -ri kestrel draft/<slug>/` → nothing.
    - Every tel:/mailto: matches the fact sheet.
    - No external requests: `grep -oE '(src|href)="https?://[^"]*"' draft/<slug>/index.html`
      shows only lemonelly.com URLs.
+   - No fabricated proof: `grep -riE 'starting at|4\.9|5-star|[0-9],[0-9]{3}\+|BBB|GAF' draft/<slug>/`
+     returns nothing (unless it's a real, sourced figure from the fact sheet).
    - All referenced local assets exist; summed image payload ≤1.5MB.
    - `noindex, nofollow` meta present; `git diff sitemap.xml` empty;
      `robots.txt` still has `Disallow: /draft/`.
@@ -85,3 +98,7 @@ back a table: company → live URL → pitch snippet.
 - Never hand-edit `sitemap.xml` or the generated region pages.
 - New stock goes in `assets/draft/stock/` with descriptive names
   (`svc-flat-roof-membrane.jpg`) — the filename is the index.
+- Design system reference screenshots live in `reference/inspiration/`
+  (`ref-summit-roofing` is the primary light/premium roofing reference the
+  template is built from). Fonts are self-hosted in `assets/draft/fonts/`
+  (Archivo body + Fraunces serif display, both OFL, latin variable woff2).

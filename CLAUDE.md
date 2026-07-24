@@ -22,11 +22,14 @@ Vercel deploys `main` automatically.
 - Every draft page: `<meta name="robots" content="noindex, nofollow">`;
   `robots.txt` keeps `Disallow: /draft/`; drafts never appear in `sitemap.xml`.
 - Zero external requests on draft pages: images from `assets/draft/...`, the
-  Archivo font from `assets/draft/fonts/`, links only to the prospect's
-  tel/mailto and lemonelly.com.
-- Never invent facts: no fake reviews, stats, or certifications. Stock imagery
-  is framed as "the kind of work we handle", never "our work". Every draft
-  carries the lemonelly badge and the not-their-live-site footer disclaimer.
+  self-hosted fonts from `assets/draft/fonts/` (Archivo body + Fraunces serif),
+  links only to the prospect's tel/mailto and lemonelly.com.
+- Never invent facts: no fake reviews, ratings, review counts, project totals,
+  prices, or certifications. Stock imagery is framed as "the kind of work we
+  handle", never "our work". Every draft carries the lemonelly badge and the
+  not-their-live-site footer disclaimer.
+- The template is a light/premium "Summit"-style design (see the template's
+  header comment); reference screenshots live in `reference/inspiration/`.
 - No index page at `/draft/` — prospects must never see each other's drafts.
 - `reference/` and `.claude/` are committed but excluded from deploy via
   `.vercelignore`. Prospect fact sheets live in `reference/clients/<slug>.md`.
