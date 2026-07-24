@@ -4,6 +4,19 @@ Static site for lemonelly.com (websites for local businesses). No framework, no
 build tooling beyond `scripts/build.py`, no external requests at runtime.
 Vercel deploys `main` automatically.
 
+## Before you start ANY task
+
+1. `git fetch origin main` and start your branch from it:
+   `git checkout -B <branch> origin/main`. A stale base once shipped five
+   drafts on a retired design — don't repeat it. (The SessionStart hook in
+   `.claude/hooks/` warns you if your checkout is behind.)
+2. If `template/draft.template.html`, `.claude/skills/draft/SKILL.md`, or
+   `reference/DRAFTS.md` are missing from your checkout, it predates the
+   current draft system — stop and rebase onto origin/main before anything.
+3. Draft requests ("add a draft for X", "build drafts for these companies")
+   ALWAYS go through the `/draft` skill. Never hand-roll a draft page, never
+   copy an old draft as the starting point — copy `template/draft.template.html`.
+
 ## Two systems live here
 
 1. **The lemonelly site itself** — `/` plus regional pages `/za /us /uk /eu`,

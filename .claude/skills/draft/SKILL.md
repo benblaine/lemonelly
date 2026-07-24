@@ -16,6 +16,11 @@ back a table: company → live URL → pitch snippet.
 
 ## Steps
 
+0. **Fresh base.** `git fetch origin main && git checkout -B <branch> origin/main`
+   before touching anything. Then confirm `template/draft.template.html` and
+   `reference/DRAFTS.md` exist — if either is missing, your checkout is stale;
+   re-fetch rather than improvising a page from scratch or from an old draft.
+
 1. **Fetch & extract.** WebFetch the URL plus nav-linked subpages
    (about/services/contact/testimonials, ≤6 pages). Extract: trading + legal
    name, phone(s), email, address & service areas, full services list, tagline,
