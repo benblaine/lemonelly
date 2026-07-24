@@ -8,16 +8,20 @@
 <meta name="description" content="Roofers in Harrogate. Roof repairs, flat roofing, roofline and guttering, metal roofing and roof windows. Free quotes and 24/7 emergency callouts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0d0d0d;
+    --ink:#14161a;
     --paper:#ffffff;
-    --orange:#ff6b1c;
-    --grey:#8a8a8a;
-    --sky:#cfe6f5;
+    --orange:#f2711f;
+    --orange-deep:#d95f16;
+    --orange-text:#c25211;
+    --panel:#1b1e24;
+    --grey:#6e727a;
+    --line:#e7e7e6;
     --radius-pill:999px;
-    --radius-card:32px;
+    --radius:14px;
+    --radius-lg:22px;
     --maxw:1200px;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -32,239 +36,183 @@
   img{display:block;max-width:100%;}
   a{color:inherit;text-decoration:none;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  section{padding-block:88px;}
 
   /* ---------- NAV ---------- */
-  header{
-    position:absolute;top:0;left:0;right:0;z-index:20;
-  }
-  .nav{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:22px 0;
-  }
-  .logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.02em;font-size:18px;line-height:1;}
-  .logo svg{width:34px;height:26px;}
-  .logo small{display:block;font-weight:500;font-size:9px;letter-spacing:.42em;color:var(--grey);margin-top:3px;}
-  nav.links{display:flex;gap:32px;font-size:14px;font-weight:500;}
-  nav.links a:hover{color:var(--orange);}
-  .nav-right{display:flex;align-items:center;gap:18px;font-size:14px;}
-  .nav-right .tel{font-weight:600;}
+  header{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px;}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.02em;font-size:16px;line-height:1;}
+  .logo svg{width:30px;height:23px;flex:none;}
+  .logo small{display:block;font-weight:500;font-size:9px;letter-spacing:.34em;color:var(--grey);margin-top:3px;}
+  nav.links{display:flex;gap:28px;font-size:14px;font-weight:600;}
+  nav.links a:hover{color:var(--orange-text);}
+  .nav-right{display:flex;align-items:center;gap:22px;font-size:13.5px;font-weight:600;}
+  .nav-right a{display:inline-flex;align-items:center;gap:8px;}
+  .nav-right svg{width:16px;height:16px;flex:none;color:var(--orange-text);}
+  .nav-right a:hover{color:var(--orange-text);}
   .btn{
-    display:inline-block;background:var(--ink);color:#fff;
-    padding:12px 26px;border-radius:var(--radius-pill);
-    font-size:14px;font-weight:600;transition:background .2s;
+    display:inline-flex;align-items:center;gap:.5em;justify-content:center;
+    background:var(--orange);color:var(--ink);
+    padding:13px 28px;border-radius:var(--radius-pill);
+    font-size:14px;font-weight:700;transition:background .2s;border:none;cursor:pointer;
   }
-  .btn:hover{background:var(--orange);}
-  .btn.orange{background:var(--orange);}
-  .btn.orange:hover{background:var(--ink);}
-  .btn.light{background:#fff;color:var(--ink);}
-  .btn.light:hover{background:var(--orange);color:#fff;}
+  .btn:hover{background:var(--orange-deep);}
+  .btn.dark{background:var(--ink);color:#fff;}
+  .btn.dark:hover{background:var(--orange);color:var(--ink);}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
+  .btn.ghost:hover{border-color:var(--orange-text);color:var(--orange-text);}
+  .btn.white{background:#fff;color:var(--ink);}
+  .btn.white:hover{background:var(--ink);color:#fff;}
+
+  .eyebrow{
+    font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--orange-text);margin-bottom:14px;
+  }
+  .contact-card .eyebrow{color:var(--orange);}
 
   /* ---------- HERO ---------- */
-  .hero{padding-top:118px;position:relative;}
-  .hero-head{position:relative;z-index:5;}
+  .hero{padding-top:72px;padding-bottom:0;}
   .hero-head h1{
-    font-weight:800;
-    font-size:clamp(52px,9.4vw,124px);
-    line-height:.92;
-    letter-spacing:-0.035em;
-    text-transform:uppercase;
+    font-weight:800;font-size:clamp(38px,6vw,64px);
+    line-height:1.02;letter-spacing:-0.02em;text-transform:uppercase;max-width:14ch;
   }
-  .hero-head .line2{
-    display:block;
-    color:var(--orange);
-    font-size:clamp(30px,5.2vw,68px);
-    letter-spacing:-0.02em;
-    text-align:right;
-    font-weight:600;
-  }
-  .hero-head .est{
-    display:block;text-align:right;
-    color:#b9b9b9;font-weight:600;
-    font-size:clamp(20px,3.2vw,40px);
-    letter-spacing:.02em;margin-top:6px;
-  }
-  .hero-media{
-    margin-top:-30px;
-    position:relative;z-index:1;
-    height:clamp(320px,52vw,560px);
-  }
-  .hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 30%;}
+  .hero-head .sub{font-size:clamp(15px,1.6vw,18px);color:var(--grey);max-width:46ch;margin-top:18px;line-height:1.6;}
+  .hero-actions{display:flex;align-items:center;gap:18px;margin-top:30px;flex-wrap:wrap;}
+  .hero-actions .note{font-size:13px;color:var(--grey);font-weight:600;}
+  .hero-row{display:grid;grid-template-columns:.9fr .9fr 1.3fr;gap:14px;margin-top:52px;height:clamp(200px,26vw,320px);}
+  .hero-row img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius);}
 
   /* ---------- MARQUEE ---------- */
-  .marquee{
-    background:var(--ink);color:#fff;
-    overflow:hidden;white-space:nowrap;
-    padding:16px 0;
-  }
+  .marquee{background:var(--ink);color:#fff;overflow:hidden;white-space:nowrap;padding:16px 0;}
   .marquee-track{display:inline-block;animation:scroll 28s linear infinite;}
   @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @media (prefers-reduced-motion:reduce){.marquee-track{animation:none;}}
   .marquee span{
-    display:inline-flex;align-items:center;gap:12px;
-    margin:0 34px;font-weight:600;letter-spacing:.14em;
-    font-size:15px;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:12px;margin:0 34px;
+    font-weight:700;letter-spacing:.14em;font-size:14px;text-transform:uppercase;
   }
-  .marquee svg{width:22px;height:16px;flex:none;}
+  .marquee svg{width:20px;height:14px;flex:none;color:var(--orange);}
 
-  /* ---------- MOSAIC / PROJECTS ---------- */
-  .projects{padding:96px 0;}
-  .projects .grid{
-    display:grid;grid-template-columns:minmax(280px,1fr) 1.4fr;
-    gap:48px;align-items:center;
+  /* ---------- SOLUTIONS / STATS ---------- */
+  .solutions{background:var(--panel);color:#fff;}
+  .solutions .head{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:end;margin-bottom:44px;}
+  .solutions h2{font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-0.01em;line-height:1.15;}
+  .solutions .head p{color:#a7abb3;font-size:15px;line-height:1.6;}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr) 1.5fr;gap:16px;}
+  .stat-tile{
+    background:#22262e;border-radius:var(--radius);padding:28px 22px;
+    display:flex;flex-direction:column;justify-content:center;
   }
-  .eyebrow{
-    font-size:12px;font-weight:600;letter-spacing:.3em;
-    text-transform:uppercase;margin-bottom:18px;
+  .stat-tile.hi{background:var(--orange);}
+  .stat-tile .n{font-size:clamp(30px,3.4vw,44px);font-weight:800;letter-spacing:-0.02em;}
+  .stat-tile .l{font-size:13px;color:#c7cad0;margin-top:6px;font-weight:600;}
+  .stat-tile.hi .l{color:rgba(20,22,26,.75);}
+  .stat-tile.hi .n{color:var(--ink);}
+  .stat-note{
+    background:#fff;color:var(--ink);border-radius:var(--radius);
+    padding:26px 26px;display:flex;flex-direction:column;justify-content:center;gap:14px;
   }
-  .projects h2{
-    font-size:clamp(30px,3.6vw,44px);font-weight:600;line-height:1.15;
-    letter-spacing:-0.015em;
-  }
-  .projects h2 em{font-style:normal;color:var(--orange);font-weight:800;}
-  .projects .cta-row{display:flex;align-items:center;gap:18px;margin-top:28px;}
-  .projects .cta-row p{font-size:13px;color:var(--grey);max-width:220px;line-height:1.5;}
-  .mosaic{
-    display:grid;grid-template-columns:repeat(3,1fr);
-    gap:10px;transform:rotate(-6deg) scale(1.06);
-  }
-  .mosaic img{
-    width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:6px;
-  }
-  .mosaic img:nth-child(1){transform:translateY(18px);}
-  .mosaic img:nth-child(3){transform:translateY(-14px);}
-  .mosaic img:nth-child(4){transform:translateY(30px);}
-  .mosaic img:nth-child(6){transform:translateY(-24px);}
-  .mosaic img:nth-child(7){transform:translateY(14px);}
-  .mosaic img:nth-child(9){transform:translateY(-10px);}
+  .stat-note p{font-size:14px;color:var(--grey);line-height:1.6;}
+  .stat-note .btn{align-self:flex-start;}
 
-  /* ---------- STORY ---------- */
-  .story{background:var(--ink);color:#fff;padding:110px 0;}
-  .story .grid{
-    display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center;
-  }
-  .story-photos{position:relative;height:420px;}
-  .story-photos img{position:absolute;object-fit:cover;border-radius:4px;}
-  .story-photos .p1{width:64%;height:82%;top:0;left:0;}
-  .story-photos .p2{width:46%;height:56%;bottom:0;right:4%;box-shadow:0 24px 60px rgba(0,0,0,.5);}
-  .story .eyebrow{color:#9a9a9a;}
-  .story h2{
-    font-size:clamp(30px,3.4vw,42px);font-weight:600;line-height:1.2;
-    letter-spacing:-0.01em;margin-bottom:28px;
-  }
-  .stats{display:flex;gap:56px;margin-top:48px;flex-wrap:wrap;}
-  .stats .num{
-    color:var(--orange);font-weight:800;
-    font-size:clamp(34px,3.6vw,48px);letter-spacing:-0.02em;
-  }
-  .stats .lbl{font-size:14px;color:#c9c9c9;margin-top:6px;}
+  /* ---------- ABOUT ---------- */
+  .about .grid{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center;}
+  .about-photos{position:relative;height:400px;}
+  .about-photos img{position:absolute;object-fit:cover;border-radius:var(--radius);}
+  .about-photos .p1{width:66%;height:84%;top:0;left:0;}
+  .about-photos .p2{width:46%;height:54%;bottom:0;right:2%;box-shadow:0 20px 48px rgba(0,0,0,.18);border:5px solid #fff;}
+  .about-card{background:var(--orange);color:var(--ink);border-radius:var(--radius-lg);padding:44px 40px;}
+  .about-card h2{font-size:clamp(24px,2.6vw,32px);font-weight:700;letter-spacing:-0.01em;margin-bottom:20px;}
+  .about-card ul{list-style:none;display:grid;gap:14px;margin-bottom:28px;}
+  .about-card li{position:relative;padding-left:26px;font-size:15px;line-height:1.5;font-weight:600;}
+  .about-card li::before{content:"";position:absolute;left:0;top:.4em;width:9px;height:9px;border-radius:50%;background:var(--ink);}
 
   /* ---------- SERVICES ---------- */
-  .services{position:relative;padding:110px 0 0;}
-  .services .angle{
-    position:absolute;inset:auto 0 0 0;height:62%;
-    background:linear-gradient(to bottom right,var(--sky) 49.8%,transparent 50%),var(--sky);
-    clip-path:polygon(0 34%,100% 0,100% 100%,0 100%);
-    z-index:0;
+  .services .head{text-align:center;max-width:46rem;margin:0 auto 48px;}
+  .services h2{font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-0.01em;}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .svc-card{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;}
+  .svc-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .svc-card:hover img{transform:scale(1.06);}
+  .svc-card::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(20,22,26,.88) 0%,rgba(20,22,26,.15) 55%,transparent 75%);
   }
-  .services .grid{
-    position:relative;z-index:2;
-    display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;
+  .svc-card .txt{position:absolute;left:20px;right:20px;bottom:20px;z-index:2;color:#fff;}
+  .svc-card .idx{font-size:12px;font-weight:700;color:var(--orange);letter-spacing:.1em;}
+  .svc-card h3{font-size:19px;font-weight:700;margin:6px 0 12px;letter-spacing:-0.01em;}
+  .svc-card .more{
+    display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;
+    background:rgba(255,255,255,.16);backdrop-filter:blur(2px);padding:8px 14px;border-radius:var(--radius-pill);
   }
-  .services .photo img{width:100%;height:520px;object-fit:cover;object-position:center 20%;}
-  .services h2{font-size:22px;font-weight:800;margin-bottom:22px;}
-  .svc{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:16px;padding:20px 0;border-bottom:1px solid rgba(13,13,13,.14);
-  }
-  .svc:last-child{border-bottom:none;}
-  .svc .name{
-    font-size:clamp(20px,2.4vw,30px);font-weight:600;letter-spacing:-0.01em;
-    display:flex;align-items:baseline;gap:14px;
-  }
-  .svc .idx{font-size:12px;font-weight:600;color:var(--ink);transform:translateY(-8px);}
-  .svc .arrow{
-    flex:none;width:44px;height:44px;border:1.5px solid var(--ink);
-    border-radius:50%;display:grid;place-items:center;transition:.2s;
-  }
-  .svc:hover .arrow{background:var(--orange);border-color:var(--orange);color:#fff;transform:rotate(45deg);}
-  .svc .arrow svg{width:16px;height:16px;}
+  .svc-card .more:hover{background:var(--orange);color:var(--ink);}
 
-  /* ---------- FEATURED ---------- */
-  .featured{padding:110px 0;}
-  .featured .head{text-align:center;margin-bottom:56px;}
-  .featured h2{
-    font-size:clamp(30px,3.6vw,44px);font-weight:600;line-height:1.2;letter-spacing:-0.015em;
-  }
-  .featured h2 span{display:block;color:var(--orange);}
-  .fgrid{
-    display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:auto auto;gap:24px;
-  }
-  .fgrid figure{margin:0;position:relative;overflow:hidden;}
+  /* ---------- FEATURED WORK ---------- */
+  .featured .head{text-align:center;margin-bottom:48px;}
+  .featured h2{font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-0.01em;}
+  .fgrid{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:auto auto;gap:20px;}
+  .fgrid figure{margin:0;position:relative;overflow:hidden;border-radius:var(--radius);}
   .fgrid img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
   .fgrid figure:hover img{transform:scale(1.04);}
   .fgrid .tall{grid-row:1 / span 2;}
-  .fgrid .tall img{height:660px;}
-  .fgrid .wide img{height:318px;}
+  .fgrid .tall img{height:560px;}
+  .fgrid .wide img{height:270px;}
   .fgrid figcaption{
-    position:absolute;left:16px;bottom:14px;background:rgba(13,13,13,.82);
-    color:#fff;font-size:12px;font-weight:600;letter-spacing:.12em;
+    position:absolute;left:16px;bottom:14px;background:var(--orange);
+    color:var(--ink);font-size:12px;font-weight:700;letter-spacing:.1em;
     text-transform:uppercase;padding:8px 14px;border-radius:var(--radius-pill);
   }
 
-  /* ---------- CONTACT CARD ---------- */
+  /* ---------- CONTACT ---------- */
   .contact-card{
-    background:#f4f4f4;border-radius:var(--radius-card);
-    padding:72px 48px 56px;margin:0 24px 24px;
-    max-width:calc(var(--maxw));margin-left:auto;margin-right:auto;
+    background:var(--panel);color:#fff;border-radius:var(--radius-lg);
+    padding:64px 48px 56px;margin:0 24px;max-width:var(--maxw);margin-inline:auto;
   }
-  .contact-card .top{text-align:center;max-width:640px;margin:0 auto 44px;}
-  .contact-card h2{font-size:clamp(28px,3.4vw,42px);font-weight:700;letter-spacing:-0.01em;}
-  .contact-card .sub{color:var(--grey);font-size:15px;margin-top:12px;}
+  .contact-card .top{text-align:center;max-width:640px;margin:0 auto 40px;}
+  .contact-card h2{font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-0.01em;}
+  .contact-card .sub{color:#a7abb3;font-size:15px;margin-top:12px;}
   .contact-card .actions{display:flex;gap:14px;justify-content:center;margin-top:26px;flex-wrap:wrap;}
-  form.quote{
-    max-width:760px;margin:0 auto;display:grid;
-    grid-template-columns:1fr 1fr;gap:14px;
-  }
+  form.quote{max-width:760px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
   form.quote input,form.quote select,form.quote textarea{
     font-family:inherit;font-size:14px;padding:14px 18px;
-    border:1.5px solid #ddd;border-radius:14px;background:#fff;width:100%;
+    border:1.5px solid #33373f;border-radius:12px;background:#22262e;color:#fff;width:100%;
   }
-  form.quote input:focus,form.quote select:focus,form.quote textarea:focus{
-    outline:2px solid var(--orange);border-color:transparent;
-  }
+  form.quote ::placeholder{color:#82868f;}
+  form.quote input:focus,form.quote select:focus,form.quote textarea:focus{outline:2px solid var(--orange);border-color:transparent;}
   form.quote textarea{grid-column:1 / -1;min-height:110px;resize:vertical;}
   form.quote .full{grid-column:1 / -1;}
-  form.quote button{
-    grid-column:1 / -1;justify-self:center;
-    background:var(--ink);color:#fff;border:none;cursor:pointer;
-    padding:14px 44px;border-radius:var(--radius-pill);
-    font-family:inherit;font-size:15px;font-weight:600;transition:background .2s;
-  }
-  form.quote button:hover{background:var(--orange);}
+  form.quote button{grid-column:1 / -1;justify-self:center;padding:14px 44px;font-size:15px;}
 
   /* ---------- FOOTER ---------- */
   .footer{
     display:flex;align-items:flex-start;justify-content:space-between;
-    gap:32px;padding:44px 48px 40px;flex-wrap:wrap;
-    max-width:var(--maxw);margin:0 auto;
+    gap:32px;padding:44px 24px 12px;flex-wrap:wrap;max-width:var(--maxw);margin:0 auto;
   }
-  .footer nav{display:flex;gap:28px;font-size:13.5px;font-weight:500;flex-wrap:wrap;}
-  .footer nav a:hover{color:var(--orange);}
+  .footer nav{display:flex;gap:26px;font-size:13.5px;font-weight:600;flex-wrap:wrap;}
+  .footer nav a:hover{color:var(--orange-text);}
   .footer .areas{font-size:12px;color:var(--grey);max-width:420px;line-height:1.7;}
-  .legal{text-align:center;font-size:12px;color:#b5b5b5;padding:0 24px 32px;}
+  .legal{text-align:center;font-size:12px;color:#b5b5b5;padding:24px 24px 32px;}
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width:900px){
     nav.links{display:none;}
-    .projects .grid,.story .grid,.services .grid{grid-template-columns:1fr;}
-    .mosaic{transform:rotate(-4deg) scale(1);margin-top:24px;}
-    .story-photos{height:340px;}
-    .services .photo img{height:380px;}
+    .hero-row{grid-template-columns:1fr 1fr;height:auto;}
+    .hero-row img{aspect-ratio:1/1;height:auto;}
+    .hero-row img:last-child{grid-column:1/-1;aspect-ratio:16/9;}
+    .solutions .head{grid-template-columns:1fr;}
+    .stat-grid{grid-template-columns:1fr 1fr;}
+    .stat-note{grid-column:1/-1;}
+    .about .grid{grid-template-columns:1fr;}
+    .about-photos{height:320px;}
+    .svc-grid{grid-template-columns:1fr 1fr;}
     .fgrid{grid-template-columns:1fr;}
     .fgrid .tall{grid-row:auto;}
-    .fgrid .tall img{height:420px;}
+    .fgrid .tall img{height:320px;}
     form.quote{grid-template-columns:1fr;}
-    .contact-card{padding:52px 24px 44px;}
+    .contact-card{padding:48px 24px 40px;}
+  }
+  @media (max-width:560px){
+    .svc-grid{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -274,8 +222,8 @@
   <div class="wrap nav">
     <a class="logo" href="#top" aria-label="Ebor Roofing home">
       <svg viewBox="0 0 34 26" fill="none" aria-hidden="true">
-        <path d="M2 24 L17 4 L32 24" stroke="#ff6b1c" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M9 24 L17 13 L25 24" stroke="#0d0d0d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 24 L17 4 L32 24" stroke="#f2711f" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 24 L17 13 L25 24" stroke="#14161a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <span>EBOR ROOFING<small>HARROGATE</small></span>
     </a>
@@ -286,107 +234,120 @@
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-right">
-      <a class="tel" href="tel:07985402235">07985 402 235</a>
-      <a class="btn" href="#contact">Contact Us</a>
+      <a class="tel" href="tel:07985402235"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>07985 402 235</a>
+      <a class="btn" href="#contact">Get a Quote</a>
     </div>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="wrap hero-head">
-    <h1>Roofers in<br>Harrogate
-      <span class="line2">Repairs, Re-roofs &amp; Roofline</span>
-      <span class="est">FREE QUOTES &middot; 24/7</span>
-    </h1>
-  </div>
-  <div class="hero-media">
-    <img src="https://images.unsplash.com/photo-1633759593085-1eaeb724fc88?q=60&w=1600&auto=format&fit=crop" alt="Roofer working on a pitched roof with a hammer" fetchpriority="high">
+  <div class="wrap">
+    <div class="hero-head">
+      <p class="eyebrow">Roofing Services in Harrogate</p>
+      <h1>Roofers in Harrogate</h1>
+      <p class="sub">Roof installations, flat roofing, roofline &amp; guttering, metal roofing and more — a family-run crew covering Harrogate and the surrounding villages.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#contact">Book a Free Site Visit</a>
+        <span class="note">Free, no-obligation quotes &middot; 24/7 emergency callouts</span>
+      </div>
+    </div>
+    <div class="hero-row">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1587061633437-187ac80e8e7a?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Red tiled roof">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1518736346281-76873166a64a?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Grey slate roof">
+      <img src="https://images.unsplash.com/photo-1633759593085-1eaeb724fc88?q=60&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Roofer working on a pitched roof with a hammer" fetchpriority="high">
+    </div>
   </div>
 </section>
 
 <!-- MARQUEE -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="#fff" stroke-width="2"/></svg>TILE &amp; SLATE ROOFS</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="#fff" stroke-width="2"/></svg>FLAT ROOFS</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="#fff" stroke-width="2"/></svg>ROOFLINE &amp; GUTTERING</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="#fff" stroke-width="2"/></svg>METAL ROOFS</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="#fff" stroke-width="2"/></svg>ROOF REPAIRS</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="#fff" stroke-width="2"/></svg>TILE &amp; SLATE ROOFS</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="#fff" stroke-width="2"/></svg>FLAT ROOFS</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="#fff" stroke-width="2"/></svg>ROOFLINE &amp; GUTTERING</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="#fff" stroke-width="2"/></svg>METAL ROOFS</span>
-    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="#fff" stroke-width="2"/></svg>ROOF REPAIRS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>TILE &amp; SLATE ROOFS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>FLAT ROOFS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>ROOFLINE &amp; GUTTERING</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>METAL ROOFS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>ROOF REPAIRS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>TILE &amp; SLATE ROOFS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>FLAT ROOFS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>ROOFLINE &amp; GUTTERING</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>METAL ROOFS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>ROOF REPAIRS</span>
   </div>
 </div>
 
-<!-- PROJECTS / MOSAIC -->
-<section class="projects">
-  <div class="wrap grid">
-    <div>
-      <p class="eyebrow">Solutions</p>
-      <h2>Every Roof Type,<br>Across <em>Harrogate</em><br>&amp; Yorkshire</h2>
-      <div class="cta-row">
-        <a class="btn" href="#contact">Contact Us</a>
-        <p>Free, no-obligation site visits with a clear, detailed quote for your project.</p>
-      </div>
+<!-- SOLUTIONS / STATS -->
+<section class="solutions">
+  <div class="wrap">
+    <div class="head">
+      <h2>Reliable Roofing, Done Right in Harrogate</h2>
+      <p>We assess your roof properly, explain your options honestly, and carry out the work to the highest standard — whether it's an urgent repair or a full re-roof.</p>
     </div>
-    <div class="mosaic" aria-label="A range of roof types">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1587061633437-187ac80e8e7a?q=60&w=500&auto=format&fit=crop" alt="Red tiled building">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1518736346281-76873166a64a?q=60&w=500&auto=format&fit=crop" alt="Grey slate roof">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1557671009-600c3a1973ca?q=60&w=500&auto=format&fit=crop" alt="Red brick roof">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1590365876016-da05ac533e83?q=60&w=500&auto=format&fit=crop" alt="Roof with triangular window">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1566071634551-224a639a1c7d?q=60&w=500&auto=format&fit=crop" alt="Bungalow roof">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1519115226133-94046df0e272?q=60&w=500&auto=format&fit=crop" alt="Green wooden house roof">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1654848232800-20fbc9cdbc10?q=60&w=500&auto=format&fit=crop" alt="Aerial view of housing rooftops">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1503594384566-461fe158e797?q=60&w=500&auto=format&fit=crop" alt="Timber house with dark roof">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1602064828974-fcac67d33f4e?q=60&w=500&auto=format&fit=crop" alt="Striped roof pattern">
+    <div class="stat-grid">
+      <div class="stat-tile"><div class="n">24/7</div><div class="l">Emergency callouts</div></div>
+      <div class="stat-tile hi"><div class="n">5</div><div class="l">Skilled local roofers</div></div>
+      <div class="stat-tile"><div class="n">15+</div><div class="l">Areas covered</div></div>
+      <div class="stat-note">
+        <p>Free, no-obligation site visit with a clear, detailed quote for your project.</p>
+        <a class="btn dark" href="#contact">Get a Free Quote</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- STORY -->
-<section class="story" id="about">
+<!-- ABOUT -->
+<section class="about" id="about">
   <div class="wrap grid">
-    <div class="story-photos">
-      <img class="p1" loading="lazy" src="https://images.unsplash.com/photo-1635424824849-1b09bdcc55b1?q=60&w=700&auto=format&fit=crop" alt="Roofer fixing panels with a power drill">
-      <img class="p2" loading="lazy" src="https://images.unsplash.com/photo-1635424709961-f3a150459ad4?q=60&w=600&auto=format&fit=crop" alt="Two roofers working on a pitched roof">
+    <div class="about-photos">
+      <img class="p1" loading="lazy" src="https://images.unsplash.com/photo-1635424824849-1b09bdcc55b1?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Roofer fixing panels with a power drill">
+      <img class="p2" loading="lazy" src="https://images.unsplash.com/photo-1635424709961-f3a150459ad4?q=60&amp;w=600&amp;auto=format&amp;fit=crop" alt="Two roofers working on a pitched roof">
     </div>
-    <div>
-      <p class="eyebrow">About Ebor Roofing</p>
-      <h2>A Family-Run Crew With Strong Local Roots in Harrogate</h2>
-      <p style="color:#c9c9c9;line-height:1.7;font-size:15px;max-width:480px;">
-        Ebor Roofing is a family-owned business serving Harrogate and the surrounding
-        villages. Our skilled local crew of five experienced roofers combines
-        traditional craftsmanship with modern roofing methods, working across
-        domestic and commercial properties, from heritage roofs to contemporary builds.
-      </p>
-      <a class="btn light" href="#contact" style="margin-top:26px;">Get a Free Quote</a>
-      <div class="stats">
-        <div><div class="num">24/7</div><div class="lbl">Emergency callouts</div></div>
-        <div><div class="num">5</div><div class="lbl">Skilled local roofers</div></div>
-        <div><div class="num">15+</div><div class="lbl">Areas covered</div></div>
-      </div>
+    <div class="about-card">
+      <p class="eyebrow" style="color:rgba(20,22,26,.72)">About Ebor Roofing</p>
+      <h2>A Family-Run Crew With Strong Local Roots</h2>
+      <ul>
+        <li>Family-owned, serving Harrogate and the surrounding villages</li>
+        <li>Skilled local crew of five experienced roofers</li>
+        <li>Traditional craftsmanship combined with modern methods</li>
+        <li>Domestic and commercial, heritage and contemporary roofs</li>
+      </ul>
+      <a class="btn white" href="#contact">Get a Free Quote</a>
     </div>
   </div>
 </section>
 
 <!-- SERVICES -->
 <section class="services" id="services">
-  <div class="angle" aria-hidden="true"></div>
-  <div class="wrap grid">
-    <div class="photo">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1632759145351-1d592919f522?q=60&w=900&auto=format&fit=crop" alt="Roofer seated on a metal roof">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">What We Do</p>
+      <h2>Comprehensive Roofing Services</h2>
     </div>
-    <div>
-      <h2>Services</h2>
-      <a class="svc" href="#contact"><span class="name"><span class="idx">01</span>New Roofs</span><span class="arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M3 13 L13 3 M6 3 H13 V10" stroke="currentColor" stroke-width="1.8"/></svg></span></a>
-      <a class="svc" href="#contact"><span class="name"><span class="idx">02</span>Flat Roofing</span><span class="arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M3 13 L13 3 M6 3 H13 V10" stroke="currentColor" stroke-width="1.8"/></svg></span></a>
-      <a class="svc" href="#contact"><span class="name"><span class="idx">03</span>Roof Repairs</span><span class="arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M3 13 L13 3 M6 3 H13 V10" stroke="currentColor" stroke-width="1.8"/></svg></span></a>
-      <a class="svc" href="#contact"><span class="name"><span class="idx">04</span>Roofline &amp; Guttering</span><span class="arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M3 13 L13 3 M6 3 H13 V10" stroke="currentColor" stroke-width="1.8"/></svg></span></a>
-      <a class="svc" href="#contact"><span class="name"><span class="idx">05</span>Metal Roofing</span><span class="arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M3 13 L13 3 M6 3 H13 V10" stroke="currentColor" stroke-width="1.8"/></svg></span></a>
-      <a class="svc" href="#contact"><span class="name"><span class="idx">06</span>Roof Windows &amp; Velux</span><span class="arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M3 13 L13 3 M6 3 H13 V10" stroke="currentColor" stroke-width="1.8"/></svg></span></a>
+    <div class="svc-grid">
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1590365876016-da05ac533e83?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Roof with triangular window">
+        <div class="txt"><span class="idx">01</span><h3>New Roofs</h3><span class="more">Request a quote</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1566071634551-224a639a1c7d?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Bungalow roof">
+        <div class="txt"><span class="idx">02</span><h3>Flat Roofing</h3><span class="more">Request a quote</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1503594384566-461fe158e797?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Timber house with dark roof">
+        <div class="txt"><span class="idx">03</span><h3>Roof Repairs</h3><span class="more">Request a quote</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1602064828974-fcac67d33f4e?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Striped roof pattern">
+        <div class="txt"><span class="idx">04</span><h3>Roofline &amp; Guttering</h3><span class="more">Request a quote</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1632759145351-1d592919f522?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="Roofer seated on a metal roof">
+        <div class="txt"><span class="idx">05</span><h3>Metal Roofing</h3><span class="more">Request a quote</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1519115226133-94046df0e272?q=60&amp;w=700&amp;auto=format&amp;fit=crop" alt="House roof with window">
+        <div class="txt"><span class="idx">06</span><h3>Roof Windows &amp; Velux</h3><span class="more">Request a quote</span></div>
+      </a>
     </div>
   </div>
 </section>
@@ -395,20 +356,20 @@
 <section class="featured" id="work">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">What We Do</p>
-      <h2>Heritage &amp; Contemporary<span>Roofing, Done Properly</span></h2>
+      <p class="eyebrow">Examples Of Our Work</p>
+      <h2>Heritage &amp; Contemporary Roofing, Done Properly</h2>
     </div>
     <div class="fgrid">
       <figure class="tall">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1602193230480-7840a38eb0c3?q=60&w=900&auto=format&fit=crop" alt="Contemporary building roofline">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1602193230480-7840a38eb0c3?q=60&amp;w=900&amp;auto=format&amp;fit=crop" alt="Contemporary building roofline">
         <figcaption>Commercial</figcaption>
       </figure>
       <figure class="wide">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1726589004565-bedfba94d3a2?q=60&w=900&auto=format&fit=crop" alt="Roofer at work on a residential roof">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1726589004565-bedfba94d3a2?q=60&amp;w=900&amp;auto=format&amp;fit=crop" alt="Roofer at work on a residential roof">
         <figcaption>Residential</figcaption>
       </figure>
       <figure class="wide">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1557671009-600c3a1973ca?q=60&w=900&auto=format&fit=crop" alt="Ornate heritage tiled roof">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1557671009-600c3a1973ca?q=60&amp;w=900&amp;auto=format&amp;fit=crop" alt="Ornate heritage tiled roof">
         <figcaption>Heritage</figcaption>
       </figure>
     </div>
@@ -416,39 +377,42 @@
 </section>
 
 <!-- CONTACT -->
-<section class="contact-card" id="contact">
-  <div class="top">
-    <h2>Is your roof leaking?</h2>
-    <p class="sub">We're here to help, any hour, any day. Book a free, no-obligation site visit.</p>
-    <div class="actions">
-      <a class="btn orange" href="tel:07985402235">Call 07985 402 235</a>
-      <a class="btn" href="mailto:info@eborroofingcontractors.co.uk">Email Us</a>
+<section id="contact" style="padding-top:0;">
+  <div class="contact-card">
+    <div class="top">
+      <p class="eyebrow">Get In Touch</p>
+      <h2>Is your roof leaking?</h2>
+      <p class="sub">We're here to help, any hour, any day. Book a free, no-obligation site visit.</p>
+      <div class="actions">
+        <a class="btn" href="tel:07985402235">Call 07985 402 235</a>
+        <a class="btn ghost" style="color:#fff;border-color:#33373f" href="mailto:info@eborroofingcontractors.co.uk">Email Us</a>
+      </div>
     </div>
+    <form class="quote" onsubmit="sendQuote(event)">
+      <input name="name" placeholder="Full name" required>
+      <input name="tel" type="tel" placeholder="Phone" required>
+      <input name="email" type="email" placeholder="Email">
+      <select name="service" required>
+        <option value="" disabled selected>Required service</option>
+        <option>Tile &amp; Slate Roofs</option>
+        <option>Flat Roofs</option>
+        <option>Roofline</option>
+        <option>Metal Roofs</option>
+        <option>Roof Repairs</option>
+        <option>Other</option>
+      </select>
+      <input class="full" name="postcode" placeholder="Postcode">
+      <textarea name="message" placeholder="Tell us about the job"></textarea>
+      <button class="btn" type="submit">Send enquiry</button>
+    </form>
   </div>
-  <form class="quote" onsubmit="sendQuote(event)">
-    <input name="name" placeholder="Full name" required>
-    <input name="tel" type="tel" placeholder="Phone" required>
-    <input name="email" type="email" placeholder="Email">
-    <select name="service" required>
-      <option value="" disabled selected>Required service</option>
-      <option>Tile &amp; Slate Roofs</option>
-      <option>Flat Roofs</option>
-      <option>Roofline</option>
-      <option>Metal Roofs</option>
-      <option>Roof Repairs</option>
-      <option>Other</option>
-    </select>
-    <input class="full" name="postcode" placeholder="Postcode">
-    <textarea name="message" placeholder="Tell us about the job"></textarea>
-    <button type="submit">Send enquiry</button>
-  </form>
 </section>
 
 <footer class="footer">
   <a class="logo" href="#top">
     <svg viewBox="0 0 34 26" fill="none" aria-hidden="true">
-      <path d="M2 24 L17 4 L32 24" stroke="#ff6b1c" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M9 24 L17 13 L25 24" stroke="#0d0d0d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M2 24 L17 4 L32 24" stroke="#f2711f" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 24 L17 13 L25 24" stroke="#14161a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     <span>EBOR ROOFING<small>HARROGATE</small></span>
   </a>
