@@ -200,6 +200,16 @@
     .region-nav a[aria-current="true"] { background: var(--green); color: #fff; }
     .region-nav a:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
 
+    .region-head { display: inline-flex; margin-left: auto; }
+    .region-head .region-nav a { padding: .3rem .5rem; font-size: .7rem; }
+    .nav-region { display: none; }
+    @media (max-width: 22.5rem) {
+      .brand { font-size: 1.05rem; }
+      .brand svg { width: 22px; height: 22px; }
+      .region-head .region-nav a { padding: .3rem .38rem; font-size: .65rem; letter-spacing: .02em; }
+      .menu-btn { width: 44px; height: 44px; }
+    }
+
     /* ---------- Header / nav ---------- */
     .site-head {
       position: sticky; top: 0; z-index: 10;
@@ -209,6 +219,7 @@
       display: flex; align-items: center; justify-content: space-between;
       min-height: 4.5rem; gap: var(--sp-4);
     }
+    @media (max-width: 40rem) { .nav-row { gap: var(--sp-2); } }
     .brand {
       display: inline-flex; align-items: center; gap: var(--sp-2);
       font-weight: 800; font-size: var(--fs-2); letter-spacing: -.02em;
@@ -241,6 +252,8 @@
 
     @media (min-width: 60rem) {
       .menu-btn { display: none; }
+      .region-head { display: none; }
+      .nav-region { display: block; }
       #site-nav { display: block; }
       #site-nav ul { flex-direction: row; align-items: center; gap: var(--sp-4); }
       #site-nav li > a:not(.btn) { padding: var(--sp-1) 0; }
@@ -396,6 +409,7 @@
         </svg>
         lemonelly
       </a>
+      <div class="region-head"><span class="region-nav" role="group" aria-label="Choose your region"><a href="/za">ZA</a><a href="/us" aria-current="true">US</a><a href="/uk">UK</a><a href="/eu">EU</a></span></div>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
         <span class="visually-hidden">Menu</span>
         <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -408,7 +422,7 @@
           <li><a href="#process">Process</a></li>
           <li><a href="#work">Work</a></li>
           <li><a href="#team">Team</a></li>
-          <li><span class="region-nav" role="group" aria-label="Choose your region"><a href="/za">ZA</a><a href="/us" aria-current="true">US</a><a href="/uk">UK</a><a href="/eu">EU</a></span></li>
+          <li class="nav-region"><span class="region-nav" role="group" aria-label="Choose your region"><a href="/za">ZA</a><a href="/us" aria-current="true">US</a><a href="/uk">UK</a><a href="/eu">EU</a></span></li>
           <li><a class="btn btn-solid" href="/start?r=us">Get Started <span class="arrow" aria-hidden="true">→</span></a></li>
         </ul>
       </nav>
