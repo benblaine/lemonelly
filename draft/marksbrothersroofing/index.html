@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Marks Brothers Roofing | Roofers in Exeter &amp; Devon · Draft by lemonelly</title>
+<meta name="description" content="Family roofers in Exeter and Devon since 1959. Slating &amp; tiling, re-roofing, flat roofs, leadwork, Velux windows, fascias &amp; guttering and chimney repairs. Free quotes.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Marks Brothers Roofing — a free website draft by lemonelly">
+<meta property="og:description" content="A modern website concept for Marks Brothers Roofing, built from their real details.">
+<meta property="og:image" content="https://lemonelly.com/assets/draft/stock/hero-slate-dormer-chimney.jpeg">
+<meta property="og:url" content="https://lemonelly.com/draft/marksbrothersroofing">
+<style>
+  @font-face{
+    font-family:'Archivo';
+    src:url('/assets/draft/fonts/archivo-latin-var.woff2') format('woff2');
+    font-weight:100 900;font-style:normal;font-display:swap;
+  }
+  @font-face{
+    font-family:'Fraunces';
+    src:url('/assets/draft/fonts/fraunces-latin-var.woff2') format('woff2');
+    font-weight:400 900;font-style:normal;font-display:swap;
+  }
+  :root{
+    --ink:#171a1f;
+    --ink-soft:#3f444d;
+    --paper:#ffffff;
+    --wash:#f6f5f2;
+    --panel:#161a22;
+    --panel-soft:#1f2530;
+    --accent:#e0742e;
+    --accent-deep:#c25f1e;
+    --accent-text:#b4560f;
+    --grey:#6b7079;
+    --line:#e7e5e0;
+    --line-soft:#eeece7;
+    --radius:16px;
+    --radius-lg:24px;
+    --radius-pill:999px;
+    --maxw:1180px;
+    --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Archivo',system-ui,-apple-system,sans-serif;
+    color:var(--ink);background:var(--paper);
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.5;
+  }
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  section{padding-block:84px;}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-0.01em;line-height:1.05;}
+
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-text);margin-bottom:16px;}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:.55em;justify-content:center;
+    background:var(--accent);color:#fff;padding:14px 26px;border-radius:var(--radius-pill);
+    font-size:14px;font-weight:700;transition:background .2s,transform .2s;border:none;cursor:pointer;
+  }
+  .btn:hover{background:var(--accent-deep);}
+  .btn svg{width:16px;height:16px;}
+  .btn.dark{background:var(--ink);}
+  .btn.dark:hover{background:#000;}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
+  .btn.ghost:hover{border-color:var(--ink);}
+  .btn.light{background:#fff;color:var(--ink);}
+  .btn.light:hover{background:var(--wash);}
+
+  header{background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30;}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:24px;}
+  .logo{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:700;font-size:19px;line-height:1;}
+  .logo svg{width:30px;height:24px;flex:none;}
+  .logo small{display:block;font-family:'Archivo';font-weight:600;font-size:9px;letter-spacing:.24em;color:var(--grey);margin-top:4px;}
+  nav.links{display:flex;gap:30px;font-size:14px;font-weight:600;}
+  nav.links a{color:var(--ink-soft);}
+  nav.links a:hover{color:var(--accent-text);}
+  .nav-right{display:flex;align-items:center;gap:20px;font-size:14px;font-weight:700;}
+  .nav-right .tel{display:inline-flex;align-items:center;gap:8px;}
+  .nav-right .tel svg{width:16px;height:16px;color:var(--accent-text);}
+  .nav-right .tel small{display:block;font-size:11px;font-weight:600;color:var(--grey);letter-spacing:.02em;}
+  @media (max-width:920px){nav.links,.nav-right .tel{display:none;}}
+
+  .hero{position:relative;color:#fff;padding:0;isolation:isolate;}
+  .hero-media{position:absolute;inset:0;z-index:-1;overflow:hidden;}
+  .hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 32%;}
+  .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,16,20,.92),rgba(14,16,20,.72) 42%,rgba(14,16,20,.32) 72%,rgba(14,16,20,.14));}
+  .hero .wrap{min-height:clamp(540px,74vh,720px);display:flex;flex-direction:column;justify-content:center;padding-top:72px;padding-bottom:96px;}
+  .hero-head{max-width:660px;}
+  .hero .eyebrow{color:#f2a469;}
+  .hero h1{font-size:clamp(40px,6vw,72px);color:#fff;}
+  .hero h1 .em{color:var(--accent);font-style:italic;}
+  .hero .sub{font-size:clamp(16px,1.5vw,18px);color:rgba(255,255,255,.84);max-width:48ch;margin-top:20px;}
+  .hero ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:24px;}
+  .hero li{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:#fff;}
+  .hero li svg{width:19px;height:19px;flex:none;color:var(--accent);}
+  .hero-actions{display:flex;align-items:center;gap:16px;margin-top:32px;flex-wrap:wrap;}
+  .hero-actions .btn.ghost{color:#fff;border-color:rgba(255,255,255,.45);}
+  .hero-actions .btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);}
+  @media (max-width:920px){
+    /* phone: real photo at the top, text on a dark panel below it */
+    .hero{background:var(--panel);}
+    .hero-media{position:static;z-index:auto;height:auto;}
+    .hero-media img{height:clamp(220px,54vw,360px);object-position:center 38%;}
+    .hero-media::after{display:none;}
+    .hero .wrap{min-height:0;padding-top:36px;padding-bottom:52px;}
+  }
+
+  .features{background:var(--panel);color:#fff;}
+  .features .wrap{padding-block:8px;}
+  .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;transform:translateY(-42px);}
+  .feat{background:var(--panel-soft);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:26px 24px;}
+  .feat .ic{width:42px;height:42px;border-radius:11px;background:rgba(224,116,46,.16);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .feat .ic svg{width:22px;height:22px;color:var(--accent);}
+  .feat h3{font-family:'Archivo';font-weight:700;font-size:15.5px;letter-spacing:0;margin-bottom:7px;}
+  .feat p{font-size:13px;color:#a9adb6;line-height:1.55;}
+  @media (max-width:920px){.feat-grid{grid-template-columns:1fr 1fr;transform:translateY(-30px);}}
+  @media (max-width:560px){.feat-grid{grid-template-columns:1fr;}}
+
+  .services .head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px;flex-wrap:wrap;}
+  .services h2{font-size:clamp(28px,3.4vw,42px);}
+  .services .head a{font-size:14px;font-weight:700;color:var(--accent-text);display:inline-flex;align-items:center;gap:7px;}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .svc-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;transition:box-shadow .25s,transform .25s;}
+  .svc-card:hover{box-shadow:0 18px 40px rgba(0,0,0,.08);transform:translateY(-3px);}
+  .svc-card .ph{aspect-ratio:16/10;overflow:hidden;}
+  .svc-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .svc-card:hover .ph img{transform:scale(1.05);}
+  .svc-card .body{padding:20px 20px 22px;}
+  .svc-card h3{font-family:'Archivo';font-weight:700;font-size:16.5px;letter-spacing:0;}
+  .svc-card p{font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.55;}
+  .svc-card .more{margin-top:14px;font-size:12.5px;font-weight:700;color:var(--accent-text);display:inline-flex;align-items:center;gap:6px;}
+  @media (max-width:920px){.svc-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.svc-grid{grid-template-columns:1fr;}}
+
+  .stats{background:var(--wash);}
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+  .stat .n{font-family:var(--serif);font-weight:700;font-size:clamp(30px,3.4vw,44px);color:var(--ink);}
+  .stat .l{font-size:13px;font-weight:600;color:var(--ink-soft);margin-top:6px;}
+  @media (max-width:640px){.stat-row{grid-template-columns:1fr 1fr;gap:32px 24px;}}
+
+  .about .grid{display:grid;grid-template-columns:1fr 1.02fr;gap:56px;align-items:center;}
+  .about-photos{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .about-photos img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius);}
+  .about-photos img:first-child{grid-row:span 2;height:100%;}
+  .about h2{font-size:clamp(26px,3vw,38px);margin-bottom:20px;}
+  .about ul{list-style:none;display:grid;gap:15px;margin:22px 0 30px;}
+  .about li{position:relative;padding-left:30px;font-size:15px;color:var(--ink-soft);line-height:1.5;}
+  .about li svg{position:absolute;left:0;top:2px;width:20px;height:20px;color:var(--accent);}
+  @media (max-width:920px){.about .grid{grid-template-columns:1fr;gap:36px;}}
+
+  .work .head{text-align:center;max-width:44rem;margin:0 auto 44px;}
+  .work h2{font-size:clamp(28px,3.4vw,42px);}
+  .work .head p{color:var(--ink-soft);margin-top:14px;}
+  .fgrid{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-auto-rows:200px;gap:16px;}
+  .fgrid figure{margin:0;position:relative;overflow:hidden;border-radius:var(--radius);}
+  .fgrid img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .fgrid figure:hover img{transform:scale(1.05);}
+  .fgrid .big{grid-row:span 2;}
+  .fgrid figcaption{position:absolute;left:14px;bottom:12px;background:rgba(255,255,255,.94);color:var(--ink);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 13px;border-radius:var(--radius-pill);}
+  @media (max-width:760px){.fgrid{grid-template-columns:1fr 1fr;grid-auto-rows:150px;}.fgrid .big{grid-row:span 2;grid-column:span 2;}}
+
+  .tc-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .testi-card{background:var(--panel);color:#fff;border-radius:var(--radius-lg);padding:44px 40px;display:flex;flex-direction:column;justify-content:center;}
+  .testi-card .quote{font-family:var(--serif);font-weight:500;font-size:clamp(19px,2vw,23px);line-height:1.4;}
+  .testi-card .stars{color:var(--accent);letter-spacing:3px;margin-bottom:18px;font-size:15px;}
+  .testi-card cite{display:block;margin-top:20px;font-family:'Archivo';font-style:normal;font-size:13.5px;font-weight:700;color:#c3c7cf;}
+  .cta-card{background:var(--accent);color:#fff;border-radius:var(--radius-lg);padding:44px 40px;display:flex;flex-direction:column;justify-content:center;}
+  .cta-card h2{font-size:clamp(24px,2.6vw,32px);color:#fff;}
+  .cta-card p{margin:14px 0 24px;font-size:15px;color:rgba(255,255,255,.9);max-width:34ch;}
+  .cta-card .row{display:flex;gap:12px;flex-wrap:wrap;}
+  @media (max-width:820px){.tc-grid{grid-template-columns:1fr;}}
+
+  .contact{background:var(--wash);}
+  .contact .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start;}
+  .contact h2{font-size:clamp(28px,3.4vw,42px);}
+  .contact .sub{color:var(--ink-soft);margin-top:14px;max-width:38ch;}
+  .contact .direct{margin-top:28px;display:grid;gap:14px;}
+  .contact .direct a{display:flex;align-items:center;gap:13px;font-weight:700;font-size:15px;}
+  .contact .direct .ic{width:42px;height:42px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex:none;}
+  .contact .direct .ic svg{width:19px;height:19px;color:var(--accent-text);}
+  .contact .direct small{display:block;font-size:12px;font-weight:600;color:var(--grey);}
+  form.quote{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  form.quote label{grid-column:1/-1;font-family:var(--serif);font-weight:600;font-size:20px;margin-bottom:4px;}
+  form.quote input,form.quote select,form.quote textarea{font-family:inherit;font-size:14px;padding:13px 15px;border:1.5px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);width:100%;}
+  form.quote ::placeholder{color:#9a9ea6;}
+  form.quote input:focus,form.quote select:focus,form.quote textarea:focus{outline:2px solid var(--accent);border-color:transparent;}
+  form.quote textarea{grid-column:1/-1;min-height:96px;resize:vertical;}
+  form.quote .full{grid-column:1/-1;}
+  form.quote button{grid-column:1/-1;padding:15px;font-size:15px;}
+  @media (max-width:820px){.contact .grid{grid-template-columns:1fr;gap:32px;}form.quote{grid-template-columns:1fr;}}
+
+  footer.site{background:var(--panel);color:#fff;padding:56px 0 0;}
+  .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .foot-top .logo{color:#fff;}
+  .foot-top .logo small{color:#9aa0a9;}
+  footer.site nav{display:flex;gap:26px;font-size:14px;font-weight:600;flex-wrap:wrap;}
+  footer.site nav a{color:#c3c7cf;}
+  footer.site nav a:hover{color:#fff;}
+  .areas{font-size:12.5px;color:#9aa0a9;line-height:1.7;padding:26px 0;}
+  .foot-legal{font-size:12px;color:#8b909a;padding-bottom:30px;line-height:1.6;}
+  .foot-legal a{color:#c3c7cf;text-decoration:underline;}
+
+  .lm-badge{position:fixed;left:16px;bottom:16px;z-index:50;display:inline-flex;align-items:center;gap:8px;background:#fff;color:#111110;border:1px solid #e2e2e2;border-radius:999px;padding:9px 16px;font-size:12.5px;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.14);}
+  .lm-badge svg{width:20px;height:20px;}
+  .lm-badge:hover{border-color:#166548;color:#166548;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Marks Brothers Roofing home">
+      <svg viewBox="0 0 34 26" fill="none" aria-hidden="true">
+        <path d="M2 24 L17 4 L32 24" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 24 L17 13 L25 24" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Marks Brothers Roofing<small>EXETER · DEVON · SINCE 1959</small></span>
+    </a>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#work">Our Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a class="tel" href="tel:01392211147">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>01392 211147<small>Or 07738 875559 · Ben Marks</small></span>
+      </a>
+      <a class="btn" href="#contact">Get a Free Quote</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-media">
+    <img fetchpriority="high" width="1000" height="1000" src="/assets/draft/stock/hero-slate-dormer-chimney.jpeg" alt="Slate roof with a dormer window and a stone chimney">
+  </div>
+  <div class="wrap">
+    <div class="hero-head">
+      <p class="eyebrow">Roofing in Exeter &amp; Devon</p>
+      <h1>Exeter's roofers,<br>a <span class="em">family</span> trade since 1959.</h1>
+      <p class="sub">Slating &amp; tiling, re-roofing, flat roofs, leadwork, Velux windows, fascias &amp; guttering and chimney repairs — a family business serving Exeter, Devon and the surrounding areas.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Free, no-obligation quotes</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>A family business since 1959</li>
+      </ul>
+      <div class="hero-actions">
+        <a class="btn" href="#contact">Book a Free Site Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn ghost" href="tel:01392211147">Call 01392 211147</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="wrap">
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1M9 13h1m4 0h1"/></svg></div>
+        <h3>Family Business</h3>
+        <p>Established in 1959 and now run by the second and third generation of the family.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Quality Craftsmanship</h3>
+        <p>Quality and reliability is our focus — proper workmanship on every roof.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3M12 3a9 9 0 1 0 9 9"/></svg></div>
+        <h3>Professional &amp; Punctual</h3>
+        <p>We turn up when we say we will and work in a clean, professional manner.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3>Work Guaranteed</h3>
+        <p>All our work is guaranteed, with a free no-obligation quotation up front.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <p class="eyebrow">What We Do</p>
+        <h2>Our Roofing Services</h2>
+      </div>
+      <a href="#contact">Request a quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="svc-grid">
+      <a class="svc-card" href="#contact">
+        <div class="ph"><img loading="lazy" width="1000" height="625" src="/assets/draft/stock/svc-slate-closeup.jpeg" alt="Close-up of a natural slate roof"></div>
+        <div class="body"><h3>Slating &amp; Tiling</h3><p>Natural slate and tiled roofs, installed and repaired to last.</p><span class="more">Request a quote →</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <div class="ph"><img loading="lazy" width="1000" height="625" src="/assets/draft/stock/work-white-brick-shingle.jpg" alt="House with a re-roofed pitched roof"></div>
+        <div class="body"><h3>Re-Roofing &amp; New Roofs</h3><p>Full re-roofs and new roofs to the latest insulation and ventilation regulations.</p><span class="more">Request a quote →</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <div class="ph"><img loading="lazy" width="1000" height="625" src="/assets/draft/stock/svc-grp-flat-skylights.jpeg" alt="Flat roof with roof lights"></div>
+        <div class="body"><h3>Flat Roofing</h3><p>Durable flat roof systems — and all our flat roofing work is guaranteed.</p><span class="more">Request a quote →</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <div class="ph"><img loading="lazy" width="1000" height="625" src="/assets/draft/stock/svc-leadwork-bay.jpeg" alt="Lead roof over a bay window"></div>
+        <div class="body"><h3>Leadwork &amp; Lead Welding</h3><p>Traditional leadwork carried out to Lead Sheet Association guidelines.</p><span class="more">Request a quote →</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <div class="ph"><img loading="lazy" width="1000" height="625" src="/assets/draft/stock/hero-slate-velux.jpeg" alt="Slate roof with a Velux roof window"></div>
+        <div class="body"><h3>Velux &amp; Cedar Shingles</h3><p>Velux roof windows fitted, plus natural cedar shingle roofing.</p><span class="more">Request a quote →</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <div class="ph"><img loading="lazy" width="1000" height="625" src="/assets/draft/stock/work-brick-slate-chimneys.jpeg" alt="Brick houses with slate roofs, roofline and chimneys"></div>
+        <div class="body"><h3>Fascias, Guttering &amp; Chimneys</h3><p>UPVC fascia boards and guttering, chimney repairs and general maintenance.</p><span class="more">Request a quote →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stat-row">
+      <div class="stat"><div class="n">1959</div><div class="l">Roofing in Exeter since</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">Generations of the family</div></div>
+      <div class="stat"><div class="n">Free</div><div class="l">No-obligation quotes</div></div>
+      <div class="stat"><div class="n">Local</div><div class="l">Exeter &amp; Devon roofers</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap grid">
+    <div class="about-photos">
+      <img loading="lazy" width="1000" height="1250" src="/assets/draft/stock/hero-slate-brick-house.jpeg" alt="Brick house with a natural slate roof">
+      <img loading="lazy" width="1000" height="600" src="/assets/draft/stock/svc-terracotta-tile-dormers.jpeg" alt="Terracotta tiled roof with dormer windows">
+      <img loading="lazy" width="1000" height="600" src="/assets/draft/stock/svc-grp-flat-grey.jpeg" alt="Grey flat roof">
+    </div>
+    <div>
+      <p class="eyebrow">About Marks Brothers Roofing</p>
+      <h2>A family roofing business, Exeter born and bred</h2>
+      <p style="color:var(--ink-soft);font-size:15.5px;">Established in Exeter and Devon since 1959, Marks Brothers Roofing was started by two brothers and is now run by the second and third generation of the family — with quality and reliability at the heart of everything we do.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Serving Exeter, Devon and the surrounding areas</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Slating, tiling, leadwork, flat roofs, fascias and chimneys</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Work to the latest insulation, ventilation and health &amp; safety regulations</li>
+      </ul>
+      <a class="btn" href="#contact">Get a Free Quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">The Kind Of Work We Handle</p>
+      <h2>Traditional &amp; modern roofing, done properly</h2>
+      <p>Slate and tile, flat roofs, leadwork and roofline — on homes like these across Exeter and Devon.</p>
+    </div>
+    <div class="fgrid">
+      <figure class="big"><img loading="lazy" width="1000" height="1250" src="/assets/draft/stock/work-stone-slate-dormers.jpeg" alt="Stone home with a slate roof and dormer windows"><figcaption>Slate roofs</figcaption></figure>
+      <figure><img loading="lazy" width="1000" height="667" src="/assets/draft/stock/work-stone-tudor-ivy.jpeg" alt="Stone period home with a slate roof"><figcaption>Period property</figcaption></figure>
+      <figure><img loading="lazy" width="1000" height="667" src="/assets/draft/stock/svc-grp-lantern.webp" alt="Flat roof with a lantern roof light"><figcaption>Flat roofs</figcaption></figure>
+      <figure><img loading="lazy" width="1000" height="667" src="/assets/draft/stock/work-white-brick-shingle.jpg" alt="White brick home with a shingle roof"><figcaption>Re-roofs</figcaption></figure>
+      <figure><img loading="lazy" width="1000" height="667" src="/assets/draft/stock/work-stone-barn-dusk.jpg" alt="Converted stone barn at dusk"><figcaption>Conversions</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap tc-grid">
+    <div class="cta-card" style="background:var(--panel)">
+      <p class="eyebrow" style="color:#f2a469">Why Marks Brothers</p>
+      <h2>Three generations of roofing know-how</h2>
+      <p>From two brothers in 1959 to the family team working across Exeter today — the same focus on quality, reliability and honest, professional work.</p>
+      <div class="row">
+        <a class="btn" href="#contact">Get a Free Quote</a>
+      </div>
+    </div>
+    <div class="cta-card">
+      <h2>Ready for a better roof?</h2>
+      <p>Get a free, no-obligation site visit and a clear quote from your local Exeter family roofers.</p>
+      <div class="row">
+        <a class="btn light" href="#contact">Book a Free Inspection</a>
+        <a class="btn" style="background:rgba(255,255,255,.16)" href="tel:01392211147">Call Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow">Get In Touch</p>
+      <h2>Is your roof leaking?</h2>
+      <p class="sub">Book a free, no-obligation site visit. We'll take a proper look and give you honest advice.</p>
+      <div class="direct">
+        <a href="tel:01392211147">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span>01392 211147 · 07738 875559<small>Office or Ben Marks</small></span>
+        </a>
+        <a href="mailto:marksbrothersroofing@hotmail.co.uk">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg></span>
+          <span>marksbrothersroofing@hotmail.co.uk<small>Email us any time</small></span>
+        </a>
+      </div>
+    </div>
+    <form class="quote" onsubmit="sendQuote(event)">
+      <label>Request a free quote</label>
+      <input name="name" placeholder="Full name" required>
+      <input name="tel" type="tel" placeholder="Phone" required>
+      <input name="email" type="email" placeholder="Email" class="full">
+      <select name="service" required>
+        <option value="" disabled selected>Required service</option>
+        <option>Slating &amp; Tiling</option>
+        <option>Re-Roofing &amp; New Roofs</option>
+        <option>Flat Roofing</option>
+        <option>Leadwork &amp; Lead Welding</option>
+        <option>Velux &amp; Cedar Shingles</option>
+        <option>Fascias, Guttering &amp; Chimneys</option>
+        <option>Other</option>
+      </select>
+      <input name="postcode" placeholder="Postcode">
+      <textarea name="message" placeholder="Tell us about the job"></textarea>
+      <button class="btn" type="submit">Send enquiry</button>
+    </form>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="logo" href="#top">
+        <svg viewBox="0 0 34 26" fill="none" aria-hidden="true">
+          <path d="M2 24 L17 4 L32 24" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 24 L17 13 L25 24" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Marks Brothers Roofing<small>EXETER · DEVON · SINCE 1959</small></span>
+      </a>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#work">Our Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <p class="areas"><strong style="color:#c3c7cf">Areas we cover:</strong> Exeter, Devon and all surrounding areas.</p>
+    <p class="foot-legal">
+      Marks Brothers Roofing &copy;2026 ·
+      Design concept prepared by <a href="https://lemonelly.com">lemonelly</a> for Marks Brothers Roofing — this is not Marks Brothers Roofing's live website. Photography is placeholder imagery shown for layout only.
+    </p>
+  </div>
+</footer>
+
+<script>
+function sendQuote(e){
+  e.preventDefault();
+  var f=e.target;
+  var body="Name: "+f.name.value+"%0ATel: "+f.tel.value+"%0AEmail: "+f.email.value+
+    "%0APostcode: "+f.postcode.value+"%0AService: "+f.service.value+
+    "%0A%0A"+encodeURIComponent(f.message.value);
+  location.href="mailto:marksbrothersroofing@hotmail.co.uk?subject=Quote request from website&body="+body;
+}
+</script>
+
+<a class="lm-badge" href="https://lemonelly.com/uk" target="_blank" rel="noopener">
+  <svg viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-20 32 38)"><ellipse cx="32" cy="38" rx="23" ry="16" fill="#FFD335" stroke="#111110" stroke-width="4"/></g><path d="M34 16q10-9 20-2q-9 9-20 2z" fill="#166548"/></svg>
+  Free draft by lemonelly
+</a>
+</body>
+</html>
