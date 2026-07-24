@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<!--
+  MASTER DRAFT TEMPLATE — fictional company "Kestrel Roofing" (greppable placeholder).
+  Workflow: .claude/skills/draft/SKILL.md. Copy to draft/<slug>/index.html and adapt.
+  Design system: construction-industrial — sticky white nav, uppercase hero with
+  asymmetric photo row, dark stats band, accent tiles, photo-overlay service cards,
+  dark contact band, fixed lemonelly badge. Derived from Ben's inspiration references
+  (reference/inspiration/). Brand retheme = the three --accent* variables only.
+  Invariants: noindex; zero external requests (local images + local Archivo font);
+  never claim stock photos are the company's work; keep badge + footer disclaimer.
+  Preview this file directly: python3 -m http.server 8000 → /template/draft.template.html
+  (asset paths are root-relative so they resolve from any depth).
+-->
+<html lang="en-GB"> <!-- SLOT: lang — en-GB / en-US / en-ZA to match the prospect -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<!-- SLOT: title + description + og tags. og:image/og:url must be absolute lemonelly.com URLs. -->
+<title>Kestrel Roofing | Roofers in Yourtown · Draft by lemonelly</title>
+<meta name="description" content="Roofers in Yourtown. New roofs, flat roofing, roof repairs, roofline and guttering. Free quotes.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kestrel Roofing — a free website draft by lemonelly">
+<meta property="og:description" content="A modern website concept for Kestrel Roofing, built from their real details.">
+<meta property="og:image" content="https://lemonelly.com/assets/draft/stock/hero-roofer-pitched-hammer.jpg">
+<meta property="og:url" content="https://lemonelly.com/draft/kestrel">
+<style>
+  /* Self-hosted Archivo variable font (400–900). Do not swap for a hosted font. */
+  @font-face{
+    font-family:'Archivo';
+    src:url('/assets/draft/fonts/archivo-latin-var.woff2') format('woff2');
+    font-weight:100 900;
+    font-style:normal;
+    font-display:swap;
+  }
+  :root{
+    --ink:#14161a;
+    --paper:#ffffff;
+    /* SLOT: brand theme — the ONLY variables to retheme per prospect.
+       Contrast rules: --accent-text on white ≥4.5:1; --ink on --accent ≥4.5:1. */
+    --accent:#f2711f;
+    --accent-deep:#d95f16;
+    --accent-text:#c25211;
+    --panel:#1b1e24;
+    --grey:#6e727a;
+    --line:#e7e7e6;
+    --radius-pill:999px;
+    --radius:14px;
+    --radius-lg:22px;
+    --maxw:1200px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Archivo',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  section{padding-block:88px;}
+
+  /* ---------- NAV ---------- */
+  header{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px;}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.02em;font-size:16px;line-height:1;}
+  .logo svg{width:30px;height:23px;flex:none;}
+  .logo small{display:block;font-weight:500;font-size:9px;letter-spacing:.34em;color:var(--grey);margin-top:3px;}
+  nav.links{display:flex;gap:28px;font-size:14px;font-weight:600;}
+  nav.links a:hover{color:var(--accent-text);}
+  .nav-right{display:flex;align-items:center;gap:22px;font-size:13.5px;font-weight:600;}
+  .nav-right a{display:inline-flex;align-items:center;gap:8px;}
+  .nav-right svg{width:16px;height:16px;flex:none;color:var(--accent-text);}
+  .nav-right a:hover{color:var(--accent-text);}
+  .btn{
+    display:inline-flex;align-items:center;gap:.5em;justify-content:center;
+    background:var(--accent);color:var(--ink);
+    padding:13px 28px;border-radius:var(--radius-pill);
+    font-size:14px;font-weight:700;transition:background .2s;border:none;cursor:pointer;
+  }
+  .btn:hover{background:var(--accent-deep);}
+  .btn.dark{background:var(--ink);color:#fff;}
+  .btn.dark:hover{background:var(--accent);color:var(--ink);}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
+  .btn.ghost:hover{border-color:var(--accent-text);color:var(--accent-text);}
+  .btn.white{background:#fff;color:var(--ink);}
+  .btn.white:hover{background:var(--ink);color:#fff;}
+
+  .eyebrow{
+    font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--accent-text);margin-bottom:14px;
+  }
+  .contact-card .eyebrow{color:var(--accent);}
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:72px;padding-bottom:0;}
+  .hero-head h1{
+    font-weight:800;font-size:clamp(38px,6vw,64px);
+    line-height:1.02;letter-spacing:-0.02em;text-transform:uppercase;max-width:14ch;
+  }
+  .hero-head .sub{font-size:clamp(15px,1.6vw,18px);color:var(--grey);max-width:46ch;margin-top:18px;line-height:1.6;}
+  .hero-actions{display:flex;align-items:center;gap:18px;margin-top:30px;flex-wrap:wrap;}
+  .hero-actions .note{font-size:13px;color:var(--grey);font-weight:600;}
+  .hero-row{display:grid;grid-template-columns:.9fr .9fr 1.3fr;gap:14px;margin-top:52px;height:clamp(200px,26vw,320px);}
+  .hero-row img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius);}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{background:var(--ink);color:#fff;overflow:hidden;white-space:nowrap;padding:16px 0;}
+  .marquee-track{display:inline-block;animation:scroll 28s linear infinite;}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.marquee-track{animation:none;}}
+  .marquee span{
+    display:inline-flex;align-items:center;gap:12px;margin:0 34px;
+    font-weight:700;letter-spacing:.14em;font-size:14px;text-transform:uppercase;
+  }
+  .marquee svg{width:20px;height:14px;flex:none;color:var(--accent);}
+
+  /* ---------- SOLUTIONS / STATS ---------- */
+  .solutions{background:var(--panel);color:#fff;}
+  .solutions .head{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:end;margin-bottom:44px;}
+  .solutions h2{font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-0.01em;line-height:1.15;}
+  .solutions .head p{color:#a7abb3;font-size:15px;line-height:1.6;}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr) 1.5fr;gap:16px;}
+  .stat-tile{
+    background:#22262e;border-radius:var(--radius);padding:28px 22px;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .stat-tile.hi{background:var(--accent);}
+  .stat-tile .n{font-size:clamp(30px,3.4vw,44px);font-weight:800;letter-spacing:-0.02em;}
+  .stat-tile .l{font-size:13px;color:#c7cad0;margin-top:6px;font-weight:600;}
+  .stat-tile.hi .l{color:rgba(20,22,26,.75);}
+  .stat-tile.hi .n{color:var(--ink);}
+  .stat-note{
+    background:#fff;color:var(--ink);border-radius:var(--radius);
+    padding:26px 26px;display:flex;flex-direction:column;justify-content:center;gap:14px;
+  }
+  .stat-note p{font-size:14px;color:var(--grey);line-height:1.6;}
+  .stat-note .btn{align-self:flex-start;}
+
+  /* ---------- ABOUT ---------- */
+  .about .grid{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center;}
+  .about-photos{position:relative;height:400px;}
+  .about-photos img{position:absolute;object-fit:cover;border-radius:var(--radius);}
+  .about-photos .p1{width:66%;height:84%;top:0;left:0;}
+  .about-photos .p2{width:46%;height:54%;bottom:0;right:2%;box-shadow:0 20px 48px rgba(0,0,0,.18);border:5px solid #fff;}
+  .about-card{background:var(--accent);color:var(--ink);border-radius:var(--radius-lg);padding:44px 40px;}
+  .about-card h2{font-size:clamp(24px,2.6vw,32px);font-weight:700;letter-spacing:-0.01em;margin-bottom:20px;}
+  .about-card ul{list-style:none;display:grid;gap:14px;margin-bottom:28px;}
+  .about-card li{position:relative;padding-left:26px;font-size:15px;line-height:1.5;font-weight:600;}
+  .about-card li::before{content:"";position:absolute;left:0;top:.4em;width:9px;height:9px;border-radius:50%;background:var(--ink);}
+
+  /* ---------- SERVICES ---------- */
+  .services .head{text-align:center;max-width:46rem;margin:0 auto 48px;}
+  .services h2{font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-0.01em;}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .svc-card{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;}
+  .svc-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .svc-card:hover img{transform:scale(1.06);}
+  .svc-card::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(20,22,26,.88) 0%,rgba(20,22,26,.15) 55%,transparent 75%);
+  }
+  .svc-card .txt{position:absolute;left:20px;right:20px;bottom:20px;z-index:2;color:#fff;}
+  .svc-card .idx{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.1em;}
+  .svc-card h3{font-size:19px;font-weight:700;margin:6px 0 12px;letter-spacing:-0.01em;}
+  .svc-card .more{
+    display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;
+    background:rgba(255,255,255,.16);backdrop-filter:blur(2px);padding:8px 14px;border-radius:var(--radius-pill);
+  }
+  .svc-card .more:hover{background:var(--accent);color:var(--ink);}
+
+  /* ---------- WORK STYLE GALLERY ---------- */
+  .featured .head{text-align:center;margin-bottom:48px;}
+  .featured h2{font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-0.01em;}
+  .fgrid{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:auto auto;gap:20px;}
+  .fgrid figure{margin:0;position:relative;overflow:hidden;border-radius:var(--radius);}
+  .fgrid img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .fgrid figure:hover img{transform:scale(1.04);}
+  .fgrid .tall{grid-row:1 / span 2;}
+  .fgrid .tall img{height:560px;}
+  .fgrid .wide img{height:270px;}
+  .fgrid figcaption{
+    position:absolute;left:16px;bottom:14px;background:var(--accent);
+    color:var(--ink);font-size:12px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;padding:8px 14px;border-radius:var(--radius-pill);
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-card{
+    background:var(--panel);color:#fff;border-radius:var(--radius-lg);
+    padding:64px 48px 56px;margin:0 24px;max-width:var(--maxw);margin-inline:auto;
+  }
+  .contact-card .top{text-align:center;max-width:640px;margin:0 auto 40px;}
+  .contact-card h2{font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-0.01em;}
+  .contact-card .sub{color:#a7abb3;font-size:15px;margin-top:12px;}
+  .contact-card .actions{display:flex;gap:14px;justify-content:center;margin-top:26px;flex-wrap:wrap;}
+  form.quote{max-width:760px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  form.quote input,form.quote select,form.quote textarea{
+    font-family:inherit;font-size:14px;padding:14px 18px;
+    border:1.5px solid #33373f;border-radius:12px;background:#22262e;color:#fff;width:100%;
+  }
+  form.quote ::placeholder{color:#82868f;}
+  form.quote input:focus,form.quote select:focus,form.quote textarea:focus{outline:2px solid var(--accent);border-color:transparent;}
+  form.quote textarea{grid-column:1 / -1;min-height:110px;resize:vertical;}
+  form.quote .full{grid-column:1 / -1;}
+  form.quote button{grid-column:1 / -1;justify-self:center;padding:14px 44px;font-size:15px;}
+
+  /* ---------- FOOTER ---------- */
+  .footer{
+    display:flex;align-items:flex-start;justify-content:space-between;
+    gap:32px;padding:44px 24px 12px;flex-wrap:wrap;max-width:var(--maxw);margin:0 auto;
+  }
+  .footer nav{display:flex;gap:26px;font-size:13.5px;font-weight:600;flex-wrap:wrap;}
+  .footer nav a:hover{color:var(--accent-text);}
+  .footer .areas{font-size:12px;color:var(--grey);max-width:420px;line-height:1.7;}
+  .legal{text-align:center;font-size:12px;color:#b5b5b5;padding:24px 24px 32px;}
+  .legal .disclaimer{display:block;margin-top:8px;color:#9a9a98;}
+
+  /* ---------- LEMONELLY BADGE ---------- */
+  .lm-badge{
+    position:fixed;left:16px;bottom:16px;z-index:50;
+    display:inline-flex;align-items:center;gap:8px;
+    background:#fff;color:#111110;border:1px solid #e2e2e2;
+    border-radius:999px;padding:9px 16px;
+    font-size:12.5px;font-weight:600;letter-spacing:.02em;
+    box-shadow:0 6px 24px rgba(0,0,0,.14);
+  }
+  .lm-badge svg{width:20px;height:20px;}
+  .lm-badge:hover{border-color:#166548;color:#166548;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    nav.links{display:none;}
+    .hero-row{grid-template-columns:1fr 1fr;height:auto;}
+    .hero-row img{aspect-ratio:1/1;height:auto;}
+    .hero-row img:last-child{grid-column:1/-1;aspect-ratio:16/9;}
+    .solutions .head{grid-template-columns:1fr;}
+    .stat-grid{grid-template-columns:1fr 1fr;}
+    .stat-note{grid-column:1/-1;}
+    .about .grid{grid-template-columns:1fr;}
+    .about-photos{height:320px;}
+    .svc-grid{grid-template-columns:1fr 1fr;}
+    .fgrid{grid-template-columns:1fr;}
+    .fgrid .tall{grid-row:auto;}
+    .fgrid .tall img{height:320px;}
+    form.quote{grid-template-columns:1fr;}
+    .contact-card{padding:48px 24px 40px;}
+  }
+  @media (max-width:560px){
+    .svc-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV — SLOT: wordmark SVG (redraw per brand), company name, town, phone -->
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Kestrel Roofing home">
+      <svg viewBox="0 0 34 26" fill="none" aria-hidden="true">
+        <path d="M2 24 L17 4 L32 24" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 24 L17 13 L25 24" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>KESTREL ROOFING<small>YOURTOWN</small></span>
+    </a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a class="tel" href="tel:01234567890"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>01234 567 890</a>
+      <a class="btn" href="#contact">Get a Quote</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO — SLOT: eyebrow, h1 (trade + town), sub (their real services/positioning),
+     note (only verifiable offers: free quotes, emergency callouts, etc.), 3 images -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-head">
+      <p class="eyebrow">Roofing Services in Yourtown</p>
+      <h1>Roofers in Yourtown</h1>
+      <p class="sub">New roofs, flat roofing, roof repairs and roofline &amp; guttering — a local crew covering Yourtown and the surrounding area.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#contact">Book a Free Site Visit</a>
+        <span class="note">Free, no-obligation quotes</span>
+      </div>
+    </div>
+    <div class="hero-row">
+      <img loading="lazy" width="1000" height="750" src="/assets/draft/stock/hero-red-tiled-roof.jpg" alt="Red tiled roof">
+      <img loading="lazy" width="1000" height="750" src="/assets/draft/stock/hero-grey-slate-roof.jpg" alt="Grey slate roof">
+      <img fetchpriority="high" width="1600" height="1067" src="/assets/draft/stock/hero-roofer-pitched-hammer.jpg" alt="Roofer working on a pitched roof with a hammer">
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE — SLOT: their top services, duplicated once for the scroll loop.
+     PRUNE: drop the whole strip if fewer than 3 services. -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>NEW ROOFS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>FLAT ROOFS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>ROOF REPAIRS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>ROOFLINE &amp; GUTTERING</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>NEW ROOFS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>FLAT ROOFS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>ROOF REPAIRS</span>
+    <span><svg viewBox="0 0 22 16" fill="none"><path d="M1 15 L11 2 L21 15" stroke="currentColor" stroke-width="2"/></svg>ROOFLINE &amp; GUTTERING</span>
+  </div>
+</div>
+
+<!-- STATS BAND — SLOT: h2, intro, tiles. HARD RULE: tiles hold VERIFIABLE facts only
+     (years trading, crew size, areas covered, 24/7 if they offer it). PRUNE: if fewer
+     than 3 verifiable facts, drop the tile row and keep just head + note. -->
+<section class="solutions">
+  <div class="wrap">
+    <div class="head">
+      <h2>Reliable Roofing, Done Right in Yourtown</h2>
+      <p>We assess your roof properly, explain your options honestly, and carry out the work to a high standard — whether it's an urgent repair or a full re-roof.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-tile"><div class="n">10+</div><div class="l">Years in the trade</div></div>
+      <div class="stat-tile hi"><div class="n">4</div><div class="l">Skilled local roofers</div></div>
+      <div class="stat-tile"><div class="n">12</div><div class="l">Areas covered</div></div>
+      <div class="stat-note">
+        <p>Free, no-obligation site visit with a clear, detailed quote for your project.</p>
+        <a class="btn dark" href="#contact">Get a Free Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT — SLOT: bullets from their real story (family-run, heritage work, etc.).
+     Prefer the prospect's own team/job photos here when quality allows. -->
+<section class="about" id="about">
+  <div class="wrap grid">
+    <div class="about-photos">
+      <img class="p1" loading="lazy" width="1000" height="667" src="/assets/draft/stock/about-roofer-drill.jpg" alt="Roofer fixing panels with a power drill">
+      <img class="p2" loading="lazy" width="800" height="533" src="/assets/draft/stock/about-two-roofers-pitched.jpg" alt="Two roofers working on a pitched roof">
+    </div>
+    <div class="about-card">
+      <p class="eyebrow" style="color:rgba(20,22,26,.72)">About Kestrel Roofing</p>
+      <h2>A Local Crew You Can Rely On</h2>
+      <ul>
+        <li>Serving Yourtown and the surrounding villages</li>
+        <li>Experienced, fully insured local roofers</li>
+        <li>Traditional craftsmanship combined with modern methods</li>
+        <li>Domestic and commercial roofing</li>
+      </ul>
+      <a class="btn white" href="#contact">Get a Free Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES — SLOT: one card per real service. RESHAPE: 6 = 3×2 (as-is), 4 = change
+     .svc-grid to repeat(2,1fr), 3 = one row. Match stock images to service semantics
+     by reading them; prefer prospect's own photos. -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">What We Do</p>
+      <h2>Comprehensive Roofing Services</h2>
+    </div>
+    <div class="svc-grid">
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" width="1000" height="1250" src="/assets/draft/stock/svc-new-roof-gable-window.jpg" alt="New roof with a gable window">
+        <div class="txt"><span class="idx">01</span><h3>New Roofs</h3><span class="more">Request a quote</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" width="900" height="1125" src="/assets/draft/stock/svc-flat-roof-bungalow.jpg" alt="Flat roof on a bungalow">
+        <div class="txt"><span class="idx">02</span><h3>Flat Roofing</h3><span class="more">Request a quote</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" width="900" height="1125" src="/assets/draft/stock/svc-repairs-timber-house.jpg" alt="Timber house with a dark roof">
+        <div class="txt"><span class="idx">03</span><h3>Roof Repairs</h3><span class="more">Request a quote</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" width="1000" height="1250" src="/assets/draft/stock/svc-roofline-striped.jpg" alt="Striped roofline pattern">
+        <div class="txt"><span class="idx">04</span><h3>Roofline &amp; Guttering</h3><span class="more">Request a quote</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" width="1000" height="1250" src="/assets/draft/stock/svc-metal-roof-worker.jpg" alt="Roofer seated on a metal roof">
+        <div class="txt"><span class="idx">05</span><h3>Metal Roofing</h3><span class="more">Request a quote</span></div>
+      </a>
+      <a class="svc-card" href="#contact">
+        <img loading="lazy" width="1000" height="1250" src="/assets/draft/stock/svc-roof-window.jpg" alt="House roof with a roof window">
+        <div class="txt"><span class="idx">06</span><h3>Roof Windows &amp; Velux</h3><span class="more">Request a quote</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WORK GALLERY — HARD RULE: with stock imagery the eyebrow stays "The Kind Of Work
+     We Handle" (never "Our Work"). Only switch to "Examples Of Our Work" if the images
+     are genuinely the prospect's own job photos. -->
+<section class="featured" id="work">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">The Kind Of Work We Handle</p>
+      <h2>Heritage &amp; Contemporary Roofing, Done Properly</h2>
+    </div>
+    <div class="fgrid">
+      <figure class="tall">
+        <img loading="lazy" width="1000" height="1250" src="/assets/draft/stock/work-commercial-roofline.jpg" alt="Contemporary building roofline">
+        <figcaption>Commercial</figcaption>
+      </figure>
+      <figure class="wide">
+        <img loading="lazy" width="1000" height="667" src="/assets/draft/stock/work-residential-roofer.jpg" alt="Roofer at work on a residential roof">
+        <figcaption>Residential</figcaption>
+      </figure>
+      <figure class="wide">
+        <img loading="lazy" width="1000" height="667" src="/assets/draft/stock/work-heritage-tiles.jpg" alt="Ornate heritage tiled roof">
+        <figcaption>Heritage</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS would go here if the prospect has real, attributable ones —
+     add a simple quote band styled like .solutions. NEVER invent reviews. -->
+
+<!-- CONTACT — SLOT: real phone + email everywhere; service <option>s match their list.
+     Form submits via mailto (no backend). -->
+<section id="contact" style="padding-top:0;">
+  <div class="contact-card">
+    <div class="top">
+      <p class="eyebrow">Get In Touch</p>
+      <h2>Is your roof leaking?</h2>
+      <p class="sub">Book a free, no-obligation site visit.</p>
+      <div class="actions">
+        <a class="btn" href="tel:01234567890">Call 01234 567 890</a>
+        <a class="btn ghost" style="color:#fff;border-color:#33373f" href="mailto:info@kestrelroofing.example">Email Us</a>
+      </div>
+    </div>
+    <form class="quote" onsubmit="sendQuote(event)">
+      <input name="name" placeholder="Full name" required>
+      <input name="tel" type="tel" placeholder="Phone" required>
+      <input name="email" type="email" placeholder="Email">
+      <select name="service" required>
+        <option value="" disabled selected>Required service</option>
+        <option>New Roofs</option>
+        <option>Flat Roofing</option>
+        <option>Roof Repairs</option>
+        <option>Roofline &amp; Guttering</option>
+        <option>Other</option>
+      </select>
+      <input class="full" name="postcode" placeholder="Postcode">
+      <textarea name="message" placeholder="Tell us about the job"></textarea>
+      <button class="btn" type="submit">Send enquiry</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER — SLOT: areas list from their site; keep the disclaimer line verbatim
+     apart from the company name. -->
+<footer class="footer">
+  <a class="logo" href="#top">
+    <svg viewBox="0 0 34 26" fill="none" aria-hidden="true">
+      <path d="M2 24 L17 4 L32 24" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 24 L17 13 L25 24" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>KESTREL ROOFING<small>YOURTOWN</small></span>
+  </a>
+  <nav>
+    <a href="#about">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <p class="areas"><strong>Areas we cover:</strong> Yourtown and all surrounding areas.</p>
+</footer>
+<p class="legal">Kestrel Roofing &copy;2026
+  <span class="disclaimer">Design concept prepared by <a href="https://lemonelly.com" style="text-decoration:underline">lemonelly</a> for Kestrel Roofing — this is not Kestrel Roofing's live website. Photography is placeholder imagery shown for layout only.</span>
+</p>
+
+<script>
+function sendQuote(e){
+  e.preventDefault();
+  var f=e.target;
+  var body="Name: "+f.name.value+"%0ATel: "+f.tel.value+"%0AEmail: "+f.email.value+
+    "%0APostcode: "+f.postcode.value+"%0AService: "+f.service.value+
+    "%0A%0A"+encodeURIComponent(f.message.value);
+  location.href="mailto:info@kestrelroofing.example?subject=Quote request from website&body="+body;
+}
+</script>
+
+<!-- BADGE — SLOT: href points to the prospect's matching regional page (/uk, /us, /za, /eu, or /) -->
+<a class="lm-badge" href="https://lemonelly.com/uk" target="_blank" rel="noopener">
+  <svg viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-20 32 38)"><ellipse cx="32" cy="38" rx="23" ry="16" fill="#FFD335" stroke="#111110" stroke-width="4"/></g><path d="M34 16q10-9 20-2q-9 9-20 2z" fill="#166548"/></svg>
+  Free draft by lemonelly
+</a>
+</body>
+</html>
