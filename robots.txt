@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /draft/
 
 Sitemap: https://lemonelly.com/sitemap.xml
