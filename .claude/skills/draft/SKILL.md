@@ -65,7 +65,11 @@ back a table: company → live URL → pitch snippet.
      `.em` emphasis word; tick-list = only real value props; badge number = a
      VERIFIABLE figure (years trading / areas covered). Localize phone format,
      spelling, terms (Velux vs skylights).
-   - Badge links to the matching regional page (UK company → /uk, etc.).
+   - Point EVERY lemonelly link at the matching regional page (UK company →
+     /uk, US → /us, etc.): the badge AND the two `<a href>` mentions in the
+     draft banner and the footer disclaimer. The template defaults all three to
+     /uk — retheme them together for non-UK prospects. (og:url/og:image stay
+     the absolute bare-domain asset/page URLs — those are not nav links.)
    - Title (browser tab): `lemonelly · <Company> (draft)` — always lead with
      lemonelly. Fill og tags (og:image = the hero image, absolute URL). Keep
      both disclaimers AND the `.lm-draft-banner` at the top of `<body>`
