@@ -90,8 +90,9 @@ back a table: company → live URL → pitch snippet.
    that `/` is unaffected) at desktop and ~375px widths.
 
 8. **Ship:** run `python3 scripts/build_admin.py` to refresh the private
-   drafts tracker (`reference/DRAFTS.md`); then branch → commit page + fact
-   sheet + per-company assets + the tracker → push → draft PR → Ben eyeballs
+   drafts tracker (`reference/DRAFTS.md`) and the CRM data feed
+   (`reference/leads.csv`); then branch → commit page + fact sheet +
+   per-company assets + the tracker + the CSV → push → draft PR → Ben eyeballs
    the Vercel preview → merge → live.
 
 9. **Hand back:** live URL(s) + a 3-sentence pitch-email draft per company

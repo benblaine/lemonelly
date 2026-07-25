@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
-"""Generate reference/DRAFTS.md — a private index of every client draft.
+"""Generate reference/DRAFTS.md and reference/leads.csv — private indexes of
+every client draft.
 
 Scans draft/<slug>/ pages and their reference/clients/<slug>.md fact sheets and
-writes a Markdown table (company, live URL, status, contact). Run it after adding
-or updating a draft:  python3 scripts/build_admin.py
+writes two artifacts:
+  - reference/DRAFTS.md  — a human-readable Markdown table (company, live URL,
+    status, contact).
+  - reference/leads.csv  — the machine-owned factual columns for the outreach
+    CRM sheet: Slug, Company, Owner, Draft URL, Original Site, Phone, Email,
+    Address, Verify notes. This is the "data feed" half of the CRM; the human-
+    owned columns (Outreach Status / Date Contacted / Owner notes) live only in
+    the sheet and are never generated here, so a refresh never clobbers them.
+
+Run it after adding or updating a draft:  python3 scripts/build_admin.py
 
 Lives under reference/ (and scripts/), which .vercelignore keeps OUT of the
 deployed site — this list of prospects is never published on lemonelly.com.
 """
+import csv
 import re
 from pathlib import Path
 
@@ -15,6 +25,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DRAFT_DIR = ROOT / "draft"
 CLIENTS_DIR = ROOT / "reference" / "clients"
 OUT = ROOT / "reference" / "DRAFTS.md"
+OUT_CSV = ROOT / "reference" / "leads.csv"
 LIVE_BASE = "https://lemonelly.com/draft"
 
 
@@ -68,6 +79,143 @@ def parse(slug):
     return company, owner, phone, email, status, site
 
 
+# --- CSV ("data feed") extraction -------------------------------------------
+# The Markdown table above intentionally truncates phone/email at the first
+# provenance note (via clean()). The CSV wants the fuller, sheet-ready values,
+# so it re-parses the fact sheet with wrap-aware helpers below.
+
+# Parenthetical/trailer content that is provenance or a caveat, not part of the
+# contact detail itself — stripped from the Phone/Email cells.
+PROVENANCE = re.compile(
+    r"20\d\d|\bsite\b|\bsource\b|\bhome\b|\bcontact\b|\bpage\b|\.htm|footer|"
+    r"verif|decod|obfuscat|cloak|differ|typo|plain text|\bNOTE\b|\bfax\b|"
+    r"Cloudflare|Joomla|Trustpilot|\bdomain\b|broken|published|as published|"
+    r"formatting|likely",
+    re.IGNORECASE,
+)
+# The subset of the above worth surfacing to a human before they make contact.
+CAVEAT = re.compile(
+    r"verif|decod|obfuscat|cloak|differ|typo|Cloudflare|Joomla|\bdomain\b|"
+    r"broken|likely",
+    re.IGNORECASE,
+)
+
+
+def tidy_note(s):
+    """Strip a leading 'NOTE:'/'CAUTION:' or 'site, 2026-… —' provenance prefix
+    from a harvested caveat so the Verify-notes cell reads cleanly."""
+    s = re.sub(r"^(?:NOTE|CAUTION)\b[:\s]+", "", s, flags=re.IGNORECASE)
+    s = re.sub(r"^(?:site|source)\b[^—–]*[—–]\s*", "", s, flags=re.IGNORECASE)
+    return s.strip(" —–.:")
+
+
+def logical_value(label, text):
+    """Full value after a '- Label:' bullet, including wrapped continuation
+    lines, with runs of whitespace collapsed to single spaces."""
+    m = re.search(
+        rf"^-?\s*{label}[^:]*:\s*(.+?)(?=\n-\s|\n\n|\n##\s|\Z)",
+        text,
+        re.IGNORECASE | re.MULTILINE | re.DOTALL,
+    )
+    return " ".join(m.group(1).replace("**", "").split()) if m else ""
+
+
+def split_contact(value):
+    """Split a raw phone/email value into (clean_contact, [caveat_notes]).
+
+    Parentheticals that read as provenance ('(site, 2026-07-24)') or caveats
+    ('(decoded from Cloudflare — verify)') are removed from the contact; the
+    caveat ones are harvested into notes. Short qualifiers such as '(office)'
+    or '(mobile)' are kept in place."""
+    notes = []
+
+    def repl(m):
+        inner = m.group(0)[1:-1].strip()
+        if PROVENANCE.search(inner):
+            if CAVEAT.search(inner):
+                notes.append(inner.strip(" —–"))
+            return ""
+        return m.group(0)
+
+    # Drop provenance/caveat parentheticals (supports one level of nesting,
+    # e.g. capitalroofing's "(… published as +44 (0)20 …)").
+    contact = re.sub(r"\((?:[^()]|\([^()]*\))*\)", repl, value)
+    # A trailing provenance clause written outside parentheses, introduced by
+    # ' — ', '. Source', or ' Source:' (e.g. mattboyd's ". Source: https://…").
+    m = re.search(r"\s+[—–]\s+|\.\s+Source\b|\s+Source:\s*", contact, re.IGNORECASE)
+    if m and PROVENANCE.search(contact[m.start():]):
+        tail = contact[m.end():]
+        if CAVEAT.search(contact[m.start():]):
+            notes.append(tail.strip(" —–.:"))
+        contact = contact[: m.start()]
+    contact = " ".join(contact.split()).strip(" ,.;").strip()
+    return contact, notes
+
+
+def flag_lines(text):
+    """Explicit 'NOTE:' / 'CAUTION:' lines authors added to a fact sheet."""
+    out = []
+    for m in re.finditer(
+        r"^-?\s*(?:NOTE|CAUTION)\b[:\s]\s*(.+?)(?=\n-\s|\n\n|\n##\s|\Z)",
+        text,
+        re.IGNORECASE | re.MULTILINE | re.DOTALL,
+    ):
+        out.append(" ".join(m.group(1).split()))
+    return out
+
+
+def csv_row(slug):
+    """Machine-owned factual columns for one draft, for the CRM data feed."""
+    company, owner, _, _, _, site = parse(slug)
+    phone = email = address = ""
+    notes = []
+    fact = CLIENTS_DIR / f"{slug}.md"
+    if fact.exists():
+        text = fact.read_text(encoding="utf-8")
+        phone, pnotes = split_contact(logical_value("Phone", text))
+        email, enotes = split_contact(logical_value("Email", text))
+        # Some fact sheets put phone and email on one line ("… · Email: x@y").
+        # If no dedicated Email bullet was found, lift the email out of phone.
+        if not email:
+            m = re.search(r"[\w.+-]+@[\w.-]+\.\w+", phone)
+            if m:
+                email = m.group(0)
+                phone = re.split(r"\s*(?:·|\|)?\s*Email\s*:?|\s+" + re.escape(email),
+                                 phone, maxsplit=1)[0].strip(" ·|")
+        # Postal address, with provenance parens/tails ("(site, 2026-07-24)",
+        # "— source: …") stripped the same way as phone/email.
+        address, _ = split_contact(logical_value("Address", text))
+        notes = pnotes + enotes + flag_lines(text)
+    seen, verify = set(), []
+    for n in (tidy_note(n) for n in notes):
+        if n and n not in seen:
+            seen.add(n)
+            verify.append(n)
+    return {
+        "Slug": slug,
+        "Company": company,
+        "Owner": owner,
+        "Draft URL": f"{LIVE_BASE}/{slug}",
+        "Original Site": site if site != "—" else "",
+        "Phone": phone,
+        "Email": email,
+        "Address": address,
+        "Verify notes": " · ".join(verify),
+    }
+
+
+def write_csv(slugs):
+    cols = [
+        "Slug", "Company", "Owner", "Draft URL", "Original Site",
+        "Phone", "Email", "Address", "Verify notes",
+    ]
+    with OUT_CSV.open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=cols)
+        w.writeheader()
+        for slug in slugs:
+            w.writerow(csv_row(slug))
+
+
 def main():
     slugs = sorted(p.name for p in DRAFT_DIR.iterdir() if (p / "index.html").exists())
     rows = []
@@ -99,7 +247,11 @@ def main():
         "",
     ]
     OUT.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Wrote {OUT.relative_to(ROOT)} ({len(slugs)} drafts)")
+    write_csv(slugs)
+    print(
+        f"Wrote {OUT.relative_to(ROOT)} and {OUT_CSV.relative_to(ROOT)} "
+        f"({len(slugs)} drafts)"
+    )
 
 
 if __name__ == "__main__":
