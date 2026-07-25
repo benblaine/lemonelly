@@ -75,7 +75,8 @@ back a table: company → live URL → pitch snippet.
      work" claims. Stock-filled galleries stay framed as "the kind of work we
      handle".
 
-6. **QA checklist** (all must pass):
+6. **QA checklist** (all must pass — `bash scripts/verify.sh` enforces checks
+   1–5 of these in CI, so run it before pushing):
    - `grep -ri kestrel draft/<slug>/` → nothing.
    - Every tel:/mailto: matches the fact sheet.
    - No external requests: `grep -oE '(src|href)="https?://[^"]*"' draft/<slug>/index.html`
