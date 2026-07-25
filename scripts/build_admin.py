@@ -43,9 +43,18 @@ def title_company(slug):
     return t or slug
 
 
+def original_site(text):
+    """First http(s) URL under the '## Sources' heading — the prospect's live site."""
+    m = re.search(r"^##\s+Sources\s*$(.*?)(?=^##\s|\Z)", text, re.IGNORECASE | re.MULTILINE | re.DOTALL)
+    if not m:
+        return "—"
+    u = first(r"^-\s*(https?://\S+)", m.group(1))
+    return u or "—"
+
+
 def parse(slug):
     fact = CLIENTS_DIR / f"{slug}.md"
-    company, phone, email, status, owner = title_company(slug), "", "", "drafted?", "—"
+    company, phone, email, status, owner, site = title_company(slug), "", "", "drafted?", "—", "—"
     if fact.exists():
         text = fact.read_text(encoding="utf-8")
         h = first(r"^#\s+(.*)$", text)
@@ -55,7 +64,8 @@ def parse(slug):
         email = clean(first(r"^-?\s*Email[^:]*:\s*(.+)$", text)) or "—"
         status = first(r"^Status:\s*(.+)$", text) or "drafted?"
         owner = first(r"^Assigned:\s*(.+)$", text) or "—"
-    return company, owner, phone, email, status
+        site = original_site(text)
+    return company, owner, phone, email, status, site
 
 
 def main():
@@ -63,12 +73,13 @@ def main():
     rows = []
     counts = {}
     for slug in slugs:
-        company, owner, phone, email, status = parse(slug)
+        company, owner, phone, email, status, site = parse(slug)
         key = status.split()[0].lower() if status else "unknown"
         counts[key] = counts.get(key, 0) + 1
         url = f"{LIVE_BASE}/{slug}"
+        site_cell = f"[{site.split('//', 1)[-1].rstrip('/')}]({site})" if site != "—" else "—"
         rows.append(
-            f"| {company} | {owner} | [`/draft/{slug}`]({url}) | {status} | {phone} | {email} |"
+            f"| {company} | {owner} | [`/draft/{slug}`]({url}) | {status} | {phone} | {email} | {site_cell} |"
         )
 
     summary = " · ".join(f"{n} {k}" for k, n in sorted(counts.items()))
@@ -82,8 +93,8 @@ def main():
         "",
         f"**{len(slugs)} drafts** — {summary}",
         "",
-        "| Company | Owner | Draft URL | Status | Phone | Email |",
-        "|---|---|---|---|---|---|",
+        "| Company | Owner | Draft URL | Status | Phone | Email | Original Site |",
+        "|---|---|---|---|---|---|---|",
         *rows,
         "",
     ]
