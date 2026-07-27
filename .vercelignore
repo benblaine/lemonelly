@@ -1,6 +1,7 @@
 # Not part of the deployed site — internal working material.
 reference
 .claude
+.github
 scripts
 template
 regions.json

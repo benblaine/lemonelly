@@ -53,6 +53,10 @@ Vercel deploys `main` automatically.
 ## Conventions
 
 - Preview: `python3 -m http.server 8000`.
+- CI (`scripts/verify.sh`, run by `.github/workflows/verify.yml`) enforces the
+  draft invariants on every PR — generated pages in sync, every draft `noindex`,
+  zero external requests, no draft in the sitemap, robots `Disallow: /draft/`.
+  Run it locally with `bash scripts/verify.sh` before pushing.
 - Ship via branch → PR → Ben reviews the Vercel preview → merge to `main`.
 - Design system for the main site is in `README.md`; the draft template is its
   own design system (see the template file's header comment).
