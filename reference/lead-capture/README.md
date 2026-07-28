@@ -2,70 +2,114 @@
 
 The `/start` onboarding form used to end on a screen that asked the prospect to
 *manually* fire their brief off via WhatsApp or email — an easy place to lose a
-lead. It now POSTs the finished brief straight to a Google Sheet, then shows a
+lead. It now sends the finished brief straight to a Google Sheet and shows a
 "we've got it" confirmation. WhatsApp/email stay as a silent fallback if the
-network call ever fails. For an email ping on each new lead, see **Email alerts**
-below — that's set up on the sheet itself, not in this script.
+network call ever fails.
 
-The site half is already wired up. The only thing left is a one-time Google
-setup, because deploying an Apps Script needs your own Google login.
+There are two ways to receive submissions. **Option A (Google Form) is the
+recommended one** — it needs no Google login and can't be blocked. Option B
+(Apps Script) is kept for reference but hits a "This app is blocked" screen on
+Workspace / high-security accounts, so skip it unless A doesn't suit you.
 
-## One-time setup (~2 minutes)
+---
 
-1. Open the leads sheet:
-   <https://docs.google.com/spreadsheets/d/1zpVOKFb8oDvdgSfSZLgXp458wnkxUwp4J5GhQafVbvY/edit>
-2. **Extensions → Apps Script.** Delete the placeholder `myFunction`, then paste
-   the entire contents of [`Code.gs`](./Code.gs). Save (the disk icon).
-3. **Deploy → New deployment.** Click the gear → **Web app**. Set:
-   - **Execute as:** Me
-   - **Who has access:** Anyone
-   Click **Deploy**, then **Authorize access** and approve. You'll see a
-   "Google hasn't verified this app" notice — click **Advanced → Go to … (unsafe)**
-   and allow. It only asks to manage *this* spreadsheet.
-4. Copy the **Web app URL** — it ends in `/exec`.
-5. In `start/index.html`, paste that URL into the `SHEET_ENDPOINT` constant near
-   the top of the `<script>`:
-   ```js
-   var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfy…/exec';
+## Option A — Google Form → your sheet (recommended)
+
+A Google Form accepts submissions anonymously and drops every response into a
+linked sheet. No script, no authorization, nothing to be blocked. We just POST
+the brief to the form's URL behind the scenes.
+
+### 1. Build the form
+
+1. Go to <https://forms.google.com> → **Blank form**. Name it e.g. "lemonelly leads".
+2. Add these **Short answer** questions (exact names don't matter, order does not
+   matter — we map them by ID). Make the last one **Paragraph**:
+   - First name
+   - Last name
+   - Business
+   - Email
+   - Phone
+   - Brief *(Paragraph — this holds the full formatted brief)*
+3. **Responses** tab → **Link to Sheets** → *Select existing spreadsheet* →
+   pick your leads sheet (or let it create one). Responses now flow into it.
+
+### 2. Grab the form's action URL + field IDs
+
+Easiest way, no code:
+
+1. Top-right **⋮ → Get pre-filled link**.
+2. Type a throwaway value into every field (e.g. `A`, `B`, `C`, `D`, `E`, `F`),
+   then **Get link** → **Copy link**.
+3. Paste that link somewhere you can read it. It looks like:
    ```
-   Commit and let Vercel deploy. Done — submissions now land in the sheet.
+   https://docs.google.com/forms/d/e/1FAIpQL…/viewform?entry.111111=A&entry.222222=B&…
+   ```
+   Each `entry.NNNN` is a field ID, in the same order as your questions.
 
-### "This app is blocked" during authorize?
+**Or just paste that pre-filled link to me and I'll wire the IDs in for you.**
 
-That hard block appears when a script asks for a *sensitive* permission (like
-sending email) on a personal Gmail account. `Code.gs` deliberately only touches
-this one spreadsheet, so it shouldn't happen. If you do hit it, you're almost
-certainly authorizing an **older copy of the script that still had the email
-line** — re-paste the current `Code.gs` (no `MailApp`), save, and deploy again.
-Get email alerts via the sheet's own notifications instead (below).
+### 3. Fill in `start/index.html`
 
-## Email alerts (optional, no script permissions)
+Near the top of the `<script>`, set `FORM_ACTION` to the form URL with
+`/viewform...` replaced by `/formResponse`, and map each `entry.NNNN` to a field:
 
-Google Sheets can email you itself — no code, nothing to authorize, can't be
-blocked:
+```js
+var FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQL…/formResponse';
+var FORM_FIELDS = {
+  'entry.111111': 'firstName',
+  'entry.222222': 'lastName',
+  'entry.333333': 'businessName',
+  'entry.444444': 'email',
+  'entry.555555': 'phone',
+  'entry.666666': 'brief'
+};
+```
 
-1. In the sheet: **Tools → Notification settings → Edit notifications**
-   (older UI: **Tools → Notification rules**).
-2. Choose **Any changes are made** → **Email – right away** → **Save**.
+The `brief` field receives the whole formatted brief (style, domain, pages,
+story, deep-dive answers, etc.) as one block of text, so nothing is lost even
+though the form only has a handful of questions. Commit, let Vercel deploy, run
+through `/start` and submit — a new row should appear in the sheet.
 
-You'll get a "the sheet changed" email the moment a lead lands; open the sheet
-to read the new row. (Google's native emails don't include the row contents —
-that's the trade-off for it being permission-free.)
+### Email alerts (optional)
 
-## Test it
+On the linked sheet: **Tools → Notification settings → Any changes → Email right
+away**. Or in the Form: **Responses → ⋮ → Get email notifications for new
+responses**. Either is permission-free.
 
-- Open the `/exec` URL in a browser: you should see
-  `{"ok":true,"msg":"lemonelly lead capture is live"}`.
-- Run through `/start` and submit. A row should appear on the **Leads** tab.
+### Available fields to map
+
+`firstName`, `lastName`, `businessName`, `email`, `phone`, `region`, `style`,
+`styleTag`, `domain`, `pages`, `story`, `colors`, `assets`, `extras`,
+`powerups`, `ddIdeal`, `ddDiff`, `ddJobs`, `ddTone`, `monthly`, `termsAgreed`,
+`brief`. Map as many or as few as you like — the six above are plenty since
+`brief` already contains everything in readable form.
+
+---
+
+## Option B — Apps Script web app (fallback)
+
+Logs the full structured brief with one column per field. The catch: deploying
+it makes Google ask you to authorize the script, and Workspace or
+high-security personal accounts return a hard **"This app is blocked"** screen
+with no way past it. If that happens, use Option A instead.
+
+1. Open the sheet → **Extensions → Apps Script**, paste [`Code.gs`](./Code.gs), save.
+2. **Deploy → New deployment → Web app**, *Execute as: Me*, *Who has access:
+   Anyone*, authorize.
+3. Copy the `/exec` URL into `SHEET_ENDPOINT` in `start/index.html` (leave
+   `FORM_ACTION` blank). Commit.
+
+`Code.gs` only touches this one spreadsheet — it deliberately doesn't send email
+(that would request a sensitive Gmail permission and guarantee the block); use
+the sheet's own notification rules for alerts.
+
+---
 
 ## Notes
 
-- **Columns** are defined by the `COLUMNS` list in `Code.gs`; the header row is
-  created automatically on the first submission. Add/rename columns there.
-- **CORS:** the page posts with `mode: 'no-cors'` and `text/plain`, which is the
-  reliable pattern for a static site talking to Apps Script — no preflight, no
-  extra config. The browser can't read the response, so the page treats a
-  completed request as success and only falls back to manual send on a true
-  network error.
-- If you'd rather not run Apps Script at all, leave `SHEET_ENDPOINT` blank and the
-  form keeps the old manual WhatsApp/email send screen — nothing breaks.
+- **CORS:** the page posts with `mode: 'no-cors'`, so the browser can't read the
+  response. It treats a completed request as success and only falls back to the
+  manual send screen on a true network error. This is the standard, reliable
+  pattern for a static site talking to Google Forms / Apps Script.
+- Leave both `FORM_ACTION` and `SHEET_ENDPOINT` blank and the form keeps the old
+  manual WhatsApp/email send screen — nothing breaks.

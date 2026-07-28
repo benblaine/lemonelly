@@ -548,11 +548,30 @@
       var $ = function (s, r) { return (r || document).querySelector(s); };
       var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-      /* Google Sheet lead capture. Paste the Apps Script Web App /exec URL here
-         and every submitted brief is logged straight to the sheet (and emailed
-         to us). Leave it blank and the form falls back to manual WhatsApp/email
-         send. Setup guide: reference/lead-capture/README.md */
+      /* --------------------------------------------------------------------
+         Where finished briefs are sent. Pick ONE. Setup: reference/lead-capture/
+
+         OPTION A — Google Form → your sheet. No Google login, nothing to
+         authorize, can't be blocked. Recommended. Create a Form, link it to the
+         sheet, then fill in the form's action URL and map each entry id to a
+         field below (README explains where to find these). */
+      var FORM_ACTION = '';   // https://docs.google.com/forms/d/e/FORM_ID/formResponse
+      var FORM_FIELDS = {
+        // 'entry.111111': 'firstName',
+        // 'entry.222222': 'lastName',
+        // 'entry.333333': 'businessName',
+        // 'entry.444444': 'email',
+        // 'entry.555555': 'phone',
+        // 'entry.666666': 'brief'
+      };
+
+      /* OPTION B — Apps Script web app. Logs the full structured brief, but needs
+         a Google authorize step that some accounts (Workspace / advanced
+         security) hard-block. Leave blank if using Option A. */
       var SHEET_ENDPOINT = '';
+
+      /* Both blank → form keeps the manual WhatsApp/email send screen. */
+      /* -------------------------------------------------------------------- */
 
       var PRICES = { za: 'R2,200', us: '$120', uk: '£95', eu: '€110' };
       var region = new URLSearchParams(location.search).get('r');
@@ -842,18 +861,35 @@
         show('done');
       }
 
+      /* Turn the payload into a request for whichever backend is configured. */
+      function buildSubmit() {
+        var p = payload();
+        if (FORM_ACTION) {
+          var body = Object.keys(FORM_FIELDS).map(function (entry) {
+            var v = p[FORM_FIELDS[entry]];
+            return encodeURIComponent(entry) + '=' + encodeURIComponent(v != null ? v : '');
+          }).join('&');
+          return { url: FORM_ACTION, type: 'application/x-www-form-urlencoded;charset=UTF-8', body: body };
+        }
+        if (SHEET_ENDPOINT) {
+          return { url: SHEET_ENDPOINT, type: 'text/plain;charset=utf-8', body: JSON.stringify(p) };
+        }
+        return null;
+      }
+
       function submitProject() {
         prepareBrief();
-        if (!SHEET_ENDPOINT) { showDone('manual'); return; }
+        var req = buildSubmit();
+        if (!req) { showDone('manual'); return; }
         var next = $('#next-btn');
         next.disabled = true;
         next.textContent = 'Sending…';
         var done = function () { next.disabled = false; next.textContent = 'Submit my project'; };
-        fetch(SHEET_ENDPOINT, {
+        fetch(req.url, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload())
+          headers: { 'Content-Type': req.type },
+          body: req.body
         }).then(function () { showDone('sent'); done(); })
           .catch(function () { showDone('manual'); done(); });
       }
