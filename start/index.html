@@ -170,6 +170,7 @@
     .ext-chips label:has(input:checked) { background: var(--green); border-color: var(--green); color: #fff; }
     .ext-chips input { position: absolute; opacity: 0; }
     .domain-note { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: .75rem 1rem; font-size: .875rem; color: var(--ink-2); margin-top: 1rem; }
+    .region-pick { margin: 1.25rem 0; }
 
     .checks { display: grid; gap: .6rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
     .check {
@@ -480,6 +481,15 @@
         <div class="panel" data-panel="5" hidden>
           <h2>Ready to squeeze the main event?</h2>
           <p class="sub">Zero risk, zero upfront fees today. You'll only launch your <strong id="price-monthly">$120</strong>/month subscription once you've reviewed and totally loved your finished site.</p>
+          <div class="region-pick">
+            <label class="f">Where will you be billed?</label>
+            <div class="ext-chips" id="region-chips">
+              <label><input type="radio" name="region" value="za">ZA · R2,200/mo</label>
+              <label><input type="radio" name="region" value="us">US · $120/mo</label>
+              <label><input type="radio" name="region" value="uk">UK · £95/mo</label>
+              <label><input type="radio" name="region" value="eu">EU · €110/mo</label>
+            </div>
+          </div>
           <div class="callout">
             <label><input type="checkbox" id="terms"> I agree to the Terms &amp; Conditions: lemonelly will design my full website for review. My subscription only starts once I approve the site, and I can cancel anytime.</label>
           </div>
@@ -578,10 +588,9 @@
       /* -------------------------------------------------------------------- */
 
       var PRICES = { za: 'R2,200', us: '$120', uk: '£95', eu: '€110' };
-      var region = new URLSearchParams(location.search).get('r');
-      var monthly = PRICES[region] || '$120';
-      $('#price-monthly').textContent = monthly;
-      $('#price-monthly-2').textContent = monthly;
+      var REGION_NAMES = { za: 'South Africa', us: 'United States', uk: 'United Kingdom', eu: 'Europe' };
+      function priceFor(r) { return PRICES[r] || PRICES.us; }
+      var urlRegion = new URLSearchParams(location.search).get('r');
 
       var THUMBS = {
         'Clean Pro': 't-modern', 'Big Impact': 't-bold', 'Trade Mark': 't-classic',
@@ -596,8 +605,17 @@
         puContent: false, puImages: false, puVideo: '',
         deepdive: false, dd: { ideal: '', diff: '', jobs: '', tone: '' },
         contact: { first: '', last: '', email: '', phone: '', biz: '' },
+        region: (PRICES[urlRegion] ? urlRegion : 'us'),
         terms: false
       };
+
+      /* Reflect the chosen billing region in the price copy + the chip state. */
+      function applyRegion() {
+        var m = priceFor(state.region);
+        $('#price-monthly').textContent = m;
+        $('#price-monthly-2').textContent = m;
+        $$('#region-chips input').forEach(function (c) { c.checked = c.value === state.region; });
+      }
 
       function save() { try { localStorage.setItem('lemonelly-onboarding', JSON.stringify(state)); } catch (e) {} }
       function load() {
@@ -775,6 +793,9 @@
 
       /* ---- step 5 wiring ---- */
       $('#terms').addEventListener('change', function (e) { state.terms = e.target.checked; renderStep(); });
+      $$('#region-chips input').forEach(function (r) {
+        r.addEventListener('change', function () { state.region = r.value; applyRegion(); save(); });
+      });
 
       /* ---- submit ---- */
       function brief() {
@@ -811,7 +832,8 @@
         L.push('CONTACT: ' + s.contact.first + ' ' + s.contact.last + ' · ' + s.contact.biz);
         L.push(s.contact.email + ' · ' + s.contact.phone);
         L.push('');
-        L.push('Terms agreed (free design, ' + monthly + '/mo after approval, cancel anytime): YES');
+        L.push('Billing: ' + (REGION_NAMES[s.region] || s.region) + ' — ' + priceFor(s.region) + '/mo');
+        L.push('Terms agreed (free design, ' + priceFor(s.region) + '/mo after approval, cancel anytime): YES');
         return L.join('\n');
       }
 
@@ -819,7 +841,8 @@
       function payload() {
         var s = state;
         return {
-          region: region || '',
+          region: s.region || '',
+          regionName: REGION_NAMES[s.region] || '',
           style: s.style ? s.style.name : '',
           styleTag: s.style ? s.style.tag : '',
           firstName: s.contact.first, lastName: s.contact.last,
@@ -836,7 +859,7 @@
           ].filter(Boolean).join(' · '),
           ddIdeal: s.deepdive ? s.dd.ideal : '', ddDiff: s.deepdive ? s.dd.diff : '',
           ddJobs: s.deepdive ? s.dd.jobs : '', ddTone: s.deepdive ? s.dd.tone : '',
-          monthly: monthly, termsAgreed: s.terms ? 'Yes' : 'No', brief: brief()
+          monthly: priceFor(s.region), termsAgreed: s.terms ? 'Yes' : 'No', brief: brief()
         };
       }
 
@@ -921,6 +944,7 @@
 
       /* ---- restore ---- */
       load();
+      applyRegion();
       if (state.style) {
         renderPicked();
         renderCustomPages(); renderSwatches();
