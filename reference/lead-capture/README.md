@@ -2,14 +2,57 @@
 
 The `/start` onboarding form used to end on a screen that asked the prospect to
 *manually* fire their brief off via WhatsApp or email — an easy place to lose a
-lead. It now sends the finished brief straight to a Google Sheet and shows a
-"we've got it" confirmation. WhatsApp/email stay as a silent fallback if the
-network call ever fails.
+lead. It now sends the finished brief straight to us — by email or into a Google
+Sheet, depending on which option below you set up — and shows a "we've got it"
+confirmation. WhatsApp/email stay as a silent fallback if the network call ever
+fails.
 
-There are two ways to receive submissions. **Option A (Google Form) is the
-recommended one** — it needs no Google login and can't be blocked. Option B
-(Apps Script) is kept for reference but hits a "This app is blocked" screen on
-Workspace / high-security accounts, so skip it unless A doesn't suit you.
+Three ways to receive submissions:
+
+- **Option C — Serverless email + Gmail app password.** *(default, active now)*
+  Leads land in your inbox. Uses SMTP, not OAuth, so the "This app is blocked"
+  screen never appears. Just set two env vars in Vercel.
+- **Option A — Google Form → your sheet.** No login at all, rows in a sheet.
+- **Option B — Apps Script.** Full structured rows, but the authorize step is
+  hard-blocked on Workspace / high-security accounts. Kept only as a fallback.
+
+The page uses whichever is configured, in the order C → A → B.
+
+---
+
+## Option C — Serverless email via Gmail app password (default)
+
+`start/index.html` already posts each brief to our own `/api/lead` function
+(`api/lead.js`), which emails it to you. An **app password** is a Gmail login
+that skips OAuth entirely, so it can't trigger the block you hit. It lives only
+in Vercel's environment — never in the page.
+
+### Setup (~3 minutes)
+
+1. **Turn on 2-Step Verification** for the Gmail account (app passwords require
+   it): <https://myaccount.google.com/security>.
+2. **Create an app password:** <https://myaccount.google.com/apppasswords> →
+   name it "lemonelly" → **Create** → copy the 16-character code (no spaces).
+3. In **Vercel → your lemonelly project → Settings → Environment Variables**, add:
+   - `GMAIL_USER` — the sending Gmail address (e.g. `hello@lemonelly.com` or your
+     `@gmail.com`)
+   - `GMAIL_APP_PASSWORD` — the 16-char code from step 2
+   - `LEAD_TO` *(optional)* — where leads should arrive; defaults to `GMAIL_USER`
+4. **Redeploy** (Vercel → Deployments → ⋮ → Redeploy, or just push) so the
+   function picks up the vars.
+
+That's it — submit a test brief through `/start` and it should hit your inbox.
+Until the vars are set, `/api/lead` returns an error and the form quietly falls
+back to the manual WhatsApp/email screen, so nothing breaks in the meantime.
+
+> ⚠️ **Workspace note:** app passwords only exist if the account has 2-Step
+> Verification and the option isn't disabled by a Workspace admin. If step 2
+> shows no "App passwords" page, use **Option A (Google Form)** instead — it
+> needs no password at all.
+
+This gives you email only (not sheet rows). Want the data in the sheet too? Run
+Option A alongside, or ask and I'll switch `/api/lead` to also write the sheet
+via a service account.
 
 ---
 

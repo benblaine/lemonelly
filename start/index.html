@@ -549,12 +549,17 @@
       var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
       /* --------------------------------------------------------------------
-         Where finished briefs are sent. Pick ONE. Setup: reference/lead-capture/
+         Where finished briefs are sent. Setup: reference/lead-capture/
 
-         OPTION A — Google Form → your sheet. No Google login, nothing to
-         authorize, can't be blocked. Recommended. Create a Form, link it to the
-         sheet, then fill in the form's action URL and map each entry id to a
-         field below (README explains where to find these). */
+         OPTION C — Serverless email via a Gmail app password (default). Posts to
+         our own /api/lead function, which emails each brief to us. Uses SMTP, not
+         OAuth, so it's never hit by the "This app is blocked" screen. Just add
+         GMAIL_USER + GMAIL_APP_PASSWORD in Vercel's env vars — no code change.
+         Set to '' to fall back to the options below. Takes priority when set. */
+      var LEAD_API = '/api/lead';
+
+      /* OPTION A — Google Form → your sheet. No login, can't be blocked. Fill in
+         the form action URL + entry-id → field map (README explains where). */
       var FORM_ACTION = '';   // https://docs.google.com/forms/d/e/FORM_ID/formResponse
       var FORM_FIELDS = {
         // 'entry.111111': 'firstName',
@@ -565,12 +570,11 @@
         // 'entry.666666': 'brief'
       };
 
-      /* OPTION B — Apps Script web app. Logs the full structured brief, but needs
-         a Google authorize step that some accounts (Workspace / advanced
-         security) hard-block. Leave blank if using Option A. */
+      /* OPTION B — Apps Script web app. Full structured rows, but the authorize
+         step is hard-blocked on some accounts. */
       var SHEET_ENDPOINT = '';
 
-      /* Both blank → form keeps the manual WhatsApp/email send screen. */
+      /* All blank → form keeps the manual WhatsApp/email send screen. */
       /* -------------------------------------------------------------------- */
 
       var PRICES = { za: 'R2,200', us: '$120', uk: '£95', eu: '€110' };
@@ -879,12 +883,25 @@
 
       function submitProject() {
         prepareBrief();
+        var next = $('#next-btn');
+        var done = function () { next.disabled = false; next.textContent = 'Submit my project'; };
+
+        // Option C: our own same-origin API — we can read the real response.
+        if (LEAD_API) {
+          next.disabled = true; next.textContent = 'Sending…';
+          fetch(LEAD_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload())
+          }).then(function (r) { showDone(r && r.ok ? 'sent' : 'manual'); done(); })
+            .catch(function () { showDone('manual'); done(); });
+          return;
+        }
+
+        // Options A/B: cross-origin Google endpoints — opaque, so stay optimistic.
         var req = buildSubmit();
         if (!req) { showDone('manual'); return; }
-        var next = $('#next-btn');
-        next.disabled = true;
-        next.textContent = 'Sending…';
-        var done = function () { next.disabled = false; next.textContent = 'Submit my project'; };
+        next.disabled = true; next.textContent = 'Sending…';
         fetch(req.url, {
           method: 'POST',
           mode: 'no-cors',
