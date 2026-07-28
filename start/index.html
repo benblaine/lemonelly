@@ -565,8 +565,12 @@
          our own /api/lead function, which emails each brief to us. Uses SMTP, not
          OAuth, so it's never hit by the "This app is blocked" screen. Just add
          GMAIL_USER + GMAIL_APP_PASSWORD in Vercel's env vars — no code change.
-         Set to '' to fall back to the options below. Takes priority when set. */
+         Drives the "sent" confirmation (it's the one endpoint we can read). */
       var LEAD_API = '/api/lead';
+
+      /* Options A/B below run ALONGSIDE the email when set — each submit is also
+         written to the sheet (best-effort, fire-and-forget). Set one, not both.
+         With LEAD_API blank they instead become the primary sender (C → A → B). */
 
       /* OPTION A — Google Form → your sheet. No login, can't be blocked. Fill in
          the form action URL + entry-id → field map (README explains where). */
@@ -904,14 +908,33 @@
         return null;
       }
 
+      /* Best-effort write to the Google Form / Apps Script sheet, if one is
+         configured. Fire-and-forget: it's opaque (no-cors) so we can't read the
+         result, and it must never block or override the email confirmation. */
+      function sendToSheet() {
+        var req = buildSubmit();
+        if (!req) return;
+        try {
+          fetch(req.url, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': req.type },
+            body: req.body
+          }).catch(function () {});
+        } catch (e) {}
+      }
+
       function submitProject() {
         prepareBrief();
         var next = $('#next-btn');
         var done = function () { next.disabled = false; next.textContent = 'Submit my project'; };
 
-        // Option C: our own same-origin API — we can read the real response.
+        // Option C: our own same-origin API — we can read the real response, so
+        // it drives the confirmation screen. Any configured sheet (A/B) is
+        // written alongside it, so leads land in both the inbox and the sheet.
         if (LEAD_API) {
           next.disabled = true; next.textContent = 'Sending…';
+          sendToSheet();
           fetch(LEAD_API, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -921,7 +944,7 @@
           return;
         }
 
-        // Options A/B: cross-origin Google endpoints — opaque, so stay optimistic.
+        // Options A/B only: cross-origin Google endpoints — opaque, so stay optimistic.
         var req = buildSubmit();
         if (!req) { showDone('manual'); return; }
         next.disabled = true; next.textContent = 'Sending…';

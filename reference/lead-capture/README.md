@@ -16,7 +16,11 @@ Three ways to receive submissions:
 - **Option B — Apps Script.** Full structured rows, but the authorize step is
   hard-blocked on Workspace / high-security accounts. Kept only as a fallback.
 
-The page uses whichever is configured, in the order C → A → B.
+The page uses whichever is configured, in the order C → A → B. **A or B can also
+run *alongside* C** — when the email (Option C) is active, any configured sheet
+endpoint is written on the same submit (best-effort, fire-and-forget), so leads
+land in both your inbox *and* the sheet. The email still drives the on-screen
+confirmation, since it's the only endpoint whose response the page can read.
 
 ---
 
@@ -50,9 +54,10 @@ back to the manual WhatsApp/email screen, so nothing breaks in the meantime.
 > shows no "App passwords" page, use **Option A (Google Form)** instead — it
 > needs no password at all.
 
-This gives you email only (not sheet rows). Want the data in the sheet too? Run
-Option A alongside, or ask and I'll switch `/api/lead` to also write the sheet
-via a service account.
+This gives you email. To **also** get sheet rows, set up Option A or B below and
+paste its endpoint into `start/index.html` — with `LEAD_API` left as `/api/lead`,
+each submit writes to the sheet *and* emails you (see the note under "three ways"
+above). The email still drives the confirmation screen.
 
 ---
 
@@ -121,11 +126,12 @@ responses**. Either is permission-free.
 
 ### Available fields to map
 
-`firstName`, `lastName`, `businessName`, `email`, `phone`, `region`, `style`,
-`styleTag`, `domain`, `pages`, `story`, `colors`, `assets`, `extras`,
-`powerups`, `ddIdeal`, `ddDiff`, `ddJobs`, `ddTone`, `monthly`, `termsAgreed`,
-`brief`. Map as many or as few as you like — the six above are plenty since
-`brief` already contains everything in readable form.
+`firstName`, `lastName`, `businessName`, `email`, `phone`, `region` (code, e.g.
+`us`), `regionName` (e.g. `United States`), `style`, `styleTag`, `domain`,
+`pages`, `story`, `colors`, `assets`, `extras`, `powerups`, `ddIdeal`, `ddDiff`,
+`ddJobs`, `ddTone`, `monthly`, `termsAgreed`, `brief`. Map as many or as few as
+you like — the six above are plenty since `brief` already contains everything in
+readable form.
 
 ---
 

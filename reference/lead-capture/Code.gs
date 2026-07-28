@@ -25,7 +25,7 @@ var COLUMNS = [
   ['businessName', 'Business'],
   ['email',        'Email'],
   ['phone',        'Phone'],
-  ['region',       'Region'],
+  ['regionName',   'Region'],
   ['style',        'Style'],
   ['styleTag',     'Style tag'],
   ['domain',       'Domain'],
