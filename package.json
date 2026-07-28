@@ -1,0 +1,9 @@
+{
+  "name": "lemonelly",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static site for lemonelly.com. The only runtime code is the /api serverless function that emails onboarding leads.",
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}
