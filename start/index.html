@@ -170,6 +170,7 @@
     .ext-chips label:has(input:checked) { background: var(--green); border-color: var(--green); color: #fff; }
     .ext-chips input { position: absolute; opacity: 0; }
     .domain-note { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: .75rem 1rem; font-size: .875rem; color: var(--ink-2); margin-top: 1rem; }
+    .region-pick { margin: 1.25rem 0; }
 
     .checks { display: grid; gap: .6rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
     .check {
@@ -480,6 +481,15 @@
         <div class="panel" data-panel="5" hidden>
           <h2>Ready to squeeze the main event?</h2>
           <p class="sub">Zero risk, zero upfront fees today. You'll only launch your <strong id="price-monthly">$120</strong>/month subscription once you've reviewed and totally loved your finished site.</p>
+          <div class="region-pick">
+            <label class="f">Where will you be billed?</label>
+            <div class="ext-chips" id="region-chips">
+              <label><input type="radio" name="region" value="za">ZA · R2,200/mo</label>
+              <label><input type="radio" name="region" value="us">US · $120/mo</label>
+              <label><input type="radio" name="region" value="uk">UK · £95/mo</label>
+              <label><input type="radio" name="region" value="eu">EU · €110/mo</label>
+            </div>
+          </div>
           <div class="callout">
             <label><input type="checkbox" id="terms"> I agree to the Terms &amp; Conditions: lemonelly will design my full website for review. My subscription only starts once I approve the site, and I can cancel anytime.</label>
           </div>
@@ -496,15 +506,15 @@
     <!-- ============ Done ============ -->
     <section class="screen" id="view-done" hidden>
       <div class="wrap">
-        <h1>One tap to send it 🍋</h1>
-        <p class="sub">Here's your project brief. Send it to us on WhatsApp or email — whichever you prefer — and our team will get to work and reach out within 24 hours!</p>
+        <h1 id="done-title">One tap to send it 🍋</h1>
+        <p class="sub" id="done-sub">Here's your project brief. Send it to us on WhatsApp or email — whichever you prefer — and our team will get to work and reach out within 24 hours!</p>
         <div class="summary" id="summary"></div>
         <div class="send-row">
           <a class="btn btn-green" id="send-wa" href="#" target="_blank" rel="noopener">Send via WhatsApp</a>
           <a class="btn btn-solid" id="send-email" href="#">Send via email</a>
           <button type="button" class="btn btn-ghost" id="copy-brief">Copy to clipboard</button>
         </div>
-        <p class="subcta">Attach your logo and photos in the same message — that's everything we need.</p>
+        <p class="subcta" id="done-note">Attach your logo and photos in the same message — that's everything we need.</p>
       </div>
     </section>
   </main>
@@ -548,11 +558,43 @@
       var $ = function (s, r) { return (r || document).querySelector(s); };
       var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
+      /* --------------------------------------------------------------------
+         Where finished briefs are sent. Setup: reference/lead-capture/
+
+         OPTION C — Serverless email via a Gmail app password (default). Posts to
+         our own /api/lead function, which emails each brief to us. Uses SMTP, not
+         OAuth, so it's never hit by the "This app is blocked" screen. Just add
+         GMAIL_USER + GMAIL_APP_PASSWORD in Vercel's env vars — no code change.
+         Drives the "sent" confirmation (it's the one endpoint we can read). */
+      var LEAD_API = '/api/lead';
+
+      /* Options A/B below run ALONGSIDE the email when set — each submit is also
+         written to the sheet (best-effort, fire-and-forget). Set one, not both.
+         With LEAD_API blank they instead become the primary sender (C → A → B). */
+
+      /* OPTION A — Google Form → your sheet. No login, can't be blocked. Fill in
+         the form action URL + entry-id → field map (README explains where). */
+      var FORM_ACTION = '';   // https://docs.google.com/forms/d/e/FORM_ID/formResponse
+      var FORM_FIELDS = {
+        // 'entry.111111': 'firstName',
+        // 'entry.222222': 'lastName',
+        // 'entry.333333': 'businessName',
+        // 'entry.444444': 'email',
+        // 'entry.555555': 'phone',
+        // 'entry.666666': 'brief'
+      };
+
+      /* OPTION B — Apps Script web app. Full structured rows, but the authorize
+         step is hard-blocked on some accounts. */
+      var SHEET_ENDPOINT = '';
+
+      /* All blank → form keeps the manual WhatsApp/email send screen. */
+      /* -------------------------------------------------------------------- */
+
       var PRICES = { za: 'R2,200', us: '$120', uk: '£95', eu: '€110' };
-      var region = new URLSearchParams(location.search).get('r');
-      var monthly = PRICES[region] || '$120';
-      $('#price-monthly').textContent = monthly;
-      $('#price-monthly-2').textContent = monthly;
+      var REGION_NAMES = { za: 'South Africa', us: 'United States', uk: 'United Kingdom', eu: 'Europe' };
+      function priceFor(r) { return PRICES[r] || PRICES.us; }
+      var urlRegion = new URLSearchParams(location.search).get('r');
 
       var THUMBS = {
         'Clean Pro': 't-modern', 'Big Impact': 't-bold', 'Trade Mark': 't-classic',
@@ -567,8 +609,17 @@
         puContent: false, puImages: false, puVideo: '',
         deepdive: false, dd: { ideal: '', diff: '', jobs: '', tone: '' },
         contact: { first: '', last: '', email: '', phone: '', biz: '' },
+        region: (PRICES[urlRegion] ? urlRegion : 'us'),
         terms: false
       };
+
+      /* Reflect the chosen billing region in the price copy + the chip state. */
+      function applyRegion() {
+        var m = priceFor(state.region);
+        $('#price-monthly').textContent = m;
+        $('#price-monthly-2').textContent = m;
+        $$('#region-chips input').forEach(function (c) { c.checked = c.value === state.region; });
+      }
 
       function save() { try { localStorage.setItem('lemonelly-onboarding', JSON.stringify(state)); } catch (e) {} }
       function load() {
@@ -643,7 +694,7 @@
       $('#next-btn').addEventListener('click', function () {
         if (state.step === 4 && !validContact()) return;
         if (state.step < 5) { state.step++; renderStep(); window.scrollTo(0, 0); }
-        else if (state.terms) { finish(); }
+        else if (state.terms) { submitProject(); }
       });
 
       /* ---- step 1 wiring ---- */
@@ -746,8 +797,11 @@
 
       /* ---- step 5 wiring ---- */
       $('#terms').addEventListener('change', function (e) { state.terms = e.target.checked; renderStep(); });
+      $$('#region-chips input').forEach(function (r) {
+        r.addEventListener('change', function () { state.region = r.value; applyRegion(); save(); });
+      });
 
-      /* ---- finish ---- */
+      /* ---- submit ---- */
       function brief() {
         var s = state;
         var L = [];
@@ -782,18 +836,125 @@
         L.push('CONTACT: ' + s.contact.first + ' ' + s.contact.last + ' · ' + s.contact.biz);
         L.push(s.contact.email + ' · ' + s.contact.phone);
         L.push('');
-        L.push('Terms agreed (free design, ' + monthly + '/mo after approval, cancel anytime): YES');
+        L.push('Billing: ' + (REGION_NAMES[s.region] || s.region) + ' — ' + priceFor(s.region) + '/mo');
+        L.push('Terms agreed (free design, ' + priceFor(s.region) + '/mo after approval, cancel anytime): YES');
         return L.join('\n');
       }
 
-      function finish() {
+      /* Flat, sheet-friendly version of the brief (one key per column). */
+      function payload() {
+        var s = state;
+        return {
+          region: s.region || '',
+          regionName: REGION_NAMES[s.region] || '',
+          style: s.style ? s.style.name : '',
+          styleTag: s.style ? s.style.tag : '',
+          firstName: s.contact.first, lastName: s.contact.last,
+          businessName: s.contact.biz, email: s.contact.email, phone: s.contact.phone,
+          domain: s.domainMode === 'new'
+            ? ('NEW: ' + (s.domainName || 'no idea yet') + ' (' + (s.exts.join(', ') || 'any') + ')')
+            : ('HAS: ' + (s.domainExisting || 'not given')),
+          pages: s.pages.concat(s.customPages).join(', '),
+          story: s.story, colors: s.colors.join(', '), assets: s.assets.join(', '), extras: s.extras,
+          powerups: [
+            s.puContent ? 'Content writing' : '',
+            s.puImages ? 'Image library' : '',
+            s.puVideo ? 'Video: ' + s.puVideo : ''
+          ].filter(Boolean).join(' · '),
+          ddIdeal: s.deepdive ? s.dd.ideal : '', ddDiff: s.deepdive ? s.dd.diff : '',
+          ddJobs: s.deepdive ? s.dd.jobs : '', ddTone: s.deepdive ? s.dd.tone : '',
+          monthly: priceFor(s.region), termsAgreed: s.terms ? 'Yes' : 'No', brief: brief()
+        };
+      }
+
+      /* Prepare the summary text + the manual WhatsApp/email fallback links. */
+      function prepareBrief() {
         var text = brief();
         $('#summary').textContent = text;
         $('#send-wa').href = 'https://wa.me/27792896707?text=' + encodeURIComponent(text);
         $('#send-email').href = 'mailto:hello@lemonelly.com?subject=' +
           encodeURIComponent('New project: ' + (state.contact.biz || 'lemonelly onboarding')) +
           '&body=' + encodeURIComponent(text);
+      }
+
+      function showDone(mode) {
+        if (mode === 'sent') {
+          $('#done-title').textContent = 'Got it — thank you! 🍋';
+          $('#done-sub').textContent = "Your brief has landed with our team and we'll be in touch within 24 hours. Prefer to chat now? You can send it over on WhatsApp too.";
+          $('#send-email').hidden = true;
+          $('#done-note').textContent = 'Got your logo or job photos ready? WhatsApp them over so we can hit the ground running.';
+        } else {
+          $('#done-title').textContent = 'One tap to send it 🍋';
+          $('#done-sub').textContent = "Here's your project brief. Send it to us on WhatsApp or email — whichever you prefer — and our team will get to work and reach out within 24 hours!";
+          $('#send-email').hidden = false;
+          $('#done-note').textContent = 'Attach your logo and photos in the same message — that\'s everything we need.';
+        }
         show('done');
+      }
+
+      /* Turn the payload into a request for whichever backend is configured. */
+      function buildSubmit() {
+        var p = payload();
+        if (FORM_ACTION) {
+          var body = Object.keys(FORM_FIELDS).map(function (entry) {
+            var v = p[FORM_FIELDS[entry]];
+            return encodeURIComponent(entry) + '=' + encodeURIComponent(v != null ? v : '');
+          }).join('&');
+          return { url: FORM_ACTION, type: 'application/x-www-form-urlencoded;charset=UTF-8', body: body };
+        }
+        if (SHEET_ENDPOINT) {
+          return { url: SHEET_ENDPOINT, type: 'text/plain;charset=utf-8', body: JSON.stringify(p) };
+        }
+        return null;
+      }
+
+      /* Best-effort write to the Google Form / Apps Script sheet, if one is
+         configured. Fire-and-forget: it's opaque (no-cors) so we can't read the
+         result, and it must never block or override the email confirmation. */
+      function sendToSheet() {
+        var req = buildSubmit();
+        if (!req) return;
+        try {
+          fetch(req.url, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': req.type },
+            body: req.body
+          }).catch(function () {});
+        } catch (e) {}
+      }
+
+      function submitProject() {
+        prepareBrief();
+        var next = $('#next-btn');
+        var done = function () { next.disabled = false; next.textContent = 'Submit my project'; };
+
+        // Option C: our own same-origin API — we can read the real response, so
+        // it drives the confirmation screen. Any configured sheet (A/B) is
+        // written alongside it, so leads land in both the inbox and the sheet.
+        if (LEAD_API) {
+          next.disabled = true; next.textContent = 'Sending…';
+          sendToSheet();
+          fetch(LEAD_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload())
+          }).then(function (r) { showDone(r && r.ok ? 'sent' : 'manual'); done(); })
+            .catch(function () { showDone('manual'); done(); });
+          return;
+        }
+
+        // Options A/B only: cross-origin Google endpoints — opaque, so stay optimistic.
+        var req = buildSubmit();
+        if (!req) { showDone('manual'); return; }
+        next.disabled = true; next.textContent = 'Sending…';
+        fetch(req.url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': req.type },
+          body: req.body
+        }).then(function () { showDone('sent'); done(); })
+          .catch(function () { showDone('manual'); done(); });
       }
       $('#copy-brief').addEventListener('click', function () {
         var t = $('#summary').textContent;
@@ -806,6 +967,7 @@
 
       /* ---- restore ---- */
       load();
+      applyRegion();
       if (state.style) {
         renderPicked();
         renderCustomPages(); renderSwatches();
