@@ -5,14 +5,17 @@
  * https://docs.google.com/spreadsheets/d/1zpVOKFb8oDvdgSfSZLgXp458wnkxUwp4J5GhQafVbvY/
  *
  * The /start page POSTs each finished brief here as JSON; this appends a row to
- * the "Leads" tab and (optionally) emails a copy. See README.md for the 2-minute
- * deploy steps and where to paste the resulting URL.
+ * the "Leads" tab. See README.md for the 2-minute deploy steps and where to
+ * paste the resulting URL.
+ *
+ * This script deliberately does NOT send email itself: adding a MailApp call
+ * makes Google request a sensitive Gmail-send permission, which triggers a hard
+ * "This app is blocked" screen on personal Gmail accounts. For email alerts, use
+ * the sheet's own notification rules instead (see README.md, "Email alerts") —
+ * that needs no script permissions and can't be blocked.
  */
 
 var SHEET_NAME = 'Leads';
-
-// Where to email each new lead. Set to '' to turn email alerts off.
-var NOTIFY_EMAIL = 'hello@lemonelly.com';
 
 // [payload key, column header] — order defines the sheet columns.
 var COLUMNS = [
@@ -58,15 +61,6 @@ function doPost(e) {
     sheet.appendRow(COLUMNS.map(function (c) {
       return data[c[0]] != null ? data[c[0]] : '';
     }));
-
-    if (NOTIFY_EMAIL) {
-      MailApp.sendEmail({
-        to: NOTIFY_EMAIL,
-        subject: 'New lemonelly lead: ' + (data.businessName || data.firstName || 'website'),
-        replyTo: data.email || undefined,
-        body: data.brief || JSON.stringify(data, null, 2)
-      });
-    }
 
     return json({ ok: true });
   } catch (err) {
