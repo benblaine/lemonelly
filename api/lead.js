@@ -18,7 +18,16 @@ module.exports = async (req, res) => {
   const user = process.env.GMAIL_USER;
   const pass = process.env.GMAIL_APP_PASSWORD;
   if (!user || !pass) {
-    return res.status(500).json({ ok: false, error: 'Email not configured' });
+    // Diagnostic only — reports which vars are present and any mail-related
+    // key NAMES the runtime can see (never values), so a misconfig is obvious.
+    return res.status(500).json({
+      ok: false,
+      error: 'Email not configured',
+      has: { GMAIL_USER: !!user, GMAIL_APP_PASSWORD: !!pass },
+      seen: Object.keys(process.env).filter(function (k) {
+        return /GMAIL|LEAD|MAIL|SMTP/i.test(k);
+      })
+    });
   }
 
   let data = req.body;
