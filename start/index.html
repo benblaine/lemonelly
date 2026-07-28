@@ -496,15 +496,15 @@
     <!-- ============ Done ============ -->
     <section class="screen" id="view-done" hidden>
       <div class="wrap">
-        <h1>One tap to send it 🍋</h1>
-        <p class="sub">Here's your project brief. Send it to us on WhatsApp or email — whichever you prefer — and our team will get to work and reach out within 24 hours!</p>
+        <h1 id="done-title">One tap to send it 🍋</h1>
+        <p class="sub" id="done-sub">Here's your project brief. Send it to us on WhatsApp or email — whichever you prefer — and our team will get to work and reach out within 24 hours!</p>
         <div class="summary" id="summary"></div>
         <div class="send-row">
           <a class="btn btn-green" id="send-wa" href="#" target="_blank" rel="noopener">Send via WhatsApp</a>
           <a class="btn btn-solid" id="send-email" href="#">Send via email</a>
           <button type="button" class="btn btn-ghost" id="copy-brief">Copy to clipboard</button>
         </div>
-        <p class="subcta">Attach your logo and photos in the same message — that's everything we need.</p>
+        <p class="subcta" id="done-note">Attach your logo and photos in the same message — that's everything we need.</p>
       </div>
     </section>
   </main>
@@ -547,6 +547,12 @@
     (function () {
       var $ = function (s, r) { return (r || document).querySelector(s); };
       var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+      /* Google Sheet lead capture. Paste the Apps Script Web App /exec URL here
+         and every submitted brief is logged straight to the sheet (and emailed
+         to us). Leave it blank and the form falls back to manual WhatsApp/email
+         send. Setup guide: reference/lead-capture/README.md */
+      var SHEET_ENDPOINT = '';
 
       var PRICES = { za: 'R2,200', us: '$120', uk: '£95', eu: '€110' };
       var region = new URLSearchParams(location.search).get('r');
@@ -643,7 +649,7 @@
       $('#next-btn').addEventListener('click', function () {
         if (state.step === 4 && !validContact()) return;
         if (state.step < 5) { state.step++; renderStep(); window.scrollTo(0, 0); }
-        else if (state.terms) { finish(); }
+        else if (state.terms) { submitProject(); }
       });
 
       /* ---- step 1 wiring ---- */
@@ -747,7 +753,7 @@
       /* ---- step 5 wiring ---- */
       $('#terms').addEventListener('change', function (e) { state.terms = e.target.checked; renderStep(); });
 
-      /* ---- finish ---- */
+      /* ---- submit ---- */
       function brief() {
         var s = state;
         var L = [];
@@ -786,14 +792,70 @@
         return L.join('\n');
       }
 
-      function finish() {
+      /* Flat, sheet-friendly version of the brief (one key per column). */
+      function payload() {
+        var s = state;
+        return {
+          region: region || '',
+          style: s.style ? s.style.name : '',
+          styleTag: s.style ? s.style.tag : '',
+          firstName: s.contact.first, lastName: s.contact.last,
+          businessName: s.contact.biz, email: s.contact.email, phone: s.contact.phone,
+          domain: s.domainMode === 'new'
+            ? ('NEW: ' + (s.domainName || 'no idea yet') + ' (' + (s.exts.join(', ') || 'any') + ')')
+            : ('HAS: ' + (s.domainExisting || 'not given')),
+          pages: s.pages.concat(s.customPages).join(', '),
+          story: s.story, colors: s.colors.join(', '), assets: s.assets.join(', '), extras: s.extras,
+          powerups: [
+            s.puContent ? 'Content writing' : '',
+            s.puImages ? 'Image library' : '',
+            s.puVideo ? 'Video: ' + s.puVideo : ''
+          ].filter(Boolean).join(' · '),
+          ddIdeal: s.deepdive ? s.dd.ideal : '', ddDiff: s.deepdive ? s.dd.diff : '',
+          ddJobs: s.deepdive ? s.dd.jobs : '', ddTone: s.deepdive ? s.dd.tone : '',
+          monthly: monthly, termsAgreed: s.terms ? 'Yes' : 'No', brief: brief()
+        };
+      }
+
+      /* Prepare the summary text + the manual WhatsApp/email fallback links. */
+      function prepareBrief() {
         var text = brief();
         $('#summary').textContent = text;
         $('#send-wa').href = 'https://wa.me/27792896707?text=' + encodeURIComponent(text);
         $('#send-email').href = 'mailto:hello@lemonelly.com?subject=' +
           encodeURIComponent('New project: ' + (state.contact.biz || 'lemonelly onboarding')) +
           '&body=' + encodeURIComponent(text);
+      }
+
+      function showDone(mode) {
+        if (mode === 'sent') {
+          $('#done-title').textContent = 'Got it — thank you! 🍋';
+          $('#done-sub').textContent = "Your brief has landed with our team and we'll be in touch within 24 hours. Prefer to chat now? You can send it over on WhatsApp too.";
+          $('#send-email').hidden = true;
+          $('#done-note').textContent = 'Got your logo or job photos ready? WhatsApp them over so we can hit the ground running.';
+        } else {
+          $('#done-title').textContent = 'One tap to send it 🍋';
+          $('#done-sub').textContent = "Here's your project brief. Send it to us on WhatsApp or email — whichever you prefer — and our team will get to work and reach out within 24 hours!";
+          $('#send-email').hidden = false;
+          $('#done-note').textContent = 'Attach your logo and photos in the same message — that\'s everything we need.';
+        }
         show('done');
+      }
+
+      function submitProject() {
+        prepareBrief();
+        if (!SHEET_ENDPOINT) { showDone('manual'); return; }
+        var next = $('#next-btn');
+        next.disabled = true;
+        next.textContent = 'Sending…';
+        var done = function () { next.disabled = false; next.textContent = 'Submit my project'; };
+        fetch(SHEET_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload())
+        }).then(function () { showDone('sent'); done(); })
+          .catch(function () { showDone('manual'); done(); });
       }
       $('#copy-brief').addEventListener('click', function () {
         var t = $('#summary').textContent;
