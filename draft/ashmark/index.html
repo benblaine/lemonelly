@@ -466,5 +466,17 @@ function sendQuote(e){
   <svg viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-20 32 38)"><ellipse cx="32" cy="38" rx="23" ry="16" fill="#FFD335" stroke="#111110" stroke-width="4"/></g><path d="M34 16q10-9 20-2q-9 9-20 2z" fill="#166548"/></svg>
   Free draft by lemonelly
 </a>
+<!-- First-party visit beacon — logs an anonymous page view to lemonelly's own
+     same-origin /api/hit (no third-party host is contacted). Slug is derived
+     from the URL. See reference/visit-tracking/. -->
+<script>
+(function(){try{
+  var m=location.pathname.match(/\/draft\/([^\/?#]+)/);
+  var slug=m?decodeURIComponent(m[1]):location.pathname;
+  var payload=JSON.stringify({slug:slug,path:location.pathname,ref:document.referrer||''});
+  if(navigator.sendBeacon){navigator.sendBeacon('/api/hit',new Blob([payload],{type:'application/json'}));}
+  else{new Image().src='/api/hit?slug='+encodeURIComponent(slug)+'&ref='+encodeURIComponent(document.referrer||'')+'&t='+Date.now();}
+}catch(e){}})();
+</script>
 </body>
 </html>
