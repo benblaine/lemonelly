@@ -27,6 +27,8 @@ def region_nav(active_code):
             + "".join(links) + "</span>")
 
 
+prices_json = json.dumps({key: regions[key]["monthly"] for key in REGION_ORDER})
+
 urls = []
 for key, r in regions.items():
     html = template
@@ -44,6 +46,7 @@ for key, r in regions.items():
         "BADGE_EXT": r["badge_ext"],
         "REGION_PARAM": r["region_param"],
         "REGION_NAV": region_nav(r["code"]),
+        "PRICES_JSON": prices_json,
     }
     for k, v in values.items():
         html = html.replace("{{" + k + "}}", v)
