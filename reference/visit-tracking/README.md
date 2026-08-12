@@ -1,17 +1,21 @@
-# Draft-page visit tracking → Google Sheet
+# Site visit tracking → Google Sheet
 
-Logs an anonymous page view every time someone opens a `/draft/<slug>` page, so
-you can see which prospects have looked at their draft. Data lands in **your**
-sheet and never expires:
+Logs an anonymous page view every time someone opens a `/draft/<slug>` page or
+the main lemonelly site (`/`, `/za`, `/us`, `/uk`, `/eu`), so you can see which
+prospects have looked at their draft and how the home page itself is doing.
+Data lands in **your** sheet and never expires:
 
 <https://docs.google.com/spreadsheets/d/1cDNNxqy1a_k_Eu_Y5GyC5nvcfDN6f0dQjuWIrSF9YFQ/>
 
 ## How it works (no third-party tracker)
 
-1. Each draft page runs a tiny script that fires a **same-origin** beacon to
-   `lemonelly.com/api/hit` — the draft never contacts Google, Vercel Analytics,
+1. Each draft page — and the home page / regional pages (`/`, `/za`, `/us`,
+   `/uk`, `/eu`) — runs a tiny script that fires a **same-origin** beacon to
+   `lemonelly.com/api/hit` — the page never contacts Google, Vercel Analytics,
    or any third-party host, so the "zero external requests" rule still holds.
-   (It uses `navigator.sendBeacon`, with a 1×1 `<img>` pixel fallback.)
+   (It uses `navigator.sendBeacon`, with a 1×1 `<img>` pixel fallback.) On
+   draft pages the logged "Draft" value is the slug (e.g. `kestrelroofing`);
+   on the home/regional pages it's just the page path (e.g. `/`, `/za`).
 2. `api/hit.js` (a Vercel serverless function) adds the visitor's user-agent and
    Vercel's geo headers (country / region / city — no precise IP is stored) and
    POSTs the hit to the Apps Script web app below.
@@ -61,7 +65,9 @@ should appear in the **Visits** tab within a few seconds.
 
 - No cookies, no login, no precise IP — only coarse geo from Vercel's edge
   headers, stored in a sheet you own.
-- The beacon lives in `template/draft.template.html`, so every **future** draft
-  built via the `/draft` skill is tracked automatically — no per-page wiring.
+- The beacon lives in `template/draft.template.html` (drafts) and
+  `template/index.template.html` (home/regional pages), so every **future**
+  draft built via the `/draft` skill and every rebuild of the main site via
+  `scripts/build.py` are tracked automatically — no per-page wiring.
 - `reference/` is excluded from the deployed site via `.vercelignore`, so this
   script and README are never published on lemonelly.com.
