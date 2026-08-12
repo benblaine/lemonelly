@@ -1,12 +1,14 @@
 /**
- * lemonelly — draft-page visit tracking → Google Sheet
+ * lemonelly — site visit tracking → Google Sheet
  *
  * Bound to the visits sheet:
  * https://docs.google.com/spreadsheets/d/1cDNNxqy1a_k_Eu_Y5GyC5nvcfDN6f0dQjuWIrSF9YFQ/
  *
- * Each draft page fires a same-origin beacon to /api/hit (api/hit.js), which
- * enriches it with user-agent + geo and POSTs the hit here as JSON; this
- * appends a row to the "Visits" tab. See README.md for the deploy steps and
+ * Each draft page and the home/regional pages fire a same-origin beacon to
+ * /api/hit (api/hit.js), which enriches it with user-agent + geo and POSTs
+ * the hit here as JSON; this appends a row to the "Visits" tab. The "Draft"
+ * column holds the draft slug for /draft/* pages, or the page path (e.g. "/",
+ * "/za") for the home/regional pages. See README.md for the deploy steps and
  * where the resulting /exec URL goes.
  *
  * Like the lead-capture script, this deliberately sends NO email (that needs a

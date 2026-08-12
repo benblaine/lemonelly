@@ -806,5 +806,19 @@ BUILD</span>
       });
     })();
   </script>
+
+  <!-- First-party visit beacon — logs an anonymous page view to lemonelly's own
+       same-origin /api/hit (no third-party host is contacted). Falls back to
+       the page path as the "slug" when not on a /draft/ page. See
+       reference/visit-tracking/. -->
+  <script>
+  (function(){try{
+    var m=location.pathname.match(/\/draft\/([^\/?#]+)/);
+    var slug=m?decodeURIComponent(m[1]):location.pathname;
+    var payload=JSON.stringify({slug:slug,path:location.pathname,ref:document.referrer||''});
+    if(navigator.sendBeacon){navigator.sendBeacon('/api/hit',new Blob([payload],{type:'application/json'}));}
+    else{new Image().src='/api/hit?slug='+encodeURIComponent(slug)+'&ref='+encodeURIComponent(document.referrer||'')+'&t='+Date.now();}
+  }catch(e){}})();
+  </script>
 </body>
 </html>
