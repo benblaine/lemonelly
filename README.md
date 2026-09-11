@@ -14,9 +14,10 @@ One static page, no build step, no dependencies, zero external requests.
 
 ## Regional pages
 
-The site ships five pages generated from one template: `/` (global, USD) plus `/za`, `/us`,
+The site ships five pages generated from one template: `/` (UK trades, £95) plus `/za`, `/us`,
 `/uk`, `/eu` — each with regional pricing, audience wording, and metadata. A geography
 toggle in the navbar links between them, and `hreflang` tags tie them together for search.
+The homepage call to action is a callback request (phone, then when/how), posted to `/api/lead`.
 
 **To change copy or layout**: edit `template/index.template.html`.
 **To change a region's prices or wording**: edit `regions.json`.
