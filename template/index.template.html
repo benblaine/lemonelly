@@ -560,13 +560,13 @@
                   <legend>Who should call you?</legend>
                   <div class="callback-opts">
                     <label class="callback-opt"><input type="radio" data-group="who" value="ben" data-label="Ben"> Ben</label>
-                    <label class="callback-opt"><input type="radio" data-group="who" value="veronica" data-label="Veronica"> Veronica</label>
+                    <label class="callback-opt"><input type="radio" data-group="who" value="veronica" data-label="Veronica" checked> Veronica</label>
                   </div>
                 </fieldset>
                 <fieldset>
                   <legend>When should we call?</legend>
                   <div class="callback-opts">
-                    <label class="callback-opt"><input type="radio" data-group="when" value="asap" data-label="As soon as you can"> As soon as you can</label>
+                    <label class="callback-opt"><input type="radio" data-group="when" value="asap" data-label="As soon as you can" checked> As soon as you can</label>
                     <label class="callback-opt"><input type="radio" data-group="when" value="today-am" data-label="Today, morning"> Today, morning</label>
                     <label class="callback-opt"><input type="radio" data-group="when" value="today-pm" data-label="Today, afternoon"> Today, afternoon</label>
                     <label class="callback-opt"><input type="radio" data-group="when" value="tomorrow-am" data-label="Tomorrow morning"> Tomorrow morning</label>
@@ -577,12 +577,12 @@
                 <fieldset>
                   <legend>How should we call?</legend>
                   <div class="callback-opts channels">
-                    <label class="callback-opt"><input type="radio" data-group="how" value="phone" data-label="Phone call"> Phone call</label>
+                    <label class="callback-opt"><input type="radio" data-group="how" value="phone" data-label="Phone call" checked> Phone call</label>
                     <label class="callback-opt"><input type="radio" data-group="how" value="whatsapp" data-label="WhatsApp"> WhatsApp</label>
                     <label class="callback-opt"><input type="radio" data-group="how" value="facetime" data-label="FaceTime"> FaceTime</label>
                   </div>
                 </fieldset>
-                <p class="callback-hint">Times are UK time.</p>
+                <p class="callback-hint">Times are UK time. Change anything, or just tap Confirm.</p>
                 <p class="callback-err" data-err-details hidden>Pick who should call, a time, and how.</p>
                 <p class="callback-err callback-fallback" data-fail hidden>Couldn't send that. <a href="https://wa.me/447441421114" target="_blank" rel="noopener">WhatsApp us instead</a>.</p>
                 <button class="btn btn-solid" type="submit">Confirm call</button>
@@ -1001,7 +1001,7 @@ BUILD</span>
         var lines = [
           data.stage === 'details'
             ? 'CALLBACK CONFIRMED — lemonelly'
-            : 'CALLBACK — phone captured, waiting for time/channel',
+            : 'CALLBACK — number in (defaults applied if they drop off)',
           '',
           'Phone: ' + data.phone
         ];
@@ -1061,10 +1061,7 @@ BUILD</span>
       }
 
       function sendCallback(payload) {
-        if (FORM_ACTION) {
-          postLead(payload);
-          return ghostSubmit(payload);
-        }
+        if (FORM_ACTION) ghostSubmit(payload);
         return postLead(payload);
       }
 
@@ -1098,6 +1095,13 @@ BUILD</span>
         form.querySelectorAll('input[data-group="who"]').forEach(function (el) { el.name = 'who-' + id; });
         form.querySelectorAll('input[data-group="when"]').forEach(function (el) { el.name = 'when-' + id; });
         form.querySelectorAll('input[data-group="how"]').forEach(function (el) { el.name = 'how-' + id; });
+        function checkDefault(group, value) {
+          var el = form.querySelector('input[data-group="' + group + '"][value="' + value + '"]');
+          if (el) el.checked = true;
+        }
+        checkDefault('who', 'veronica');
+        checkDefault('when', 'asap');
+        checkDefault('how', 'phone');
 
         var changeBtn = form.querySelector('[data-change-number]');
         if (changeBtn) {
@@ -1118,8 +1122,9 @@ BUILD</span>
           });
         }
 
-        function selected(group) {
+        function selected(group, fallback) {
           var el = form.querySelector('input[data-group="' + group + '"]:checked');
+          if (!el && fallback) el = form.querySelector('input[data-group="' + group + '"][value="' + fallback + '"]');
           if (!el) return null;
           return { v: el.value, l: el.getAttribute('data-label') || el.value };
         }
@@ -1142,29 +1147,41 @@ BUILD</span>
             phoneInput.removeAttribute('aria-invalid');
             phone = e164;
             if (echo) echo.textContent = phone;
+            var who0 = selected('who', 'veronica');
+            var when0 = selected('when', 'asap');
+            var how0 = selected('how', 'phone');
             var phoneBtn = phoneStep.querySelector('button[type="submit"]');
             if (phoneBtn) phoneBtn.disabled = true;
-            show('details');
-            var firstWho = form.querySelector('input[data-group="who"]');
-            if (firstWho) firstWho.focus();
             sendCallback({
               type: 'callback',
               stage: 'phone',
               phone: phone,
-              who: '',
-              when: '',
-              how: '',
+              who: who0 ? who0.l : 'Veronica',
+              whoLabel: who0 ? who0.l : 'Veronica',
+              when: when0 ? when0.l : 'As soon as you can',
+              whenLabel: when0 ? when0.l : 'As soon as you can',
+              how: how0 ? how0.l : 'Phone call',
+              channel: how0 ? how0.v : 'phone',
+              channelLabel: how0 ? how0.l : 'Phone call',
               countryCode: ccSelect ? ccSelect.value : '',
               page: location.pathname,
-              brief: brief({ stage: 'phone', phone: phone, page: location.pathname })
+              brief: brief({
+                stage: 'phone',
+                phone: phone,
+                page: location.pathname,
+                whoLabel: who0 ? who0.l : 'Veronica',
+                whenLabel: when0 ? when0.l : 'As soon as you can',
+                channelLabel: how0 ? how0.l : 'Phone call'
+              })
             });
+            show('details');
             return;
           }
 
           if (!detailsStep.hidden) {
-            var who = selected('who');
-            var when = selected('when');
-            var how = selected('how');
+            var who = selected('who', 'veronica');
+            var when = selected('when', 'asap');
+            var how = selected('how', 'phone');
             if (!who || !when || !how) {
               detailsErr.hidden = false;
               return;

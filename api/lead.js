@@ -62,11 +62,22 @@ module.exports = async (req, res) => {
     return res.status(405).json({ ok: false, error: 'Method not allowed' });
   }
 
+  let data = req.body;
+  if (typeof data === 'string') { try { data = JSON.parse(data); } catch (e) { data = {}; } }
+  if (!data || typeof data !== 'object') data = {};
+
   const user = process.env.GMAIL_USER;
   const pass = process.env.GMAIL_APP_PASSWORD;
+  const isCallbackEarly = data.type === 'callback';
   if (!user || !pass) {
-    // Diagnostic only — reports which vars are present and any mail-related
-    // key NAMES the runtime can see (never values), so a misconfig is obvious.
+    if (isCallbackEarly) {
+      try {
+        await appendCallbackRow(data);
+        return res.status(200).json({ ok: true, mailed: false, sheet: true });
+      } catch (e) {
+        return res.status(500).json({ ok: false, error: 'sheet failed and email not configured' });
+      }
+    }
     return res.status(500).json({
       ok: false,
       error: 'Email not configured',
@@ -77,17 +88,12 @@ module.exports = async (req, res) => {
     });
   }
 
-  let data = req.body;
-  if (typeof data === 'string') { try { data = JSON.parse(data); } catch (e) { data = {}; } }
-  if (!data || typeof data !== 'object') data = {};
-
   const to = process.env.LEAD_TO || user;
   const isCallback = data.type === 'callback';
   const whoBit = data.whoLabel || data.who;
   const subject = isCallback
-    ? (data.stage === 'details'
-        ? ('Callback confirmed: ' + (whoBit ? whoBit + ' · ' : '') + (data.phone || 'website'))
-        : ('Callback: ' + (data.phone || 'website')))
+    ? ((data.stage === 'details' ? 'Callback confirmed: ' : 'Callback: ') +
+        (whoBit ? whoBit + ' · ' : '') + (data.phone || 'website'))
     : ('New lemonelly lead: ' + (data.businessName || data.firstName || 'website'));
   const text = data.brief || JSON.stringify(data, null, 2);
 
