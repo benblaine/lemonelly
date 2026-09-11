@@ -103,11 +103,19 @@ module.exports = async (req, res) => {
       text: text
     };
     if (data.email) mail.replyTo = String(data.email).slice(0, 200);
-    await transporter.sendMail(mail);
-    if (isCallback) {
-      try { await appendCallbackRow(data); } catch (e) { /* sheet must never fail the lead */ }
+    let mailed = false;
+    let sheeted = false;
+    try {
+      await transporter.sendMail(mail);
+      mailed = true;
+    } catch (mailErr) {
+      if (!isCallback) throw mailErr;
     }
-    return res.status(200).json({ ok: true });
+    if (isCallback) {
+      try { await appendCallbackRow(data); sheeted = true; } catch (e) { /* sheet must never fail the lead */ }
+    }
+    if (mailed || sheeted) return res.status(200).json({ ok: true, mailed: mailed, sheet: sheeted });
+    return res.status(500).json({ ok: false, error: 'email and sheet both failed' });
   } catch (err) {
     return res.status(500).json({ ok: false, error: String((err && err.message) || err) });
   }
