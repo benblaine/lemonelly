@@ -69,7 +69,7 @@
       {
         "@type": "Question",
         "name": "What do you need from me to get started?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Just tell us about your business and point us at your current website if you have one. We take it from there and review everything with you before launch." }
+        "acceptedAnswer": { "@type": "Answer", "text": "A phone number. We call you, agree a time, and take it from there. Point us at your current website if you have one." }
       },
       {
         "@type": "Question",
@@ -285,6 +285,57 @@
     }
     .lede { font-size: var(--fs-2); color: var(--ink-2); max-width: 44ch; margin-bottom: var(--sp-5); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; margin-bottom: var(--sp-5); }
+
+    /* ---------- Callback form ---------- */
+    .callback { max-width: 34rem; margin-bottom: var(--sp-5); }
+    .callback-label {
+      display: block; font-size: var(--fs-0); font-weight: 700;
+      letter-spacing: .04em; text-transform: uppercase; margin-bottom: var(--sp-2);
+    }
+    .callback-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+    .callback-row input[type="tel"] {
+      flex: 1 1 14rem; min-height: 50px; padding: var(--sp-2) 1.1rem;
+      border: 1.5px solid var(--line); border-radius: 999px;
+      font: inherit; color: var(--ink); background: var(--bg);
+    }
+    .callback-row input[type="tel"].field-err { border-color: #8B1E1E; }
+    .callback-row .btn { flex: none; }
+    .callback-hint { color: var(--ink-2); font-size: var(--fs-0); margin-top: var(--sp-2); }
+    .callback-err { color: #8B1E1E; font-size: var(--fs-0); font-weight: 600; margin-top: var(--sp-2); }
+    .callback-echo { font-weight: 600; margin-bottom: var(--sp-4); }
+    .callback fieldset { border: 0; padding: 0; margin: 0 0 var(--sp-4); }
+    .callback legend { font-weight: 700; margin-bottom: var(--sp-2); padding: 0; }
+    .callback-opts { display: grid; gap: .5rem; grid-template-columns: 1fr 1fr; }
+    .callback-opts.channels { grid-template-columns: repeat(3, 1fr); }
+    .callback-opt {
+      display: flex; align-items: center; gap: .6rem;
+      min-height: 48px; padding: .55rem .9rem;
+      border: 1.5px solid var(--line); border-radius: var(--r);
+      font-weight: 600; cursor: pointer;
+    }
+    .callback-opt:has(input:checked) { border-color: var(--green); background: var(--green-wash); }
+    .callback-opt input { accent-color: var(--green); width: 1.05rem; height: 1.05rem; flex: none; }
+    .callback-step .btn-solid { min-width: 11rem; }
+    .callback-done h3 { font-size: var(--fs-3); font-weight: 800; outline: none; }
+    .callback-done p { color: var(--ink-2); margin-top: var(--sp-2); }
+    .callback-card {
+      max-width: 36rem; margin-inline: auto; margin-top: var(--sp-5);
+      background: var(--bg); color: var(--ink); text-align: left;
+      border-radius: var(--r-lg); padding: var(--sp-5) var(--sp-4);
+    }
+    .callback-card .callback { margin-bottom: 0; max-width: none; }
+    .callback-fallback a { color: var(--green); font-weight: 600; }
+    .callback-change {
+      display: inline; margin-left: .6rem; padding: 0; border: 0; background: none;
+      font: inherit; font-size: var(--fs-0); font-weight: 600; color: var(--green);
+      cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+    }
+    .callback-change:hover { color: var(--green-deep); }
+    @media (max-width: 40rem) {
+      .callback-opts, .callback-opts.channels { grid-template-columns: 1fr; }
+      .callback-row .btn { width: 100%; }
+    }
+
     .price-strip {
       display: inline-flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem;
       border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow);
@@ -460,7 +511,7 @@
           <li><a href="#process">Process</a></li>
           <li><a href="#work">Work</a></li>
           <li class="nav-region"><span class="region-nav" role="group" aria-label="Choose your region"><a href="/za">ZA</a><a href="/us" aria-current="true">US</a><a href="/uk">UK</a><a href="/eu">EU</a></span></li>
-          <li><a class="btn btn-solid js-start-link" href="/start?r=us">Get Started <span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="btn btn-solid" href="#callback">Request a call</a></li>
         </ul>
       </nav>
     </div>
@@ -473,9 +524,60 @@
           <p class="badge-pill">Web design studio<span class="badge-ext"> for US small businesses</span></p>
           <h1>We design your website free. You only pay if you love it.</h1>
           <p class="lede">Professional websites that win trust for American small businesses. Live in 7 days. <span class="js-price">$120</span>/month once you're happy, and nothing before that.</p>
-          <div class="hero-actions">
-            <a class="btn btn-solid js-start-link" href="/start?r=us">Get Your Free Draft <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="btn btn-ghost" href="https://wa.me/447441421114" target="_blank" rel="noopener">Talk to Us</a>
+          <div id="callback" class="callback-mount" data-callback="hero">
+            <form class="callback" novalidate>
+              <div class="callback-step" data-step="phone">
+                <label class="callback-label" data-phone-label>Your number</label>
+                <div class="callback-row">
+                  <input type="tel" inputmode="tel" autocomplete="tel" name="phone" placeholder="07xxx xxxxxx" maxlength="24" required>
+                  <button class="btn btn-solid" type="submit">Request a call</button>
+                </div>
+                <p class="callback-hint">We'll ring you on UK time. No long form first.</p>
+                <p class="callback-err" data-err hidden>Enter a number we can actually call.</p>
+              </div>
+              <div class="callback-step" data-step="details" hidden>
+                <p class="callback-echo">We'll call <strong data-phone-echo></strong>
+                  <button type="button" class="callback-change" data-change-number>Change number</button>
+                </p>
+                <fieldset>
+                  <legend>Who should call you?</legend>
+                  <div class="callback-opts">
+                    <label class="callback-opt"><input type="radio" data-group="who" value="ben" data-label="Ben"> Ben</label>
+                    <label class="callback-opt"><input type="radio" data-group="who" value="veronica" data-label="Veronica"> Veronica</label>
+                  </div>
+                </fieldset>
+                <fieldset>
+                  <legend>When should we call?</legend>
+                  <div class="callback-opts">
+                    <label class="callback-opt"><input type="radio" data-group="when" value="asap" data-label="As soon as you can"> As soon as you can</label>
+                    <label class="callback-opt"><input type="radio" data-group="when" value="today-am" data-label="Today, morning"> Today, morning</label>
+                    <label class="callback-opt"><input type="radio" data-group="when" value="today-pm" data-label="Today, afternoon"> Today, afternoon</label>
+                    <label class="callback-opt"><input type="radio" data-group="when" value="tomorrow-am" data-label="Tomorrow morning"> Tomorrow morning</label>
+                    <label class="callback-opt"><input type="radio" data-group="when" value="tomorrow-pm" data-label="Tomorrow afternoon"> Tomorrow afternoon</label>
+                    <label class="callback-opt"><input type="radio" data-group="when" value="this-week" data-label="Later this week"> Later this week</label>
+                  </div>
+                </fieldset>
+                <fieldset>
+                  <legend>How should we call?</legend>
+                  <div class="callback-opts channels">
+                    <label class="callback-opt"><input type="radio" data-group="how" value="phone" data-label="Phone call"> Phone call</label>
+                    <label class="callback-opt"><input type="radio" data-group="how" value="whatsapp" data-label="WhatsApp"> WhatsApp</label>
+                    <label class="callback-opt"><input type="radio" data-group="how" value="facetime" data-label="FaceTime"> FaceTime</label>
+                  </div>
+                </fieldset>
+                <p class="callback-hint">Times are UK time.</p>
+                <p class="callback-err" data-err-details hidden>Pick who should call, a time, and how.</p>
+                <p class="callback-err callback-fallback" data-fail hidden>Couldn't send that. <a href="https://wa.me/447441421114" target="_blank" rel="noopener">WhatsApp us instead</a>.</p>
+                <button class="btn btn-solid" type="submit">Confirm call</button>
+              </div>
+              <div class="callback-step callback-done" data-step="done" hidden>
+                <h3 tabindex="-1">We'll call you</h3>
+                <p data-done-copy></p>
+              </div>
+            </form>
+            <noscript>
+              <p class="callback-hint">JavaScript is off. <a href="https://wa.me/447441421114">WhatsApp us</a> with your number.</p>
+            </noscript>
           </div>
           <p class="price-strip"><strong>Free</strong> website design <span aria-hidden="true">·</span> <strong><span class="js-price">$120</span>/mo</strong> once you're happy <span aria-hidden="true">·</span> live in <strong>7 days</strong></p>
         </div>
@@ -661,8 +763,8 @@
         </div>
         <div class="prep-cta">
           <h3>Ready to get started?</h3>
-          <p>Kick off the Free Draft process, get your raw notes together, and let's get to work. Your killer new website is closer than you think.</p>
-          <a class="btn btn-solid js-start-link" href="/start?r=us">Start My Free Draft <span class="arrow" aria-hidden="true">→</span></a>
+          <p>Leave a number. We'll call you, then take it from there.</p>
+          <a class="btn btn-solid" href="#callback">Request a call <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -671,29 +773,30 @@
       <div class="wrap">
         <div class="sec-head">
           <p class="badge-pill">Who We Work With</p>
-          <h2 id="for-h">Built for real-world businesses</h2>
+          <h2 id="for-h">Built for American small businesses</h2>
+          <p>Roofers, electricians, plumbers, pool care, HVAC. You do the jobs. The website should stop hiding them.</p>
         </div>
         <div class="grid-3">
           <div class="card">
             <div class="icon-dot" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M3 21V10l9-7 9 7v11h-6v-7h-6v7z"/></svg>
             </div>
-            <h3>Home &amp; Trade</h3>
-            <p>Roofers, electricians, plumbers, pool care, HVAC. You do premium work; your website should stop hiding it. Dirty-boots businesses are our favourite clients.</p>
+            <h3>Roofing</h3>
+            <p>Re-roofs, repairs, leadwork. Homeowners already Google you. The site should close the job.</p>
           </div>
           <div class="card">
             <div class="icon-dot" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 109 9c0-1-1-2-2-2h-2a2 2 0 01-2-2V6c0-1-1-3-3-3z"/><circle cx="8" cy="10" r="1"/><circle cx="12" cy="7" r="1"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>
             </div>
-            <h3>Creatives</h3>
-            <p>Interior Designers, Architects. Your digital storefront will finally match your portfolio.</p>
+            <h3>Electrical</h3>
+            <p>Call-outs and install work. Make it obvious you are local, and that someone picks up the phone.</p>
           </div>
           <div class="card">
             <div class="icon-dot" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.5-9 9-9 9z"/></svg>
             </div>
-            <h3>Healthcare</h3>
-            <p>Doctors, Dentists, Clinics. Building deep patient trust before they even step in the door.</p>
+            <h3>Plumbing &amp; heating</h3>
+            <p>Boilers, bathrooms, emergencies. A site that loads on a phone and has tap-to-call.</p>
           </div>
         </div>
       </div>
@@ -755,7 +858,7 @@ BUILD</span>
           </details>
           <details>
             <summary>What do you need from me to get started? <span class="plus" aria-hidden="true"></span></summary>
-            <p>Just tell us about your business and point us at your current website if you have one. We take it from there and review everything with you before launch.</p>
+            <p>A phone number. We call you, agree a time, and take it from there. Point us at your current website if you have one.</p>
           </details>
           <details>
             <summary>Can I change things after the site is live? <span class="plus" aria-hidden="true"></span></summary>
@@ -767,13 +870,11 @@ BUILD</span>
 
     <section id="start" class="cta" aria-labelledby="start-h">
       <div class="wrap">
-        <p class="badge-pill">Get Started</p>
-        <h2 id="start-h">Start with a free draft</h2>
-        <p>Ready for a site that finally matches how good your business really is? Tell us what you do — we'll design your new site free.</p>
-        <div class="cta-actions">
-          <a class="btn btn-solid js-start-link" href="/start?r=us">Start My Free Draft <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="btn btn-ghost" href="mailto:hello@lemonelly.com">Email Us</a>
-          <a class="btn btn-ghost" href="https://wa.me/447441421114" target="_blank" rel="noopener">WhatsApp Us</a>
+        <p class="badge-pill">Request a call</p>
+        <h2 id="start-h">We'll ring you</h2>
+        <p>Leave a number. Then who should call, when, and how.</p>
+        <div class="callback-card">
+          <div class="callback-mount" data-callback="cta"></div>
         </div>
       </div>
     </section>
@@ -809,31 +910,191 @@ BUILD</span>
 
   <script>
     (function () {
-      /* Only on the global page — regional pages already show their own
-         locked-in price and have an aria-current region-nav link. */
-      if (document.querySelector('.region-nav a[aria-current="true"]')) return;
+      var LEAD_API = '/api/lead';
 
-      var PRICES = {"za": "R2,200", "us": "$120", "uk": "\u00a395", "eu": "\u20ac110"};
-
-      function detectRegion() {
-        var tz = '';
-        try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
-        if (tz === 'Africa/Johannesburg') return 'za';
-        if (tz === 'Europe/London') return 'uk';
-        if (tz.indexOf('America/') === 0) return 'us';
-        if (tz.indexOf('Europe/') === 0) return 'eu';
-        return null;
+      function validPhone(raw) {
+        var d = String(raw || '').replace(/\D/g, '');
+        return d.length >= 10 && d.length <= 15;
       }
 
-      var region = detectRegion();
-      var price = region && PRICES[region];
-      if (!price) return;
+      function brief(data) {
+        var lines = [
+          data.stage === 'details'
+            ? 'CALLBACK CONFIRMED — lemonelly'
+            : 'CALLBACK — phone captured, waiting for time/channel',
+          '',
+          'Phone: ' + data.phone
+        ];
+        if (data.whoLabel) lines.push('Who: ' + data.whoLabel);
+        if (data.whenLabel) lines.push('When: ' + data.whenLabel + ' (UK time)');
+        if (data.channelLabel) lines.push('How: ' + data.channelLabel);
+        lines.push('Page: ' + data.page);
+        return lines.join('\n');
+      }
 
-      document.querySelectorAll('.js-price').forEach(function (el) {
-        el.textContent = price;
+      function postLead(payload) {
+        return fetch(LEAD_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function (r) { return !!(r && r.ok); })
+          .catch(function () { return false; });
+      }
+
+      function init(form, id) {
+        var phoneStep = form.querySelector('[data-step="phone"]');
+        var detailsStep = form.querySelector('[data-step="details"]');
+        var doneStep = form.querySelector('[data-step="done"]');
+        var phoneInput = form.querySelector('input[type="tel"]');
+        var phoneLabel = form.querySelector('[data-phone-label]');
+        var err = form.querySelector('[data-err]');
+        var detailsErr = form.querySelector('[data-err-details]');
+        var echo = form.querySelector('[data-phone-echo]');
+        var doneCopy = form.querySelector('[data-done-copy]');
+        var fail = form.querySelector('[data-fail]');
+        var phoneId = 'cb-phone-' + id;
+        var phone = '';
+        if (!phoneInput || !phoneStep || !detailsStep || !doneStep) return;
+
+        phoneInput.id = phoneId;
+        if (phoneLabel) {
+          phoneLabel.setAttribute('for', phoneId);
+          phoneLabel.removeAttribute('data-phone-label');
+        }
+
+        form.querySelectorAll('input[data-group="who"]').forEach(function (el) { el.name = 'who-' + id; });
+        form.querySelectorAll('input[data-group="when"]').forEach(function (el) { el.name = 'when-' + id; });
+        form.querySelectorAll('input[data-group="how"]').forEach(function (el) { el.name = 'how-' + id; });
+
+        var changeBtn = form.querySelector('[data-change-number]');
+        if (changeBtn) {
+          changeBtn.addEventListener('click', function () {
+            var phoneBtn = phoneStep.querySelector('button[type="submit"]');
+            if (phoneBtn) phoneBtn.disabled = false;
+            err.hidden = true;
+            if (detailsErr) detailsErr.hidden = true;
+            if (fail) fail.hidden = true;
+            show('phone');
+            phoneInput.focus();
+          });
+        }
+
+        function show(step) {
+          [phoneStep, detailsStep, doneStep].forEach(function (s) {
+            s.hidden = s.getAttribute('data-step') !== step;
+          });
+        }
+
+        function selected(group) {
+          var el = form.querySelector('input[data-group="' + group + '"]:checked');
+          if (!el) return null;
+          return { v: el.value, l: el.getAttribute('data-label') || el.value };
+        }
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!phoneStep.hidden) {
+            if (!validPhone(phoneInput.value)) {
+              err.hidden = false;
+              phoneInput.classList.add('field-err');
+              phoneInput.setAttribute('aria-invalid', 'true');
+              phoneInput.focus();
+              return;
+            }
+            err.hidden = true;
+            phoneInput.classList.remove('field-err');
+            phoneInput.removeAttribute('aria-invalid');
+            phone = phoneInput.value.trim();
+            if (echo) echo.textContent = phone;
+            var phoneBtn = phoneStep.querySelector('button[type="submit"]');
+            if (phoneBtn) phoneBtn.disabled = true;
+            show('details');
+            var firstWho = form.querySelector('input[data-group="who"]');
+            if (firstWho) firstWho.focus();
+            postLead({
+              type: 'callback',
+              stage: 'phone',
+              phone: phone,
+              page: location.pathname,
+              brief: brief({ stage: 'phone', phone: phone, page: location.pathname })
+            });
+            return;
+          }
+
+          if (!detailsStep.hidden) {
+            var who = selected('who');
+            var when = selected('when');
+            var how = selected('how');
+            if (!who || !when || !how) {
+              detailsErr.hidden = false;
+              return;
+            }
+            detailsErr.hidden = true;
+            var btn = detailsStep.querySelector('button[type="submit"]');
+            if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+            var payload = {
+              type: 'callback',
+              stage: 'details',
+              phone: phone,
+              who: who.v,
+              whoLabel: who.l,
+              when: when.v,
+              whenLabel: when.l,
+              channel: how.v,
+              channelLabel: how.l,
+              page: location.pathname,
+              brief: brief({
+                stage: 'details',
+                phone: phone,
+                page: location.pathname,
+                whoLabel: who.l,
+                whenLabel: when.l,
+                channelLabel: how.l
+              })
+            };
+            postLead(payload).then(function (ok) {
+              if (ok) {
+                doneCopy.textContent = who.l + ' will call ' + phone + ' on ' + how.l + '. ' + when.l + ". UK time. If we miss you, we'll try again.";
+                show('done');
+                var heading = doneStep.querySelector('h3');
+                if (heading) heading.focus();
+                return;
+              }
+              if (btn) { btn.disabled = false; btn.textContent = 'Confirm call'; }
+              fail.hidden = false;
+              var wa = fail.querySelector('a');
+              if (wa) {
+                wa.href = 'https://wa.me/447441421114?text=' + encodeURIComponent(
+                  'Hi, please ask ' + who.l + ' to call me on ' + phone + '. ' + when.l + ', via ' + how.l + '.'
+                );
+              }
+            });
+          }
+        });
+      }
+
+      var source = document.querySelector('#callback form.callback');
+      var mounts = document.querySelectorAll('.callback-mount');
+      mounts.forEach(function (mount) {
+        if (mount.querySelector('form.callback')) return;
+        if (!source) return;
+        mount.appendChild(source.cloneNode(true));
       });
-      document.querySelectorAll('.js-start-link').forEach(function (a) {
-        a.href = '/start?r=' + region;
+      mounts.forEach(function (mount) {
+        var form = mount.querySelector('form.callback');
+        if (form) init(form, mount.getAttribute('data-callback') || 'cb');
+      });
+
+      document.querySelectorAll('a[href="#callback"]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          setTimeout(function () {
+            var hero = document.querySelector('[data-callback="hero"] form');
+            if (!hero) return;
+            var phoneStep = hero.querySelector('[data-step="phone"]');
+            var input = hero.querySelector('input[type="tel"]');
+            if (phoneStep && !phoneStep.hidden && input) input.focus();
+          }, 0);
+        });
       });
     })();
   </script>

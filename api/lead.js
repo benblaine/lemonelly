@@ -1,4 +1,4 @@
-// Serverless endpoint: emails each /start onboarding brief to us.
+// Serverless endpoint: emails homepage callback requests and /start briefs.
 //
 // Uses a Gmail app password (SMTP), NOT OAuth — so it sidesteps the
 // "This app is blocked" consent screen entirely. The password lives only in
@@ -35,7 +35,13 @@ module.exports = async (req, res) => {
   if (!data || typeof data !== 'object') data = {};
 
   const to = process.env.LEAD_TO || user;
-  const subject = 'New lemonelly lead: ' + (data.businessName || data.firstName || 'website');
+  const isCallback = data.type === 'callback';
+  const whoBit = data.whoLabel || data.who;
+  const subject = isCallback
+    ? (data.stage === 'details'
+        ? ('Callback confirmed: ' + (whoBit ? whoBit + ' · ' : '') + (data.phone || 'website'))
+        : ('Callback: ' + (data.phone || 'website')))
+    : ('New lemonelly lead: ' + (data.businessName || data.firstName || 'website'));
   const text = data.brief || JSON.stringify(data, null, 2);
 
   try {
@@ -43,13 +49,14 @@ module.exports = async (req, res) => {
       service: 'gmail',
       auth: { user: user, pass: pass }
     });
-    await transporter.sendMail({
+    const mail = {
       from: 'lemonelly onboarding <' + user + '>',
       to: to,
-      replyTo: data.email || undefined,
       subject: subject,
       text: text
-    });
+    };
+    if (data.email) mail.replyTo = String(data.email).slice(0, 200);
+    await transporter.sendMail(mail);
     return res.status(200).json({ ok: true });
   } catch (err) {
     return res.status(500).json({ ok: false, error: String((err && err.message) || err) });

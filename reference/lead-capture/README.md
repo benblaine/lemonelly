@@ -1,5 +1,9 @@
 # /start lead capture → Google Sheet
 
+Homepage **callback requests** (phone, then when/how to call) and `/start`
+onboarding briefs both POST to `/api/lead`. Callbacks arrive with subject
+`Callback:` (number only) then `Callback confirmed:` (who + number; body has time and channel).
+
 The `/start` onboarding form used to end on a screen that asked the prospect to
 *manually* fire their brief off via WhatsApp or email — an easy place to lose a
 lead. It now sends the finished brief straight to us — by email or into a Google
