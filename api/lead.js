@@ -45,7 +45,7 @@ async function appendCallbackRow(data) {
   await fetch(
     'https://sheets.googleapis.com/v4/spreadsheets/' +
       encodeURIComponent(sheetId) +
-      '/values/Callbacks!A:I:append?valueInputOption=USER_ENTERED',
+      '/values/Callbacks!A:I:append?valueInputOption=RAW',
     {
       method: 'POST',
       headers: {
