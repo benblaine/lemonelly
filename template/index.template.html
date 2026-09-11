@@ -293,12 +293,23 @@
       letter-spacing: .04em; text-transform: uppercase; margin-bottom: var(--sp-2);
     }
     .callback-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+    .callback-dial {
+      display: flex; flex: 1 1 16rem; gap: .4rem; min-width: 0;
+    }
+    .callback-cc {
+      flex: none; width: 7.6rem; min-height: 50px; padding: .45rem .35rem .45rem .75rem;
+      border: 1.5px solid var(--line); border-radius: 999px;
+      font: inherit; font-weight: 600; font-size: .9rem;
+      color: var(--ink); background: var(--bg); cursor: pointer;
+    }
+    .callback-cc:focus { outline: 2px solid var(--ink); outline-offset: 2px; }
     .callback-row input[type="tel"] {
-      flex: 1 1 14rem; min-height: 50px; padding: var(--sp-2) 1.1rem;
+      flex: 1 1 8rem; min-width: 0; min-height: 50px; padding: var(--sp-2) 1.1rem;
       border: 1.5px solid var(--line); border-radius: 999px;
       font: inherit; color: var(--ink); background: var(--bg);
     }
-    .callback-row input[type="tel"].field-err { border-color: #8B1E1E; }
+    .callback-row input[type="tel"].field-err,
+    .callback-cc.field-err { border-color: #8B1E1E; }
     .callback-row .btn { flex: none; }
     .callback-hint { color: var(--ink-2); font-size: var(--fs-0); margin-top: var(--sp-2); }
     .callback-err { color: #8B1E1E; font-size: var(--fs-0); font-weight: 600; margin-top: var(--sp-2); }
@@ -333,6 +344,7 @@
     .callback-change:hover { color: var(--green-deep); }
     @media (max-width: 40rem) {
       .callback-opts, .callback-opts.channels { grid-template-columns: 1fr; }
+      .callback-dial { flex: 1 1 100%; }
       .callback-row .btn { width: 100%; }
     }
 
@@ -529,10 +541,15 @@
               <div class="callback-step" data-step="phone">
                 <label class="callback-label" data-phone-label>Your number</label>
                 <div class="callback-row">
-                  <input type="tel" inputmode="tel" autocomplete="tel" name="phone" placeholder="07xxx xxxxxx" maxlength="24" required>
+                  <div class="callback-dial">
+                    <select class="callback-cc" data-cc aria-label="Country code" autocomplete="tel-country-code">
+                      <option value="44" selected>UK +44</option>
+                    </select>
+                    <input type="tel" inputmode="tel" autocomplete="tel-national" name="phone" placeholder="07xxx xxxxxx" maxlength="20" required>
+                  </div>
                   <button class="btn btn-solid" type="submit">Request a call</button>
                 </div>
-                <p class="callback-hint">We'll ring you on UK time. No long form first.</p>
+                <p class="callback-hint">Pick your country code. We'll ring you on UK time.</p>
                 <p class="callback-err" data-err hidden>Enter a number we can actually call.</p>
               </div>
               <div class="callback-step" data-step="details" hidden>
@@ -911,10 +928,59 @@ BUILD</span>
   <script>
     (function () {
       var LEAD_API = '/api/lead';
+      /* Short labels so the closed <select> stays narrow. UK/ZA/US first. */
+      var COUNTRIES = [
+        ['44', 'UK +44'], ['27', 'ZA +27'], ['1', 'US +1'], ['1', 'CA +1'],
+        ['971', 'AE +971'], ['54', 'AR +54'], ['43', 'AT +43'], ['61', 'AU +61'],
+        ['32', 'BE +32'], ['359', 'BG +359'], ['55', 'BR +55'], ['267', 'BW +267'],
+        ['41', 'CH +41'], ['56', 'CL +56'], ['86', 'CN +86'], ['57', 'CO +57'],
+        ['420', 'CZ +420'], ['49', 'DE +49'], ['45', 'DK +45'], ['372', 'EE +372'],
+        ['20', 'EG +20'], ['34', 'ES +34'], ['251', 'ET +251'], ['358', 'FI +358'],
+        ['33', 'FR +33'], ['233', 'GH +233'], ['30', 'GR +30'],
+        ['852', 'HK +852'], ['385', 'HR +385'], ['36', 'HU +36'], ['353', 'IE +353'],
+        ['972', 'IL +972'], ['91', 'IN +91'], ['62', 'ID +62'], ['39', 'IT +39'],
+        ['254', 'KE +254'], ['82', 'KR +82'], ['370', 'LT +370'], ['371', 'LV +371'],
+        ['212', 'MA +212'], ['261', 'MG +261'], ['389', 'MK +389'], ['230', 'MU +230'],
+        ['52', 'MX +52'], ['60', 'MY +60'], ['258', 'MZ +258'], ['264', 'NA +264'],
+        ['234', 'NG +234'], ['31', 'NL +31'], ['47', 'NO +47'], ['64', 'NZ +64'],
+        ['63', 'PH +63'], ['92', 'PK +92'], ['48', 'PL +48'], ['351', 'PT +351'],
+        ['40', 'RO +40'], ['250', 'RW +250'], ['966', 'SA +966'], ['46', 'SE +46'],
+        ['65', 'SG +65'], ['386', 'SI +386'], ['421', 'SK +421'], ['66', 'TH +66'],
+        ['90', 'TR +90'], ['886', 'TW +886'], ['380', 'UA +380'], ['256', 'UG +256'],
+        ['84', 'VN +84'], ['263', 'ZW +263']
+      ];
 
-      function validPhone(raw) {
-        var d = String(raw || '').replace(/\D/g, '');
-        return d.length >= 10 && d.length <= 15;
+      function digits(raw) { return String(raw || '').replace(/\D/g, ''); }
+
+      function fillCc(select) {
+        if (!select) return;
+        var keep = select.value || '44';
+        select.innerHTML = '';
+        COUNTRIES.forEach(function (c) {
+          var opt = document.createElement('option');
+          opt.value = c[0];
+          opt.textContent = c[1];
+          select.appendChild(opt);
+        });
+        select.value = keep;
+        if (select.value !== keep) select.value = '44';
+      }
+
+      /* National number + selected code → E.164. Leading 0 is a trunk prefix
+         and is dropped. A pasted +… / 00… number is kept as-is. */
+      function formatE164(cc, raw) {
+        var trimmed = String(raw || '').trim();
+        var d = digits(trimmed);
+        if (trimmed.charAt(0) === '+' || trimmed.indexOf('00') === 0) {
+          if (trimmed.indexOf('00') === 0) d = d.replace(/^00/, '');
+          if (d.length >= 8 && d.length <= 15) return '+' + d;
+          return null;
+        }
+        if (d.charAt(0) === '0') d = d.slice(1);
+        if (!cc || d.length < 6 || d.length > 12) return null;
+        var full = String(cc) + d;
+        if (full.length < 8 || full.length > 15) return null;
+        return '+' + full;
       }
 
       function brief(data) {
@@ -946,6 +1012,7 @@ BUILD</span>
         var detailsStep = form.querySelector('[data-step="details"]');
         var doneStep = form.querySelector('[data-step="done"]');
         var phoneInput = form.querySelector('input[type="tel"]');
+        var ccSelect = form.querySelector('[data-cc]');
         var phoneLabel = form.querySelector('[data-phone-label]');
         var err = form.querySelector('[data-err]');
         var detailsErr = form.querySelector('[data-err-details]');
@@ -960,6 +1027,11 @@ BUILD</span>
         if (phoneLabel) {
           phoneLabel.setAttribute('for', phoneId);
           phoneLabel.removeAttribute('data-phone-label');
+        }
+        fillCc(ccSelect);
+        if (ccSelect) {
+          ccSelect.id = 'cb-cc-' + id;
+          ccSelect.name = 'cc-' + id;
         }
 
         form.querySelectorAll('input[data-group="who"]').forEach(function (el) { el.name = 'who-' + id; });
@@ -994,17 +1066,20 @@ BUILD</span>
         form.addEventListener('submit', function (e) {
           e.preventDefault();
           if (!phoneStep.hidden) {
-            if (!validPhone(phoneInput.value)) {
+            var e164 = formatE164(ccSelect && ccSelect.value, phoneInput.value);
+            if (!e164) {
               err.hidden = false;
               phoneInput.classList.add('field-err');
+              if (ccSelect) ccSelect.classList.add('field-err');
               phoneInput.setAttribute('aria-invalid', 'true');
               phoneInput.focus();
               return;
             }
             err.hidden = true;
             phoneInput.classList.remove('field-err');
+            if (ccSelect) ccSelect.classList.remove('field-err');
             phoneInput.removeAttribute('aria-invalid');
-            phone = phoneInput.value.trim();
+            phone = e164;
             if (echo) echo.textContent = phone;
             var phoneBtn = phoneStep.querySelector('button[type="submit"]');
             if (phoneBtn) phoneBtn.disabled = true;
@@ -1015,6 +1090,7 @@ BUILD</span>
               type: 'callback',
               stage: 'phone',
               phone: phone,
+              countryCode: ccSelect ? ccSelect.value : '',
               page: location.pathname,
               brief: brief({ stage: 'phone', phone: phone, page: location.pathname })
             });
@@ -1036,6 +1112,7 @@ BUILD</span>
               type: 'callback',
               stage: 'details',
               phone: phone,
+              countryCode: ccSelect ? ccSelect.value : '',
               who: who.v,
               whoLabel: who.l,
               when: when.v,
