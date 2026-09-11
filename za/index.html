@@ -362,8 +362,9 @@
     /* ---------- Stats ---------- */
     .stats { border-block: 1px solid var(--line); background: var(--bg-2); padding-block: var(--sp-5); }
     .stats .wrap { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
-    .stat strong { display: block; font-size: var(--fs-4); font-weight: 800; letter-spacing: -.02em; }
-    .stat span { color: var(--ink-2); font-size: var(--fs-0); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+    .stat strong { display: block; font-size: var(--fs-4); font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
+    .stat strong span { font: inherit; letter-spacing: inherit; text-transform: none; }
+    .stat > span { color: var(--ink-2); font-size: var(--fs-0); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
 
     /* ---------- Cards ---------- */
     .grid-3 { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
