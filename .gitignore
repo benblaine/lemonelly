@@ -2,3 +2,5 @@
 .DS_Store
 node_modules
 .vercel
+scripts/.callback-form-token.json
+.env*

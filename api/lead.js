@@ -6,9 +6,56 @@
 //   GMAIL_USER          the Gmail address that sends (and, by default, receives)
 //   GMAIL_APP_PASSWORD  a 16-char app password from myaccount.google.com/apppasswords
 //   LEAD_TO             optional — where to deliver leads (defaults to GMAIL_USER)
+// Callbacks also append a row to the "lemonelly callbacks" sheet when these
+// are set: GOOGLE_SHEETS_REFRESH_TOKEN, GOOGLE_SHEETS_CLIENT_ID,
+// GOOGLE_SHEETS_CLIENT_SECRET, CALLBACK_SHEET_ID.
 // See reference/lead-capture/README.md.
 
 const nodemailer = require('nodemailer');
+
+async function appendCallbackRow(data) {
+  const refresh = process.env.GOOGLE_SHEETS_REFRESH_TOKEN;
+  const clientId = process.env.GOOGLE_SHEETS_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_SHEETS_CLIENT_SECRET;
+  const sheetId = process.env.CALLBACK_SHEET_ID;
+  if (!refresh || !clientId || !clientSecret || !sheetId) return;
+  const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'refresh_token',
+      refresh_token: refresh,
+      client_id: clientId,
+      client_secret: clientSecret
+    })
+  });
+  const tokenJson = await tokenRes.json();
+  if (!tokenJson.access_token) return;
+  const row = [[
+    new Date().toISOString(),
+    String(data.stage || '').slice(0, 40),
+    String(data.phone || '').slice(0, 40),
+    String(data.countryCode || '').slice(0, 8),
+    String(data.whoLabel || data.who || '').slice(0, 40),
+    String(data.whenLabel || data.when || '').slice(0, 80),
+    String(data.channelLabel || data.how || '').slice(0, 40),
+    String(data.page || '').slice(0, 80),
+    String(data.brief || '').slice(0, 8000)
+  ]];
+  await fetch(
+    'https://sheets.googleapis.com/v4/spreadsheets/' +
+      encodeURIComponent(sheetId) +
+      '/values/Callbacks!A:I:append?valueInputOption=USER_ENTERED',
+    {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + tokenJson.access_token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ values: row })
+    }
+  );
+}
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
@@ -57,6 +104,9 @@ module.exports = async (req, res) => {
     };
     if (data.email) mail.replyTo = String(data.email).slice(0, 200);
     await transporter.sendMail(mail);
+    if (isCallback) {
+      try { await appendCallbackRow(data); } catch (e) { /* sheet must never fail the lead */ }
+    }
     return res.status(200).json({ ok: true });
   } catch (err) {
     return res.status(500).json({ ok: false, error: String((err && err.message) || err) });

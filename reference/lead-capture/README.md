@@ -1,8 +1,9 @@
 # /start lead capture → Google Sheet
 
-Homepage **callback requests** (phone, then when/how to call) and `/start`
-onboarding briefs both POST to `/api/lead`. Callbacks arrive with subject
-`Callback:` (number only) then `Callback confirmed:` (who + number; body has time and channel).
+Homepage **callback requests** ghost-POST to a Google Form (hidden iframe →
+`formResponse`) and POST `/api/lead`, which emails us and appends a row to
+[lemonelly callbacks](https://docs.google.com/spreadsheets/d/1ZcUJ2qZF_eXpF7TvOjdwggcH1EE8ZDae43JYKHQfQd0/edit).
+Form IDs: `callback-form.json`. `/start` briefs still go to `/api/lead`.
 
 The `/start` onboarding form used to end on a screen that asked the prospect to
 *manually* fire their brief off via WhatsApp or email — an easy place to lose a
