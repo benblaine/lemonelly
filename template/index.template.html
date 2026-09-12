@@ -81,17 +81,6 @@
   </script>
 
   <style>
-    @font-face {
-      font-family: "Archivo";
-      src: url("/assets/draft/fonts/archivo-latin-var.woff2") format("woff2");
-      font-weight: 100 900; font-style: normal; font-display: swap;
-    }
-    @font-face {
-      font-family: "Fraunces";
-      src: url("/assets/draft/fonts/fraunces-latin-var.woff2") format("woff2");
-      font-weight: 400 900; font-style: normal; font-display: swap;
-    }
-
     /* ---------- Tokens ---------- */
     :root {
       --bg: #FFFFFF;
@@ -293,122 +282,205 @@
     @media (min-width: 60rem) {
       .hero { padding-block: var(--sp-6) var(--sp-7); }
       .hero-grid {
-        display: grid; grid-template-columns: 1fr auto; gap: clamp(2rem, 6vw, 5rem);
+        display: grid; grid-template-columns: minmax(16rem, 1fr) auto; gap: clamp(2rem, 6vw, 5rem);
         text-align: left; align-items: center;
       }
+      .hero-copy { min-width: 0; }
       h1, .lede { margin-inline: 0; }
       h1 { max-width: 14ch; }
     }
 
-    /* ---------- Phone mockup (sample trade site) ---------- */
-    .phone {
+
+    /* ---------- Hero sample device ---------- */
+    .hero-device {
+      width: 16.75rem;
+      max-width: 100%;
+      flex: none;
+      min-width: 0;
+      transition: width .32s ease;
+    }
+    .hero-device[data-mode="laptop"] {
+      width: min(40rem, 100%);
+    }
+    @media (min-width: 60rem) {
+      .hero-device[data-mode="laptop"] { width: min(36rem, 46vw); }
+    }
+
+    .showcase { width: 100%; }
+
+    .mode-toggle {
+      display: flex; width: fit-content; margin: 0 auto .85rem;
+      border: 1px solid var(--line); border-radius: 999px; overflow: hidden;
+      background: var(--bg);
+    }
+    .mode-toggle button {
+      min-height: 36px; padding: .35rem .95rem;
+      border: 0; background: transparent; cursor: pointer;
+      font: inherit; font-size: .72rem; font-weight: 700; letter-spacing: .04em;
+      color: var(--ink-2);
+    }
+    .mode-toggle button:hover { color: var(--ink); }
+    .mode-toggle button[aria-pressed="true"] { background: var(--green); color: #fff; }
+    .mode-toggle button:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+
+    .device-stage { position: relative; width: 100%; }
+
+    .device-shell {
       --bezel: #111110;
-      width: min(17.5rem, 78vw);
-      aspect-ratio: 390 / 820;
+      position: relative;
+      margin-inline: auto;
       background: var(--bezel);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .hero-device[data-mode="phone"] .device-shell {
+      width: 100%;
+      aspect-ratio: 390 / 600;
       border-radius: 2.35rem;
       padding: .52rem;
-      box-shadow: var(--shadow-lg);
-      position: relative;
-      flex: none;
     }
-    .phone-notch {
+    .hero-device[data-mode="laptop"] .device-shell {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 14px;
+      padding: 0;
+      background: #1c1c1a;
+    }
+    @media (min-width: 60rem) {
+      .hero-device[data-mode="laptop"] .device-shell { aspect-ratio: 16 / 10.15; }
+    }
+
+    .phone-island {
       position: absolute; top: .72rem; left: 50%; transform: translateX(-50%);
       width: 5.4rem; height: 1.05rem; background: var(--bezel); border-radius: 999px; z-index: 2;
+      pointer-events: none;
     }
-    .phone-screen {
-      height: 100%; border-radius: 1.85rem; overflow: hidden; background: #161a22;
-      position: relative;
+    .chrome-home {
+      position: absolute; left: 0; right: 0; bottom: .42rem; z-index: 2;
+      display: grid; place-items: center; pointer-events: none;
     }
-    .site-mini {
-      height: 100%; display: flex; flex-direction: column;
-      font-family: "Archivo", system-ui, sans-serif;
-      color: #fff; background: #161a22;
+    .chrome-home span {
+      width: 3.15rem; height: .28rem; border-radius: 999px; background: #3a3a38;
     }
-    .sm-nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.55rem .85rem .55rem;
-      font-size: .62rem; font-weight: 700; letter-spacing: .04em;
+    .hero-device[data-mode="laptop"] .phone-island,
+    .hero-device[data-mode="laptop"] .chrome-home { display: none; }
+
+    .chrome-laptop {
+      display: none; flex: none; align-items: center;
+      height: 2.05rem; padding: 0 .7rem; position: relative;
+      background: #2a2a28; color: #c8c5be;
     }
-    .sm-logo { font-family: "Fraunces", Georgia, serif; font-size: .78rem; font-weight: 600; }
-    .sm-call {
-      background: var(--sm-accent, #e0742e); color: #fff;
-      padding: .28rem .55rem; border-radius: 999px; font-size: .58rem;
-    }
-    .sm-hero { position: relative; flex: 1; min-height: 0; overflow: hidden; }
-    .sm-hero img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; object-position: center 30%;
-    }
-    .sm-hero::after {
-      content: ""; position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(14,16,20,.15), rgba(14,16,20,.78) 72%);
-    }
-    .sm-copy {
-      position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
-      padding: .85rem .85rem 1rem;
-    }
-    .sm-kicker {
-      font-size: .55rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
-      color: var(--sm-accent, #e0742e); margin-bottom: .35rem;
-    }
-    .sm-copy h3 {
-      font-family: "Fraunces", Georgia, serif; font-weight: 600;
-      font-size: 1.15rem; letter-spacing: -.02em; line-height: 1.12;
-      text-wrap: balance;
-    }
-    .sm-bar {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 2.4rem; background: var(--sm-accent, #e0742e);
-      font-size: .72rem; font-weight: 700; letter-spacing: .02em;
+    .hero-device[data-mode="laptop"] .chrome-laptop { display: flex; }
+    .traffic { display: flex; gap: 6px; }
+    .traffic i { width: 8px; height: 8px; border-radius: 50%; display: block; }
+    .traffic i:nth-child(1) { background: #ff5f57; }
+    .traffic i:nth-child(2) { background: #febc2e; }
+    .traffic i:nth-child(3) { background: #28c840; }
+    .url {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      max-width: 58%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      background: #1c1c1a; color: #c8c5be;
+      font-size: .62rem; font-weight: 600; letter-spacing: .01em;
+      padding: .18rem .85rem; border-radius: 999px;
     }
 
-    .site-mini.is-elec {
-      --sm-accent: #d4a017;
-      background: #12151c;
+    .device-shell, .device-screen { min-width: 0; max-width: 100%; }
+    .device-screen {
+      flex: 1; min-height: 0; position: relative; overflow: hidden;
+      background: #fff;
     }
-    .site-mini.is-elec .sm-hero,
-    .site-mini.is-plumb .sm-hero {
-      display: flex; flex-direction: column;
-    }
-    .site-mini.is-elec .sm-hero {
-      background:
-        radial-gradient(120% 80% at 80% 20%, rgba(212,160,23,.28), transparent 50%),
-        linear-gradient(165deg, #1a1f2b, #0e1016 60%);
-    }
-    .site-mini.is-elec .sm-hero::after,
-    .site-mini.is-plumb .sm-hero::after { display: none; }
-    .site-mini.is-elec .sm-copy,
-    .site-mini.is-plumb .sm-copy {
-      position: relative; padding-top: 1.4rem; flex: 1;
-      display: flex; flex-direction: column; justify-content: flex-end;
-    }
+    .hero-device[data-mode="phone"] .device-screen { border-radius: 1.85rem; }
+    .hero-device[data-mode="laptop"] .device-screen { border-radius: 0 0 12px 12px; }
 
-    .site-mini.is-plumb {
-      --sm-accent: #1f6f8b;
-      background: #0f1c24;
+    .sample-track {
+      display: flex; width: 100%; height: 100%;
+      margin: 0; padding: 0; list-style: none;
+      overflow-x: auto; overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      min-width: 0;
     }
-    .site-mini.is-plumb .sm-hero {
-      background:
-        radial-gradient(90% 70% at 10% 90%, rgba(31,111,139,.35), transparent 55%),
-        linear-gradient(180deg, #17313c, #0f1c24);
+    .sample-track::-webkit-scrollbar { height: 0; display: none; }
+    .sample-slide {
+      flex: 0 0 100%; width: 100%; min-width: 0; max-width: 100%; height: 100%;
+      scroll-snap-align: start; scroll-snap-stop: always; margin: 0;
     }
+    .sample-scroll {
+      height: 100%; overflow-x: hidden; overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(17, 17, 16, .35) transparent;
+    }
+    .sample-scroll::-webkit-scrollbar { width: 4px; }
+    .sample-scroll::-webkit-scrollbar-thumb {
+      background: rgba(17, 17, 16, .32); border-radius: 99px;
+    }
+    .sample-scroll:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+    .sample-scroll img {
+      width: 100%; max-width: 100%; height: auto; display: block;
+      pointer-events: none; user-select: none; -webkit-user-drag: none;
+    }
+    .hero-device[data-mode="phone"] .sample-scroll { padding-bottom: 1.15rem; }
 
-    .sm-mark {
-      width: 2.1rem; height: 2.1rem; border-radius: .55rem;
-      display: grid; place-items: center;
-      background: rgba(255,255,255,.08); margin-bottom: .7rem;
+    .device-hud { margin-top: .85rem; }
+    .device-dots {
+      display: flex; justify-content: center; align-items: center;
+      flex-wrap: wrap; min-width: 0; margin-bottom: .15rem;
     }
-    .sm-mark svg { width: 1.15rem; height: 1.15rem; stroke: var(--sm-accent); fill: none; stroke-width: 1.8; }
-    .sm-chips {
-      list-style: none; padding: 0; margin: .85rem 0 0;
-      display: flex; flex-wrap: wrap; gap: .35rem;
+    .device-dots button {
+      width: 12px; height: 24px; padding: 0; border: 0;
+      background: transparent; cursor: pointer; position: relative;
+      flex: none;
     }
-    .sm-chips li {
-      font-size: .55rem; font-weight: 700; letter-spacing: .04em;
-      padding: .28rem .5rem; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.88);
+    .device-dots button::after {
+      content: ""; position: absolute; left: 50%; top: 50%;
+      width: 5px; height: 5px; border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background: #C8C5BE;
     }
+    .device-dots button[aria-current="true"]::after {
+      width: 7px; height: 7px; background: var(--ink);
+    }
+    .device-dots button:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; border-radius: 4px; }
+
+    .device-meta {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: .35rem .5rem; margin-top: .15rem;
+    }
+    .carousel-count {
+      font-size: var(--fs-0); font-weight: 700; letter-spacing: .04em;
+      color: var(--ink-2); font-variant-numeric: tabular-nums;
+      min-width: 3.6rem; text-align: center; margin: 0;
+    }
+    .carousel-btns, .scroll-btns { display: flex; align-items: center; gap: .35rem; }
+    .carousel-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; padding: 0;
+      border: 1.5px solid var(--line); border-radius: 999px;
+      background: var(--bg); color: var(--ink); cursor: pointer;
+    }
+    .carousel-btn:hover { border-color: var(--ink); }
+    .carousel-btn:disabled,
+    .carousel-btn:disabled:hover {
+      opacity: .4; color: #9a968e; cursor: not-allowed; border-color: var(--line);
+    }
+    .carousel-btn svg { width: 18px; height: 18px; }
+
+    .device-hint {
+      text-align: center; font-size: .75rem; font-weight: 600;
+      color: var(--ink-2); margin-top: .55rem; min-height: 1.15em;
+      opacity: 0; transform: translateY(.2rem);
+      transition: opacity .4s ease, transform .4s ease;
+      pointer-events: none;
+    }
+    .device-hint.is-on { opacity: 1; transform: none; }
+
 
     /* ---------- Risk reversal ---------- */
     .risk {
@@ -453,102 +525,6 @@
         content: ""; position: absolute; top: .8rem; left: calc(50% + 1.3rem);
         width: calc(100% - 1.6rem); height: 1px; background: var(--line);
       }
-    }
-
-    /* ---------- Sample carousel ---------- */
-    .work { overflow: hidden; }
-    .work-head {
-      display: flex; flex-wrap: wrap; align-items: flex-end;
-      justify-content: space-between; gap: var(--sp-3) var(--sp-4);
-      margin-bottom: var(--sp-4);
-    }
-    .work-head .sec-head { margin-bottom: 0; }
-    .carousel-bar {
-      display: flex; align-items: center; gap: .65rem;
-      margin-left: auto;
-    }
-    .carousel-count {
-      font-size: var(--fs-0); font-weight: 700; letter-spacing: .04em;
-      color: var(--ink-2); font-variant-numeric: tabular-nums;
-      min-width: 4.4rem;
-    }
-    .carousel-btns { display: flex; gap: .4rem; }
-    @media (max-width: 40rem) {
-      .carousel-bar { width: 100%; margin-left: 0; justify-content: space-between; }
-    }
-    .carousel-btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 44px; height: 44px; padding: 0;
-      border: 1.5px solid var(--line); border-radius: 999px;
-      background: var(--bg); color: var(--ink); cursor: pointer;
-    }
-    .carousel-btn:hover { border-color: var(--ink); }
-    .carousel-btn:disabled,
-    .carousel-btn:disabled:hover { opacity: .35; cursor: not-allowed; border-color: var(--line); }
-    .carousel-btn svg { width: 18px; height: 18px; }
-
-    .carousel-track {
-      display: flex; gap: var(--sp-3);
-      overflow-x: auto; scroll-snap-type: x mandatory;
-      scroll-padding-inline: var(--gutter);
-      padding-block: .25rem var(--sp-2);
-      margin-inline: calc(-1 * var(--gutter));
-      padding-inline: var(--gutter);
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-x: contain;
-      scrollbar-width: none;
-    }
-    @media (max-width: 39.99rem) {
-      .carousel-track {
-        padding-inline-end: calc(100% - min(12rem, 58vw) - var(--gutter));
-      }
-    }
-    .carousel-track::-webkit-scrollbar { height: 0; }
-    .carousel-item {
-      flex: 0 0 min(12rem, 58vw);
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      margin: 0;
-    }
-    @media (min-width: 40rem) {
-      .carousel-item { flex-basis: 13.25rem; }
-    }
-
-    .sample { margin: 0; }
-    .sample-open {
-      display: block; color: inherit; text-decoration: none; cursor: zoom-in;
-      border-radius: var(--r-lg);
-    }
-    .sample-open:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-    .sample-open:hover .sample-frame { border-color: var(--ink); }
-    .sample-frame {
-      position: relative; aspect-ratio: 9 / 19.5;
-      border-radius: var(--r-lg); overflow: hidden;
-      background: var(--bg-2); border: 1.5px solid var(--line);
-      box-shadow: var(--shadow);
-    }
-    .sample-frame img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; object-position: top center;
-    }
-
-    dialog.sample-lightbox {
-      position: fixed; inset: 0; margin: auto;
-      padding: 0; border: 0; color: var(--ink);
-      width: min(44rem, 96vw); height: fit-content; max-height: 96vh;
-      background: var(--bg); border-radius: var(--r-lg); overflow: auto;
-      box-shadow: var(--shadow-lg);
-      overscroll-behavior: contain;
-    }
-    .sample-lightbox::backdrop { background: rgba(17, 17, 16, .72); }
-    .sample-lightbox img { display: block; width: 100%; height: auto; }
-    .sample-lightbox form { position: sticky; top: 0; z-index: 1; height: 0; margin: 0; }
-    .sample-lightbox-close {
-      position: absolute; top: .75rem; right: .75rem;
-      min-height: 44px; padding: .4rem 1rem;
-      border: 0; border-radius: 999px; cursor: pointer;
-      font: inherit; font-weight: 600; font-size: var(--fs-0);
-      background: var(--ink); color: var(--bg);
     }
 
     /* ---------- Callback form ---------- */
@@ -725,7 +701,9 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; }
-      .carousel-track { scroll-snap-type: none; }
+      .sample-track { scroll-snap-type: none; scroll-behavior: auto; }
+      .sample-scroll { scroll-behavior: auto; }
+      .device-hint { transition: none; }
     }
   </style>
 </head>
@@ -772,23 +750,158 @@
           <p class="hero-tag">Your trade business could look like this by next week.</p>
           <p class="hero-jump"><a href="#start">Get my free draft</a></p>
         </div>
-        <div class="phone" aria-hidden="true">
-          <span class="phone-notch"></span>
-          <div class="phone-screen">
-            <article class="site-mini is-roof">
-              <div class="sm-nav">
-                <span class="sm-logo">Your Roofing Co.</span>
-                <span class="sm-call">Call now</span>
+        <div class="hero-device" id="work" data-mode="phone">
+          <div class="showcase" role="region" aria-roledescription="carousel" aria-labelledby="work-h">
+            <h2 id="work-h" class="visually-hidden">Sample websites</h2>
+            <div class="mode-toggle" role="group" aria-label="Preview device">
+              <button type="button" data-mode-btn="phone" aria-pressed="true">Mobile</button>
+              <button type="button" data-mode-btn="laptop" aria-pressed="false">Desktop</button>
+            </div>
+            <div class="device-stage">
+              <div class="device-shell">
+                <span class="phone-island" aria-hidden="true"></span>
+                <div class="chrome-laptop" aria-hidden="true">
+                  <span class="traffic"><i></i><i></i><i></i></span>
+                  <span class="url">yoursite.com</span>
+                </div>
+                <div class="device-screen">
+                  <ul class="sample-track" id="sample-track">
+                  <li class="sample-slide">
+                    <div class="sample-scroll" tabindex="0">
+                      <img src="/assets/samples/sample-01-salon.jpg" alt="Sample of a salon website" width="736" height="1551" decoding="async" fetchpriority="high">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-02-dentist.jpg" alt="Sample of a dental website" width="736" height="1022" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-03-law.jpg" alt="Sample of a law-firm website" width="736" height="1472" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-04-spa.jpg" alt="Sample of a spa website" width="736" height="1307" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-05-realestate.jpg" alt="Sample of a real-estate website" width="736" height="1104" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-06-photographer.jpg" alt="Sample of a photographer website" width="736" height="1271" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-07-yoga.jpg" alt="Sample of a yoga-studio website" width="736" height="1104" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-08-cafe.jpg" alt="Sample of a cafe website" width="736" height="1307" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-09-florist.jpg" alt="Sample of a florist website" width="736" height="1551" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-10-physio.jpg" alt="Sample of a physiotherapy website" width="736" height="1104" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-11-accountant.jpg" alt="Sample of an accounting website" width="736" height="1104" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-12-interior.jpg" alt="Sample of an interior-design website" width="736" height="1104" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-13-vet.jpg" alt="Sample of a veterinary website" width="736" height="1104" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-14-wedding.jpg" alt="Sample of a wedding-planner website" width="736" height="1551" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-15-trainer.jpg" alt="Sample of a personal-trainer website" width="350" height="700" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-16-landscaping.jpg" alt="Sample of a landscaping website" width="600" height="1200" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-17-tutoring.jpg" alt="Sample of a tutoring website" width="736" height="1472" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-18-plumber.jpg" alt="Sample of a plumbing website" width="736" height="1104" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-19-hotel.jpg" alt="Sample of a hotel website" width="736" height="1551" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  <li class="sample-slide">
+                    <div class="sample-scroll">
+                      <img src="/assets/samples/sample-20-cleaning.jpg" alt="Sample of a cleaning-service website" width="736" height="1251" decoding="async" loading="lazy">
+                    </div>
+                  </li>
+                  </ul>
+                </div>
+                <span class="chrome-home" aria-hidden="true"><span></span></span>
               </div>
-              <div class="sm-hero">
-                <img src="/assets/draft/stock/hero-slate-arched-dormers.jpeg" alt="" width="1024" height="1024">
-                <div class="sm-copy">
-                  <p class="sm-kicker">Roofers · Local</p>
-                  <h3>New roofs. Repairs. A number that gets answered.</h3>
+            </div>
+            <div class="device-hud">
+              <div class="device-dots" data-dots role="group" aria-label="Choose a sample"></div>
+              <div class="device-meta">
+                <div class="carousel-btns">
+                  <button type="button" class="carousel-btn" data-carousel-prev aria-controls="sample-track" aria-label="Previous sample">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <path d="M15 6 9 12l6 6"/>
+                    </svg>
+                  </button>
+                  <p class="carousel-count" aria-live="polite"><span data-carousel-count>1 / 20</span></p>
+                  <button type="button" class="carousel-btn" data-carousel-next aria-controls="sample-track" aria-label="Next sample">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <path d="m9 6 6 6-6 6"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="scroll-btns">
+                  <button type="button" class="carousel-btn" data-scroll-up aria-label="Scroll sample up">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <path d="m6 15 6-6 6 6"/>
+                    </svg>
+                  </button>
+                  <button type="button" class="carousel-btn" data-scroll-down aria-label="Scroll sample down">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                  </button>
                 </div>
               </div>
-              <div class="sm-bar">Call now</div>
-            </article>
+              <p class="device-hint is-on" data-hint>Swipe ↑↓ to scroll · ←→ for another site</p>
+            </div>
           </div>
         </div>
       </div>
@@ -824,217 +937,6 @@
           <li><span class="n">2</span> Review in 48hrs</li>
           <li><span class="n">3</span> Go Live</li>
         </ol>
-      </div>
-    </section>
-
-    <!-- BLOCK 3 — Sample sites -->
-    <section class="work" id="work" aria-labelledby="work-h">
-      <div class="wrap">
-        <div class="carousel" role="region" aria-roledescription="carousel" aria-labelledby="work-h">
-          <div class="work-head">
-            <div class="sec-head">
-              <h2 id="work-h">Sites like these</h2>
-              <p>Sample sites of the kind we build. Yours gets your name, your photos, your number.</p>
-            </div>
-            <div class="carousel-bar">
-              <p class="carousel-count" aria-live="polite"><span data-carousel-count>1 / 20</span></p>
-              <div class="carousel-btns">
-                <button type="button" class="carousel-btn" data-carousel-prev aria-controls="sample-track" aria-label="Previous sample">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                    <path d="M15 6 9 12l6 6"/>
-                  </svg>
-                </button>
-                <button type="button" class="carousel-btn" data-carousel-next aria-controls="sample-track" aria-label="Next sample">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                    <path d="m9 6 6 6-6 6"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <ul class="carousel-track" id="sample-track" aria-label="Sample websites">
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-01-salon.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-01-salon.jpg" alt="Sample of a salon website" width="736" height="1551">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-02-dentist.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-02-dentist.jpg" alt="Sample of a dental website" width="736" height="1022" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-03-law.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-03-law.jpg" alt="Sample of a law-firm website" width="736" height="1472" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-04-spa.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-04-spa.jpg" alt="Sample of a spa website" width="736" height="1307" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-05-realestate.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-05-realestate.jpg" alt="Sample of a real-estate website" width="736" height="1104" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-06-photographer.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-06-photographer.jpg" alt="Sample of a photographer website" width="736" height="1271" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-07-yoga.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-07-yoga.jpg" alt="Sample of a yoga-studio website" width="736" height="1104" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-08-cafe.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-08-cafe.jpg" alt="Sample of a cafe website" width="736" height="1307" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-09-florist.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-09-florist.jpg" alt="Sample of a florist website" width="736" height="1551" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-10-physio.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-10-physio.jpg" alt="Sample of a physiotherapy website" width="736" height="1104" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-11-accountant.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-11-accountant.jpg" alt="Sample of an accounting website" width="736" height="1104" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-12-interior.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-12-interior.jpg" alt="Sample of an interior-design website" width="736" height="1104" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-13-vet.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-13-vet.jpg" alt="Sample of a veterinary website" width="736" height="1104" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-14-wedding.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-14-wedding.jpg" alt="Sample of a wedding-planner website" width="736" height="1551" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-15-trainer.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-15-trainer.jpg" alt="Sample of a personal-trainer website" width="350" height="700" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-16-landscaping.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-16-landscaping.jpg" alt="Sample of a landscaping website" width="600" height="1200" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-17-tutoring.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-17-tutoring.jpg" alt="Sample of a tutoring website" width="736" height="1472" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-18-plumber.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-18-plumber.jpg" alt="Sample of a plumbing website" width="736" height="1104" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-19-hotel.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-19-hotel.jpg" alt="Sample of a hotel website" width="736" height="1551" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-            <li class="carousel-item">
-              <figure class="sample">
-                <a class="sample-open" href="/assets/samples/sample-20-cleaning.jpg">
-                  <div class="sample-frame">
-                    <img src="/assets/samples/sample-20-cleaning.jpg" alt="Sample of a cleaning-service website" width="736" height="1251" loading="lazy">
-                  </div>
-                </a>
-              </figure>
-            </li>
-          </ul>
-        </div>
       </div>
     </section>
 
@@ -1200,10 +1102,6 @@
     </form>
   </dialog>
 
-  <dialog class="sample-lightbox" id="sample-lightbox" aria-label="Full sample">
-    <form method="dialog"><button class="sample-lightbox-close" type="submit">Close</button></form>
-    <img alt="">
-  </dialog>
 
   <footer>
     <div class="wrap">
@@ -1590,98 +1488,289 @@
   </script>
   <script>
     (function () {
-      var root = document.querySelector('.carousel');
+      var root = document.querySelector('.showcase');
       var track = document.getElementById('sample-track');
       if (!root || !track) return;
 
-      var items = Array.prototype.slice.call(track.querySelectorAll('.carousel-item'));
+      var device = root.closest('.hero-device') || root;
+      var items = Array.prototype.slice.call(track.querySelectorAll('.sample-slide'));
       var prev = root.querySelector('[data-carousel-prev]');
       var next = root.querySelector('[data-carousel-next]');
       var count = root.querySelector('[data-carousel-count]');
+      var dotsMount = root.querySelector('[data-dots]');
+      var scrollUp = root.querySelector('[data-scroll-up]');
+      var scrollDown = root.querySelector('[data-scroll-down]');
+      var hint = root.querySelector('[data-hint]');
+      var modeBtns = Array.prototype.slice.call(root.querySelectorAll('[data-mode-btn]'));
       var total = items.length;
+      var index = 0;
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var dragging = false;
+      var startX = 0;
+      var startY = 0;
+      var startLeft = 0;
+      var axis = null;
+      var dots = [];
 
+      function scrollerAt(i) {
+        var item = items[i];
+        return item ? item.querySelector('.sample-scroll') : null;
+      }
+      function currentScroller() { return scrollerAt(index); }
       function step() {
         var item = items[0];
         if (!item) return 1;
-        var styles = window.getComputedStyle(track);
-        var gap = parseFloat(styles.columnGap || styles.gap) || 0;
-        return item.getBoundingClientRect().width + gap;
+        return item.getBoundingClientRect().width;
       }
 
-      function maxScroll() {
-        return Math.max(0, track.scrollWidth - track.clientWidth);
+      function eager(i) {
+        var item = items[i];
+        if (!item) return;
+        var img = item.querySelector('img');
+        if (img && img.getAttribute('loading') === 'lazy') img.loading = 'eager';
       }
 
-      function indexFromScroll() {
-        var s = step();
-        if (!s) return 0;
-        var max = maxScroll();
-        if (max > 0 && track.scrollLeft >= max - 4) return total - 1;
-        var i = Math.round(track.scrollLeft / s);
-        return Math.max(0, Math.min(total - 1, i));
-      }
-
-      function update() {
-        var i = indexFromScroll();
-        if (count) count.textContent = (i + 1) + ' / ' + total;
-        if (prev) prev.disabled = i <= 0;
-        if (next) next.disabled = i >= total - 1;
-        items.forEach(function (item, idx) {
-          var link = item.querySelector('a');
-          if (link) link.tabIndex = idx === i ? 0 : -1;
-        });
-      }
-
-      function go(delta) {
-        var max = maxScroll();
-        var left = track.scrollLeft + delta * step();
-        if (left <= 4) left = 0;
-        else if (left >= max - 4) left = max;
-        else left = Math.max(0, Math.min(max, left));
-        track.scrollTo({ left: left, behavior: reduce ? 'auto' : 'smooth' });
+      function goTo(i, instant) {
+        i = Math.max(0, Math.min(total - 1, i));
+        var changed = i !== index;
+        index = i;
+        track.scrollTo({ left: i * step(), behavior: (instant || reduce) ? 'auto' : 'smooth' });
+        if (changed) {
+          var s = scrollerAt(index);
+          if (s) s.scrollTop = 0;
+          eager(index);
+          eager(index + 1);
+        }
         update();
       }
+      function go(delta) { goTo(index + delta); }
 
-      if (prev) prev.addEventListener('click', function () { go(-1); });
-      if (next) next.addEventListener('click', function () { go(1); });
+      function update() {
+        if (count) count.textContent = (index + 1) + ' / ' + total;
+        if (prev) prev.disabled = index <= 0;
+        if (next) next.disabled = index >= total - 1;
+        items.forEach(function (item, idx) {
+          var on = idx === index;
+          if (on) item.removeAttribute('aria-hidden');
+          else item.setAttribute('aria-hidden', 'true');
+          var s = item.querySelector('.sample-scroll');
+          if (!s) return;
+          s.tabIndex = on ? 0 : -1;
+          if (on) {
+            var img = item.querySelector('img');
+            s.setAttribute('role', 'region');
+            s.setAttribute('aria-label', (img && img.alt ? img.alt : 'Sample website') + '. Scroll to browse the page.');
+          } else {
+            s.removeAttribute('aria-label');
+          }
+        });
+        dots.forEach(function (d, idx) {
+          if (idx === index) d.setAttribute('aria-current', 'true');
+          else d.removeAttribute('aria-current');
+        });
+        updateScrollBtns();
+      }
 
-      track.addEventListener('scroll', function () {
-        if (track._raf) cancelAnimationFrame(track._raf);
-        track._raf = requestAnimationFrame(update);
-      }, { passive: true });
+      function updateScrollBtns() {
+        var s = currentScroller();
+        if (!s) return;
+        var top = s.scrollTop <= 2;
+        var bot = s.scrollTop + s.clientHeight >= s.scrollHeight - 2;
+        if (scrollUp) scrollUp.disabled = top;
+        if (scrollDown) scrollDown.disabled = bot;
+      }
 
-      root.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
-        else if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
-        else if (e.key === 'Home') { e.preventDefault(); go(-total); }
-        else if (e.key === 'End') { e.preventDefault(); go(total); }
+      function dismissHint() {
+        if (!hint || hint.getAttribute('data-off')) return;
+        hint.setAttribute('data-off', '1');
+        hint.classList.remove('is-on');
+        hint.setAttribute('aria-hidden', 'true');
+        try { sessionStorage.setItem('lemonelly-device-hint', '1'); } catch (err) {}
+      }
+
+      if (dotsMount) {
+        var frag = document.createDocumentFragment();
+        items.forEach(function (item, idx) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          var img = item.querySelector('img');
+          b.setAttribute('aria-label', 'Show sample ' + (idx + 1) + ' of ' + total + (img && img.alt ? ': ' + img.alt : ''));
+          b.addEventListener('click', function () { dismissHint(); goTo(idx); });
+          frag.appendChild(b);
+          dots.push(b);
+        });
+        dotsMount.appendChild(frag);
+      }
+
+      if (prev) prev.addEventListener('click', function () { dismissHint(); go(-1); });
+      if (next) next.addEventListener('click', function () { dismissHint(); go(1); });
+
+      function scrollPage(dir) {
+        dismissHint();
+        var s = currentScroller();
+        if (!s) return;
+        s.scrollBy({ top: dir * Math.round(s.clientHeight * 0.78), behavior: reduce ? 'auto' : 'smooth' });
+      }
+      if (scrollUp) scrollUp.addEventListener('click', function () { scrollPage(-1); });
+      if (scrollDown) scrollDown.addEventListener('click', function () { scrollPage(1); });
+
+      items.forEach(function (item) {
+        var s = item.querySelector('.sample-scroll');
+        if (s) {
+          s.addEventListener('scroll', function () {
+            if (item === items[index]) {
+              dismissHint();
+              updateScrollBtns();
+            }
+          }, { passive: true });
+        }
+        var img = item.querySelector('img');
+        if (img) {
+          img.addEventListener('load', function () {
+            if (item === items[index]) updateScrollBtns();
+          });
+        }
       });
 
-      window.addEventListener('resize', update);
+      track.addEventListener('scroll', function () {
+        if (dragging) return;
+        if (track._raf) cancelAnimationFrame(track._raf);
+        track._raf = requestAnimationFrame(function () {
+          var s = step();
+          if (!s) return;
+          var i = Math.round(track.scrollLeft / s);
+          i = Math.max(0, Math.min(total - 1, i));
+          if (i !== index) {
+            index = i;
+            var sc = scrollerAt(index);
+            if (sc) sc.scrollTop = 0;
+            eager(index);
+            eager(index + 1);
+            update();
+          }
+        });
+      }, { passive: true });
+
+      function onDown(x, y) {
+        startX = x; startY = y; startLeft = track.scrollLeft; axis = null; dragging = false;
+      }
+      function onMove(x, y, prevent) {
+        var dx = x - startX, dy = y - startY;
+        if (!axis) {
+          if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
+          axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+          if (axis === 'x') {
+            dragging = true;
+            track.style.scrollSnapType = 'none';
+            track.style.scrollBehavior = 'auto';
+          }
+        }
+        if (axis === 'x') {
+          if (prevent) prevent();
+          track.scrollLeft = startLeft - dx;
+        }
+      }
+      function onUp(x) {
+        if (axis === 'x') {
+          var dx = x - startX;
+          track.style.scrollSnapType = '';
+          track.style.scrollBehavior = '';
+          if (dx < -40) go(1);
+          else if (dx > 40) go(-1);
+          else goTo(index);
+          dismissHint();
+        } else if (axis === 'y') {
+          dismissHint();
+        }
+        dragging = false;
+        axis = null;
+      }
+
+      var screen = device.querySelector('.device-screen') || track;
+      screen.addEventListener('touchstart', function (e) {
+        var t = e.changedTouches[0];
+        onDown(t.clientX, t.clientY);
+      }, { passive: true });
+      screen.addEventListener('touchmove', function (e) {
+        var t = e.changedTouches[0];
+        onMove(t.clientX, t.clientY, function () { e.preventDefault(); });
+      }, { passive: false });
+      screen.addEventListener('touchend', function (e) {
+        var t = e.changedTouches[0];
+        onUp(t.clientX);
+      });
+      screen.addEventListener('touchcancel', function (e) {
+        var t = e.changedTouches[0];
+        onUp(t ? t.clientX : startX);
+      });
+
+      var wheelAcc = 0, wheelTimer;
+      screen.addEventListener('wheel', function (e) {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 4) {
+          e.preventDefault();
+          wheelAcc += e.deltaX;
+          clearTimeout(wheelTimer);
+          if (Math.abs(wheelAcc) > 70) {
+            go(wheelAcc > 0 ? 1 : -1);
+            wheelAcc = 0;
+            dismissHint();
+          } else {
+            wheelTimer = setTimeout(function () { wheelAcc = 0; }, 180);
+          }
+        } else if (e.deltaY) {
+          dismissHint();
+        }
+      }, { passive: false });
+
+      root.addEventListener('keydown', function (e) {
+        var inScroller = e.target && e.target.classList && e.target.classList.contains('sample-scroll');
+        if (e.key === 'ArrowLeft') { e.preventDefault(); dismissHint(); go(-1); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); dismissHint(); go(1); }
+        else if (e.key === 'Home') { e.preventDefault(); dismissHint(); goTo(0); }
+        else if (e.key === 'End') { e.preventDefault(); dismissHint(); goTo(total - 1); }
+        else if ((e.key === 'ArrowUp' && !inScroller) || e.key === 'PageUp') {
+          e.preventDefault();
+          scrollPage(-1);
+        } else if ((e.key === 'ArrowDown' && !inScroller) || e.key === 'PageDown') {
+          e.preventDefault();
+          scrollPage(1);
+        }
+      });
+
+      modeBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var mode = btn.getAttribute('data-mode-btn');
+          if (!mode) return;
+          device.setAttribute('data-mode', mode);
+          modeBtns.forEach(function (b) {
+            b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+          });
+          dismissHint();
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { goTo(index, true); });
+          });
+        });
+      });
+
+      var seenHint = false;
+      try { seenHint = sessionStorage.getItem('lemonelly-device-hint') === '1'; } catch (err) {}
+      if (hint && !seenHint) {
+        hint.removeAttribute('aria-hidden');
+        hint.classList.add('is-on');
+      } else if (hint) {
+        hint.classList.remove('is-on');
+        hint.setAttribute('aria-hidden', 'true');
+      }
+
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () { goTo(index, true); }, 80);
+      });
+
       update();
     })();
   </script>
-  <script>
-    (function () {
-      var dlg = document.getElementById('sample-lightbox');
-      var full = dlg && dlg.querySelector('img');
-      if (!dlg || !full || typeof dlg.showModal !== 'function') return;
-      document.querySelectorAll('a.sample-open').forEach(function (a) {
-        a.addEventListener('click', function (e) {
-          e.preventDefault();
-          var thumb = a.querySelector('img');
-          full.src = a.getAttribute('href');
-          full.alt = thumb ? thumb.alt : '';
-          dlg.showModal();
-          dlg.scrollTop = 0;
-        });
-      });
-      dlg.addEventListener('click', function (e) {
-        if (e.target === dlg) dlg.close();
-      });
-      dlg.addEventListener('close', function () { full.removeAttribute('src'); });
-    })();
-  </script>
 </body>
+
 </html>
