@@ -295,6 +295,10 @@
     }
     .callback-opt:has(input:checked) { border-color: var(--green); background: var(--green-wash); }
     .callback-opt input { accent-color: var(--green); width: 1.05rem; height: 1.05rem; flex: none; }
+    .callback-face {
+      width: 1.75rem; height: 1.75rem; border-radius: 50%;
+      object-fit: cover; flex: none; background: var(--bg-2);
+    }
     .callback-step .btn-solid { min-width: 11rem; }
     .callback-done h3 { font-size: var(--fs-3); font-weight: 800; outline: none; }
     .callback-done p { color: var(--ink-2); margin-top: var(--sp-2); }
@@ -478,8 +482,8 @@
                 <fieldset>
                   <legend>Who should call you?</legend>
                   <div class="callback-opts">
-                    <label class="callback-opt"><input type="radio" data-group="who" value="ben" data-label="Ben"> Ben</label>
-                    <label class="callback-opt"><input type="radio" data-group="who" value="veronica" data-label="Veronica" checked> Veronica</label>
+                    <label class="callback-opt"><input type="radio" data-group="who" value="ben" data-label="Ben"> <img class="callback-face" src="/assets/ben.jpg" alt="" width="28" height="28" onerror="this.remove()"> Ben</label>
+                    <label class="callback-opt"><input type="radio" data-group="who" value="veronica" data-label="Veronica" checked> <img class="callback-face" src="/assets/veronica.jpg" alt="" width="28" height="28" onerror="this.remove()"> Veronica</label>
                   </div>
                 </fieldset>
                 <fieldset>
