@@ -32,51 +32,13 @@
     "name": "lemonelly",
     "url": "https://lemonelly.com/",
     "email": "hello@lemonelly.com",
-    "description": "Web design studio building fast, professional websites for South African small businesses. Free website design; R2,200/month once your site is live.",
+    "description": "We build and host websites for South African small businesses. Leave a number. Design is free. R2,200/month once your site is live.",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Cape Town",
       "addressCountry": "ZA"
     },
     "areaServed": "South Africa"
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Nothing's free. What's the catch?",
-        "acceptedAnswer": { "@type": "Answer", "text": "There isn't one. We carry the cost of the draft because most people who see their finished site want to keep it. If you don't, you walk away and owe nothing." }
-      },
-      {
-        "@type": "Question",
-        "name": "What does a website cost with lemonelly?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Nothing upfront. The design, the draft, and every revision are free. You only start paying R2,200/month once you're happy and your new site goes live." }
-      },
-      {
-        "@type": "Question",
-        "name": "How fast will my site be live?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Seven days from kickoff. Days 1–2 we design your free draft, days 3–5 we refine it with your feedback, days 6–7 we go live." }
-      },
-      {
-        "@type": "Question",
-        "name": "What does the R2,200/month actually cover?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Everything: fast hosting, SSL security, software and security updates, one round of content edits every month — new photos, price changes, fresh copy — plus SEO and direct WhatsApp support. No upfront cost. No hidden fees. Cancel anytime." }
-      },
-      {
-        "@type": "Question",
-        "name": "What do you need from me to get started?",
-        "acceptedAnswer": { "@type": "Answer", "text": "A phone number. We call you, agree a time, and take it from there. Point us at your current website if you have one." }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I change things after the site is live?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. One round of updates is included every single month, so your site keeps up as your business grows — just send us what's changed." }
-      }
-    ]
   }
   </script>
 
@@ -204,10 +166,13 @@
     .region-head { display: inline-flex; margin-left: auto; }
     .region-head .region-nav a { padding: .3rem .5rem; font-size: .7rem; }
     .nav-region { display: none; }
+    @media (max-width: 40rem) {
+      .region-head .region-nav a { padding: .28rem .34rem; font-size: .62rem; }
+    }
     @media (max-width: 22.5rem) {
       .brand { font-size: 1.05rem; }
       .brand svg { width: 22px; height: 22px; }
-      .region-head .region-nav a { padding: .3rem .38rem; font-size: .65rem; letter-spacing: .02em; }
+      .region-head .region-nav a { padding: .3rem .32rem; font-size: .62rem; letter-spacing: .02em; }
       .menu-btn { width: 44px; height: 44px; }
     }
 
@@ -271,19 +236,23 @@
       content: ""; display: block; width: 3rem; height: .3rem; border-radius: 999px;
       background: var(--lemon); margin: var(--sp-3) auto 0;
     }
-    .tint { background: var(--bg-2); border-block: 1px solid var(--line); }
     .sec-head p { color: var(--ink-2); margin-top: var(--sp-3); }
 
     /* ---------- Hero ---------- */
-    .hero { padding-block: var(--sp-6); }
-    @media (min-width: 60rem) {
-      .hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--sp-6); align-items: center; }
-    }
+    .hero { padding-block: var(--sp-6); padding-bottom: var(--sp-5); }
+    .hero .wrap { max-width: 42rem; }
     h1 {
       font-size: var(--fs-5); font-weight: 800; letter-spacing: -.03em;
-      max-width: 19ch; margin-top: var(--sp-4); margin-bottom: var(--sp-4);
+      max-width: 100%; margin-top: var(--sp-4); margin-bottom: var(--sp-4);
+      overflow-wrap: break-word; text-wrap: wrap;
     }
-    .lede { font-size: var(--fs-2); color: var(--ink-2); max-width: 44ch; margin-bottom: var(--sp-5); }
+    @media (max-width: 40rem) {
+      h1 { font-size: clamp(1.9rem, 8.4vw, 2.5rem); }
+    }
+    @media (min-width: 40rem) {
+      h1 { text-wrap: balance; }
+    }
+    .lede { font-size: var(--fs-2); color: var(--ink-2); max-width: min(44ch, 100%); margin-bottom: var(--sp-5); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; margin-bottom: var(--sp-5); }
 
     /* ---------- Callback form ---------- */
@@ -329,12 +298,6 @@
     .callback-step .btn-solid { min-width: 11rem; }
     .callback-done h3 { font-size: var(--fs-3); font-weight: 800; outline: none; }
     .callback-done p { color: var(--ink-2); margin-top: var(--sp-2); }
-    .callback-card {
-      max-width: 36rem; margin-inline: auto; margin-top: var(--sp-5);
-      background: var(--bg); color: var(--ink); text-align: left;
-      border-radius: var(--r-lg); padding: var(--sp-5) var(--sp-4);
-    }
-    .callback-card .callback { margin-bottom: 0; max-width: none; }
     .callback-fallback a { color: var(--green); font-weight: 600; }
     .callback-change {
       display: inline; margin-left: .6rem; padding: 0; border: 0; background: none;
@@ -349,145 +312,86 @@
     }
 
     .price-strip {
-      display: inline-flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem;
+      display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .75rem;
+      width: fit-content; max-width: 100%;
       border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow);
       padding: var(--sp-2) var(--sp-3);
       font-size: var(--fs-0); font-weight: 600; color: var(--ink-2);
     }
     .price-strip strong { color: var(--ink); font-weight: 700; }
 
-    .hero-art { width: 100%; height: auto; margin-top: var(--sp-5); border-radius: var(--r-lg); border: 1px solid var(--line); }
-    @media (min-width: 60rem) { .hero-art { margin-top: 0; } }
-
-    /* ---------- Stats ---------- */
-    .stats { border-block: 1px solid var(--line); background: var(--bg-2); padding-block: var(--sp-5); }
-    .stats .wrap { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
-    .stat strong { display: block; font-size: var(--fs-4); font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
-    .stat strong span { font: inherit; letter-spacing: inherit; text-transform: none; }
-    .stat > span { color: var(--ink-2); font-size: var(--fs-0); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
-
-    /* ---------- Cards ---------- */
-    .grid-3 { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-    .card {
-      background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg);
-      box-shadow: var(--shadow); padding: var(--sp-5) var(--sp-4);
+    /* ---------- Samples ---------- */
+    .sample-grid {
+      display: grid; gap: var(--sp-4);
+      grid-template-columns: 1fr;
+      list-style: none; padding: 0; margin: 0;
     }
-    .icon-dot {
-      width: 3rem; height: 3rem; border-radius: 50%; background: var(--green);
-      display: grid; place-items: center; margin-bottom: var(--sp-4);
-      transition: background-color .2s ease, transform .2s ease;
+    @media (min-width: 40rem) { .sample-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 70rem) { .sample-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .sample { margin: 0; }
+    .sample-frame {
+      position: relative; aspect-ratio: 16 / 10;
+      border-radius: var(--r-lg); overflow: hidden;
+      background: var(--bg-2); border: 1.5px dashed var(--line);
     }
-    .card:hover .icon-dot { background: var(--cta-deep); transform: scale(1.08) rotate(-4deg); }
-    .icon-dot svg { width: 1.4rem; height: 1.4rem; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .card h3 { font-size: var(--fs-3); font-weight: 700; letter-spacing: -.01em; margin-bottom: var(--sp-2); }
-    .card p { color: var(--ink-2); }
-
-    /* ---------- Prep (Before We Build) ---------- */
-    .prep-grid { grid-template-columns: 1fr; }
-    @media (min-width: 40rem) { .prep-grid { grid-template-columns: repeat(2, 1fr); } }
-    .prep-grid .card { display: flex; flex-direction: column; }
-    .prep-grid .card ul { list-style: none; padding: 0; margin-top: var(--sp-3); display: grid; gap: var(--sp-2); }
-    .prep-grid .card li {
-      position: relative; padding-left: 1.4rem;
-      color: var(--ink); font-weight: 500; font-size: .95rem;
+    .sample-frame img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
     }
-    .prep-grid .card li::before {
-      content: ""; position: absolute; left: 0; top: .5em;
-      width: .55rem; height: .55rem; border-radius: 50%; background: var(--cta);
-    }
-    .card-note {
-      margin-top: auto; padding: var(--sp-2) var(--sp-3);
-      border-left: 3px solid var(--cta); border-radius: 0 var(--r) var(--r) 0;
-      background: var(--bg-2); font-size: .95rem; color: var(--ink);
-    }
-    .prep-grid .card ul, .prep-grid .card > p:not(.card-note) { margin-bottom: var(--sp-3); }
-    .prep-cta { text-align: center; margin-top: var(--sp-6); }
-    .prep-cta h3 { font-size: var(--fs-3); font-weight: 700; letter-spacing: -.01em; }
-    .prep-cta p { color: var(--ink-2); max-width: 46ch; margin: var(--sp-2) auto var(--sp-4); }
-
-    /* ---------- Process ---------- */
-    .steps { display: grid; gap: var(--sp-5) var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
-    .steps li { border-top: 2px solid var(--line); padding-top: var(--sp-4); }
-    .step-num { display: block; font-size: var(--fs-0); font-weight: 700; letter-spacing: .12em; color: var(--green); margin-bottom: var(--sp-2); }
-    .steps h3 { font-size: var(--fs-2); font-weight: 700; margin-bottom: var(--sp-2); }
-    .steps p { color: var(--ink-2); }
-
-    /* ---------- Work ---------- */
-    .grid-2 { display: grid; gap: var(--sp-5) var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
-    .project { text-decoration: none; display: block; }
-    .project .shot {
-      display: block;
-      position: relative; aspect-ratio: 16 / 11; border-radius: var(--r-lg);
-      overflow: hidden; background: var(--bg-2); border: 1px solid var(--line);
-      margin-bottom: var(--sp-3);
-    }
-    .project .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .project .shot.crop-bottom img { object-position: 50% 100%; }
-    .project .plate-name {
+    .sample-frame.has-img { border-style: solid; }
+    .sample-ph {
       position: absolute; inset: 0; display: grid; place-items: center;
-      font-weight: 800; font-size: var(--fs-3); letter-spacing: .06em; color: var(--ink-2);
-      text-align: center; white-space: pre-line;
+      font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      font-size: var(--fs-0); color: var(--ink-2);
     }
-    .project h3 { font-size: var(--fs-3); font-weight: 700; letter-spacing: -.01em; display: inline; }
-    .project .cat { color: var(--ink-2); font-size: var(--fs-0); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-top: var(--sp-1); }
-    .project:hover h3 { color: var(--green); }
+    .sample figcaption {
+      margin-top: var(--sp-2);
+      font-size: var(--fs-0); font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--ink-2);
+    }
+
+    .offer {
+      border-block: 1px solid var(--line); background: var(--bg-2);
+      padding-block: var(--sp-5); text-align: center;
+    }
+    .offer p {
+      font-size: var(--fs-2); font-weight: 600; max-width: 40rem;
+      margin-inline: auto;
+    }
+    .offer a { color: var(--green); }
 
     /* ---------- Team ---------- */
-    .people { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); max-width: 56rem; margin-inline: auto; }
-    .person { display: flex; flex-direction: column; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: var(--sp-4); }
+    .people { display: grid; gap: var(--sp-4); grid-template-columns: 1fr; max-width: 46rem; margin-inline: auto; }
+    @media (min-width: 40rem) { .people { grid-template-columns: 1fr 1fr; } }
+    .person {
+      display: grid; grid-template-columns: 5.5rem 1fr; column-gap: var(--sp-3); row-gap: var(--sp-1);
+      align-items: start;
+      background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg);
+      padding: var(--sp-3);
+    }
     .headshot {
       position: relative; aspect-ratio: 1; border-radius: var(--r);
-      overflow: hidden; background: var(--bg-2); margin-bottom: var(--sp-4);
+      overflow: hidden; background: var(--bg-2); margin: 0;
+      grid-column: 1; grid-row: 1 / -1; align-self: start; width: 100%;
     }
     .monogram {
       position: absolute; inset: 0; display: grid; place-items: center;
       font-size: var(--fs-5); font-weight: 800; letter-spacing: .02em; color: var(--ink-2);
     }
     .headshot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .person h3 { font-size: var(--fs-3); font-weight: 700; }
-    .person .cred { font-size: var(--fs-0); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green); margin: var(--sp-1) 0 var(--sp-2); }
-    .person .bio { color: var(--ink-2); }
-    .person .contact { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: auto; padding-top: var(--sp-3); }
+    .person h3 { font-size: var(--fs-2); font-weight: 700; grid-column: 2; }
+    .person .cred { font-size: var(--fs-0); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green); margin: 0; grid-column: 2; }
+    .person .bio { color: var(--ink-2); grid-column: 2; }
+    .person .contact { display: flex; flex-wrap: wrap; gap: var(--sp-2); grid-column: 2; padding-top: var(--sp-2); }
     .person .contact .btn { min-height: 42px; padding-inline: 1.1rem; font-size: var(--fs-0); }
     .team-contact { text-align: center; margin-top: var(--sp-5); }
-
-    /* ---------- FAQ ---------- */
-    .faq-list { max-width: 46rem; margin-inline: auto; border-bottom: 1px solid var(--line); }
-    .faq-list details { border-top: 1px solid var(--line); }
-    .faq-list summary {
-      display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
-      padding: var(--sp-4) 0; cursor: pointer; list-style: none;
-      font-size: var(--fs-2); font-weight: 600;
-    }
-    .faq-list summary > span:not(.plus) { flex: 1; min-width: 0; }
-    .faq-list summary::-webkit-details-marker { display: none; }
-    .faq-list summary:hover { color: var(--green); }
-    .faq-list summary .plus {
-      flex: none; width: 1.5rem; height: 1.5rem; position: relative;
-      transition: transform .2s ease;
-    }
-    .faq-list summary .plus::before, .faq-list summary .plus::after {
-      content: ""; position: absolute; inset: 0; margin: auto; background: currentColor;
-    }
-    .faq-list summary .plus::before { width: 100%; height: 2px; }
-    .faq-list summary .plus::after { width: 2px; height: 100%; }
-    .faq-list details[open] summary .plus { transform: rotate(45deg); }
-    .faq-list details p { color: var(--ink-2); padding: 0 2.5rem var(--sp-4) 0; }
-
-    /* ---------- CTA ---------- */
-    .cta { background: var(--green-deep); border-top: 1px solid var(--green-deep); text-align: center; color: #fff; }
-    .cta h2 { font-size: var(--fs-4); font-weight: 800; letter-spacing: -.02em; margin-top: var(--sp-4); }
-    .cta p { color: rgba(255, 255, 255, .85); max-width: 46ch; margin: var(--sp-3) auto var(--sp-5); font-size: var(--fs-2); }
-    .cta-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); justify-content: center; }
-    .cta .badge-pill { color: var(--ink); }
-    .cta .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, .45); }
-    .cta .btn-ghost:hover { border-color: #fff; background: rgba(255, 255, 255, .08); }
 
     /* ---------- Footer ---------- */
     footer { border-top: 1px solid var(--line); padding-block: var(--sp-5); }
     footer .wrap { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); align-items: center; justify-content: space-between; }
     footer .mark { font-weight: 800; letter-spacing: .06em; }
     footer p { color: var(--ink-2); font-size: var(--fs-0); }
+    .footer-prices { flex: 1 1 12rem; }
 
     /* ---------- Motion ---------- */
     @media (prefers-reduced-motion: reduce) {
@@ -519,11 +423,8 @@
       </button>
       <nav id="site-nav" aria-label="Main">
         <ul>
+          <li><a href="#samples">Samples</a></li>
           <li><a href="#team">Team</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="#why">Why Us</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#work">Work</a></li>
           <li class="nav-region"><span class="region-nav" role="group" aria-label="Choose your region"><a href="/za" aria-current="true">ZA</a><a href="/us">US</a><a href="/uk">UK</a><a href="/eu">EU</a></span></li>
           <li><a class="btn btn-solid" href="#callback">Request a call</a></li>
         </ul>
@@ -536,8 +437,8 @@
       <div class="wrap">
         <div>
           <p class="badge-pill">Web Design Studio<span class="badge-ext"> · Cape Town</span></p>
-          <h1>We design your website free. You only pay if you love it.</h1>
-          <p class="lede">Professional websites that win trust for South African small businesses. Live in 7 days. <span class="js-price">R2,200</span>/month once you're happy, and nothing before that.</p>
+          <h1>A website that looks like this. We build it. We host it.</h1>
+          <p class="lede">Leave a number. We call. Design is free. <span class="js-price">R2,200</span> a month once it's live.</p>
           <div id="callback" class="callback-mount" data-callback="hero">
             <form class="callback" novalidate>
               <div class="callback-step" data-step="phone">
@@ -598,19 +499,186 @@
               <p class="callback-hint">JavaScript is off. <a href="https://wa.me/447441421114">WhatsApp us</a> with your number.</p>
             </noscript>
           </div>
-          <p class="price-strip"><strong>Free</strong> website design <span aria-hidden="true">·</span> <strong><span class="js-price">R2,200</span>/mo</strong> once you're happy <span aria-hidden="true">·</span> live in <strong>7 days</strong></p>
+          <p class="price-strip"><strong>Free</strong> design <span aria-hidden="true">·</span> we host it <span aria-hidden="true">·</span> <strong><span class="js-price">R2,200</span>/mo</strong> once live <span aria-hidden="true">·</span> <strong>7 days</strong></p>
         </div>
-        <img class="hero-art" src="/assets/hero-mockup.png"
-             alt="The Lost Wax Foundry website, built by lemonelly, shown on a laptop and phone"
-             width="1500" height="900" onerror="this.remove()">
       </div>
     </section>
 
-    <div class="stats" role="group" aria-label="What you get">
+    <section id="samples" aria-labelledby="samples-h">
       <div class="wrap">
-        <p class="stat"><strong>7 days</strong> <span>from kickoff to launch</span></p>
-        <p class="stat"><strong>Free</strong> <span>design, drafts &amp; revisions</span></p>
-        <p class="stat"><strong><span class="js-price">R2,200</span>/mo</strong> <span>only once your site goes live</span></p>
+        <div class="sec-head">
+          <p class="badge-pill">Samples</p>
+          <h2 id="samples-h">Sites like these</h2>
+          <p>Samples of the look. Yours gets your name, your photos, your number.</p>
+        </div>
+        <ul class="sample-grid">
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-01-salon.jpg" alt="Sample of a salon website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-02-dentist.jpg" alt="Sample of a dental website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-03-law.jpg" alt="Sample of a law-firm website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-04-spa.jpg" alt="Sample of a spa website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-05-realestate.jpg" alt="Sample of a real-estate website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-06-photographer.jpg" alt="Sample of a photographer website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-07-yoga.jpg" alt="Sample of a yoga-studio website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-08-cafe.jpg" alt="Sample of a cafe website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-09-florist.jpg" alt="Sample of a florist website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-10-physio.jpg" alt="Sample of a physiotherapy website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-11-accountant.jpg" alt="Sample of an accounting website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-12-interior.jpg" alt="Sample of an interior-design website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-13-vet.jpg" alt="Sample of a veterinary website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-14-wedding.jpg" alt="Sample of a wedding-planner website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-15-trainer.jpg" alt="Sample of a personal-trainer website" width="350" height="219" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-16-landscaping.jpg" alt="Sample of a landscaping website" width="600" height="375" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-17-tutoring.jpg" alt="Sample of a tutoring website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-18-plumber.jpg" alt="Sample of a plumbing website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-19-hotel.jpg" alt="Sample of a hotel website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="sample">
+              <div class="sample-frame has-img">
+                <img src="/assets/samples/sample-20-cleaning.jpg" alt="Sample of a cleaning-service website" width="736" height="460" loading="lazy">
+              </div>
+              <figcaption>Sample</figcaption>
+            </figure>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="offer">
+      <div class="wrap">
+        <p>Like one of these? <a href="#callback">Leave a number</a>. We build it, we host it, <span class="js-price">R2,200</span>/mo once you say go.</p>
       </div>
     </div>
 
@@ -618,19 +686,19 @@
       <div class="wrap">
         <div class="sec-head">
           <p class="badge-pill">The Team</p>
-          <h2 id="team-h">The people you'll work with</h2>
-          <p>A combined 30+ years of experience working at the intersection of tech, art and design.</p>
+          <h2 id="team-h">Ben and Veronica</h2>
+          <p>We build it. We host it. You talk to us.</p>
         </div>
         <div class="people">
           <div class="person">
             <figure class="headshot">
               <span class="monogram" aria-hidden="true">VK</span>
               <img src="/assets/veronica.jpg" alt="Veronica Kotze, Creative Director at lemonelly"
-                   width="640" height="640" loading="lazy" onerror="this.remove()">
+                   width="640" height="640" onerror="this.remove()">
             </figure>
             <h3>Veronica Kotze</h3>
             <p class="cred">Creative Director · BA Honours in Fine Arts</p>
-            <p class="bio">The creative eye. Veronica worked for world-renowned artist Lionel Smit before bringing that craft to brands. She makes sure your site looks stunning, communicates the right vibe, and captures attention.</p>
+            <p class="bio">She designs the site. Your name, your photos, your number.</p>
             <div class="contact">
               <a class="btn btn-ghost" href="mailto:veronica@lemonelly.com">Email</a>
               <a class="btn btn-ghost" href="https://www.linkedin.com/in/veronicakotze/" target="_blank" rel="noopener">LinkedIn</a>
@@ -640,11 +708,11 @@
             <figure class="headshot">
               <span class="monogram" aria-hidden="true">BB</span>
               <img src="/assets/ben.jpg" alt="Ben Blaine, Technical Lead at lemonelly"
-                   width="640" height="640" loading="lazy" onerror="this.remove()">
+                   width="640" height="640" onerror="this.remove()">
             </figure>
             <h3>Ben Blaine</h3>
             <p class="cred">Technical Lead · BSc Mechanical Engineering</p>
-            <p class="bio">The technical engine. Ben worked at venture builder FireID and helped build tech startups SnapScan and OfferZen — plus dozens of products since. He builds the structure that keeps your site lightning-fast and rock-solid.</p>
+            <p class="bio">He builds it and hosts it. Fast, kept up.</p>
             <div class="contact">
               <a class="btn btn-ghost" href="mailto:ben@lemonelly.com">Email</a>
               <a class="btn btn-ghost" href="https://www.linkedin.com/in/benjamin-blaine/" target="_blank" rel="noopener">LinkedIn</a>
@@ -654,254 +722,12 @@
         <p class="team-contact"><a class="btn btn-ghost" href="https://wa.me/447441421114" target="_blank" rel="noopener">WhatsApp Us</a></p>
       </div>
     </section>
-
-    <section class="tint" id="why" aria-labelledby="why-h">
-      <div class="wrap">
-        <div class="sec-head">
-          <p class="badge-pill">Why Us</p>
-          <h2 id="why-h">A website partner, not just a website</h2>
-        </div>
-        <div class="grid-3">
-          <div class="card">
-            <div class="icon-dot" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z"/></svg>
-            </div>
-            <h3>Bold Design</h3>
-            <p>We create striking visual identities that make you look like the undeniable, premium choice in your industry.</p>
-          </div>
-          <div class="card">
-            <div class="icon-dot" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>
-            </div>
-            <h3>Blazing Fast</h3>
-            <p>Engineered from the ground up to load instantly and perform flawlessly across every single device.</p>
-          </div>
-          <div class="card">
-            <div class="icon-dot" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-            </div>
-            <h3>Everything Handled</h3>
-            <p>Hosting, security, updates, edits, SEO. One monthly price, no technical homework for you.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="process" aria-labelledby="process-h">
-      <div class="wrap">
-        <div class="sec-head">
-          <p class="badge-pill">Our Process</p>
-          <h2 id="process-h">The 1-Week Launch</h2>
-        </div>
-        <ol class="steps">
-          <li>
-            <span class="step-num" aria-hidden="true">01</span>
-            <h3>Draft <span aria-hidden="true">·</span> Days 1–2</h3>
-            <p>We design a free draft of your new website, based on your current site and what makes your business good.</p>
-          </li>
-          <li>
-            <span class="step-num" aria-hidden="true">02</span>
-            <h3>Refine <span aria-hidden="true">·</span> Days 3–5</h3>
-            <p>You give feedback, we improve the draft until it feels right. Still completely free.</p>
-          </li>
-          <li>
-            <span class="step-num" aria-hidden="true">03</span>
-            <h3>Launch <span aria-hidden="true">·</span> Days 6–7</h3>
-            <p>Love it? We push it live. Only now does the <span class="js-price">R2,200</span>/month begin.</p>
-          </li>
-          <li>
-            <span class="step-num" aria-hidden="true">04</span>
-            <h3>Ongoing <span aria-hidden="true">·</span> <span class="js-price">R2,200</span>/Mo</h3>
-            <p><span class="js-price">R2,200</span>/month covers everything: fast hosting, SSL security, software and security updates, one round of content edits every month, SEO, and direct WhatsApp support. No upfront cost. No hidden fees. Cancel anytime.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="tint" id="prep" aria-labelledby="prep-h">
-      <div class="wrap">
-        <div class="sec-head">
-          <p class="badge-pill">Before We Build</p>
-          <h2 id="prep-h">Let's nail your story.</h2>
-          <p>Cookie-cutter templates don't win customers. Real understanding does. The deeper we dive into what makes your business tick, who you serve, and what sets you apart, the sharper your copy gets — and the harder your new site works to drive high-quality leads.</p>
-        </div>
-        <div class="grid-3 prep-grid">
-          <div class="card">
-            <div class="icon-dot" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>
-            </div>
-            <h3>Step 1: Start your Free Draft</h3>
-            <p>No clunky accounts or passwords to juggle just yet. We like to get straight to the point. Your first move is simple: tell us what you want.</p>
-            <ul>
-              <li>Share your vision and goals</li>
-              <li>Give us the raw details of your business</li>
-              <li>Watch us spin it into a custom Free Draft</li>
-            </ul>
-            <p class="card-note">No upfront commitments. Just your ideas, fast-tracked.</p>
-          </div>
-          <div class="card">
-            <div class="icon-dot" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            </div>
-            <h3>Prep for impact</h3>
-            <p>We move fast, but a little prep goes a long way. To hit the ground running, try to gather:</p>
-            <ul>
-              <li>Your best project photos ready to upload</li>
-              <li>Quick, rough notes for each page</li>
-            </ul>
-            <p class="card-note">Not a writer? Don't stress. Bullet points are all we need — or send us rambling voice notes about your business and what you want, and we'll turn them into content.</p>
-          </div>
-          <div class="card">
-            <div class="icon-dot" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-            </div>
-            <h3>Your site's blueprint</h3>
-            <p>Most heavy-hitting small-business sites rock 6 to 8 core pages. The standard arsenal includes:</p>
-            <ul>
-              <li>A high-converting Home page</li>
-              <li>An authentic About Us page</li>
-              <li>A stunning Project Gallery to show off your work</li>
-              <li>SEO-optimized Service pages (so you actually rank on Google)</li>
-              <li>A Contact page engineered to generate inquiries</li>
-            </ul>
-            <p class="card-note">Need more? Accreditations, Pricing, Case Studies, or Meet the Team? You got it. Bespoke means built exclusively for you.</p>
-          </div>
-          <div class="card">
-            <div class="icon-dot" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
-            </div>
-            <h3>The anti-template advantage</h3>
-            <p>Anyone can prompt an AI to spit out a generic layout. We dig deeper. We ask the tough, agency-level questions that uncover exactly why clients choose you over the competition.</p>
-            <ul>
-              <li>We brief you the same way top agencies brief national brands</li>
-              <li>We transform your raw answers into proper, lead-generating copy</li>
-              <li>Your site is 100% custom-built — never recycled, never templated</li>
-            </ul>
-            <p class="card-note">That's why a lemonelly site crushes a drag-and-drop Wix build. The real power is in the strategy we build before we write a single line of code.</p>
-          </div>
-        </div>
-        <div class="prep-cta">
-          <h3>Ready to get started?</h3>
-          <p>Leave a number. We'll call you, then take it from there.</p>
-          <a class="btn btn-solid" href="#callback">Request a call <span class="arrow" aria-hidden="true">→</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section id="for" aria-labelledby="for-h">
-      <div class="wrap">
-        <div class="sec-head">
-          <p class="badge-pill">Who We Work With</p>
-          <h2 id="for-h">Built for South African small businesses</h2>
-          <p>Roofers, electricians, plumbers, pool care. You do the jobs. The website should stop hiding them.</p>
-        </div>
-        <div class="grid-3">
-          <div class="card">
-            <div class="icon-dot" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M3 21V10l9-7 9 7v11h-6v-7h-6v7z"/></svg>
-            </div>
-            <h3>Roofing</h3>
-            <p>Re-roofs, repairs, leadwork. Homeowners already Google you. The site should close the job.</p>
-          </div>
-          <div class="card">
-            <div class="icon-dot" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>
-            </div>
-            <h3>Electrical</h3>
-            <p>Call-outs and install work. Make it obvious you are local, and that someone picks up the phone.</p>
-          </div>
-          <div class="card">
-            <div class="icon-dot" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.5-9 9-9 9z"/></svg>
-            </div>
-            <h3>Plumbing &amp; heating</h3>
-            <p>Boilers, bathrooms, emergencies. A site that loads on a phone and has tap-to-call.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="tint" id="work" aria-labelledby="work-h">
-      <div class="wrap">
-        <div class="sec-head">
-          <p class="badge-pill">Recent Projects</p>
-          <h2 id="work-h">Recent work</h2>
-        </div>
-        <div class="grid-2">
-          <a class="project" href="https://lostwaxfoundry.com" target="_blank" rel="noopener">
-            <span class="shot crop-bottom">
-              <span class="plate-name" aria-hidden="true">LOST WAX
-FOUNDRY</span>
-              <img src="/assets/work-lostwax.jpg" alt="Bronze sculpture from the Lost Wax Foundry site"
-                   width="1000" height="1250" loading="lazy" onerror="this.remove()">
-            </span>
-            <h3>Lost Wax Foundry <span class="arrow" aria-hidden="true">↗</span></h3>
-            <p class="cat">Fine Art &amp; Craft · Somerset West</p>
-          </a>
-          <a class="project" href="https://neurabuild.com" target="_blank" rel="noopener">
-            <span class="shot">
-              <span class="plate-name" aria-hidden="true">NEURA
-BUILD</span>
-              <img src="/assets/work-neurabuild.jpg" alt="Homepage of the Neurabuild website"
-                   width="1280" height="800" loading="lazy" onerror="this.remove()">
-            </span>
-            <h3>Neurabuild <span class="arrow" aria-hidden="true">↗</span></h3>
-            <p class="cat">Tech &amp; Research</p>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" aria-labelledby="faq-h">
-      <div class="wrap">
-        <div class="sec-head">
-          <p class="badge-pill">FAQ</p>
-          <h2 id="faq-h">Common questions</h2>
-        </div>
-        <div class="faq-list">
-          <details>
-            <summary><span>Nothing's free. What's the catch?</span> <span class="plus" aria-hidden="true"></span></summary>
-            <p>There isn't one. We carry the cost of the draft because most people who see their finished site want to keep it. If you don't, you walk away and owe nothing.</p>
-          </details>
-          <details>
-            <summary><span>What does a website cost with lemonelly?</span> <span class="plus" aria-hidden="true"></span></summary>
-            <p>Nothing upfront. The design, the draft, and every revision are free. You only start paying <span class="js-price">R2,200</span>/month once you're happy and your new site goes live.</p>
-          </details>
-          <details>
-            <summary><span>How fast will my site be live?</span> <span class="plus" aria-hidden="true"></span></summary>
-            <p>Seven days from kickoff. Days 1–2 we design your free draft, days 3–5 we refine it with your feedback, days 6–7 we go live.</p>
-          </details>
-          <details>
-            <summary><span>What does the <span class="js-price">R2,200</span>/month actually cover?</span> <span class="plus" aria-hidden="true"></span></summary>
-            <p>Everything: fast hosting, SSL security, software and security updates, one round of content edits every month — new photos, price changes, fresh copy — plus SEO and direct WhatsApp support. No upfront cost. No hidden fees. Cancel anytime.</p>
-          </details>
-          <details>
-            <summary><span>What do you need from me to get started?</span> <span class="plus" aria-hidden="true"></span></summary>
-            <p>A phone number. We call you, agree a time, and take it from there. Point us at your current website if you have one.</p>
-          </details>
-          <details>
-            <summary><span>Can I change things after the site is live?</span> <span class="plus" aria-hidden="true"></span></summary>
-            <p>Yes. One round of updates is included every single month, so your site keeps up as your business grows — just send us what's changed.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section id="start" class="cta" aria-labelledby="start-h">
-      <div class="wrap">
-        <p class="badge-pill">Request a call</p>
-        <h2 id="start-h">We'll ring you</h2>
-        <p>Leave a number. Then who should call, when, and how.</p>
-        <div class="callback-card">
-          <div class="callback-mount" data-callback="cta"></div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer>
     <div class="wrap">
       <p class="mark">LEMONELLY.COM</p>
+      <p class="footer-prices">UK £95 · ZA R2,200 · US $120 · EU €110 /mo</p>
       <p>Proudly built in Cape Town · <a href="mailto:hello@lemonelly.com">hello@lemonelly.com</a></p>
     </div>
   </footer>
