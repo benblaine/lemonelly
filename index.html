@@ -32,7 +32,7 @@
     "name": "lemonelly",
     "url": "https://lemonelly.com/",
     "email": "hello@lemonelly.com",
-    "description": "We build and host websites for UK trades. Leave a number. Design is free. £95/month once your site is live.",
+    "description": "We build and host websites for UK trades. Design is free. £95/month once your site is live.",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Cape Town",
@@ -41,8 +41,57 @@
     "areaServed": "United Kingdom"
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Nothing's free. What's the catch?",
+        "acceptedAnswer": { "@type": "Answer", "text": "There isn't one. We carry the cost of the draft because most people who see their finished site want to keep it. If you don't, you walk away and owe nothing." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does a website cost with lemonelly?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Nothing upfront. The design, the draft, and every revision are free. You only start paying £95/month once you're happy and your new site goes live." }
+      },
+      {
+        "@type": "Question",
+        "name": "How fast will my site be live?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Request a draft, review it within 48 hours, go live within 7 days." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the £95/month actually cover?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Fast hosting, SSL security, software and security updates, one round of content edits every month, plus SEO and direct WhatsApp support. No upfront cost. No hidden fees. Cancel anytime." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do you need from me to get started?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A phone number. Send raw photos or a quick voice note later — we write the copy." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change things after the site is live?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. One round of updates is included every month — just send us what's changed." }
+      }
+    ]
+  }
+  </script>
 
   <style>
+    @font-face {
+      font-family: "Archivo";
+      src: url("/assets/draft/fonts/archivo-latin-var.woff2") format("woff2");
+      font-weight: 100 900; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: "Fraunces";
+      src: url("/assets/draft/fonts/fraunces-latin-var.woff2") format("woff2");
+      font-weight: 400 900; font-style: normal; font-display: swap;
+    }
+
     /* ---------- Tokens ---------- */
     :root {
       --bg: #FFFFFF;
@@ -56,8 +105,8 @@
       --cta-deep: #48AF7D;
       --green-wash: #EAF3EE;
       --lemon: #FFD335;
-
       --shadow: 0 2px 10px rgba(17, 17, 16, .05);
+      --shadow-lg: 0 28px 60px rgba(17, 17, 16, .16);
 
       --sp-1: .25rem; --sp-2: .5rem; --sp-3: 1rem; --sp-4: 1.5rem;
       --sp-5: 2.5rem; --sp-6: 4rem; --sp-7: 7rem;
@@ -72,9 +121,9 @@
       --fs-2: 1.1875rem;
       --fs-3: clamp(1.375rem, 1.2rem + .9vw, 1.75rem);
       --fs-4: clamp(1.875rem, 1.45rem + 2vw, 2.75rem);
-      --fs-5: clamp(2.625rem, 1.9rem + 3.4vw, 4.5rem);
+      --fs-5: clamp(2.25rem, 1.5rem + 3.2vw, 4.15rem);
       --lh-tight: 1.05;
-      --lh-body: 1.65;
+      --lh-body: 1.55;
     }
 
     /* ---------- Reset ---------- */
@@ -123,34 +172,17 @@
       border: 1.5px solid transparent; border-radius: 999px;
       font-weight: 600; font-size: var(--fs-1); line-height: 1.2;
       text-decoration: none; color: var(--ink); background: transparent;
+      cursor: pointer;
       transition: background-color .15s ease, border-color .15s ease;
     }
-    .btn .arrow { font-weight: 400; transition: transform .15s ease; }
-    .btn:hover .arrow { transform: translateX(3px); }
     .btn-solid { background: var(--cta); color: var(--ink); }
     .btn-solid:hover { background: var(--cta-deep); }
-    .btn-ghost { border-color: var(--line); }
+    .btn-solid:disabled { background: var(--line); color: var(--ink-2); cursor: not-allowed; }
+    .btn-ghost { border-color: var(--line); background: var(--bg); }
     .btn-ghost:hover { border-color: var(--ink); }
+    .btn-block { width: 100%; }
 
-    /* ---------- Badges (section eyebrows) ---------- */
-    .badge-pill {
-      display: inline-flex; align-items: center; gap: .5rem;
-      color: var(--ink);
-      background: var(--bg); border: 1px solid var(--line); border-radius: 999px;
-      padding: .45rem 1.1rem;
-      font-size: var(--fs-0); font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--ink);
-    }
-    .badge-pill::before {
-      content: ""; width: .55rem; height: .55rem; border-radius: 50%;
-      background: var(--green); flex: none;
-    }
-    .badge-pill { white-space: nowrap; }
-    .badge-ext { white-space: pre; }
-    @media (max-width: 40rem) {
-      .badge-ext { display: none; }
-    }
-
+    /* ---------- Region nav ---------- */
     .region-nav {
       display: inline-flex; flex: none; border: 1px solid var(--line); border-radius: 999px; overflow: hidden;
     }
@@ -183,7 +215,7 @@
     }
     .nav-row {
       display: flex; align-items: center; justify-content: space-between;
-      min-height: 4.5rem; gap: var(--sp-4);
+      min-height: 4.25rem; gap: var(--sp-4);
     }
     @media (max-width: 40rem) { .nav-row { gap: var(--sp-2); } }
     .brand {
@@ -227,74 +259,296 @@
     }
 
     /* ---------- Sections ---------- */
-    section { padding-block: var(--sp-6); }
-    @media (min-width: 40rem) { section { padding-block: var(--sp-7); } }
+    section { padding-block: var(--sp-5); }
+    @media (min-width: 40rem) { section { padding-block: var(--sp-6); } }
 
-    .sec-head { text-align: center; max-width: 46rem; margin-inline: auto; margin-bottom: var(--sp-6); }
-    .sec-head h2 { font-size: var(--fs-4); font-weight: 800; letter-spacing: -.02em; margin-top: var(--sp-4); }
-    .sec-head h2::after {
-      content: ""; display: block; width: 3rem; height: .3rem; border-radius: 999px;
-      background: var(--lemon); margin: var(--sp-3) auto 0;
-    }
-    .sec-head p { color: var(--ink-2); margin-top: var(--sp-3); }
+    .sec-head { max-width: 36rem; margin-bottom: var(--sp-4); }
+    .sec-head h2 { font-size: var(--fs-4); font-weight: 800; letter-spacing: -.02em; }
+    .sec-head p { color: var(--ink-2); margin-top: var(--sp-2); }
+    .sec-head.center { text-align: center; margin-inline: auto; }
+
+    .tint { background: var(--bg-2); border-block: 1px solid var(--line); }
 
     /* ---------- Hero ---------- */
-    .hero { padding-block: var(--sp-6); padding-bottom: var(--sp-5); }
-    .hero .wrap { max-width: 42rem; }
+    .hero { padding-block: var(--sp-4) var(--sp-5); }
+    .hero-grid {
+      display: flex; flex-direction: column; align-items: center; gap: var(--sp-5);
+      text-align: center;
+    }
     h1 {
       font-size: var(--fs-5); font-weight: 800; letter-spacing: -.03em;
-      max-width: 100%; margin-top: var(--sp-4); margin-bottom: var(--sp-4);
-      overflow-wrap: break-word; text-wrap: wrap;
+      max-width: 16ch; margin-inline: auto; margin-bottom: var(--sp-3);
+      overflow-wrap: break-word;
     }
-    @media (max-width: 40rem) {
-      h1 { font-size: clamp(1.9rem, 8.4vw, 2.5rem); }
+    .lede {
+      font-size: var(--fs-2); color: var(--ink-2); max-width: 28ch;
+      margin-inline: auto; margin-bottom: var(--sp-4);
+    }
+    .hero-tag {
+      margin-top: var(--sp-4); color: var(--ink);
+      font-weight: 600; font-size: var(--fs-1);
+    }
+    .hero-jump { margin-top: var(--sp-3); font-size: var(--fs-0); font-weight: 600; }
+    .hero-jump a { color: var(--green); }
+    @media (min-width: 60rem) {
+      .hero { padding-block: var(--sp-6) var(--sp-7); }
+      .hero-grid {
+        display: grid; grid-template-columns: 1fr auto; gap: clamp(2rem, 6vw, 5rem);
+        text-align: left; align-items: center;
+      }
+      h1, .lede { margin-inline: 0; }
+      h1 { max-width: 14ch; }
+    }
+
+    /* ---------- Phone mockup (sample trade site) ---------- */
+    .phone {
+      --bezel: #111110;
+      width: min(17.5rem, 78vw);
+      aspect-ratio: 390 / 820;
+      background: var(--bezel);
+      border-radius: 2.35rem;
+      padding: .52rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      flex: none;
+    }
+    .phone-notch {
+      position: absolute; top: .72rem; left: 50%; transform: translateX(-50%);
+      width: 5.4rem; height: 1.05rem; background: var(--bezel); border-radius: 999px; z-index: 2;
+    }
+    .phone-screen {
+      height: 100%; border-radius: 1.85rem; overflow: hidden; background: #161a22;
+      position: relative;
+    }
+    .phone-lg { width: min(22rem, 86vw); }
+
+    .site-mini {
+      height: 100%; display: flex; flex-direction: column;
+      font-family: "Archivo", system-ui, sans-serif;
+      color: #fff; background: #161a22;
+    }
+    .sm-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.55rem .85rem .55rem;
+      font-size: .62rem; font-weight: 700; letter-spacing: .04em;
+    }
+    .sm-logo { font-family: "Fraunces", Georgia, serif; font-size: .78rem; font-weight: 600; }
+    .sm-call {
+      background: var(--sm-accent, #e0742e); color: #fff;
+      padding: .28rem .55rem; border-radius: 999px; font-size: .58rem;
+    }
+    .sm-hero { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+    .sm-hero img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 30%;
+    }
+    .sm-hero::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(14,16,20,.15), rgba(14,16,20,.78) 72%);
+    }
+    .sm-copy {
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+      padding: .85rem .85rem 1rem;
+    }
+    .sm-kicker {
+      font-size: .55rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--sm-accent, #e0742e); margin-bottom: .35rem;
+    }
+    .sm-copy h3 {
+      font-family: "Fraunces", Georgia, serif; font-weight: 600;
+      font-size: 1.15rem; letter-spacing: -.02em; line-height: 1.12;
+      text-wrap: balance;
+    }
+    .sm-bar {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 2.4rem; background: var(--sm-accent, #e0742e);
+      font-size: .72rem; font-weight: 700; letter-spacing: .02em;
+    }
+
+    .site-mini.is-elec {
+      --sm-accent: #d4a017;
+      background: #12151c;
+    }
+    .site-mini.is-elec .sm-hero,
+    .site-mini.is-plumb .sm-hero {
+      display: flex; flex-direction: column;
+    }
+    .site-mini.is-elec .sm-hero {
+      background:
+        radial-gradient(120% 80% at 80% 20%, rgba(212,160,23,.28), transparent 50%),
+        linear-gradient(165deg, #1a1f2b, #0e1016 60%);
+    }
+    .site-mini.is-elec .sm-hero::after,
+    .site-mini.is-plumb .sm-hero::after { display: none; }
+    .site-mini.is-elec .sm-copy,
+    .site-mini.is-plumb .sm-copy {
+      position: relative; padding-top: 1.4rem; flex: 1;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+
+    .site-mini.is-plumb {
+      --sm-accent: #1f6f8b;
+      background: #0f1c24;
+    }
+    .site-mini.is-plumb .sm-hero {
+      background:
+        radial-gradient(90% 70% at 10% 90%, rgba(31,111,139,.35), transparent 55%),
+        linear-gradient(180deg, #17313c, #0f1c24);
+    }
+
+    .sm-mark {
+      width: 2.1rem; height: 2.1rem; border-radius: .55rem;
+      display: grid; place-items: center;
+      background: rgba(255,255,255,.08); margin-bottom: .7rem;
+    }
+    .sm-mark svg { width: 1.15rem; height: 1.15rem; stroke: var(--sm-accent); fill: none; stroke-width: 1.8; }
+    .sm-chips {
+      list-style: none; padding: 0; margin: .85rem 0 0;
+      display: flex; flex-wrap: wrap; gap: .35rem;
+    }
+    .sm-chips li {
+      font-size: .55rem; font-weight: 700; letter-spacing: .04em;
+      padding: .28rem .5rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.88);
+    }
+
+    /* ---------- Risk reversal ---------- */
+    .risk {
+      display: grid; gap: var(--sp-3);
+      grid-template-columns: 1fr;
+    }
+    .risk article {
+      background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg);
+      padding: 1.25rem 1.3rem 1.35rem;
+    }
+    .risk h3 {
+      font-size: var(--fs-1); font-weight: 800; letter-spacing: -.01em;
+      margin-bottom: .4rem;
+    }
+    .risk p { color: var(--ink-2); font-size: .95rem; }
+    .risk strong { color: var(--ink); font-weight: 700; }
+    @media (min-width: 50rem) {
+      .risk { grid-template-columns: 1fr 1fr 1fr; gap: var(--sp-4); }
+    }
+
+    /* ---------- 3-step process ---------- */
+    .process { padding-block: var(--sp-4); }
+    .steps-3 {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: .4rem; align-items: start; text-align: center;
+      max-width: 46rem; margin-inline: auto;
+    }
+    .steps-3 li {
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      font-weight: 700; font-size: clamp(.72rem, 2.6vw, .95rem);
+      letter-spacing: -.01em; position: relative;
+    }
+    .steps-3 .n {
+      display: grid; place-items: center;
+      width: 1.7rem; height: 1.7rem; border-radius: 50%;
+      background: var(--green); color: #fff;
+      font-size: .75rem; font-weight: 800;
     }
     @media (min-width: 40rem) {
-      h1 { text-wrap: balance; }
+      .steps-3 { gap: var(--sp-3); }
+      .steps-3 li:not(:last-child)::after {
+        content: ""; position: absolute; top: .8rem; left: calc(50% + 1.3rem);
+        width: calc(100% - 1.6rem); height: 1px; background: var(--line);
+      }
     }
-    .lede { font-size: var(--fs-2); color: var(--ink-2); max-width: min(44ch, 100%); margin-bottom: var(--sp-5); }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; margin-bottom: var(--sp-5); }
+
+    /* ---------- Work carousel ---------- */
+    .work { overflow: hidden; }
+    .work-track {
+      display: flex; gap: var(--sp-3);
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      scroll-padding-inline: var(--gutter);
+      padding-block: .25rem var(--sp-2);
+      margin-inline: calc(-1 * var(--gutter));
+      padding-inline: var(--gutter);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .work-card {
+      flex: 0 0 min(78vw, 19.5rem);
+      scroll-snap-align: start;
+      background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg);
+      overflow: hidden; display: flex; flex-direction: column;
+      box-shadow: var(--shadow);
+    }
+    .work-thumb {
+      position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #161a22;
+    }
+    .work-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .work-thumb.is-elec {
+      background:
+        radial-gradient(120% 80% at 80% 10%, rgba(212,160,23,.32), transparent 50%),
+        linear-gradient(165deg, #1a1f2b, #0e1016);
+    }
+    .work-thumb.is-plumb {
+      background:
+        radial-gradient(90% 70% at 10% 90%, rgba(31,111,139,.4), transparent 55%),
+        linear-gradient(180deg, #17313c, #0f1c24);
+    }
+    .work-thumb .icon {
+      position: absolute; inset: 0; display: grid; place-items: center;
+    }
+    .work-thumb .icon svg { width: 3rem; height: 3rem; stroke: rgba(255,255,255,.85); fill: none; stroke-width: 1.5; }
+    .work-body { padding: 1.1rem 1.15rem 1.25rem; display: flex; flex-direction: column; gap: .45rem; flex: 1; }
+    .work-body h3 { font-size: var(--fs-2); font-weight: 800; letter-spacing: -.02em; }
+    .work-body p { color: var(--ink-2); font-size: .92rem; flex: 1; }
+    .work-body .btn { min-height: 44px; align-self: start; padding-inline: 1.15rem; font-size: var(--fs-0); }
+    @media (min-width: 70rem) {
+      .work-track {
+        display: grid; grid-template-columns: 1fr 1fr 1fr; overflow: visible;
+        margin-inline: 0; padding-inline: 0; scroll-snap-type: none;
+      }
+      .work-card { flex: none; }
+    }
 
     /* ---------- Callback form ---------- */
-    .callback { max-width: 34rem; margin-bottom: var(--sp-5); }
+    .start .wrap { max-width: 36rem; }
+    .callback { margin-top: var(--sp-4); }
     .callback-label {
       display: block; font-size: var(--fs-0); font-weight: 700;
       letter-spacing: .04em; text-transform: uppercase; margin-bottom: var(--sp-2);
     }
     .callback-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
     .callback-dial {
-      display: flex; flex: 1 1 16rem; gap: .4rem; min-width: 0;
+      display: flex; flex: 1 1 16rem; min-width: 0;
+      border: 1.5px solid var(--line); border-radius: 999px; background: var(--bg);
+      overflow: hidden;
     }
+    .callback-dial:focus-within { outline: 2px solid var(--ink); outline-offset: 2px; }
     .callback-cc {
-      flex: none; width: 7.6rem; min-height: 50px; padding: .45rem .35rem .45rem .75rem;
-      border: 1.5px solid var(--line); border-radius: 999px;
-      font: inherit; font-weight: 600; font-size: .9rem;
-      color: var(--ink); background: var(--bg); cursor: pointer;
+      flex: none; width: 6.8rem; min-height: 50px; padding: .45rem .2rem .45rem .9rem;
+      border: 0; border-right: 1.5px solid var(--line);
+      font: inherit; font-weight: 600; font-size: .88rem;
+      color: var(--ink); background: transparent; cursor: pointer;
     }
-    .callback-cc:focus { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .callback-cc:focus { outline: none; }
     .callback-row input[type="tel"] {
       flex: 1 1 8rem; min-width: 0; min-height: 50px; padding: var(--sp-2) 1.1rem;
-      border: 1.5px solid var(--line); border-radius: 999px;
-      font: inherit; color: var(--ink); background: var(--bg);
+      border: 0; font: inherit; color: var(--ink); background: transparent;
     }
-    .callback-row input[type="tel"].field-err,
-    .callback-cc.field-err { border-color: #8B1E1E; }
+    .callback-row input[type="tel"]:focus { outline: none; }
+    .callback-dial.field-err { border-color: #8B1E1E; }
     .callback-row .btn { flex: none; }
     .callback-hint { color: var(--ink-2); font-size: var(--fs-0); margin-top: var(--sp-2); }
     .callback-err { color: #8B1E1E; font-size: var(--fs-0); font-weight: 600; margin-top: var(--sp-2); }
-    .callback-echo { font-weight: 600; margin-bottom: var(--sp-4); }
-    .callback fieldset { border: 0; padding: 0; margin: 0 0 var(--sp-4); }
+    .callback-echo { font-weight: 600; margin-bottom: .85rem; }
+    .callback fieldset { border: 0; padding: 0; margin: 0 0 .8rem; min-width: 0; }
     .callback legend { font-weight: 700; margin-bottom: var(--sp-2); padding: 0; }
-    .callback-opts { display: grid; gap: .5rem; grid-template-columns: 1fr 1fr; }
-    .callback-opts.channels { grid-template-columns: repeat(3, 1fr); }
-    .callback-opts.days { grid-template-columns: repeat(4, 1fr); }
+    .callback-opts { display: grid; gap: .45rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .callback-opts.channels { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .callback-opts.days { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .callback-asap { grid-column: 1 / -1; }
     .callback-sub { font-weight: 700; margin: var(--sp-3) 0 var(--sp-2); }
     .callback-opt {
-      display: flex; align-items: center; gap: .6rem;
-      min-height: 48px; padding: .55rem .9rem;
+      display: flex; align-items: center; gap: .45rem;
+      min-height: 44px; min-width: 0; padding: .45rem .6rem;
       border: 1.5px solid var(--line); border-radius: var(--r);
-      font-weight: 600; cursor: pointer;
+      font-weight: 600; font-size: .92rem; cursor: pointer;
     }
     .callback-opt:has(input:checked) { border-color: var(--green); background: var(--green-wash); }
     .callback-opt input { accent-color: var(--green); width: 1.05rem; height: 1.05rem; flex: none; }
@@ -302,7 +556,6 @@
       width: 1.75rem; height: 1.75rem; border-radius: 50%;
       object-fit: cover; flex: none; background: var(--bg-2);
     }
-    .callback-step .btn-solid { min-width: 11rem; }
     .callback-done h3 { font-size: var(--fs-3); font-weight: 800; outline: none; }
     .callback-done p { color: var(--ink-2); margin-top: var(--sp-2); }
     .callback-fallback a { color: var(--green); font-weight: 600; }
@@ -313,85 +566,119 @@
     }
     .callback-change:hover { color: var(--green-deep); }
     @media (max-width: 40rem) {
-      .callback-opts, .callback-opts.channels { grid-template-columns: 1fr; }
-      .callback-opts.days { grid-template-columns: 1fr 1fr; }
+      .callback-opts { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+      .callback-opts.channels { grid-template-columns: 1fr; }
+      .callback-opts.days { grid-template-columns: repeat(4, minmax(0, 1fr)); }
       .callback-dial { flex: 1 1 100%; }
       .callback-row .btn { width: 100%; }
     }
 
-    .price-strip {
-      display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .75rem;
-      width: fit-content; max-width: 100%;
-      border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow);
-      padding: var(--sp-2) var(--sp-3);
-      font-size: var(--fs-0); font-weight: 600; color: var(--ink-2);
+    /* ---------- Drawers / dialogs ---------- */
+    dialog.cb-drawer, dialog.preview-dlg {
+      border: 0; padding: 0; color: var(--ink);
+      box-shadow: var(--shadow-lg);
+      overflow: auto;
+      overscroll-behavior: contain;
     }
-    .price-strip strong { color: var(--ink); font-weight: 700; }
-
-    /* ---------- Samples ---------- */
-    .sample-grid {
-      display: grid; gap: var(--sp-4);
-      grid-template-columns: 1fr;
-      list-style: none; padding: 0; margin: 0;
+    dialog.cb-drawer::backdrop, dialog.preview-dlg::backdrop { background: rgba(17, 17, 16, .62); }
+    dialog.cb-drawer {
+      background: var(--bg);
+      position: fixed;
+      inset: auto 0 0 0;
+      width: 100%;
+      max-width: none;
+      height: auto;
+      max-height: 92vh;
+      margin: 0;
+      border-radius: 24px 24px 0 0;
+      overflow: auto;
     }
-    @media (min-width: 40rem) { .sample-grid { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 70rem) { .sample-grid { grid-template-columns: 1fr 1fr 1fr; } }
-    .sample { margin: 0; }
-    .sample-open {
-      display: block; color: inherit; text-decoration: none; cursor: zoom-in;
-      border-radius: var(--r-lg);
+    dialog.cb-drawer[open] { display: flex; flex-direction: column; }
+    dialog.cb-drawer .drawer-inner {
+      padding: 0.35rem 1.25rem 1.5rem;
+      min-width: 0;
+      overflow: visible;
     }
-    .sample-open:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-    .sample-open:hover .sample-frame { border-color: var(--ink); }
-    .sample-frame {
-      position: relative; aspect-ratio: 9 / 19.5;
-      border-radius: var(--r-lg); overflow: hidden;
-      background: var(--bg-2); border: 1.5px dashed var(--line);
-    }
-    .sample-frame img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; object-position: top center;
-    }
-    .sample-frame.has-img { border-style: solid; }
-    .sample figcaption {
-      margin-top: var(--sp-2);
-      font-size: var(--fs-0); font-weight: 600; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--ink-2);
-    }
-    .sample-lightbox {
-      position: relative; padding: 0; border: 0;
-      width: min(44rem, 96vw); max-height: 96vh;
-      background: var(--bg); border-radius: var(--r-lg); overflow: auto;
-    }
-    .sample-lightbox::backdrop { background: rgba(17, 17, 16, .72); }
-    .sample-lightbox img { display: block; width: 100%; height: auto; }
-    .sample-lightbox form { position: sticky; top: 0; z-index: 1; height: 0; margin: 0; }
-    .sample-lightbox-close {
-      position: absolute; top: .75rem; right: .75rem;
-      min-height: 44px; padding: .4rem 1rem;
+    .drawer-close {
+      align-self: flex-end;
+      flex: none;
+      min-height: 44px; min-width: 44px; padding: .35rem .85rem;
+      margin: .65rem .65rem 0 0;
       border: 0; border-radius: 999px; cursor: pointer;
       font: inherit; font-weight: 600; font-size: var(--fs-0);
       background: var(--ink); color: var(--bg);
     }
-
-    .offer {
-      border-block: 1px solid var(--line); background: var(--bg-2);
-      padding-block: var(--sp-5); text-align: center;
+    .drawer-title { font-size: var(--fs-3); font-weight: 800; letter-spacing: -.02em; padding-right: 1rem; }
+    .drawer-lede { color: var(--ink-2); margin: .4rem 0 .9rem; max-width: 36ch; }
+    dialog.preview-dlg {
+      background: #0c0c0c;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      max-width: none;
+      height: 100%;
+      max-height: none;
+      margin: 0;
+      border-radius: 0;
     }
-    .offer p {
-      font-size: var(--fs-2); font-weight: 600; max-width: 40rem;
-      margin-inline: auto;
+    dialog.preview-dlg .drawer-inner {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem; min-height: 100%;
+      padding: 3.2rem 1rem 1.5rem;
     }
-    .offer a { color: var(--green); }
+    dialog.preview-dlg .drawer-close {
+      position: absolute; float: none; top: .7rem; right: .7rem; margin: 0;
+      background: #fff; color: var(--ink);
+    }
+    dialog.preview-dlg .phone {
+      width: auto;
+      height: min(78vh, 42rem);
+      aspect-ratio: 390 / 820;
+    }
+    .preview-cap { color: rgba(255,255,255,.72); font-size: var(--fs-0); font-weight: 600; text-align: center; max-width: 28ch; }
+    @media (min-width: 40rem) {
+      dialog.cb-drawer {
+        inset: 0;
+        width: min(36rem, 96vw);
+        max-width: min(36rem, 96vw);
+        height: fit-content;
+        max-height: 92vh;
+        margin: auto;
+        border-radius: var(--r-lg);
+      }
+    }
 
-    /* ---------- Team ---------- */
-    .people { display: grid; gap: var(--sp-4); grid-template-columns: 1fr; max-width: 46rem; margin-inline: auto; }
+    /* ---------- FAQ + founders accordions ---------- */
+    .faq-list details, .founders details.group {
+      border-top: 1px solid var(--line);
+    }
+    .faq-list details:last-child { border-bottom: 1px solid var(--line); }
+    .faq-list summary, .founders details.group > summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      min-height: 3.25rem; padding: .7rem 0;
+      font-weight: 700; cursor: pointer; list-style: none;
+    }
+    .faq-list summary::-webkit-details-marker,
+    .founders details.group > summary::-webkit-details-marker { display: none; }
+    .faq-list summary::marker,
+    .founders details.group > summary::marker { content: none; }
+    .plus {
+      flex: none; width: 1.15rem; height: 1.15rem; position: relative;
+    }
+    .plus::before, .plus::after {
+      content: ""; position: absolute; background: var(--ink); border-radius: 1px;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+    }
+    .plus::before { width: 100%; height: 2px; }
+    .plus::after { width: 2px; height: 100%; }
+    details[open] > summary .plus::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+    .faq-list details p { color: var(--ink-2); padding: 0 2.5rem .9rem 0; }
+
+    .people { display: grid; gap: var(--sp-3); padding: 0 0 var(--sp-4); }
     @media (min-width: 40rem) { .people { grid-template-columns: 1fr 1fr; } }
     .person {
-      display: grid; grid-template-columns: 5.5rem 1fr; column-gap: var(--sp-3); row-gap: var(--sp-1);
+      display: grid; grid-template-columns: 4.5rem 1fr; column-gap: var(--sp-3); row-gap: var(--sp-1);
       align-items: start;
-      background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg);
-      padding: var(--sp-3);
     }
     .headshot {
       position: relative; aspect-ratio: 1; border-radius: var(--r);
@@ -400,15 +687,14 @@
     }
     .monogram {
       position: absolute; inset: 0; display: grid; place-items: center;
-      font-size: var(--fs-5); font-weight: 800; letter-spacing: .02em; color: var(--ink-2);
+      font-size: var(--fs-3); font-weight: 800; color: var(--ink-2);
     }
     .headshot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .person h3 { font-size: var(--fs-2); font-weight: 700; grid-column: 2; }
-    .person .cred { font-size: var(--fs-0); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green); margin: 0; grid-column: 2; }
-    .person .bio { color: var(--ink-2); grid-column: 2; }
-    .person .contact { display: flex; flex-wrap: wrap; gap: var(--sp-2); grid-column: 2; padding-top: var(--sp-2); }
-    .person .contact .btn { min-height: 42px; padding-inline: 1.1rem; font-size: var(--fs-0); }
-    .team-contact { text-align: center; margin-top: var(--sp-5); }
+    .person h3 { font-size: var(--fs-1); font-weight: 700; grid-column: 2; }
+    .person .cred { font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green); margin: 0; grid-column: 2; }
+    .person .bio { color: var(--ink-2); font-size: .92rem; grid-column: 2; }
+    .person .contact { display: flex; flex-wrap: wrap; gap: var(--sp-2); grid-column: 2; padding-top: var(--sp-1); }
+    .person .contact .btn { min-height: 40px; padding-inline: 1rem; font-size: var(--fs-0); }
 
     /* ---------- Footer ---------- */
     footer { border-top: 1px solid var(--line); padding-block: var(--sp-5); }
@@ -417,10 +703,10 @@
     footer p { color: var(--ink-2); font-size: var(--fs-0); }
     .footer-prices { flex: 1 1 12rem; }
 
-    /* ---------- Motion ---------- */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; }
+      .work-track { scroll-snap-type: none; }
     }
   </style>
 </head>
@@ -447,365 +733,361 @@
       </button>
       <nav id="site-nav" aria-label="Main">
         <ul>
-          <li><a href="#samples">Samples</a></li>
-          <li><a href="#team">Team</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#process">How it works</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li class="nav-region"><span class="region-nav" role="group" aria-label="Choose your region"><a href="/za">ZA</a><a href="/us">US</a><a href="/uk">UK</a><a href="/eu">EU</a></span></li>
-          <li><a class="btn btn-solid" href="#callback">Request a call</a></li>
+          <li><a class="btn btn-solid" href="#start">Get my free draft</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main id="main">
+    <!-- BLOCK 1 — Hero + visual showcase -->
     <section class="hero" id="top" aria-label="Introduction">
-      <div class="wrap">
-        <div>
-          <p class="badge-pill">Websites for UK trades<span class="badge-ext"></span></p>
-          <h1>A website that looks like this. We build it. We host it.</h1>
-          <p class="lede">Leave a number. We call. Design is free. <span class="js-price">£95</span> a month once it's live.</p>
-          <div id="callback" class="callback-mount" data-callback="hero">
-            <form class="callback" novalidate>
-              <div class="callback-step" data-step="phone">
-                <label class="callback-label" data-phone-label>Your number</label>
-                <div class="callback-row">
-                  <div class="callback-dial">
-                    <select class="callback-cc" data-cc aria-label="Country code" autocomplete="tel-country-code">
-                      <option value="44" selected>UK +44</option>
-                    </select>
-                    <input type="tel" inputmode="tel" autocomplete="tel-national" name="phone" placeholder="07xxx xxxxxx" maxlength="20" required>
-                  </div>
-                  <button class="btn btn-solid" type="submit">Request a call</button>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1>Websites for UK trades. Built free. Live in 7 days.</h1>
+          <p class="lede"><span class="js-price">£95</span>/month once you love it. Zero cost before that.</p>
+          <p class="hero-tag">Your trade business could look like this by next week.</p>
+          <p class="hero-jump"><a href="#start">Get my free draft</a></p>
+        </div>
+        <div class="phone" aria-hidden="true">
+          <span class="phone-notch"></span>
+          <div class="phone-screen">
+            <article class="site-mini is-roof">
+              <div class="sm-nav">
+                <span class="sm-logo">Your Roofing Co.</span>
+                <span class="sm-call">Call now</span>
+              </div>
+              <div class="sm-hero">
+                <img src="/assets/draft/stock/hero-slate-arched-dormers.jpeg" alt="" width="1024" height="1024">
+                <div class="sm-copy">
+                  <p class="sm-kicker">Roofers · Local</p>
+                  <h3>New roofs. Repairs. A number that gets answered.</h3>
                 </div>
-                <p class="callback-hint">Pick your country code. We'll ring you on UK time.</p>
-                <p class="callback-err" data-err hidden>Enter a number we can actually call.</p>
               </div>
-              <div class="callback-step" data-step="details" hidden>
-                <p class="callback-echo">We'll call <strong data-phone-echo></strong>
-                  <button type="button" class="callback-change" data-change-number>Change number</button>
-                </p>
-                <fieldset>
-                  <legend>Who should call you?</legend>
-                  <div class="callback-opts">
-                    <label class="callback-opt"><input type="radio" data-group="who" value="ben" data-label="Ben"> <img class="callback-face" src="/assets/ben.jpg" alt="" width="28" height="28" onerror="this.remove()"> Ben</label>
-                    <label class="callback-opt"><input type="radio" data-group="who" value="veronica" data-label="Veronica" checked> <img class="callback-face" src="/assets/veronica.jpg" alt="" width="28" height="28" onerror="this.remove()"> Veronica</label>
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <legend>When should we call?</legend>
-                  <div class="callback-opts days">
-                    <label class="callback-opt callback-asap"><input type="radio" data-group="when-day" value="asap" data-label="As soon as you can" checked> As soon as you can</label>
-                    <label class="callback-opt"><input type="radio" data-group="when-day" value="mon" data-label="Monday"> Mon</label>
-                    <label class="callback-opt"><input type="radio" data-group="when-day" value="tue" data-label="Tuesday"> Tue</label>
-                    <label class="callback-opt"><input type="radio" data-group="when-day" value="wed" data-label="Wednesday"> Wed</label>
-                    <label class="callback-opt"><input type="radio" data-group="when-day" value="thu" data-label="Thursday"> Thu</label>
-                    <label class="callback-opt"><input type="radio" data-group="when-day" value="fri" data-label="Friday"> Fri</label>
-                    <label class="callback-opt"><input type="radio" data-group="when-day" value="sat" data-label="Saturday"> Sat</label>
-                    <label class="callback-opt"><input type="radio" data-group="when-day" value="sun" data-label="Sunday"> Sun</label>
-                  </div>
-                  <p class="callback-sub">Time</p>
-                  <div class="callback-opts channels">
-                    <label class="callback-opt"><input type="radio" data-group="when-time" value="morning" data-label="Morning" checked> Morning</label>
-                    <label class="callback-opt"><input type="radio" data-group="when-time" value="afternoon" data-label="Afternoon"> Afternoon</label>
-                    <label class="callback-opt"><input type="radio" data-group="when-time" value="evening" data-label="Evening"> Evening</label>
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <legend>How should we call?</legend>
-                  <div class="callback-opts channels">
-                    <label class="callback-opt"><input type="radio" data-group="how" value="phone" data-label="Phone call" checked> Phone call</label>
-                    <label class="callback-opt"><input type="radio" data-group="how" value="whatsapp" data-label="WhatsApp"> WhatsApp</label>
-                    <label class="callback-opt"><input type="radio" data-group="how" value="facetime" data-label="FaceTime"> FaceTime</label>
-                  </div>
-                </fieldset>
-                <p class="callback-hint">Times are UK time. Change anything, or just tap Confirm.</p>
-                <p class="callback-err" data-err-details hidden>Pick who should call, a day, a time, and how.</p>
-                <p class="callback-err callback-fallback" data-fail hidden>Couldn't send that. <a href="https://wa.me/447441421114" target="_blank" rel="noopener">WhatsApp us instead</a>.</p>
-                <button class="btn btn-solid" type="submit">Confirm call</button>
-              </div>
-              <div class="callback-step callback-done" data-step="done" hidden>
-                <h3 tabindex="-1">We'll call you</h3>
-                <p data-done-copy></p>
-              </div>
-            </form>
-            <noscript>
-              <p class="callback-hint">JavaScript is off. <a href="https://wa.me/447441421114">WhatsApp us</a> with your number.</p>
-            </noscript>
+              <div class="sm-bar">Call now</div>
+            </article>
           </div>
-          <p class="price-strip"><strong>Free</strong> design <span aria-hidden="true">·</span> we host it <span aria-hidden="true">·</span> <strong><span class="js-price">£95</span>/mo</strong> once live <span aria-hidden="true">·</span> <strong>7 days</strong></p>
         </div>
       </div>
     </section>
 
-    <section id="samples" aria-labelledby="samples-h">
+    <!-- BLOCK 2 — Risk reversal -->
+    <section class="tint" id="why" aria-labelledby="why-h">
+      <div class="wrap">
+        <div class="sec-head center">
+          <h2 id="why-h">The deal, in three lines.</h2>
+        </div>
+        <div class="risk">
+          <article>
+            <h3>How much to start?</h3>
+            <p><strong>£0.</strong> We design your draft completely free. You only pay if you decide to go live.</p>
+          </article>
+          <article>
+            <h3>How much work?</h3>
+            <p><strong>Zero.</strong> Send raw photos or a quick voice note; we write the copy.</p>
+          </article>
+          <article>
+            <h3>After launch?</h3>
+            <p><strong><span class="js-price">£95</span>/mo</strong> covers fast hosting, security, and monthly edits.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="process" id="process" aria-label="How it works">
+      <div class="wrap">
+        <ol class="steps-3">
+          <li><span class="n">1</span> Request Draft</li>
+          <li><span class="n">2</span> Review in 48hrs</li>
+          <li><span class="n">3</span> Go Live</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- BLOCK 3 — Recent trade work -->
+    <section class="work" id="work" aria-labelledby="work-h">
       <div class="wrap">
         <div class="sec-head">
-          <p class="badge-pill">Samples</p>
-          <h2 id="samples-h">Sites like these</h2>
-          <p>Samples of the look. Yours gets your name, your photos, your number.</p>
+          <h2 id="work-h">Recent trade work</h2>
+          <p>Sample sites of the kind we build. Yours gets your name, your photos, your number.</p>
         </div>
-        <ul class="sample-grid">
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-01-salon.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-01-salon.jpg" alt="Sample of a salon website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
+        <ul class="work-track">
+          <li class="work-card">
+            <div class="work-thumb">
+              <img src="/assets/draft/stock/work-stone-slate-dormers.jpeg" alt="The kind of roofing work we handle" width="1024" height="1024" loading="lazy">
+            </div>
+            <div class="work-body">
+              <h3>Roofing</h3>
+              <p>Built to turn local searches into direct calls</p>
+              <button type="button" class="btn btn-ghost" data-preview="roofing" aria-haspopup="dialog">Preview</button>
+            </div>
           </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-02-dentist.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-02-dentist.jpg" alt="Sample of a dental website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
+          <li class="work-card">
+            <div class="work-thumb is-elec">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+              </span>
+            </div>
+            <div class="work-body">
+              <h3>Electrical</h3>
+              <p>Built to turn local searches into direct calls</p>
+              <button type="button" class="btn btn-ghost" data-preview="electrical" aria-haspopup="dialog">Preview</button>
+            </div>
           </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-03-law.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-03-law.jpg" alt="Sample of a law-firm website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-04-spa.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-04-spa.jpg" alt="Sample of a spa website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-05-realestate.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-05-realestate.jpg" alt="Sample of a real-estate website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-06-photographer.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-06-photographer.jpg" alt="Sample of a photographer website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-07-yoga.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-07-yoga.jpg" alt="Sample of a yoga-studio website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-08-cafe.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-08-cafe.jpg" alt="Sample of a cafe website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-09-florist.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-09-florist.jpg" alt="Sample of a florist website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-10-physio.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-10-physio.jpg" alt="Sample of a physiotherapy website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-11-accountant.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-11-accountant.jpg" alt="Sample of an accounting website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-12-interior.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-12-interior.jpg" alt="Sample of an interior-design website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-13-vet.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-13-vet.jpg" alt="Sample of a veterinary website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-14-wedding.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-14-wedding.jpg" alt="Sample of a wedding-planner website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-15-trainer.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-15-trainer.jpg" alt="Sample of a personal-trainer website" width="350" height="219" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-16-landscaping.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-16-landscaping.jpg" alt="Sample of a landscaping website" width="600" height="375" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-17-tutoring.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-17-tutoring.jpg" alt="Sample of a tutoring website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-18-plumber.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-18-plumber.jpg" alt="Sample of a plumbing website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-19-hotel.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-19-hotel.jpg" alt="Sample of a hotel website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
-          </li>
-          <li>
-            <figure class="sample">
-              <a class="sample-open" href="/assets/samples/sample-20-cleaning.jpg">
-                <div class="sample-frame has-img">
-                  <img src="/assets/samples/sample-20-cleaning.jpg" alt="Sample of a cleaning-service website" width="736" height="460" loading="lazy">
-                </div>
-              </a>
-              <figcaption>Sample</figcaption>
-            </figure>
+          <li class="work-card">
+            <div class="work-thumb is-plumb">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3s7 7.2 7 11.2A7 7 0 1 1 5 14.2C5 10.2 12 3 12 3z"/></svg>
+              </span>
+            </div>
+            <div class="work-body">
+              <h3>Plumbing &amp; Heating</h3>
+              <p>Built to turn local searches into direct calls</p>
+              <button type="button" class="btn btn-ghost" data-preview="plumbing" aria-haspopup="dialog">Preview</button>
+            </div>
           </li>
         </ul>
       </div>
     </section>
 
-    <div class="offer">
-      <div class="wrap">
-        <p>Like one of these? <a href="#callback">Leave a number</a>. We build it, we host it, <span class="js-price">£95</span>/mo once you say go.</p>
-      </div>
-    </div>
-
-    <section id="team" aria-labelledby="team-h">
+    <!-- BLOCK 4 — 1-step phone form -->
+    <section class="tint start" id="start" aria-labelledby="start-h">
       <div class="wrap">
         <div class="sec-head">
-          <p class="badge-pill">The Team</p>
-          <h2 id="team-h">Ben and Veronica</h2>
-          <p>We build it. We host it. You talk to us.</p>
+          <h2 id="start-h">Get my free draft</h2>
+          <p>One number. We take it from there.</p>
         </div>
-        <div class="people">
-          <div class="person">
-            <figure class="headshot">
-              <span class="monogram" aria-hidden="true">VK</span>
-              <img src="/assets/veronica.jpg" alt="Veronica Kotze, Creative Director at lemonelly"
-                   width="640" height="640" onerror="this.remove()">
-            </figure>
-            <h3>Veronica Kotze</h3>
-            <p class="cred">Creative Director · BA Honours in Fine Arts</p>
-            <p class="bio">She designs the site. Your name, your photos, your number.</p>
-            <div class="contact">
-              <a class="btn btn-ghost" href="mailto:veronica@lemonelly.com">Email</a>
-              <a class="btn btn-ghost" href="https://www.linkedin.com/in/veronicakotze/" target="_blank" rel="noopener">LinkedIn</a>
+        <div id="callback" class="callback-mount" data-callback="hero">
+          <form class="callback" id="cb-form" novalidate>
+            <div class="callback-step" data-step="phone">
+              <label class="callback-label" data-phone-label>Enter your phone number</label>
+              <div class="callback-row">
+                <div class="callback-dial" data-dial>
+                  <select class="callback-cc" data-cc aria-label="Country code" autocomplete="tel-country-code">
+                    <option value="44" selected>UK +44</option>
+                  </select>
+                  <input type="tel" inputmode="tel" autocomplete="tel-national" name="phone" placeholder="07xxx xxxxxx" maxlength="20" required>
+                </div>
+                <button class="btn btn-solid" type="submit">Get My Free Draft</button>
+              </div>
+              <p class="callback-hint">We'll ring you on UK time.</p>
+              <p class="callback-err" data-err hidden>Enter a number we can actually call.</p>
+            </div>
+          </form>
+          <noscript>
+            <p class="callback-hint">JavaScript is off. <a href="https://wa.me/447441421114">WhatsApp us</a> with your number.</p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-h">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 id="faq-h">FAQ</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary><span>Nothing's free. What's the catch?</span> <span class="plus" aria-hidden="true"></span></summary>
+            <p>There isn't one. We carry the cost of the draft because most people who see their finished site want to keep it. If you don't, you walk away and owe nothing.</p>
+          </details>
+          <details>
+            <summary><span>What does a website cost with lemonelly?</span> <span class="plus" aria-hidden="true"></span></summary>
+            <p>Nothing upfront. The design, the draft, and every revision are free. You only start paying <span class="js-price">£95</span>/month once you're happy and your new site goes live.</p>
+          </details>
+          <details>
+            <summary><span>How fast will my site be live?</span> <span class="plus" aria-hidden="true"></span></summary>
+            <p>Request a draft, review it within 48 hours, go live within 7 days.</p>
+          </details>
+          <details>
+            <summary><span>What does the <span class="js-price">£95</span>/month actually cover?</span> <span class="plus" aria-hidden="true"></span></summary>
+            <p>Fast hosting, SSL security, software and security updates, one round of content edits every month, plus SEO and direct WhatsApp support. No upfront cost. No hidden fees. Cancel anytime.</p>
+          </details>
+          <details>
+            <summary><span>What do you need from me to get started?</span> <span class="plus" aria-hidden="true"></span></summary>
+            <p>A phone number. Send raw photos or a quick voice note later — we write the copy.</p>
+          </details>
+          <details>
+            <summary><span>Can I change things after the site is live?</span> <span class="plus" aria-hidden="true"></span></summary>
+            <p>Yes. One round of updates is included every month — just send us what's changed.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="founders" id="founders" aria-labelledby="founders-h">
+      <div class="wrap">
+        <details class="group">
+          <summary>
+            <span id="founders-h">About the Founders</span>
+            <span class="plus" aria-hidden="true"></span>
+          </summary>
+          <div class="people">
+            <div class="person">
+              <figure class="headshot">
+                <span class="monogram" aria-hidden="true">VK</span>
+                <img src="/assets/veronica.jpg" alt="Veronica Kotze, Creative Director at lemonelly"
+                     width="640" height="640" loading="lazy" onerror="this.remove()">
+              </figure>
+              <h3>Veronica Kotze</h3>
+              <p class="cred">Creative Director · BA Honours in Fine Arts</p>
+              <p class="bio">The creative eye. Veronica worked for world-renowned artist Lionel Smit before bringing that craft to brands. She designs the site — your name, your photos, your number.</p>
+              <div class="contact">
+                <a class="btn btn-ghost" href="mailto:veronica@lemonelly.com">Email</a>
+                <a class="btn btn-ghost" href="https://www.linkedin.com/in/veronicakotze/" target="_blank" rel="noopener">LinkedIn</a>
+              </div>
+            </div>
+            <div class="person">
+              <figure class="headshot">
+                <span class="monogram" aria-hidden="true">BB</span>
+                <img src="/assets/ben.jpg" alt="Ben Blaine, Technical Lead at lemonelly"
+                     width="640" height="640" loading="lazy" onerror="this.remove()">
+              </figure>
+              <h3>Ben Blaine</h3>
+              <p class="cred">Technical Lead · BSc Mechanical Engineering</p>
+              <p class="bio">The technical engine. Ben worked at venture builder FireID and helped build SnapScan and OfferZen. He builds it and hosts it — fast, kept up.</p>
+              <div class="contact">
+                <a class="btn btn-ghost" href="mailto:ben@lemonelly.com">Email</a>
+                <a class="btn btn-ghost" href="https://www.linkedin.com/in/benjamin-blaine/" target="_blank" rel="noopener">LinkedIn</a>
+              </div>
             </div>
           </div>
-          <div class="person">
-            <figure class="headshot">
-              <span class="monogram" aria-hidden="true">BB</span>
-              <img src="/assets/ben.jpg" alt="Ben Blaine, Technical Lead at lemonelly"
-                   width="640" height="640" onerror="this.remove()">
-            </figure>
-            <h3>Ben Blaine</h3>
-            <p class="cred">Technical Lead · BSc Mechanical Engineering</p>
-            <p class="bio">He builds it and hosts it. Fast, kept up.</p>
-            <div class="contact">
-              <a class="btn btn-ghost" href="mailto:ben@lemonelly.com">Email</a>
-              <a class="btn btn-ghost" href="https://www.linkedin.com/in/benjamin-blaine/" target="_blank" rel="noopener">LinkedIn</a>
-            </div>
-          </div>
-        </div>
-        <p class="team-contact"><a class="btn btn-ghost" href="https://wa.me/447441421114" target="_blank" rel="noopener">WhatsApp Us</a></p>
+        </details>
       </div>
     </section>
   </main>
 
-  <dialog class="sample-lightbox" id="sample-lightbox" aria-label="Full sample">
-    <form method="dialog"><button class="sample-lightbox-close" type="submit">Close</button></form>
-    <img alt="">
+  <dialog class="cb-drawer" id="cb-drawer" aria-labelledby="cb-drawer-title">
+    <button class="drawer-close" type="button" data-close-drawer>Close</button>
+    <form class="callback drawer-inner" id="cb-details" novalidate>
+      <div class="callback-step" data-step="details">
+        <h2 class="drawer-title" id="cb-drawer-title" tabindex="-1">Got it!</h2>
+        <p class="drawer-lede">Who should ring you (Ben or Veronica) and when's the best time?</p>
+        <p class="callback-echo">We'll call <strong data-phone-echo></strong>
+          <button type="button" class="callback-change" data-change-number>Change number</button>
+        </p>
+        <fieldset>
+          <legend>Who should call you?</legend>
+          <div class="callback-opts">
+            <label class="callback-opt"><input type="radio" data-group="who" value="ben" data-label="Ben"> <img class="callback-face" src="/assets/ben.jpg" alt="" width="28" height="28" onerror="this.remove()"> Ben</label>
+            <label class="callback-opt"><input type="radio" data-group="who" value="veronica" data-label="Veronica" checked> <img class="callback-face" src="/assets/veronica.jpg" alt="" width="28" height="28" onerror="this.remove()"> Veronica</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>When should we call?</legend>
+          <div class="callback-opts days">
+            <label class="callback-opt callback-asap"><input type="radio" data-group="when-day" value="asap" data-label="As soon as you can" checked> As soon as you can</label>
+            <label class="callback-opt"><input type="radio" data-group="when-day" value="mon" data-label="Monday"> Mon</label>
+            <label class="callback-opt"><input type="radio" data-group="when-day" value="tue" data-label="Tuesday"> Tue</label>
+            <label class="callback-opt"><input type="radio" data-group="when-day" value="wed" data-label="Wednesday"> Wed</label>
+            <label class="callback-opt"><input type="radio" data-group="when-day" value="thu" data-label="Thursday"> Thu</label>
+            <label class="callback-opt"><input type="radio" data-group="when-day" value="fri" data-label="Friday"> Fri</label>
+            <label class="callback-opt"><input type="radio" data-group="when-day" value="sat" data-label="Saturday"> Sat</label>
+            <label class="callback-opt"><input type="radio" data-group="when-day" value="sun" data-label="Sunday"> Sun</label>
+          </div>
+          <p class="callback-sub">Time</p>
+          <div class="callback-opts channels">
+            <label class="callback-opt"><input type="radio" data-group="when-time" value="morning" data-label="Morning" checked> Morning</label>
+            <label class="callback-opt"><input type="radio" data-group="when-time" value="afternoon" data-label="Afternoon"> Afternoon</label>
+            <label class="callback-opt"><input type="radio" data-group="when-time" value="evening" data-label="Evening"> Evening</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>How should we call?</legend>
+          <div class="callback-opts channels">
+            <label class="callback-opt"><input type="radio" data-group="how" value="phone" data-label="Phone call" checked> Phone call</label>
+            <label class="callback-opt"><input type="radio" data-group="how" value="whatsapp" data-label="WhatsApp"> WhatsApp</label>
+            <label class="callback-opt"><input type="radio" data-group="how" value="facetime" data-label="FaceTime"> FaceTime</label>
+          </div>
+        </fieldset>
+        <p class="callback-hint">Times are UK time. Change anything, or just tap Confirm.</p>
+        <p class="callback-err" data-err-details hidden>Pick who should call, a day, a time, and how.</p>
+        <p class="callback-err callback-fallback" data-fail hidden>Couldn't send that. <a href="https://wa.me/447441421114" target="_blank" rel="noopener">WhatsApp us instead</a>.</p>
+        <button class="btn btn-solid btn-block" type="submit">Confirm call</button>
+      </div>
+      <div class="callback-step callback-done" data-step="done" hidden>
+        <h2 class="drawer-title" tabindex="-1">We'll call you</h2>
+        <p data-done-copy></p>
+      </div>
+    </form>
   </dialog>
+
+  <dialog class="preview-dlg" id="preview-dlg" aria-labelledby="preview-title">
+    <div class="drawer-inner">
+      <button class="drawer-close" type="button" data-close-preview>Close</button>
+      <h2 class="visually-hidden" id="preview-title">Sample website preview</h2>
+      <div class="phone phone-lg" aria-hidden="true">
+        <span class="phone-notch"></span>
+        <div class="phone-screen" data-preview-screen></div>
+      </div>
+      <p class="preview-cap" data-preview-cap></p>
+    </div>
+  </dialog>
+
+  <template id="tpl-roofing">
+    <article class="site-mini is-roof">
+      <div class="sm-nav">
+        <span class="sm-logo">Your Roofing Co.</span>
+        <span class="sm-call">Call now</span>
+      </div>
+      <div class="sm-hero">
+        <img src="/assets/draft/stock/hero-slate-arched-dormers.jpeg" alt="" width="1024" height="1024">
+        <div class="sm-copy">
+          <p class="sm-kicker">Roofers · Local</p>
+          <h3>New roofs. Repairs. A number that gets answered.</h3>
+        </div>
+      </div>
+      <div class="sm-bar">Call now</div>
+    </article>
+  </template>
+  <template id="tpl-electrical">
+    <article class="site-mini is-elec">
+      <div class="sm-nav">
+        <span class="sm-logo">Your Electrical Co.</span>
+        <span class="sm-call">Call now</span>
+      </div>
+      <div class="sm-hero">
+        <div class="sm-copy">
+          <span class="sm-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+          </span>
+          <p class="sm-kicker">Electricians · Local</p>
+          <h3>Power. Lighting. A van that actually turns up.</h3>
+          <ul class="sm-chips"><li>Call-outs</li><li>Rewires</li><li>Lighting</li></ul>
+        </div>
+      </div>
+      <div class="sm-bar">Call now</div>
+    </article>
+  </template>
+  <template id="tpl-plumbing">
+    <article class="site-mini is-plumb">
+      <div class="sm-nav">
+        <span class="sm-logo">Your Plumbing Co.</span>
+        <span class="sm-call">Call now</span>
+      </div>
+      <div class="sm-hero">
+        <div class="sm-copy">
+          <span class="sm-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3s7 7.2 7 11.2A7 7 0 1 1 5 14.2C5 10.2 12 3 12 3z"/></svg>
+          </span>
+          <p class="sm-kicker">Plumbing &amp; heating · Local</p>
+          <h3>Boilers, bathrooms, emergencies. Tap to call.</h3>
+          <ul class="sm-chips"><li>Boilers</li><li>Bathrooms</li><li>Heating</li></ul>
+        </div>
+      </div>
+      <div class="sm-bar">Call now</div>
+    </article>
+  </template>
 
   <footer>
     <div class="wrap">
       <p class="mark">LEMONELLY.COM</p>
       <p class="footer-prices">UK £95 · ZA R2,200 · US $120 · EU €110 /mo</p>
-      <p>Proudly built in Cape Town · <a href="mailto:hello@lemonelly.com">hello@lemonelly.com</a></p>
+      <p>Proudly built in Cape Town · <a href="mailto:hello@lemonelly.com">hello@lemonelly.com</a> · <a href="/about">About</a></p>
     </div>
   </footer>
 
@@ -970,203 +1252,215 @@
         return postLead(payload);
       }
 
-      function init(form, id) {
-        var phoneStep = form.querySelector('[data-step="phone"]');
-        var detailsStep = form.querySelector('[data-step="details"]');
-        var doneStep = form.querySelector('[data-step="done"]');
-        var phoneInput = form.querySelector('input[type="tel"]');
-        var ccSelect = form.querySelector('[data-cc]');
-        var phoneLabel = form.querySelector('[data-phone-label]');
-        var err = form.querySelector('[data-err]');
-        var detailsErr = form.querySelector('[data-err-details]');
-        var echo = form.querySelector('[data-phone-echo]');
-        var doneCopy = form.querySelector('[data-done-copy]');
-        var fail = form.querySelector('[data-fail]');
-        var phoneId = 'cb-phone-' + id;
-        var phone = '';
-        if (!phoneInput || !phoneStep || !detailsStep || !doneStep) return;
+      var phoneForm = document.getElementById('cb-form');
+      var detailsForm = document.getElementById('cb-details');
+      var drawer = document.getElementById('cb-drawer');
+      if (!phoneForm || !detailsForm || !drawer) return;
 
-        phoneInput.id = phoneId;
-        if (phoneLabel) {
-          phoneLabel.setAttribute('for', phoneId);
-          phoneLabel.removeAttribute('data-phone-label');
+      var phoneStep = phoneForm.querySelector('[data-step="phone"]');
+      var detailsStep = detailsForm.querySelector('[data-step="details"]');
+      var doneStep = detailsForm.querySelector('[data-step="done"]');
+      var phoneInput = phoneForm.querySelector('input[type="tel"]');
+      var ccSelect = phoneForm.querySelector('[data-cc]');
+      var dial = phoneForm.querySelector('[data-dial]');
+      var phoneLabel = phoneForm.querySelector('[data-phone-label]');
+      var err = phoneForm.querySelector('[data-err]');
+      var detailsErr = detailsForm.querySelector('[data-err-details]');
+      var echo = detailsForm.querySelector('[data-phone-echo]');
+      var doneCopy = detailsForm.querySelector('[data-done-copy]');
+      var fail = detailsForm.querySelector('[data-fail]');
+      var phoneId = 'cb-phone-hero';
+      var phone = '';
+      var stage = 'phone';
+
+      if (!phoneInput || !phoneStep || !detailsStep || !doneStep) return;
+
+      phoneInput.id = phoneId;
+      if (phoneLabel) {
+        phoneLabel.setAttribute('for', phoneId);
+        phoneLabel.removeAttribute('data-phone-label');
+      }
+      fillCc(ccSelect);
+      if (ccSelect) {
+        ccSelect.id = 'cb-cc-hero';
+        ccSelect.name = 'cc-hero';
+      }
+
+      detailsForm.querySelectorAll('input[data-group="who"]').forEach(function (el) { el.name = 'who-hero'; });
+      detailsForm.querySelectorAll('input[data-group="when-day"]').forEach(function (el) { el.name = 'when-day-hero'; });
+      detailsForm.querySelectorAll('input[data-group="when-time"]').forEach(function (el) { el.name = 'when-time-hero'; });
+      detailsForm.querySelectorAll('input[data-group="how"]').forEach(function (el) { el.name = 'how-hero'; });
+      function checkDefault(group, value) {
+        var el = detailsForm.querySelector('input[data-group="' + group + '"][value="' + value + '"]');
+        if (el) el.checked = true;
+      }
+      checkDefault('who', 'veronica');
+      checkDefault('when-day', 'asap');
+      checkDefault('when-time', 'morning');
+      checkDefault('how', 'phone');
+
+      function selected(group, fallback) {
+        var el = detailsForm.querySelector('input[data-group="' + group + '"]:checked');
+        if (!el && fallback) el = detailsForm.querySelector('input[data-group="' + group + '"][value="' + fallback + '"]');
+        if (!el) return null;
+        return { v: el.value, l: el.getAttribute('data-label') || el.value };
+      }
+
+      function whenChoice() {
+        var day = selected('when-day', 'asap');
+        var time = selected('when-time', 'morning');
+        if (!day || !time) return null;
+        var label = day.v === 'asap' ? 'As soon as you can' : (day.l + ', ' + time.l.toLowerCase());
+        return { l: label };
+      }
+
+      function openDrawer(which) {
+        detailsStep.hidden = which !== 'details';
+        doneStep.hidden = which !== 'done';
+        if (typeof drawer.showModal === 'function') {
+          if (!drawer.open) drawer.showModal();
+        } else {
+          drawer.setAttribute('open', '');
         }
-        fillCc(ccSelect);
-        if (ccSelect) {
-          ccSelect.id = 'cb-cc-' + id;
-          ccSelect.name = 'cc-' + id;
+        drawer.scrollTop = 0;
+        if (which === 'done') {
+          var heading = doneStep.querySelector('h2');
+          if (heading) heading.focus();
         }
+      }
 
-        form.querySelectorAll('input[data-group="who"]').forEach(function (el) { el.name = 'who-' + id; });
-        form.querySelectorAll('input[data-group="when-day"]').forEach(function (el) { el.name = 'when-day-' + id; });
-        form.querySelectorAll('input[data-group="when-time"]').forEach(function (el) { el.name = 'when-time-' + id; });
-        form.querySelectorAll('input[data-group="how"]').forEach(function (el) { el.name = 'how-' + id; });
-        function checkDefault(group, value) {
-          var el = form.querySelector('input[data-group="' + group + '"][value="' + value + '"]');
-          if (el) el.checked = true;
-        }
-        checkDefault('who', 'veronica');
-        checkDefault('when-day', 'asap');
-        checkDefault('when-time', 'morning');
-        checkDefault('how', 'phone');
+      function closeDrawer() {
+        if (drawer.open) drawer.close();
+        else drawer.removeAttribute('open');
+      }
 
-        var changeBtn = form.querySelector('[data-change-number]');
-        if (changeBtn) {
-          changeBtn.addEventListener('click', function () {
-            var phoneBtn = phoneStep.querySelector('button[type="submit"]');
-            if (phoneBtn) phoneBtn.disabled = false;
-            err.hidden = true;
-            if (detailsErr) detailsErr.hidden = true;
-            if (fail) fail.hidden = true;
-            show('phone');
-            phoneInput.focus();
-          });
-        }
-
-        function show(step) {
-          [phoneStep, detailsStep, doneStep].forEach(function (s) {
-            s.hidden = s.getAttribute('data-step') !== step;
-          });
-        }
-
-        function selected(group, fallback) {
-          var el = form.querySelector('input[data-group="' + group + '"]:checked');
-          if (!el && fallback) el = form.querySelector('input[data-group="' + group + '"][value="' + fallback + '"]');
-          if (!el) return null;
-          return { v: el.value, l: el.getAttribute('data-label') || el.value };
-        }
-
-        function whenChoice() {
-          var day = selected('when-day', 'asap');
-          var time = selected('when-time', 'morning');
-          if (!day || !time) return null;
-          var label = day.v === 'asap' ? 'As soon as you can' : (day.l + ', ' + time.l.toLowerCase());
-          return { l: label };
-        }
-
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          if (!phoneStep.hidden) {
-            var e164 = formatE164(ccSelect && ccSelect.value, phoneInput.value);
-            if (!e164) {
-              err.hidden = false;
-              phoneInput.classList.add('field-err');
-              if (ccSelect) ccSelect.classList.add('field-err');
-              phoneInput.setAttribute('aria-invalid', 'true');
-              phoneInput.focus();
-              return;
-            }
-            err.hidden = true;
-            phoneInput.classList.remove('field-err');
-            if (ccSelect) ccSelect.classList.remove('field-err');
-            phoneInput.removeAttribute('aria-invalid');
-            phone = e164;
-            if (echo) echo.textContent = phone;
-            var who0 = selected('who', 'veronica');
-            var when0 = whenChoice();
-            var how0 = selected('how', 'phone');
-            var phoneBtn = phoneStep.querySelector('button[type="submit"]');
-            if (phoneBtn) phoneBtn.disabled = true;
-            sendCallback({
-              type: 'callback',
-              stage: 'phone',
-              phone: phone,
-              who: who0 ? who0.l : 'Veronica',
-              whoLabel: who0 ? who0.l : 'Veronica',
-              when: when0 ? when0.l : 'As soon as you can',
-              whenLabel: when0 ? when0.l : 'As soon as you can',
-              how: how0 ? how0.l : 'Phone call',
-              channel: how0 ? how0.v : 'phone',
-              channelLabel: how0 ? how0.l : 'Phone call',
-              countryCode: ccSelect ? ccSelect.value : '',
-              page: location.pathname,
-              brief: brief({
-                stage: 'phone',
-                phone: phone,
-                page: location.pathname,
-                whoLabel: who0 ? who0.l : 'Veronica',
-                whenLabel: when0 ? when0.l : 'As soon as you can',
-                channelLabel: how0 ? how0.l : 'Phone call'
-              })
-            });
-            show('details');
-            return;
-          }
-
-          if (!detailsStep.hidden) {
-            var who = selected('who', 'veronica');
-            var when = whenChoice();
-            var how = selected('how', 'phone');
-            if (!who || !when || !how) {
-              detailsErr.hidden = false;
-              return;
-            }
-            detailsErr.hidden = true;
-            var btn = detailsStep.querySelector('button[type="submit"]');
-            if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
-            var payload = {
-              type: 'callback',
-              stage: 'details',
-              phone: phone,
-              countryCode: ccSelect ? ccSelect.value : '',
-              who: who.l,
-              whoLabel: who.l,
-              when: when.l,
-              whenLabel: when.l,
-              how: how.l,
-              channel: how.v,
-              channelLabel: how.l,
-              page: location.pathname,
-              brief: brief({
-                stage: 'details',
-                phone: phone,
-                page: location.pathname,
-                whoLabel: who.l,
-                whenLabel: when.l,
-                channelLabel: how.l
-              })
-            };
-            sendCallback(payload).then(function (ok) {
-              if (ok) {
-                doneCopy.textContent = who.l + ' will call ' + phone + ' on ' + how.l + '. ' + when.l + ". UK time. If we miss you, we'll try again.";
-                show('done');
-                var heading = doneStep.querySelector('h3');
-                if (heading) heading.focus();
-                return;
-              }
-              if (btn) { btn.disabled = false; btn.textContent = 'Confirm call'; }
-              fail.hidden = false;
-              var wa = fail.querySelector('a');
-              if (wa) {
-                wa.href = 'https://wa.me/447441421114?text=' + encodeURIComponent(
-                  'Hi, please ask ' + who.l + ' to call me on ' + phone + '. ' + when.l + ', via ' + how.l + '.'
-                );
-              }
-            });
-          }
+      var changeBtn = detailsForm.querySelector('[data-change-number]');
+      if (changeBtn) {
+        changeBtn.addEventListener('click', function () {
+          var phoneBtn = phoneStep.querySelector('button[type="submit"]');
+          if (phoneBtn) phoneBtn.disabled = false;
+          err.hidden = true;
+          if (detailsErr) detailsErr.hidden = true;
+          if (fail) fail.hidden = true;
+          stage = 'phone';
+          closeDrawer();
+          phoneInput.focus();
         });
       }
 
-      var source = document.querySelector('#callback form.callback');
-      var mounts = document.querySelectorAll('.callback-mount');
-      mounts.forEach(function (mount) {
-        if (mount.querySelector('form.callback')) return;
-        if (!source) return;
-        mount.appendChild(source.cloneNode(true));
+      drawer.querySelector('[data-close-drawer]').addEventListener('click', function () {
+        closeDrawer();
       });
-      mounts.forEach(function (mount) {
-        var form = mount.querySelector('form.callback');
-        if (form) init(form, mount.getAttribute('data-callback') || 'cb');
+      drawer.addEventListener('click', function (e) {
+        if (e.target === drawer) closeDrawer();
       });
 
-      document.querySelectorAll('a[href="#callback"]').forEach(function (a) {
+      phoneForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var e164 = formatE164(ccSelect && ccSelect.value, phoneInput.value);
+        if (!e164) {
+          err.hidden = false;
+          if (dial) dial.classList.add('field-err');
+          phoneInput.classList.add('field-err');
+          if (ccSelect) ccSelect.classList.add('field-err');
+          phoneInput.setAttribute('aria-invalid', 'true');
+          phoneInput.focus();
+          return;
+        }
+        err.hidden = true;
+        phoneInput.classList.remove('field-err');
+        if (ccSelect) ccSelect.classList.remove('field-err');
+        if (dial) dial.classList.remove('field-err');
+        phoneInput.removeAttribute('aria-invalid');
+        phone = e164;
+        if (echo) echo.textContent = phone;
+        var who0 = selected('who', 'veronica');
+        var when0 = whenChoice();
+        var how0 = selected('how', 'phone');
+        var phoneBtn = phoneStep.querySelector('button[type="submit"]');
+        if (phoneBtn) phoneBtn.disabled = true;
+        sendCallback({
+          type: 'callback',
+          stage: 'phone',
+          phone: phone,
+          who: who0 ? who0.l : 'Veronica',
+          whoLabel: who0 ? who0.l : 'Veronica',
+          when: when0 ? when0.l : 'As soon as you can',
+          whenLabel: when0 ? when0.l : 'As soon as you can',
+          how: how0 ? how0.l : 'Phone call',
+          channel: how0 ? how0.v : 'phone',
+          channelLabel: how0 ? how0.l : 'Phone call',
+          countryCode: ccSelect ? ccSelect.value : '',
+          page: location.pathname,
+          brief: brief({
+            stage: 'phone',
+            phone: phone,
+            page: location.pathname,
+            whoLabel: who0 ? who0.l : 'Veronica',
+            whenLabel: when0 ? when0.l : 'As soon as you can',
+            channelLabel: how0 ? how0.l : 'Phone call'
+          })
+        });
+        stage = 'details';
+        openDrawer('details');
+      });
+
+      detailsForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var who = selected('who', 'veronica');
+        var when = whenChoice();
+        var how = selected('how', 'phone');
+        if (!who || !when || !how) {
+          detailsErr.hidden = false;
+          return;
+        }
+        detailsErr.hidden = true;
+        var btn = detailsStep.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+        var payload = {
+          type: 'callback',
+          stage: 'details',
+          phone: phone,
+          countryCode: ccSelect ? ccSelect.value : '',
+          who: who.l,
+          whoLabel: who.l,
+          when: when.l,
+          whenLabel: when.l,
+          how: how.l,
+          channel: how.v,
+          channelLabel: how.l,
+          page: location.pathname,
+          brief: brief({
+            stage: 'details',
+            phone: phone,
+            page: location.pathname,
+            whoLabel: who.l,
+            whenLabel: when.l,
+            channelLabel: how.l
+          })
+        };
+        sendCallback(payload).then(function (ok) {
+          if (ok) {
+            doneCopy.textContent = who.l + ' will call ' + phone + ' on ' + how.l + '. ' + when.l + ". UK time. If we miss you, we'll try again.";
+            stage = 'done';
+            openDrawer('done');
+            return;
+          }
+          if (btn) { btn.disabled = false; btn.textContent = 'Confirm call'; }
+          fail.hidden = false;
+          var wa = fail.querySelector('a');
+          if (wa) {
+            wa.href = 'https://wa.me/447441421114?text=' + encodeURIComponent(
+              'Hi, please ask ' + who.l + ' to call me on ' + phone + '. ' + when.l + ', via ' + how.l + '.'
+            );
+          }
+        });
+      });
+
+      document.querySelectorAll('a[href="#start"], a[href="#callback"]').forEach(function (a) {
         a.addEventListener('click', function () {
           setTimeout(function () {
-            var hero = document.querySelector('[data-callback="hero"] form');
-            if (!hero) return;
-            var phoneStep = hero.querySelector('[data-step="phone"]');
-            var input = hero.querySelector('input[type="tel"]');
-            if (phoneStep && !phoneStep.hidden && input) input.focus();
+            if (stage === 'phone' && phoneInput) phoneInput.focus();
           }, 0);
         });
       });
@@ -1174,23 +1468,36 @@
   </script>
   <script>
     (function () {
-      var dlg = document.getElementById('sample-lightbox');
-      var full = dlg && dlg.querySelector('img');
-      if (!dlg || !full || typeof dlg.showModal !== 'function') return;
-      document.querySelectorAll('a.sample-open').forEach(function (a) {
-        a.addEventListener('click', function (e) {
-          e.preventDefault();
-          var thumb = a.querySelector('img');
-          full.src = a.href;
-          full.alt = thumb ? thumb.alt : '';
+      var dlg = document.getElementById('preview-dlg');
+      var screen = dlg && dlg.querySelector('[data-preview-screen]');
+      var cap = dlg && dlg.querySelector('[data-preview-cap]');
+      var title = document.getElementById('preview-title');
+      if (!dlg || !screen || typeof dlg.showModal !== 'function') return;
+
+      var labels = {
+        roofing: 'Sample roofing site',
+        electrical: 'Sample electrical site',
+        plumbing: 'Sample plumbing & heating site'
+      };
+
+      document.querySelectorAll('[data-preview]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var key = btn.getAttribute('data-preview');
+          var tpl = document.getElementById('tpl-' + key);
+          if (!tpl) return;
+          screen.replaceChildren(tpl.content.cloneNode(true));
+          var label = labels[key] || 'Sample website';
+          if (cap) cap.textContent = label + ' — the kind of work we handle, not a live client site.';
+          if (title) title.textContent = label;
           dlg.showModal();
-          dlg.scrollTop = 0;
         });
       });
+
+      dlg.querySelector('[data-close-preview]').addEventListener('click', function () { dlg.close(); });
       dlg.addEventListener('click', function (e) {
         if (e.target === dlg) dlg.close();
       });
-      dlg.addEventListener('close', function () { full.removeAttribute('src'); });
+      dlg.addEventListener('close', function () { screen.replaceChildren(); });
     })();
   </script>
 </body>
