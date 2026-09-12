@@ -287,6 +287,9 @@
     .callback legend { font-weight: 700; margin-bottom: var(--sp-2); padding: 0; }
     .callback-opts { display: grid; gap: .5rem; grid-template-columns: 1fr 1fr; }
     .callback-opts.channels { grid-template-columns: repeat(3, 1fr); }
+    .callback-opts.days { grid-template-columns: repeat(4, 1fr); }
+    .callback-asap { grid-column: 1 / -1; }
+    .callback-sub { font-weight: 700; margin: var(--sp-3) 0 var(--sp-2); }
     .callback-opt {
       display: flex; align-items: center; gap: .6rem;
       min-height: 48px; padding: .55rem .9rem;
@@ -311,6 +314,7 @@
     .callback-change:hover { color: var(--green-deep); }
     @media (max-width: 40rem) {
       .callback-opts, .callback-opts.channels { grid-template-columns: 1fr; }
+      .callback-opts.days { grid-template-columns: 1fr 1fr; }
       .callback-dial { flex: 1 1 100%; }
       .callback-row .btn { width: 100%; }
     }
@@ -488,13 +492,21 @@
                 </fieldset>
                 <fieldset>
                   <legend>When should we call?</legend>
-                  <div class="callback-opts">
-                    <label class="callback-opt"><input type="radio" data-group="when" value="asap" data-label="As soon as you can" checked> As soon as you can</label>
-                    <label class="callback-opt"><input type="radio" data-group="when" value="today-am" data-label="Today, morning"> Today, morning</label>
-                    <label class="callback-opt"><input type="radio" data-group="when" value="today-pm" data-label="Today, afternoon"> Today, afternoon</label>
-                    <label class="callback-opt"><input type="radio" data-group="when" value="tomorrow-am" data-label="Tomorrow morning"> Tomorrow morning</label>
-                    <label class="callback-opt"><input type="radio" data-group="when" value="tomorrow-pm" data-label="Tomorrow afternoon"> Tomorrow afternoon</label>
-                    <label class="callback-opt"><input type="radio" data-group="when" value="this-week" data-label="Later this week"> Later this week</label>
+                  <div class="callback-opts days">
+                    <label class="callback-opt callback-asap"><input type="radio" data-group="when-day" value="asap" data-label="As soon as you can" checked> As soon as you can</label>
+                    <label class="callback-opt"><input type="radio" data-group="when-day" value="mon" data-label="Monday"> Mon</label>
+                    <label class="callback-opt"><input type="radio" data-group="when-day" value="tue" data-label="Tuesday"> Tue</label>
+                    <label class="callback-opt"><input type="radio" data-group="when-day" value="wed" data-label="Wednesday"> Wed</label>
+                    <label class="callback-opt"><input type="radio" data-group="when-day" value="thu" data-label="Thursday"> Thu</label>
+                    <label class="callback-opt"><input type="radio" data-group="when-day" value="fri" data-label="Friday"> Fri</label>
+                    <label class="callback-opt"><input type="radio" data-group="when-day" value="sat" data-label="Saturday"> Sat</label>
+                    <label class="callback-opt"><input type="radio" data-group="when-day" value="sun" data-label="Sunday"> Sun</label>
+                  </div>
+                  <p class="callback-sub">Time</p>
+                  <div class="callback-opts channels">
+                    <label class="callback-opt"><input type="radio" data-group="when-time" value="morning" data-label="Morning" checked> Morning</label>
+                    <label class="callback-opt"><input type="radio" data-group="when-time" value="afternoon" data-label="Afternoon"> Afternoon</label>
+                    <label class="callback-opt"><input type="radio" data-group="when-time" value="evening" data-label="Evening"> Evening</label>
                   </div>
                 </fieldset>
                 <fieldset>
@@ -506,7 +518,7 @@
                   </div>
                 </fieldset>
                 <p class="callback-hint">Times are UK time. Change anything, or just tap Confirm.</p>
-                <p class="callback-err" data-err-details hidden>Pick who should call, a time, and how.</p>
+                <p class="callback-err" data-err-details hidden>Pick who should call, a day, a time, and how.</p>
                 <p class="callback-err callback-fallback" data-fail hidden>Couldn't send that. <a href="https://wa.me/447441421114" target="_blank" rel="noopener">WhatsApp us instead</a>.</p>
                 <button class="btn btn-solid" type="submit">Confirm call</button>
               </div>
@@ -986,14 +998,16 @@
         }
 
         form.querySelectorAll('input[data-group="who"]').forEach(function (el) { el.name = 'who-' + id; });
-        form.querySelectorAll('input[data-group="when"]').forEach(function (el) { el.name = 'when-' + id; });
+        form.querySelectorAll('input[data-group="when-day"]').forEach(function (el) { el.name = 'when-day-' + id; });
+        form.querySelectorAll('input[data-group="when-time"]').forEach(function (el) { el.name = 'when-time-' + id; });
         form.querySelectorAll('input[data-group="how"]').forEach(function (el) { el.name = 'how-' + id; });
         function checkDefault(group, value) {
           var el = form.querySelector('input[data-group="' + group + '"][value="' + value + '"]');
           if (el) el.checked = true;
         }
         checkDefault('who', 'veronica');
-        checkDefault('when', 'asap');
+        checkDefault('when-day', 'asap');
+        checkDefault('when-time', 'morning');
         checkDefault('how', 'phone');
 
         var changeBtn = form.querySelector('[data-change-number]');
@@ -1022,6 +1036,14 @@
           return { v: el.value, l: el.getAttribute('data-label') || el.value };
         }
 
+        function whenChoice() {
+          var day = selected('when-day', 'asap');
+          var time = selected('when-time', 'morning');
+          if (!day || !time) return null;
+          var label = day.v === 'asap' ? 'As soon as you can' : (day.l + ', ' + time.l.toLowerCase());
+          return { l: label };
+        }
+
         form.addEventListener('submit', function (e) {
           e.preventDefault();
           if (!phoneStep.hidden) {
@@ -1041,7 +1063,7 @@
             phone = e164;
             if (echo) echo.textContent = phone;
             var who0 = selected('who', 'veronica');
-            var when0 = selected('when', 'asap');
+            var when0 = whenChoice();
             var how0 = selected('how', 'phone');
             var phoneBtn = phoneStep.querySelector('button[type="submit"]');
             if (phoneBtn) phoneBtn.disabled = true;
@@ -1073,7 +1095,7 @@
 
           if (!detailsStep.hidden) {
             var who = selected('who', 'veronica');
-            var when = selected('when', 'asap');
+            var when = whenChoice();
             var how = selected('how', 'phone');
             if (!who || !when || !how) {
               detailsErr.hidden = false;
