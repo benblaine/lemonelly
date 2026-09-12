@@ -329,8 +329,14 @@
     @media (min-width: 40rem) { .sample-grid { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 70rem) { .sample-grid { grid-template-columns: 1fr 1fr 1fr; } }
     .sample { margin: 0; }
+    .sample-open {
+      display: block; color: inherit; text-decoration: none; cursor: zoom-in;
+      border-radius: var(--r-lg);
+    }
+    .sample-open:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .sample-open:hover .sample-frame { border-color: var(--ink); }
     .sample-frame {
-      position: relative; aspect-ratio: 16 / 10;
+      position: relative; aspect-ratio: 9 / 19.5;
       border-radius: var(--r-lg); overflow: hidden;
       background: var(--bg-2); border: 1.5px dashed var(--line);
     }
@@ -339,15 +345,25 @@
       object-fit: cover; object-position: top center;
     }
     .sample-frame.has-img { border-style: solid; }
-    .sample-ph {
-      position: absolute; inset: 0; display: grid; place-items: center;
-      font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      font-size: var(--fs-0); color: var(--ink-2);
-    }
     .sample figcaption {
       margin-top: var(--sp-2);
       font-size: var(--fs-0); font-weight: 600; letter-spacing: .08em;
       text-transform: uppercase; color: var(--ink-2);
+    }
+    .sample-lightbox {
+      position: relative; padding: 0; border: 0;
+      width: min(44rem, 96vw); max-height: 96vh;
+      background: var(--bg); border-radius: var(--r-lg); overflow: auto;
+    }
+    .sample-lightbox::backdrop { background: rgba(17, 17, 16, .72); }
+    .sample-lightbox img { display: block; width: 100%; height: auto; }
+    .sample-lightbox form { position: sticky; top: 0; z-index: 1; height: 0; margin: 0; }
+    .sample-lightbox-close {
+      position: absolute; top: .75rem; right: .75rem;
+      min-height: 44px; padding: .4rem 1rem;
+      border: 0; border-radius: 999px; cursor: pointer;
+      font: inherit; font-weight: 600; font-size: var(--fs-0);
+      background: var(--ink); color: var(--bg);
     }
 
     .offer {
@@ -514,161 +530,201 @@
         <ul class="sample-grid">
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-01-salon.jpg" alt="Sample of a salon website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-01-salon.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-01-salon.jpg" alt="Sample of a salon website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-02-dentist.jpg" alt="Sample of a dental website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-02-dentist.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-02-dentist.jpg" alt="Sample of a dental website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-03-law.jpg" alt="Sample of a law-firm website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-03-law.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-03-law.jpg" alt="Sample of a law-firm website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-04-spa.jpg" alt="Sample of a spa website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-04-spa.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-04-spa.jpg" alt="Sample of a spa website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-05-realestate.jpg" alt="Sample of a real-estate website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-05-realestate.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-05-realestate.jpg" alt="Sample of a real-estate website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-06-photographer.jpg" alt="Sample of a photographer website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-06-photographer.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-06-photographer.jpg" alt="Sample of a photographer website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-07-yoga.jpg" alt="Sample of a yoga-studio website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-07-yoga.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-07-yoga.jpg" alt="Sample of a yoga-studio website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-08-cafe.jpg" alt="Sample of a cafe website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-08-cafe.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-08-cafe.jpg" alt="Sample of a cafe website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-09-florist.jpg" alt="Sample of a florist website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-09-florist.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-09-florist.jpg" alt="Sample of a florist website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-10-physio.jpg" alt="Sample of a physiotherapy website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-10-physio.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-10-physio.jpg" alt="Sample of a physiotherapy website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-11-accountant.jpg" alt="Sample of an accounting website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-11-accountant.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-11-accountant.jpg" alt="Sample of an accounting website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-12-interior.jpg" alt="Sample of an interior-design website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-12-interior.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-12-interior.jpg" alt="Sample of an interior-design website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-13-vet.jpg" alt="Sample of a veterinary website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-13-vet.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-13-vet.jpg" alt="Sample of a veterinary website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-14-wedding.jpg" alt="Sample of a wedding-planner website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-14-wedding.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-14-wedding.jpg" alt="Sample of a wedding-planner website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-15-trainer.jpg" alt="Sample of a personal-trainer website" width="350" height="219" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-15-trainer.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-15-trainer.jpg" alt="Sample of a personal-trainer website" width="350" height="219" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-16-landscaping.jpg" alt="Sample of a landscaping website" width="600" height="375" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-16-landscaping.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-16-landscaping.jpg" alt="Sample of a landscaping website" width="600" height="375" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-17-tutoring.jpg" alt="Sample of a tutoring website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-17-tutoring.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-17-tutoring.jpg" alt="Sample of a tutoring website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-18-plumber.jpg" alt="Sample of a plumbing website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-18-plumber.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-18-plumber.jpg" alt="Sample of a plumbing website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-19-hotel.jpg" alt="Sample of a hotel website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-19-hotel.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-19-hotel.jpg" alt="Sample of a hotel website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
           <li>
             <figure class="sample">
-              <div class="sample-frame has-img">
-                <img src="/assets/samples/sample-20-cleaning.jpg" alt="Sample of a cleaning-service website" width="736" height="460" loading="lazy">
-              </div>
+              <a class="sample-open" href="/assets/samples/sample-20-cleaning.jpg">
+                <div class="sample-frame has-img">
+                  <img src="/assets/samples/sample-20-cleaning.jpg" alt="Sample of a cleaning-service website" width="736" height="460" loading="lazy">
+                </div>
+              </a>
               <figcaption>Sample</figcaption>
             </figure>
           </li>
@@ -723,6 +779,11 @@
       </div>
     </section>
   </main>
+
+  <dialog class="sample-lightbox" id="sample-lightbox" aria-label="Full sample">
+    <form method="dialog"><button class="sample-lightbox-close" type="submit">Close</button></form>
+    <img alt="">
+  </dialog>
 
   <footer>
     <div class="wrap">
@@ -1083,6 +1144,27 @@
           }, 0);
         });
       });
+    })();
+  </script>
+  <script>
+    (function () {
+      var dlg = document.getElementById('sample-lightbox');
+      var full = dlg && dlg.querySelector('img');
+      if (!dlg || !full || typeof dlg.showModal !== 'function') return;
+      document.querySelectorAll('a.sample-open').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          var thumb = a.querySelector('img');
+          full.src = a.href;
+          full.alt = thumb ? thumb.alt : '';
+          dlg.showModal();
+          dlg.scrollTop = 0;
+        });
+      });
+      dlg.addEventListener('click', function (e) {
+        if (e.target === dlg) dlg.close();
+      });
+      dlg.addEventListener('close', function () { full.removeAttribute('src'); });
     })();
   </script>
 </body>
